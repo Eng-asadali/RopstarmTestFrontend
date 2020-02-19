@@ -1,0 +1,13 @@
+<div *ngFor="let i of errors_array">
+    <span class="error" *ngIf="i == 'required'">{{field_name}} is required.</span>
+    <span class="error" *ngIf="i == 'email'">Email must be valid.</span>
+    <span class="error" *ngIf="i == 'max'">{{field_name}} is exceeding the limit.</span>
+    <span class="error" *ngIf="i == 'pattern'">
+        <span class="error" *ngIf="alphabets_only_error">{{field_name}} should contain alphabets only.</span>
+        <span class="error" *ngIf="email_error">{{field_name}} should be a valid email.</span>
+        <span class="error" *ngIf="contact_number_error">{{field_name}} should be valid.</span>
+        <span class="error" *ngIf="positive_number_error">{{field_name}} should be valid.</span>
+        <span class="error" *ngIf="branch_contact_number_error">{{field_name}} should be valid.</span>
+        
+    </span>
+</div>

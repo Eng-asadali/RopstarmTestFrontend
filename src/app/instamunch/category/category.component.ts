@@ -1,0 +1,96 @@
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
+import { MatPaginator, MatTableDataSource, MatSort } from '@angular/material';
+import { SelectionModel } from '@angular/cdk/collections';
+
+import { CategoryService } from '../Services/category.service';
+import { Category } from './category';
+import { SwalAlert } from 'src/app/Shared/swalAlerts';
+
+
+@Component({
+  selector: 'app-category',
+  templateUrl: './category.component.html',
+  styleUrls: ['./category.component.css']
+})
+export class CategoryComponent implements OnInit {
+
+  dataSource = new MatTableDataSource<any>([]);
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  initialSelection = [];
+  allowMultiSelect = true;
+  selection = new SelectionModel<any>(this.allowMultiSelect, this.initialSelection);
+
+  loaded = false;
+
+  table_headers: any = [];
+  data: any = [];
+  categories: Category[];
+
+  constructor(private categoryService: CategoryService, private router: Router,
+    private currentActivatedRoute: ActivatedRoute) { }
+
+  ngOnInit() {
+    // SwalAlert.sucessAlert('','Product added sucessfully!');
+    this.table_headers = ['select', 'image', 'name', 'parent_category_id', 'status', 'actions'];
+    const categories = this.categoryService.getCategories();
+    categories.subscribe(
+      result => {
+        console.log('categories list:', result);
+        if (!result['error']) {
+          this.categories = result['data'];
+          this.dataSource.data = this.categories;
+          this.dataSource.connect().next(this.categories);
+          this.dataSource.paginator = this.paginator;
+        }
+        else {
+          SwalAlert.errorAlert('',result['message'].charAt(0).toUpperCase() + result['message'].substring(1));
+        }
+      },
+      err => { console.log(err); },
+      () => {
+        this.loaded = true;
+        // console.log('call completed');
+      }
+    );
+  }
+
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+  getCategoryId(category_id) {
+    console.log(category_id);
+    this.router.navigate(['/instamunch/category/edit', category_id]);
+  }
+
+  isAllSelected() {
+    const numSelected = this.selection.selected.length;
+    const numRows = this.dataSource.data.length;
+    return numSelected == numRows;
+    console.log(this.selection);
+  }
+
+  /** Selects all rows if they are not all selected; otherwise clear selection. */
+  masterToggle() {
+    this.isAllSelected() ?
+      this.selection.clear() :
+      this.dataSource.data.forEach(row => this.selection.select(row));
+    console.log(this.selection);
+  }
+
+  // $event ? selection.toggle(row) : null
+  checkboxClicked(event, row) {
+    if (event) {
+      this.selection.toggle(row);
+    }
+    else
+      null;
+
+    console.log(this.selection);
+  }
+
+  navigateToCategoryAdd() {
+    this.router.navigate(['add'], { relativeTo: this.currentActivatedRoute });
+  }
+}

@@ -3,7 +3,9 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  // baseUrl: 'http:// 51.11.55.5:8000/instamunch/' // staging
+  baseUrl: 'http://51.11.55.5:8000/instamunch/' // production
 };
 
 /*

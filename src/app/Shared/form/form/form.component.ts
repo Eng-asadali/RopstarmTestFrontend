@@ -46,7 +46,11 @@ export class FormComponent implements OnInit {
 
   ngOnChanges(changes: SimpleChanges) {
 
-    if (this.clear_form == undefined) {
+    console.log(changes);
+
+    // if (this.clear_form == undefined) {
+    if (changes['form']) {
+       console.log(changes);
       this.timeout = setInterval(() => {
         if (this.form['form_fields'].length == 0) {
           // console.log(this.form['form_fields'].length);
@@ -64,9 +68,8 @@ export class FormComponent implements OnInit {
 
     }
 
-
-    console.log(this.clear_form);
     if (this.clear_form == true) {
+      console.log('abd');
       this.FormGroupDirective.resetForm();
       // setTimeout(function () {
       //   $('.selectpicker').selectpicker('refresh');

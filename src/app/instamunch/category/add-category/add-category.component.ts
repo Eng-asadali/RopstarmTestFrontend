@@ -58,6 +58,10 @@ export class AddCategoryComponent implements OnInit {
     }
   }
 
+  test(){
+    this.clear_form= true;
+  }
+
   getCategoryData(data){
     if(this.edit){
       this.categoryService.editCategory(data,this.category_id).subscribe(
@@ -75,6 +79,7 @@ export class AddCategoryComponent implements OnInit {
       this.categoryService.addCategory(data).subscribe(
         result => {
           if (!result['error']) {
+            this.clear_form= true;
             SwalAlert.sucessAlert('','Category Created Sucessfully!');
           }
           else{

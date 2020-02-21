@@ -26,6 +26,7 @@ import { AddCategoryComponent } from './instamunch/category/add-category/add-cat
 import { AddProductComponent } from './instamunch/product/add-product/add-product.component';
 import { StaffComponent } from './instamunch/staff/staff.component';
 import { OrderComponent } from './instamunch/order/order.component';
+import { SalesComponent } from './instamunch/Reports/sales/sales.component';
 
 
 @NgModule({
@@ -39,7 +40,8 @@ import { OrderComponent } from './instamunch/order/order.component';
     AddCategoryComponent,
     AddProductComponent,
     StaffComponent,
-    OrderComponent
+    OrderComponent,
+    SalesComponent
   ],
 
   imports: [

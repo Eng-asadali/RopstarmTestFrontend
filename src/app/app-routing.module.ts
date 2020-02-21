@@ -8,6 +8,7 @@ import { AddCategoryComponent } from './instamunch/category/add-category/add-cat
 import { AddProductComponent } from './instamunch/product/add-product/add-product.component';
 import { OrderComponent } from './instamunch/order/order.component';
 import { StaffComponent } from './instamunch/staff/staff.component';
+import { SalesComponent } from './instamunch/Reports/sales/sales.component';
 
 const routes: Routes = [
   {
@@ -33,6 +34,9 @@ const routes: Routes = [
   },
   {
     path: 'instamunch/staff', component: StaffComponent
+  },
+  {
+    path: 'instamunch/sales-report', component: SalesComponent
   },
 ];
 

@@ -22,7 +22,7 @@ export class CategoryService {
 
   addCategory(data){
     return this.httpServices.postFormDataWithoutActiveStatus(data,'catalog/category/').pipe(
-      catchError(err => of({data:[]})));
+      catchError(err => of({error:true,message:'Server error',data:[]})));
   }
 
   getCategories(){

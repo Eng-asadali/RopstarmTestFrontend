@@ -16,6 +16,7 @@ import { AppComponent } from './app.component';
 //Services
 import { HttpService } from './Services/http.service';
 import { InterceptorService } from './Services/interceptor.service';
+import { SalesReportResolver } from './Services/sales-report.resolver';
 
 import { HeaderComponent } from './Core/header/header.component';
 import { SidebarComponent } from './Core/sidebar/sidebar.component';
@@ -63,6 +64,7 @@ import { SalesComponent } from './instamunch/Reports/sales/sales.component';
 
   providers: [HttpService,
     AuthService,
+    SalesReportResolver,
     { provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true }
   ],
 

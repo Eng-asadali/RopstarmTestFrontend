@@ -10,6 +10,8 @@ import { OrderComponent } from './instamunch/order/order.component';
 import { StaffComponent } from './instamunch/staff/staff.component';
 import { SalesComponent } from './instamunch/Reports/sales/sales.component';
 
+
+import { SalesReportResolver } from './Services/sales-report.resolver';
 const routes: Routes = [
   {
     path: 'instamunch/category', component: CategoryComponent
@@ -36,7 +38,9 @@ const routes: Routes = [
     path: 'instamunch/staff', component: StaffComponent
   },
   {
-    path: 'instamunch/sales-report', component: SalesComponent
+    path: 'instamunch/sales-report', component: SalesComponent,resolve:{
+      cres: SalesReportResolver
+    }
   },
 ];
 

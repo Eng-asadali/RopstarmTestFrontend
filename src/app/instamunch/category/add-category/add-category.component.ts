@@ -109,8 +109,6 @@ export class AddCategoryComponent implements OnInit {
           ]
           this.form['form_fields'] = this.fields;
           this.form['FormbootstrapGridClass'] = 'col-lg-9';
-          this.form['map'] = false;
-          this.form['MapbootstrapGridClass'] = 'col-lg-4';
           this.form['image'] = true;
           this.form['ImagebootstrapGridClass'] = 'col-lg-3';
           this.form['img_height'] = "200px";

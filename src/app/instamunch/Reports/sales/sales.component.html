@@ -61,7 +61,7 @@
               <div class="widget-subheading">All menu items</div>
             </div>
             <div class="widget-content-right">
-              <div class="widget-numbers text-white"><span>1896</span></div>
+              <div class="widget-numbers text-white"><span>{{sales_report.overall_summary?.total_orders}}</span></div>
             </div>
           </div>
         </div>
@@ -70,11 +70,12 @@
         <div class="card mb-3 widget-content bg-arielle-smile">
           <div class="widget-content-wrapper text-white">
             <div class="widget-content-left">
-              <div class="widget-heading">Total Visitors</div>
+              <div class="widget-heading">Total Revenue</div>
               <div class="widget-subheading">All orders</div>
             </div>
             <div class="widget-content-right">
-              <div class="widget-numbers text-white"><span>568</span></div>
+              <div class="widget-numbers text-white"><span>£ {{sales_report.overall_summary?.total_revenue}}</span>
+              </div>
             </div>
           </div>
         </div>
@@ -83,11 +84,11 @@
         <div class="card mb-3 widget-content bg-grow-early">
           <div class="widget-content-wrapper text-white">
             <div class="widget-content-left">
-              <div class="widget-heading">Net Sale</div>
+              <div class="widget-heading">Total Tips</div>
               <div class="widget-subheading">Overall all orders</div>
             </div>
             <div class="widget-content-right">
-              <div class="widget-numbers text-white"><span> £ 80,000</span></div>
+              <div class="widget-numbers text-white"><span> £ {{sales_report.overall_summary?.total_tips}}</span></div>
             </div>
           </div>
         </div>
@@ -119,7 +120,10 @@
           <div class="card-body">
 
             <div class="apexbox mb-0" style="position: relative;">
-
+              <div id="chart">
+                <app-charts *ngIf="chartReady" [data]="salesChartData" yaxisLabel="Orders" [labels]="salesChartLabels">
+                </app-charts>
+              </div>
             </div>
           </div>
         </div>
@@ -131,177 +135,25 @@
             <div class="scroll-area" style="height: 335px;">
               <div class="scrollbar-container ps ps--active-y">
                 <ul class="rm-list-borders rm-list-borders-scroll list-group list-group-flush">
-                  <li class="list-group-item">
+                  <li *ngFor="let item of sales_report.category_sales_breakdown" class="list-group-item">
                     <div class="widget-content p-0">
                       <div class="widget-content-wrapper">
                         <div class="widget-content-left mr-3">
-                          <img width="42" class="rounded-circle" src="assets/images/img1.png" alt="">
+                          <img width="42" class="rounded-circle"
+                            [src]="item.category_image!=null ? item.category_image : '../../../assets/images/no_image.png'"
+                            alt="">
                         </div>
                         <div class="widget-content-left">
-                          <div class="widget-heading">Starters</div>
+                          <div class="widget-heading">{{item.product__category__name}}</div>
                           <div class="widget-subheading">Menu</div>
                         </div>
                         <div class="widget-content-right">
                           <div class="font-size-xlg text-muted">
                             <small class="opacity-5 pr-1">£</small>
-                            <span> 7890</span>
-                            <small class="text-danger pl-2">
+                            <span> {{item.overall}}</span>
+                            <!-- <small class="text-danger pl-2">
                               <i class="fa fa-angle-down"></i>
-                            </small>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </li>
-                  <li class="list-group-item">
-                    <div class="widget-content p-0">
-                      <div class="widget-content-wrapper">
-                        <div class="widget-content-left mr-3">
-                          <img width="42" class="rounded-circle" src="assets/images/img2.png" alt="">
-                        </div>
-                        <div class="widget-content-left">
-                          <div class="widget-heading">Drinks</div>
-                          <div class="widget-subheading">Menu</div>
-                        </div>
-                        <div class="widget-content-right">
-                          <div class="font-size-xlg text-muted">
-                            <small class="opacity-5 pr-1">£</small>
-                            <span> 7850</span>
-                            <small class="text-danger pl-2">
-                              <i class="fa fa-angle-up"></i>
-                            </small>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </li>
-                  <li class="list-group-item">
-                    <div class="widget-content p-0">
-                      <div class="widget-content-wrapper">
-                        <div class="widget-content-left mr-3">
-                          <img width="42" class="rounded-circle" src="assets/images/img3.png" alt="">
-                        </div>
-                        <div class="widget-content-left">
-                          <div class="widget-heading">Main Course</div>
-                          <div class="widget-subheading">Menu</div>
-                        </div>
-                        <div class="widget-content-right">
-                          <div class="font-size-xlg text-muted">
-                            <small class="opacity-5 pr-1">£</small>
-                            <span>17810</span>
-                            <small class="text-success pl-2">
-                              <i class="fa fa-angle-up"></i>
-                            </small>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </li>
-                  <li class="list-group-item">
-                    <div class="widget-content p-0">
-                      <div class="widget-content-wrapper">
-                        <div class="widget-content-left mr-3">
-                          <img width="42" class="rounded-circle" src="assets/images/img1.png" alt="">
-                        </div>
-                        <div class="widget-content-left">
-                          <div class="widget-heading">Starters</div>
-                          <div class="widget-subheading">Menu</div>
-                        </div>
-                        <div class="widget-content-right">
-                          <div class="font-size-xlg text-muted">
-                            <small class="opacity-5 pr-1">£</small>
-                            <span> 7890</span>
-                            <small class="text-danger pl-2">
-                              <i class="fa fa-angle-down"></i>
-                            </small>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </li>
-                  <li class="list-group-item">
-                    <div class="widget-content p-0">
-                      <div class="widget-content-wrapper">
-                        <div class="widget-content-left mr-3">
-                          <img width="42" class="rounded-circle" src="assets/images/img2.png" alt="">
-                        </div>
-                        <div class="widget-content-left">
-                          <div class="widget-heading">Drinks</div>
-                          <div class="widget-subheading">Menu</div>
-                        </div>
-                        <div class="widget-content-right">
-                          <div class="font-size-xlg text-muted">
-                            <small class="opacity-5 pr-1">£</small>
-                            <span> 7850</span>
-                            <small class="text-danger pl-2">
-                              <i class="fa fa-angle-up"></i>
-                            </small>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </li>
-                  <li class="list-group-item">
-                    <div class="widget-content p-0">
-                      <div class="widget-content-wrapper">
-                        <div class="widget-content-left mr-3">
-                          <img width="42" class="rounded-circle" src="assets/images/img1.png" alt="">
-                        </div>
-                        <div class="widget-content-left">
-                          <div class="widget-heading">Starters</div>
-                          <div class="widget-subheading">Menu</div>
-                        </div>
-                        <div class="widget-content-right">
-                          <div class="font-size-xlg text-muted">
-                            <small class="opacity-5 pr-1">£</small>
-                            <span> 78990</span>
-                            <small class="text-danger pl-2">
-                              <i class="fa fa-angle-down"></i>
-                            </small>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </li>
-                  <li class="list-group-item">
-                    <div class="widget-content p-0">
-                      <div class="widget-content-wrapper">
-                        <div class="widget-content-left mr-3">
-                          <img width="42" class="rounded-circle" src="assets/images/img1.png" alt="">
-                        </div>
-                        <div class="widget-content-left">
-                          <div class="widget-heading">Starters</div>
-                          <div class="widget-subheading">Menu</div>
-                        </div>
-                        <div class="widget-content-right">
-                          <div class="font-size-xlg text-muted">
-                            <small class="opacity-5 pr-1">£</small>
-                            <span> 78990</span>
-                            <small class="text-danger pl-2">
-                              <i class="fa fa-angle-down"></i>
-                            </small>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </li>
-                  <li class="list-group-item">
-                    <div class="widget-content p-0">
-                      <div class="widget-content-wrapper">
-                        <div class="widget-content-left mr-3">
-                          <img width="42" class="rounded-circle" src="assets/images/img3.png" alt="">
-                        </div>
-                        <div class="widget-content-left">
-                          <div class="widget-heading">Main Course</div>
-                          <div class="widget-subheading">Menu</div>
-                        </div>
-                        <div class="widget-content-right">
-                          <div class="font-size-xlg text-muted">
-                            <small class="opacity-5 pr-1">£</small>
-                            <span>17810</span>
-                            <small class="text-success pl-2">
-                              <i class="fa fa-angle-up"></i>
-                            </small>
+                            </small> -->
                           </div>
                         </div>
                       </div>
@@ -318,8 +170,8 @@
             </div>
           </div>
         </div>
-  
-  
+
+
       </div>
     </div>
 
@@ -327,16 +179,52 @@
       <div class="col-md-8">
         <div class="main-card mb-3 card">
           <div class="card-header">Payment Summary
-            <div class="btn-actions-pane-right">
+            <!-- <div class="btn-actions-pane-right">
               <div role="group" class="btn-group-sm btn-group">
                 <button class="active btn btn-focus">Received </button>
                 <button class="btn btn-focus">Pending</button>
               </div>
-            </div>
+            </div> -->
           </div>
           <div class="card-body">
+            <mat-form-field style="width: 100%;">
+              <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+            </mat-form-field>
+
             <div class="table-responsive">
-              <table class="align-middle mb-0 table table-sm table-borderless table-striped table-hover">
+              <table mat-table [dataSource]="dataSource" style="width: 100%;">
+                <div>
+                  <ng-container matColumnDef="image">
+                    <th mat-header-cell *matHeaderCellDef> Image </th>
+                    <td mat-cell *matCellDef="let element"> <img style="width: 30px; height: 30px;"
+                        [src]="element.waiter__user_image!=null ? element.waiter__user_image : '../../../assets/images/no_image.png'" />
+                    </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="name">
+                    <th mat-header-cell *matHeaderCellDef> Name </th>
+                    <td mat-cell *matCellDef="let element"> {{element.waiter__first_name}} {{element.waiter__last_name}}
+                    </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="amount">
+                    <th mat-header-cell *matHeaderCellDef> Sales </th>
+                    <td mat-cell *matCellDef="let element"> {{element.sales}} </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="tip">
+                    <th mat-header-cell *matHeaderCellDef> Tip </th>
+                    <td mat-cell *matCellDef="let element"> {{element.tip}} </td>
+                  </ng-container>
+
+                </div>
+                <tr mat-header-row *matHeaderRowDef="table_headers"></tr>
+                <tr mat-row *matRowDef="let row; columns: table_headers;"></tr>
+              </table>
+
+              <mat-paginator #paginator [pageSize]="10" showFirstLastButtons [pageSizeOptions]="[10,50,100,500]">
+              </mat-paginator>
+              <!-- <table class="align-middle mb-0 table table-sm table-borderless table-striped table-hover">
                 <thead>
                   <tr>
                     <th class="text-center">#</th>
@@ -472,11 +360,11 @@
                   </tr>
   
                 </tbody>
-              </table>
+              </table> -->
             </div>
-  
+
           </div>
-  
+
         </div>
       </div>
       <div class="col-md-12 col-lg-4">
@@ -486,22 +374,21 @@
               <i class="header-icon lnr-apartment icon-gradient bg-love-kiss"> </i>
               Most Running Items
             </div>
-  
+
           </div>
           <div class="card-body">
             <div class="apexbox mb-0" style="position: relative;">
-  
-  
+              <app-doughnut-chart [labels]="doughnutChartLabels" [data]="doughnutChartData"></app-doughnut-chart>
             </div>
           </div>
-  
+
         </div>
       </div>
-   </div>
-    
+    </div>
+
   </div>
 
 
-  
+
 
 </div>

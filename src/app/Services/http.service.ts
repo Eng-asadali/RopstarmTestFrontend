@@ -18,7 +18,7 @@ export class HttpService {
     data['created_by_id'] = this.loggen_in_user['id'];
     data['os'] = "web";
     data['status'] = "active";
-    console.log(data)
+    // console.log(data);
     return this.http.post(url, data);
   }
 
@@ -27,20 +27,20 @@ export class HttpService {
     data['os'] = "web";
     data['status'] = "active";
     var form_data = this.converToFormdata(data);
-    console.log(form_data);
+    // console.log(form_data);
     return this.http.post(url, form_data);
   }
 
   postFormDataWithoutActiveStatus(data, url) {
     data['created_by_id'] =  this.loggen_in_user['id'];
     data['os'] = "web";
-    console.log(data);
+    // console.log(data);
     var form_data = this.converToFormdata(data);
     return this.http.post(url, form_data);
   }
 
   filter(data, url) {
-    console.log(data)
+    // console.log(data);
     return this.http.post(url, data);
   }
 
@@ -50,7 +50,7 @@ export class HttpService {
     data['created_by_id'] = this.loggen_in_user['id'];
     data['os'] = "web";
     data['status'] = "active";
-    console.log(data);
+    // console.log(data);
     return this.http.patch(url, data);
   }
 
@@ -61,7 +61,7 @@ export class HttpService {
     data['os'] = "web";
     data['status'] = "active";
     var form_data = this.converToFormdata(data);
-    console.log(form_data);
+    // console.log(form_data);
     return this.http.patch(url, form_data);
   }
 
@@ -69,20 +69,20 @@ export class HttpService {
     data['modified_by_id'] = this.loggen_in_user['id'];
     data['modified_datetime'] = new Date().toISOString();
     data['os'] = "web";
-    console.log(data);
+    // console.log(data);
     var form_data = this.converToFormdata(data);
     return this.http.patch(url, form_data);
   }
 
  delete(url) {
-    console.log(url);
+    // console.log(url);
     return this.http.delete(url);
   }
 
    converToFormdata(data) {
     var form_data = new FormData();
     for (var key in data) {
-      console.log(key,data[key]);
+      // console.log(key,data[key]);
       form_data.append(key, data[key]);
     }
     return form_data;

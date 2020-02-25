@@ -1,10 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common'; 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgApexchartsModule } from "ng-apexcharts";
 
 //Components
 import { FormComponent } from './form/form/form.component';
 import { ErrorsComponent } from './form/errors/errors.component';
+import { ChartsComponent } from './charts/charts.component';
+import { DoughnutChartComponent } from './doughnut-chart/doughnut-chart.component';
 
 @NgModule({
 
@@ -15,17 +18,22 @@ import { ErrorsComponent } from './form/errors/errors.component';
 
     declarations: [
         FormComponent,
-        ErrorsComponent
+        ErrorsComponent,
+        ChartsComponent,
+        DoughnutChartComponent
     ],
 
     exports: [
         ErrorsComponent,
-        FormComponent
+        FormComponent,
+        ChartsComponent,
+        DoughnutChartComponent
     ],
 
     imports: [
         ReactiveFormsModule,
-        CommonModule
+        CommonModule,
+        NgApexchartsModule
     ],
 
 })

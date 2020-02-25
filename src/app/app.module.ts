@@ -6,6 +6,7 @@ import {
   MatTableModule, MatPaginatorModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatCheckboxModule,
   MatProgressBarModule
 } from '@angular/material';
+import { NgApexchartsModule } from "ng-apexcharts";
 
 import { SharedModule } from './Shared/shared.module';
 
@@ -56,7 +57,8 @@ import { SalesComponent } from './instamunch/Reports/sales/sales.component';
     MatCheckboxModule,
     MatInputModule,
     MatProgressBarModule,
-    SharedModule
+    SharedModule,
+    NgApexchartsModule
   ],
 
   providers: [HttpService,

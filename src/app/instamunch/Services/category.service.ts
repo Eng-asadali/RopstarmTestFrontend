@@ -12,12 +12,13 @@ export class CategoryService {
 
   getCategoryById(id) {
     return this.httpServices.get('catalog/category/details/' + id + "/").pipe(
-      catchError(err => of({data:[]})));
+      catchError(err => of({error:true,message:'Server error',data:[]})));
   }
 
   editCategory(data,id){
-    return this.httpServices.patch(data,'catalog/category/' + id + "/").pipe(
-      catchError(err => of({data:[]})));
+   
+    return this.httpServices.patchFormData(data,'catalog/category/details/' + id + "/").pipe(
+      catchError(err => of({error:true,message:'Server error',data:[]})));
   }
 
   addCategory(data){
@@ -27,7 +28,8 @@ export class CategoryService {
 
   getCategories(){
    return this.httpServices.get('catalog/category/').pipe(
-      catchError(err => of({data:[]})));
+      catchError(err => of({error:true,message:'Server error',data:[]}))
+      );
   }
 
   getParentCategories(){

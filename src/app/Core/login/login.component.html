@@ -1,0 +1,5 @@
+<form novalidate #f="ngForm" (ngSubmit)="f.form.valid && onSubmit()">
+  <input [(ngModel)]="model.username" name="email" placeholder="email"/>
+  <input [(ngModel)]="model.password" name="password" placeholder="passoword" /> 
+  <button type="submit">Login</button>
+</form>

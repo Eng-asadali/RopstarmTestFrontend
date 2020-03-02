@@ -1,10 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, MatTableDataSource, MatSort } from '@angular/material';
-import { SelectionModel } from '@angular/cdk/collections';
+import { ActivatedRoute} from '@angular/router';
+import { map } from 'rxjs/operators';
 
 import { SalesReportService } from '../../Services/sales-report.service';
 import { DateUtils } from 'src/app/Shared/DateUtils';
-import { th } from 'date-fns/locale';
+
 
 @Component({
   selector: 'app-sales',
@@ -19,7 +20,8 @@ export class SalesComponent implements OnInit {
 
 
 
-  sales_report = {};
+  sales_report = {overall_summary:{total_orders:'-',total_revenue:'-',total_tips:'-'},category_sales_breakdown:[],waiter_sales_breakdown:[],
+  product_sales_breakdown:[],monthly_sales_breakdown:[]};
 
   salesChartData = [{ name: 'Orders', data: [] }];
   salesChartLabels = [];
@@ -27,33 +29,61 @@ export class SalesComponent implements OnInit {
   doughnutChartData = [];
 
   chartReady: boolean = false;
+  chartReadyD:boolean = false;
 
-  constructor(private salesReportService: SalesReportService) { }
+  constructor(private salesReportService: SalesReportService, private activated_route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.salesReportService.getSalesReport().subscribe(
-      result => {
-        if (!result['error']) {
-          console.log('sales report', result);
-          this.sales_report = result['data'];
-          this.table_headers = ['image', 'name', 'amount', 'tip'];
-          this.dataSource.data = result['data']['waiter_sales_breakdown'];
-          this.getSalesReport(result['data']['monthly_sales_breakdown']);
-          this.getMostRunningProductsReport(result['data']['product_sales_breakdown']);
-          this.dataSource.connect().next(result['data']);
-          this.dataSource.paginator = this.paginator;
+    this.activated_route.data.pipe(map(data => data.cres)).subscribe(result => {
+      // console.log(result);
+     let response = result;
+     response.subscribe(
+        result => {
+          if (!result['error']) {
+            console.log('sales report', result);
+            this.sales_report = result['data'];
+            this.table_headers = ['image', 'name', 'amount', 'tip'];
+            this.dataSource.data = result['data']['waiter_sales_breakdown'];
+            this.getSalesReport(result['data']['monthly_sales_breakdown']);
+            this.getMostRunningProductsReport(result['data']['product_sales_breakdown']);
+            this.dataSource.connect().next(result['data']);
+            this.dataSource.paginator = this.paginator;
+          }
+          else {
+  
+          }
+        },
+        err => {
+  
+        },
+        () => {
+  
         }
-        else {
+      )
+    });
+    // this.salesReportService.getSalesReport().subscribe(
+    //   result => {
+    //     if (!result['error']) {
+    //       console.log('sales report', result);
+    //       this.sales_report = result['data'];
+    //       this.table_headers = ['image', 'name', 'amount', 'tip'];
+    //       this.dataSource.data = result['data']['waiter_sales_breakdown'];
+    //       this.getSalesReport(result['data']['monthly_sales_breakdown']);
+    //       this.getMostRunningProductsReport(result['data']['product_sales_breakdown']);
+    //       this.dataSource.connect().next(result['data']);
+    //       this.dataSource.paginator = this.paginator;
+    //     }
+    //     else {
 
-        }
-      },
-      err => {
+    //     }
+    //   },
+    //   err => {
 
-      },
-      () => {
+    //   },
+    //   () => {
 
-      }
-    )
+    //   }
+    // )
   }
 
   getSalesReport(sales_data) {
@@ -69,6 +99,7 @@ export class SalesComponent implements OnInit {
       this.doughnutChartData.push(record.overall);
       this.doughnutChartLabels.push(record.product__name);
     });
+    this.chartReadyD = true;
   }
 
   applyFilter(filterValue: string) {

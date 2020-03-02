@@ -18,18 +18,32 @@ export class InterceptorService implements HttpInterceptor {
     // Get the auth header from the service.
     // const authHeader = this.auth.getToken();
 
-    const authHeader = 'fe8a459e4cc9c7fea059dda5e228501e8b30ea22';
+    // console.log(this.auth.getToken());
+    // this.auth.unsetUser();
+    const authHeader = this.auth.getToken();
+    const branch_Key = this.auth.getBranchKey();
     const url = environment.baseUrl;
+    // const url = 'http://168.63.140.202:8001/instamunch/';
 
     // Clone the request to add the new header.
 
     let cloneReq;
-    if (authHeader != null) {
+    if (authHeader != null && branch_Key !=null) {
       let headers = req.headers
-            .set("Authorization", "Token " + authHeader)
-            .set("branch-Auth-Key" , "oquwyekjnasbdkasd");
+        .set("Authorization", "Token " + authHeader)
+        .set("branch-Auth-Key", branch_Key);
 
-        cloneReq = req.clone({ headers:headers ,url: url+req.url});
+      cloneReq = req.clone({ headers: headers, url: url + req.url });
+    }
+    //  if (authHeader != null) {
+    //   let headers = req.headers
+    //     .set("Authorization", "Token " + authHeader)
+    //    // .set("branch-Auth-Key", branch_Key);
+
+    //   cloneReq = req.clone({ headers: headers, url: url + req.url });
+    // }
+    else {
+      cloneReq = req.clone({ url: url + req.url });
     }
     // Pass on the cloned request instead of the original request.
     return next.handle(cloneReq).pipe(

@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 import {
   MatTableModule, MatPaginatorModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatCheckboxModule,
   MatProgressBarModule
@@ -16,6 +17,8 @@ import { AppComponent } from './app.component';
 //Services
 import { HttpService } from './Services/http.service';
 import { InterceptorService } from './Services/interceptor.service';
+import { SalesReportResolver } from './Services/sales-report.resolver';
+import { AuthGuardService } from './Services/auth-guard';
 
 import { HeaderComponent } from './Core/header/header.component';
 import { SidebarComponent } from './Core/sidebar/sidebar.component';
@@ -31,6 +34,8 @@ import { SalesComponent } from './instamunch/Reports/sales/sales.component';
 import { AddStaffComponent } from './instamunch/staff/add-staff/add-staff.component';
 import { EditComponent } from './instamunch/staff/edit/edit.component';
 import { EditOrderComponent } from './instamunch/order/edit-order/edit-order.component';
+import { LoginComponent } from './Core/login/login.component';
+import { DashboardComponent } from './Core/dashboard/dashboard.component';
 
 
 @NgModule({
@@ -48,7 +53,9 @@ import { EditOrderComponent } from './instamunch/order/edit-order/edit-order.com
     SalesComponent,
     AddStaffComponent,
     EditComponent,
-    EditOrderComponent
+    EditOrderComponent,
+    LoginComponent,
+    DashboardComponent
   ],
 
   imports: [
@@ -64,11 +71,14 @@ import { EditOrderComponent } from './instamunch/order/edit-order/edit-order.com
     MatInputModule,
     MatProgressBarModule,
     SharedModule,
-    NgApexchartsModule
+    NgApexchartsModule,
+    FormsModule
   ],
 
   providers: [HttpService,
     AuthService,
+    SalesReportResolver,
+    AuthGuardService,
     { provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true }
   ],
 

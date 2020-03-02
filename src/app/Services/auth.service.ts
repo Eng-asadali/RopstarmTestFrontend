@@ -19,25 +19,50 @@ export class AuthService {
       {
         username: contact_number,
         password: password,
-        type: "admin"
+        type: 'admin'
       }).pipe(map(user => {
+
         console.log(user);
         if (!user['error']) {
           localStorage.setItem('user', JSON.stringify(user['data'][0]));
           this.dataSource.next(JSON.stringify(user['data'][0]));
         }
         return user;
-      }));
+      },
+      err => {
+        
+      }
+      ));
   }
 
   getToken() {
     var token = null;
+    var user = JSON.parse(localStorage.getItem('user'));
+
+    if (user != null)
+      token = user['token'];
+
     //  console.log(localStorage.getItem('user'));
-    if (localStorage.getItem('user') != 'undefined' && localStorage.getItem('user') != null) {
-      token = JSON.parse(localStorage.getItem('user'))['token'];
-    }
+    // if (localStorage.getItem('user') != 'undefined' && localStorage.getItem('user') != null) {
+    //   token = JSON.parse(localStorage.getItem('user'))['token'];
+    // }
 
     return token;
+  }
+
+
+  getBranchKey() {
+    var branch_key = null;
+    var user = JSON.parse(localStorage.getItem('user'));
+
+    if (user != null)
+      branch_key = user['branch_key'];
+    // console.log();
+    // if (branch_key != 'undefined' && branch_key != null) {
+    //   branch_key = JSON.parse(localStorage.getItem('user'))['branch_key'];
+    // }
+
+    return branch_key;
   }
 
   unsetUser() {
@@ -51,7 +76,7 @@ export class AuthService {
     }
   }
 
-  updatedDataSelection(data){
+  updatedDataSelection(data) {
     this.dataSource.next(data);
   }
 

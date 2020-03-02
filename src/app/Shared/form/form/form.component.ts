@@ -46,11 +46,8 @@ export class FormComponent implements OnInit {
 
   ngOnChanges(changes: SimpleChanges) {
 
-    console.log(changes);
-
     // if (this.clear_form == undefined) {
     if (changes['form']) {
-       console.log(changes);
       this.timeout = setInterval(() => {
         if (this.form['form_fields'].length == 0) {
           // console.log(this.form['form_fields'].length);
@@ -68,9 +65,10 @@ export class FormComponent implements OnInit {
 
     }
 
-    if (this.clear_form == true) {
-      console.log('abd');
-      this.FormGroupDirective.resetForm();
+    if (changes['clear_form']) {
+      if (changes['clear_form'].currentValue == true)
+        this.FormGroupDirective.resetForm();
+        this.displayValidationsErrors = false;
       // setTimeout(function () {
       //   $('.selectpicker').selectpicker('refresh');
       // }, 200);
@@ -107,17 +105,15 @@ export class FormComponent implements OnInit {
       }
     }
 
-    if(this.form['attribute']){
-    this.Form.addControl( 'attriubutes_list',this.fb.array([
-      this.fb.group({
-        attribute: this.fb.group({
+    if (this.form['attribute']) {
+      this.Form.addControl('product_attributes', this.fb.array([
+        this.fb.group({
           name: '',
-          value: ''
-        })
-      }),
-    
-    ]));
-  }
+            value: ''
+        }),
+
+      ]));
+    }
 
     // console.log(this.Form);
     // setTimeout(function () {
@@ -125,17 +121,15 @@ export class FormComponent implements OnInit {
     // }, 10);
   }
 
-  addAttribute(){
-    var arr= this.Form.get('attriubutes_list');
-    const attribute =   this.fb.group({
-      attribute: this.fb.group({
-        name: '',
-        value: ''
-      })
+  addAttribute() {
+    var arr = this.Form.get('product_attributes');
+    const attribute = this.fb.group({
+      name: '',
+      value: ''
     });
     (arr as FormArray).push(attribute);
-      
-      
+
+
   }
 
   submit() {
@@ -150,6 +144,9 @@ export class FormComponent implements OnInit {
         }
       }.bind(this));
       this.formValues.emit(this.form_values);
+    }
+    else{
+     console.log('form is not valid');
     }
   }
 
@@ -180,7 +177,7 @@ export class FormComponent implements OnInit {
     }
   }
 
-  chooseImage(){
+  chooseImage() {
     document.getElementById("fileInput").click();
   }
 

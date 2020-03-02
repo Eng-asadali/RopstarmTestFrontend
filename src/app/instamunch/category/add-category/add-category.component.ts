@@ -7,6 +7,7 @@ import { FieldConfig } from '../../../Interfaces/feildConfig';
 import { CategoryService } from '../../Services/category.service';
 import { SwalAlert } from '../../../Shared/swalAlerts';
 
+import { DateUtils } from '../../../Shared/DateUtils';
 @Component({
   selector: 'app-add-category',
   templateUrl: './add-category.component.html',
@@ -22,8 +23,8 @@ export class AddCategoryComponent implements OnInit {
   loaded = false;
 
   category: Category;
-  edit:boolean;
-  category_id:number;
+  edit: boolean;
+  category_id: number;
 
   constructor(private categoryService: CategoryService, private route: Router,
     private active_route: ActivatedRoute) { }
@@ -31,64 +32,91 @@ export class AddCategoryComponent implements OnInit {
   ngOnInit() {
     this.form['form_fields'] = this.fields;
     if (this.active_route.snapshot.paramMap.get('id') != null) {
-      this.edit=true;
-      this.category_id = parseInt(this.active_route.snapshot.paramMap.get('id'));
-      let category = this.categoryService.getCategoryById(this.category_id);
-      category.subscribe(
-        result => {
-          console.log('category by id:', result);
-          this.category = result['data'][0];
-          if (!result['error']) {
-            this.generateForm(this.category);
-          }
-          else {
-            this.loaded = true;
-            SwalAlert.errorAlert('', result['message'].charAt(0).toUpperCase() + result['message'].substring(1));
-          }
-
-        },
-        err => { console.log(err); },
-        () => { console.log('call completed'); }
-      );
-      console.log(category);
+      this.edit = true;
+      this.getCategoryDateToEdit(parseInt(this.active_route.snapshot.paramMap.get('id')));
     }
     else {
-      this.edit=false;
+      this.edit = false;
       this.generateForm();
     }
   }
 
-  test(){
-    this.clear_form= true;
+
+  getCategoryDateToEdit(id) {
+    // this.category_id = parseInt(this.active_route.snapshot.paramMap.get('id'));
+    let category = this.categoryService.getCategoryById(id);
+    category.subscribe(
+      result => {
+    
+        console.log('category by id:', result);
+        this.category = result['data'][0];
+        if (!result['error']) {
+          this.generateForm(this.category);
+          
+        }
+        else {
+          SwalAlert.errorAlert('', result['message'].charAt(0).toUpperCase() + result['message'].substring(1));
+        }
+        this.loaded = true;
+      },
+      err => { 
+        console.log(err);
+        SwalAlert.errorAlert('', 'Server Error!'); }
+    );
+    console.log(category);
   }
 
-  getCategoryData(data){
-    if(this.edit){
-      this.categoryService.editCategory(data,this.category_id).subscribe(
-        result => {
-          if (!result['error']) {
 
-          }
-          else{
-            SwalAlert.errorAlert('',result['message'].charAt(0).toUpperCase() + result['message'].substring(1));
-          }
-        }
-      );
+
+  getCategoryData(data) {
+    this.clear_form = false;
+    this.submit_clicked = true;
+    if (this.edit) {
+      this.editCategory(data);
     }
-    else{
-      this.categoryService.addCategory(data).subscribe(
-        result => {
-          if (!result['error']) {
-            this.clear_form= true;
-            SwalAlert.sucessAlert('','Category Created Sucessfully!');
-          }
-          else{
-            SwalAlert.errorAlert('',result['message'].charAt(0).toUpperCase() + result['message'].substring(1));
-          }
-        }
-      );
+    else {
+      this.addCategory(data);
     }
-    console.log(data);
+
+    //  console.log(data);
+  }
+
+  addCategory(data) {
+    this.categoryService.addCategory(data).subscribe(
+      result => {
+        this.submit_clicked = false;
+        if (!result['error']) {
+          this.clear_form = true;
+          console.log('asddasd');
+          SwalAlert.sucessAlert('', 'Category Added Sucessfully!');
+
+        }
+        else {
+          SwalAlert.errorAlert('', result['message'].charAt(0).toUpperCase() + result['message'].substring(1));
+        }
+      },
+      err => {
+        console.log(err);
+        SwalAlert.errorAlert('', 'Server Error');
+      }
+    );
+  }
+
+  editCategory(data) {
+    this.categoryService.editCategory(data, this.category_id).subscribe(
+      result => {
+        if (!result['error']) {
+          SwalAlert.sucessAlert('', 'Category Updated Sucessfully!');
+        }
+        else {
+          SwalAlert.errorAlert('', result['message'].charAt(0).toUpperCase() + result['message'].substring(1));
+        }
+      },
+      err => {
+        console.log(err);
+        SwalAlert.errorAlert('', 'Server Error');
+      }
+    );
   }
 
   generateForm(category?: Category) {
@@ -116,8 +144,8 @@ export class AddCategoryComponent implements OnInit {
           this.form['submit'] = 'Save'
         }
         else {
-            this.loaded=true;
-            SwalAlert.errorAlert('',result['message'].charAt(0).toUpperCase() + result['message'].substring(1));
+          this.loaded = true;
+          SwalAlert.errorAlert('', result['message'].charAt(0).toUpperCase() + result['message'].substring(1));
         }
       },
       err => { console.log(err); },
@@ -128,6 +156,7 @@ export class AddCategoryComponent implements OnInit {
     );
 
   }
+
 
   navigateToCategoryListing() {
     this.route.navigate(['instamunch/category']);

@@ -12,18 +12,35 @@ export class ProductService {
 
   getProuctById(id) {
     return this.httpServices.get('catalog/product/details/' + id + "/").pipe(
-      catchError(err => of({data:[]})));
+      catchError(err => of({ error: true, message: 'Server error', data: [] })));
   }
 
-  getProducts(){
-   return this.httpServices.get('catalog/product/').pipe(
-      catchError(err => of({data:[]})));
+  addProduct(data){
+    return this.httpServices.postFormDataWithoutActiveStatus(data,'catalog/product/').pipe(
+      catchError(err => of({error:true,message:'Server error',data:[]})));
   }
 
-//   getParentCategories(){
-//     return this.httpServices.get('catalog/parent_category/').pipe(
-//       catchError(err => of({data:[]})));
-//   }
 
-  
+  // editCategory(data,id){
+   
+  //   return this.httpServices.patchFormData(data,'catalog/category/details/' + id + "/").pipe(
+  //     catchError(err => of({error:true,message:'Server error',data:[]})));
+  // }
+
+  getProducts() {
+    return this.httpServices.get('catalog/product/').pipe(
+      catchError(err => of({ error: true, message: 'Server error', data: [] })));
+  }
+
+  getKitchenList() {
+    return this.httpServices.get('kitchen/').pipe(
+      catchError(err => of({ error: true, message: 'Server error', data: [] }))
+    );
+  }
+  //   getParentCategories(){
+  //     return this.httpServices.get('catalog/parent_category/').pipe(
+  //       catchError(err => of({data:[]})));
+  //   }
+
+
 }

@@ -53,7 +53,7 @@ export class ChartsComponent implements OnInit, OnChanges {
 
 
   ngOnInit() {
-    console.log(this.data);
+    // console.log(this.data);
     this.chartOptions = {
       chart: {
         height: 350,
@@ -114,7 +114,7 @@ export class ChartsComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['data']) {
-      console.log(this.chart);
+      //console.log(this.chart);
       // this.chart.updateSeries(this.data);
     }
   }

@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 import {
   MatTableModule, MatPaginatorModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatCheckboxModule,
   MatProgressBarModule
@@ -17,6 +18,7 @@ import { AppComponent } from './app.component';
 import { HttpService } from './Services/http.service';
 import { InterceptorService } from './Services/interceptor.service';
 import { SalesReportResolver } from './Services/sales-report.resolver';
+import { AuthGuardService } from './Services/auth-guard';
 
 import { HeaderComponent } from './Core/header/header.component';
 import { SidebarComponent } from './Core/sidebar/sidebar.component';
@@ -29,6 +31,8 @@ import { AddProductComponent } from './instamunch/product/add-product/add-produc
 import { StaffComponent } from './instamunch/staff/staff.component';
 import { OrderComponent } from './instamunch/order/order.component';
 import { SalesComponent } from './instamunch/Reports/sales/sales.component';
+import { LoginComponent } from './Core/login/login.component';
+import { DashboardComponent } from './Core/dashboard/dashboard.component';
 
 
 @NgModule({
@@ -43,7 +47,9 @@ import { SalesComponent } from './instamunch/Reports/sales/sales.component';
     AddProductComponent,
     StaffComponent,
     OrderComponent,
-    SalesComponent
+    SalesComponent,
+    LoginComponent,
+    DashboardComponent
   ],
 
   imports: [
@@ -59,12 +65,14 @@ import { SalesComponent } from './instamunch/Reports/sales/sales.component';
     MatInputModule,
     MatProgressBarModule,
     SharedModule,
-    NgApexchartsModule
+    NgApexchartsModule,
+    FormsModule
   ],
 
   providers: [HttpService,
     AuthService,
     SalesReportResolver,
+    AuthGuardService,
     { provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true }
   ],
 

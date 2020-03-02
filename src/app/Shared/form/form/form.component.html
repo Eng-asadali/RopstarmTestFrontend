@@ -7,9 +7,10 @@
           <div *ngFor='let index of rows ;let i = index' class="{{fields[index].bootstrapGridClass}}">
 
             <div class="form-group" *ngIf="fields[index].type == 'checkbox'">
-              <input *ngIf="fields[index].name" formControlName="{{fields[index].name}}" type="checkbox" value="rtete">
-              <input *ngIf="!fields[index].name" type="checkbox" value="rtete">
-              <label>{{fields[index].label}} <span *ngIf="fields[index].required" class="required">*</span></label>
+              <!-- <input type="checkbox" id="horns" name="horns"> -->
+              <input *ngIf="fields[index].name" value="{{fields[index].value}}" [checked]="fields[index].value" formControlName="{{fields[index].name}}" type="checkbox">
+              <input *ngIf="!fields[index].name" type="checkbox">
+              <label style="margin-left: 10px;">{{fields[index].label}} <span *ngIf="fields[index].required" class="required">*</span></label>
             </div>
 
             <div class="form-group" *ngIf="fields[index].type == 'radio'">
@@ -162,10 +163,10 @@
             </div>
 
             <div class="form-group" *ngIf="fields[index].type == 'attribute'">
-              <label>{{fields[index].label}} <button style="color: white;margin-left: 6px;" class="btn btn-sm btn-success" (click)="addAttribute()"><i class="icofont-ui-add"></i></button></label>
-              <div formArrayName="attriubutes_list">
-                <div *ngFor="let attribute of Form.controls.attriubutes_list.controls; let i = index" [formGroupName]="i">
-                  <div formGroupName="attribute">
+              <label>{{fields[index].label}} <button type="button" style="color: white;margin-left: 6px;" class="btn btn-sm btn-success" (click)="addAttribute()"><i class="icofont-ui-add"></i></button></label>
+              <div formArrayName="product_attributes">
+                <div *ngFor="let attribute of Form.controls.product_attributes.controls; let i = index" [formGroupName]="i">
+                  <!-- <div formGroupName="attribute"> -->
                     <div style="margin-bottom: 5px;" class="row">
                       <div class="col-lg-6">
                         <input placeholder="Name" formControlName="name" class="form-control"/>    
@@ -173,7 +174,7 @@
                       <div class="col-lg-6">
                         <input placeholder="Value" formControlName="value" class="form-control"/>    
                       </div>
-                    </div>
+                    <!-- </div> -->
                     
                      
                   </div>
@@ -218,7 +219,7 @@
     </div>
   </div>
   <div *ngIf="form.submit" class="d-block text-right card-footer">
-    <button class="btn btn-success pull-right " style="margin-bottom: 15px;" type="submit"
+    <button [disabled]="submit_clicked" class="btn btn-success pull-right " style="margin-bottom: 15px;" type="submit"
       (click)="displayValidations()">{{form.submit}}</button>
   </div>
   <!-- <div *ngIf="form.edit_submit" class="row">

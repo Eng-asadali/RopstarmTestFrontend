@@ -35,7 +35,7 @@ export class SalesComponent implements OnInit {
 
   ngOnInit() {
     this.activated_route.data.pipe(map(data => data.cres)).subscribe(result => {
-      console.log(result);
+      // console.log(result);
      let response = result;
      response.subscribe(
         result => {

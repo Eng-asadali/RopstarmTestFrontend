@@ -36,6 +36,7 @@ export class CategoryComponent implements OnInit {
     const categories = this.categoryService.getCategories();
     categories.subscribe(
       result => {
+      //  alert(JSON.stringify(result));
         console.log('categories list:', result);
         if (!result['error']) {
           this.categories = result['data'];
@@ -47,7 +48,9 @@ export class CategoryComponent implements OnInit {
           SwalAlert.errorAlert('',result['message'].charAt(0).toUpperCase() + result['message'].substring(1));
         }
       },
-      err => { console.log(err); },
+      err => {
+        //alert(JSON.stringify(err));
+        console.log(err); },
       () => {
         this.loaded = true;
         // console.log('call completed');

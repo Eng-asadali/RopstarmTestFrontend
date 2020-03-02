@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { DateUtils } from '../Shared/DateUtils';
 
 @Injectable()
 export class HttpService {
@@ -46,7 +47,7 @@ export class HttpService {
 
   patch(data, url) {
     data['modified_by_id'] = this.loggen_in_user['id'];
-    data['modified_datetime'] = new Date().toISOString();
+    data['modified_datetime'] = DateUtils.getUtcDateTimeStart(new Date().toISOString());
     data['created_by_id'] = this.loggen_in_user['id'];
     data['os'] = "web";
     data['status'] = "active";
@@ -56,7 +57,7 @@ export class HttpService {
 
   patchFormData(data, url) {
     data['modified_by_id'] = this.loggen_in_user['id'];
-    data['modified_datetime'] = new Date().toISOString();
+    data['modified_datetime'] = DateUtils.getUtcDateTimeStart(new Date().toISOString());
     data['created_by_id'] = this.loggen_in_user['id'];
     data['os'] = "web";
     data['status'] = "active";

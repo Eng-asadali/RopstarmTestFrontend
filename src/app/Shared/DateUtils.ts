@@ -402,7 +402,7 @@ export class DateUtils {
    * @param date: date to format
    * @param dateFormat: format to convert date in
    */
-  static getUtcDateTimeStart(date: string, dateFormat = 'YYYY-MM-DD HH:mm:ss') {
+  static getUtcDateTimeStart(date: string, dateFormat = 'yyyy-MM-dd HH:mm:ss') {
     if (date) {
       try {
         const utcDate = Date.parse(date);

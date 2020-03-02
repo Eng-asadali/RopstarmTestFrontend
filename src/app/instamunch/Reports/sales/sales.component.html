@@ -232,9 +232,7 @@
                     <th class="text-center">Type</th>
                     <th class="text-center">Amount (£) </th>
                     <th class="text-center">Tip Amount (£)</th>
-  
-  
-                  </tr>
+                 </tr>
                 </thead>
                 <tbody>
                   <tr *ngFor="let element of sales_report?.waiter_sales_breakdown">
@@ -277,7 +275,7 @@
             </div>
 
           </div>
-          <div class="card-body">
+          <div style="height: 320px;" class="card-body">
             <div class="apexbox mb-0" style="position: relative;">
               <app-doughnut-chart *ngIf="chartReadyD" [labels]="doughnutChartLabels" [data]="doughnutChartData"></app-doughnut-chart>
             </div>

@@ -28,6 +28,9 @@ import { AddProductComponent } from './instamunch/product/add-product/add-produc
 import { StaffComponent } from './instamunch/staff/staff.component';
 import { OrderComponent } from './instamunch/order/order.component';
 import { SalesComponent } from './instamunch/Reports/sales/sales.component';
+import { AddStaffComponent } from './instamunch/staff/add-staff/add-staff.component';
+import { EditComponent } from './instamunch/staff/edit/edit.component';
+import { EditOrderComponent } from './instamunch/order/edit-order/edit-order.component';
 
 
 @NgModule({
@@ -42,7 +45,10 @@ import { SalesComponent } from './instamunch/Reports/sales/sales.component';
     AddProductComponent,
     StaffComponent,
     OrderComponent,
-    SalesComponent
+    SalesComponent,
+    AddStaffComponent,
+    EditComponent,
+    EditOrderComponent
   ],
 
   imports: [

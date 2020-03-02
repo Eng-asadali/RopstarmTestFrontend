@@ -15,9 +15,8 @@
         <div class="page-title-actions">
 
           <div class="d-inline-block dropdown">
-            <a style="margin-left: 4px;color: white;"  class="btn-shadow  btn btn-info">
-              <!-- (click)="navigateToProductAdd()" -->
-              <i class="icofont-ui-add"></i> Add New
+            <a style="margin-left: 4px;color: white;"  class="btn-shadow  btn btn-info"
+              (click)="navigateToStaffAdd()" >              <i class="icofont-ui-add"></i> Add New
             </a>
             <!-- <div class="btn-group ">
               <button style="margin-left: 4px;" type="button" class="btn  btn-secondary"><i class="icofont-upload-alt"></i> Export</button>
@@ -121,15 +120,16 @@
                       <td mat-cell *matCellDef="let element"> {{element.job_shift}} </td>
                     </ng-container>
 
-                    <!-- <ng-container matColumnDef="actions">
+                  <ng-container matColumnDef="actions">
                       <th mat-header-cell *matHeaderCellDef> Actions </th>   
                       <td mat-cell *matCellDef="let element"> 
                         <div class="buttons">
-                          <a style="color: #8f8f8f;" (click)="getProductId(element.id)" class="mb-2 mr-2 btn-transition btn btn-outline-light btn-sm">Edit</a>
-                          <button (click)="getProductId(element.id)" class="mb-2 mr-2 btn-transition btn btn-outline-light btn-sm">Delete</button>
+                          <a style="color: #8f8f8f;" (click)="getStaffId(element.id)" class="mb-2 mr-2 btn-transition btn btn-outline-light btn-sm">Edit</a>
+                          <button (click)="deleteStaffId(element.id)" class="mb-2 mr-2 btn-transition btn btn-outline-light btn-sm">Delete</button>
                       </div>
                       </td>
-                    </ng-container>  -->
+                    </ng-container> 
+
 
                   </div>
                   <tr mat-header-row *matHeaderRowDef="table_headers"></tr>

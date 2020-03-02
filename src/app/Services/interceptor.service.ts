@@ -18,7 +18,7 @@ export class InterceptorService implements HttpInterceptor {
     // Get the auth header from the service.
     // const authHeader = this.auth.getToken();
 
-    const authHeader = 'f2851f2b8d9aaa32f10e2936926ed0f59ea72597';
+    const authHeader = 'fe8a459e4cc9c7fea059dda5e228501e8b30ea22';
     const url = environment.baseUrl;
 
     // Clone the request to add the new header.

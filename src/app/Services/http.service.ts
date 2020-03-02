@@ -14,11 +14,19 @@ export class HttpService {
     return this.http.get(url);
   }
 
+  postOrder(data, url) {
+    // data['created_by_id'] = this.loggen_in_user['id'];
+    // data['os'] = "web";
+    // data['status'] = "active";
+    // console.log(data);
+    return this.http.post(url, data);
+  }
+
   post(data, url) {
     data['created_by_id'] = this.loggen_in_user['id'];
     data['os'] = "web";
     data['status'] = "active";
-    // console.log(data);
+    console.log(data);
     return this.http.post(url, data);
   }
 

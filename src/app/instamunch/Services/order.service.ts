@@ -15,11 +15,31 @@ export class OrderService {
 //       catchError(err => of({data:[]})));
 //   }
 
-  getOrders(){
-   return this.httpServices.get('order/').pipe(
+  // getOrders(){
+  //  return this.httpServices.get('order/').pipe(
+  //     catchError(err => of({data:[]})));
+  // }
+
+  getOrders(data){
+    return this.httpServices.postOrder(data,'order/filter/').pipe(
+       catchError(err => of({data:[]})));
+   }
+
+  getOrderbyid(id){
+    return this.httpServices.get('order/details/'+id+'/').pipe(
+       catchError(err => of({data:[]})));
+   }
+  
+   deleteOrder(id){
+    return this.httpServices.delete('order/details/' + id + '/').pipe(
       catchError(err => of({data:[]})));
+   }
+
+
+   uploadOrderById(data,id) {
+    console.log("data"+ data)
+   return this.httpServices.patch(data,'order/details/'+id+ "/").pipe(
+     catchError(err => of({data:[]})));
   }
-
-
   
 }

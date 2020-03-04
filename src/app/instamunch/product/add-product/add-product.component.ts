@@ -66,8 +66,12 @@ export class AddProductComponent implements OnInit {
           value: product ? product.price : ''
         },
         {
+          label: 'Estimated Prepare Time', type: 'number', bootstrapGridClass: "col-lg-12", name: "estimated_prepare_time", required: false, value: product ? product.estimated_prepare_time : ''
+        },
+        {
           label: 'Tax Included', type: 'checkbox', bootstrapGridClass: "col-lg-12", name: "is_tax_included", required: false, value: product ? product.is_tax_included : false
         },
+      //  estimated_prepare_time
         // {
         //   label: 'Attribute List', type: 'attribute', bootstrapGridClass: "col-lg-12", name: "attr", validations: [Validators.required], required: false
         // },

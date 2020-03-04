@@ -8,4 +8,5 @@ export interface Product {
     price: number;
     image?: string;
     is_tax_included: boolean;
+    estimated_prepare_time?: string;
   }

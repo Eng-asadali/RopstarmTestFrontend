@@ -1,5 +1,5 @@
 
-<div class="app-container app-theme-white body-tabs-shadow fixed-sidebar fixed-header">
+<div *ngIf="!reload;else other_content" class="app-container app-theme-white body-tabs-shadow fixed-sidebar fixed-header">
   <app-header></app-header>
   <div class="app-main">
     <app-sidebar></app-sidebar>
@@ -8,4 +8,14 @@
     </div>
   </div>
 </div>
-<!-- <button style="margin-left: 500px;" (click)="logout()">Logout</button> -->
+
+<ng-template #other_content>
+  <div class="container">
+    <div class="item-1"></div>
+    <div class="item-2"></div>
+    <div class="item-3"></div>
+    <div class="item-4"></div>
+    <div class="item-5"></div>
+  </div>
+  
+</ng-template>

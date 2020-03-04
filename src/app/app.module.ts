@@ -19,6 +19,7 @@ import { HttpService } from './Services/http.service';
 import { InterceptorService } from './Services/interceptor.service';
 import { SalesReportResolver } from './Services/sales-report.resolver';
 import { AuthGuardService } from './Services/auth-guard';
+import { DataSharingService } from './Services/data-sharing.service';
 
 import { HeaderComponent } from './Core/header/header.component';
 import { SidebarComponent } from './Core/sidebar/sidebar.component';
@@ -81,6 +82,7 @@ import { PageNotFoundComponent } from './Core/page-not-found/page-not-found.comp
     AuthService,
     SalesReportResolver,
     AuthGuardService,
+    DataSharingService,
     { provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true }
   ],
 

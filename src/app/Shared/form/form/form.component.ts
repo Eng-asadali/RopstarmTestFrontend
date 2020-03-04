@@ -47,28 +47,37 @@ export class FormComponent implements OnInit {
   ngOnChanges(changes: SimpleChanges) {
 
     // if (this.clear_form == undefined) {
+    //  console.log(changes['form']);
     if (changes['form']) {
       this.timeout = setInterval(() => {
-        if (this.form['form_fields'].length == 0) {
-          // console.log(this.form['form_fields'].length);
-        }
-        else {
-          // console.log(this.form['form_fields'].length);
+        if (this.form['form_fields'].length > 0) {
           var form = this.form;
           this.form = form;
           this.fields = this.form['form_fields'];
           this.addControls();
           clearTimeout(this.timeout);
         }
+     //   console.log('interval');
+        // else {
+        //   // console.log(this.form['form_fields'].length);
+        //   var form = this.form;
+        //   this.form = form;
+        //   this.fields = this.form['form_fields'];
+        //   this.addControls();
+        //   clearTimeout(this.timeout);
+        // }
 
-      }, 300);
+      }, 100);
 
     }
 
     if (changes['clear_form']) {
-      if (changes['clear_form'].currentValue == true)
+      if (changes['clear_form'].currentValue == true) {
         this.FormGroupDirective.resetForm();
         this.displayValidationsErrors = false;
+        (<HTMLImageElement>document.getElementById("img")).src = '../../../../assets/images/no_image.png';
+      }
+
       // setTimeout(function () {
       //   $('.selectpicker').selectpicker('refresh');
       // }, 200);
@@ -109,7 +118,7 @@ export class FormComponent implements OnInit {
       this.Form.addControl('product_attributes', this.fb.array([
         this.fb.group({
           name: '',
-            value: ''
+          value: ''
         }),
 
       ]));
@@ -145,8 +154,8 @@ export class FormComponent implements OnInit {
       }.bind(this));
       this.formValues.emit(this.form_values);
     }
-    else{
-     console.log('form is not valid');
+    else {
+      console.log('form is not valid');
     }
   }
 

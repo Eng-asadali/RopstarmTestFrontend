@@ -6,7 +6,7 @@ import { SelectionModel } from '@angular/cdk/collections';
 import { CategoryService } from '../Services/category.service';
 import { Category } from './category';
 import { SwalAlert } from 'src/app/Shared/swalAlerts';
-
+import { StatusEnum } from '../Enums/status-enum';
 
 @Component({
   selector: 'app-category',
@@ -14,6 +14,8 @@ import { SwalAlert } from 'src/app/Shared/swalAlerts';
   styleUrls: ['./category.component.css']
 })
 export class CategoryComponent implements OnInit {
+
+  statusEnum= StatusEnum;
 
   dataSource = new MatTableDataSource<any>([]);
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -31,12 +33,15 @@ export class CategoryComponent implements OnInit {
     private currentActivatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
-    // SwalAlert.sucessAlert('','Product added sucessfully!');
     this.table_headers = ['select', 'image', 'name', 'parent_category_id', 'status', 'actions'];
+    this.getCategoriesList();
+    
+  }
+
+  getCategoriesList(){
     const categories = this.categoryService.getCategories();
     categories.subscribe(
       result => {
-      //  alert(JSON.stringify(result));
         console.log('categories list:', result);
         if (!result['error']) {
           this.categories = result['data'];
@@ -49,11 +54,9 @@ export class CategoryComponent implements OnInit {
         }
       },
       err => {
-        //alert(JSON.stringify(err));
         console.log(err); },
       () => {
         this.loaded = true;
-        // console.log('call completed');
       }
     );
   }

@@ -36,6 +36,7 @@ import { EditComponent } from './instamunch/staff/edit/edit.component';
 import { EditOrderComponent } from './instamunch/order/edit-order/edit-order.component';
 import { LoginComponent } from './Core/login/login.component';
 import { DashboardComponent } from './Core/dashboard/dashboard.component';
+import { PageNotFoundComponent } from './Core/page-not-found/page-not-found.component';
 
 
 @NgModule({
@@ -55,7 +56,8 @@ import { DashboardComponent } from './Core/dashboard/dashboard.component';
     EditComponent,
     EditOrderComponent,
     LoginComponent,
-    DashboardComponent
+    DashboardComponent,
+    PageNotFoundComponent
   ],
 
   imports: [

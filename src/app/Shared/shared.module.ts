@@ -9,6 +9,9 @@ import { ErrorsComponent } from './form/errors/errors.component';
 import { ChartsComponent } from './charts/charts.component';
 import { DoughnutChartComponent } from './doughnut-chart/doughnut-chart.component';
 
+//Pipes
+import { removeUnderScore } from './Pipes/removeUnderScore';
+
 @NgModule({
 
     entryComponents: [
@@ -20,14 +23,16 @@ import { DoughnutChartComponent } from './doughnut-chart/doughnut-chart.componen
         FormComponent,
         ErrorsComponent,
         ChartsComponent,
-        DoughnutChartComponent
+        DoughnutChartComponent,
+        removeUnderScore
     ],
 
     exports: [
         ErrorsComponent,
         FormComponent,
         ChartsComponent,
-        DoughnutChartComponent
+        DoughnutChartComponent,
+        removeUnderScore
     ],
 
     imports: [

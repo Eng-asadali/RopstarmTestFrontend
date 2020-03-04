@@ -6,7 +6,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { ProductService } from '../Services/product.service';
 import { Product } from './product';
 import { SwalAlert } from '../../Shared/swalAlerts';
-
+import { StatusEnum } from '../Enums/status-enum';
 
 
 @Component({
@@ -15,6 +15,8 @@ import { SwalAlert } from '../../Shared/swalAlerts';
   styleUrls: ['./product.component.css']
 })
 export class ProductComponent implements OnInit {
+
+  statusEnum= StatusEnum;
 
   dataSource = new MatTableDataSource<any>([]);
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -34,6 +36,10 @@ export class ProductComponent implements OnInit {
 
   ngOnInit() {
     this.table_headers = ['select', 'image', 'name', 'category_id', 'estimated_prepare_time', 'status', 'actions'];
+    this.getProductsList();
+  }
+
+  getProductsList(){
     const products = this.productService.getProducts();
     products.subscribe(
       result => {

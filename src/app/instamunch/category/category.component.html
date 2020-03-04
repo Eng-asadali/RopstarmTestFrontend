@@ -45,9 +45,9 @@
 
         <h4 class="d-flex flex-wrap justify-content-between align-items-center mb-3">
           <div>Categories</div>
-          <div class="col-12 col-md-3 p-0 mb-3">
+          <!-- <div class="col-12 col-md-3 p-0 mb-3">
             <input type="text" class="form-control" placeholder="Search...">
-          </div>
+          </div> -->
         </h4>
         <div class="main-card mb-3 card">
           <!-- <div class="card-header">Products
@@ -104,8 +104,8 @@
                       <td mat-cell *matCellDef="let element"> 
                         <span class="badge" [ngClass]="{
                           'badge-success':element.status === 'active',
-                          'badge-danger':element.status === 'inactive'
-                        }" >{{element.status}}</span> 
+                          'badge-danger':element.status === 'deactivate'
+                        }" >{{statusEnum[element.status]}}</span> 
                       </td>
                     </ng-container>
 

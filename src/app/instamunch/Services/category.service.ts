@@ -17,7 +17,7 @@ export class CategoryService {
 
   editCategory(data,id){
    
-    return this.httpServices.patchFormData(data,'catalog/category/details/' + id + "/").pipe(
+    return this.httpServices.patchFormDataWithoutActiveStatus(data,'catalog/category/details/' + id + "/").pipe(
       catchError(err => of({error:true,message:'Server error',data:[]})));
   }
 
@@ -34,7 +34,7 @@ export class CategoryService {
 
   getParentCategories(){
     return this.httpServices.get('catalog/parent_category/').pipe(
-      catchError(err => of({data:[]})));
+      catchError(err => of({error:true,message:'Server error',data:[]})));
   }
 
   

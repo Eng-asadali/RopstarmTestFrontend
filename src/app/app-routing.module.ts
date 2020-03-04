@@ -3,7 +3,10 @@ import { EditComponent } from './instamunch/staff/edit/edit.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
+import { SalesReportResolver } from './Services/sales-report.resolver';
+import { AuthGuardService as AuthGuard } from './Services/auth-guard';
 
+import { DashboardComponent } from './Core/dashboard/dashboard.component';
 import { CategoryComponent } from './instamunch/category/category.component';
 import { ProductComponent } from './instamunch/product/product.component';
 import { AddCategoryComponent } from './instamunch/category/add-category/add-category.component';
@@ -13,53 +16,13 @@ import { StaffComponent } from './instamunch/staff/staff.component';
 import { SalesComponent } from './instamunch/Reports/sales/sales.component';
 import { AddStaffComponent } from './instamunch/staff/add-staff/add-staff.component';
 import { LoginComponent } from './Core/login/login.component';
+import { PageNotFoundComponent } from './Core/page-not-found/page-not-found.component';
 
-
-import { SalesReportResolver } from './Services/sales-report.resolver';
-import { DashboardComponent } from './Core/dashboard/dashboard.component';
-import { AuthGuardService as AuthGuard } from './Services/auth-guard';
 
 const routes: Routes = [
-  { path: '', component: LoginComponent, pathMatch:'full' },
-  
-  // {
-  //   path: 'instamunch/category', component: CategoryComponent
-  // },
-  // {
-  //   path: 'instamunch/category/add', component: AddCategoryComponent
-  // },
-  // {
-  //   path: 'instamunch/category/edit/:id', component: AddCategoryComponent
-  // },
-  // {
-  //   path: 'instamunch/product', component: ProductComponent
-  // },
-  // {
-  //   path: 'instamunch/product/add', component: AddProductComponent
-  // },
-  // {
-  //   path: 'instamunch/product/edit/:id', component: AddProductComponent
-  // },
-  // {
-  //   path: 'instamunch/order', component: OrderComponent
-  // },
-  
-  // {
-  //   path: 'instamunch/staff', component: StaffComponent
-  // },
-  // {
-  //   path: 'instamunch/staff/add', component: AddStaffComponent
-  // },
-  // {
-  //   path: 'instamunch/staff/edit/:id', component: EditComponent
-  // },
-  // {
-  //   path: 'instamunch/sales-report', component: SalesComponent
-  // },
-  // {
-  //   path: 'instamunch/order/edit/:id', component: EditOrderComponent
-  // },
-   { path: 'instamunch', component: DashboardComponent, canActivate: [AuthGuard],
+  { path: '', component: LoginComponent, pathMatch: 'full' },
+  {
+    path: 'instamunch', component: DashboardComponent, canActivate: [AuthGuard],
 
     children: [
       {
@@ -88,8 +51,18 @@ const routes: Routes = [
         path: 'order', component: OrderComponent
       },
       {
+        path: 'order/edit/:id', component: EditOrderComponent
+      },
+      {
         path: 'staff', component: StaffComponent
       },
+      {
+        path: 'staff/add', component: AddStaffComponent
+      },
+      {
+        path: 'staff/edit/:id', component: EditComponent
+      },
+
       {
         path: 'sales-report', component: SalesComponent, resolve: {
           cres: SalesReportResolver
@@ -98,8 +71,11 @@ const routes: Routes = [
     ]
 
   },
+  {
+    path: '**',
+    component: PageNotFoundComponent
+  }
 
-  
 
 ];
 

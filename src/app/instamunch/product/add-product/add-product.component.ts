@@ -8,6 +8,7 @@ import { FieldConfig } from '../../../Interfaces/feildConfig';
 import { ProductService } from '../../Services/product.service';
 import { CategoryService } from '../../Services/category.service';
 import { SwalAlert } from '../../../Shared/swalAlerts';
+import { Status } from '../../Options/status';
 
 @Component({
   selector: 'app-add-product',
@@ -28,24 +29,9 @@ export class AddProductComponent implements OnInit {
 
   ngOnInit() {
     this.form['form_fields'] = this.fields;
-    if (this.active_route.snapshot.paramMap.get('id') != null) {
-      const product_id = parseInt(this.active_route.snapshot.paramMap.get('id'));
-      let product = this.productService.getProuctById(product_id);
-      product.subscribe(
-        result => {
-          console.log('product by id:', result);
-          if (!result['error']) {
-            this.generateForm(result['data'][0]);
-          }
-          else {
-            this.loaded = true;
-            SwalAlert.errorAlert('', result['message'].charAt(0).toUpperCase() + result['message'].substring(1));
-          }
-
-        },
-        err => { console.log(err); },
-        () => { console.log('call completed'); }
-      );
+    const product_id = this.active_route.snapshot.paramMap.get('id');
+    if (product_id != null) {
+     this.getProductDataById(product_id);
       // console.log(category);
     }
     else {
@@ -73,7 +59,7 @@ export class AddProductComponent implements OnInit {
         },
         {
           label: 'Status', type: 'select', bootstrapGridClass: "col-lg-6", name: "status", validations: [Validators.required], required: true,
-          value: product ? product.status : 'active', options: [{ id: 'active', name: 'Active' }, { id: 'inactive', name: 'Inactive' }]
+          value: product ? product.status : 'active', options: Status
         },
         {
           label: 'Price', type: 'text', bootstrapGridClass: "col-lg-6", name: "price", validations: [Validators.required], required: true,
@@ -102,16 +88,67 @@ export class AddProductComponent implements OnInit {
     });
   }
 
+  getProductDataById(id){
+    let product = this.productService.getProuctById(id);
+    product.subscribe(
+      result => {
+        console.log('product by id:', result);
+        if (!result['error']) {
+          this.generateForm(result['data'][0]);
+        }
+        else {
+          this.loaded = true;
+          SwalAlert.errorAlert('', result['message'].charAt(0).toUpperCase() + result['message'].substring(1));
+        }
+        
+      },
+      err => { console.log(err);
+      this.loaded = true; }
+    );
+  }
+
   getProductData(data) {
     console.log(data);
     this.clear_form = false;
     this.submit_clicked = true;
-    this.addProduct(data);
+    delete data['product_attributes'];
+    data['is_tax_included'] == '' ? data['is_tax_included']= false : data['is_tax_included'];
+
+    console.log(data);
+
+    const product_id = this.active_route.snapshot.paramMap.get('id');
+    if(product_id!=null){
+      this.editProduct(data,product_id);
+    }
+    else{
+      this.addProduct(data);
+    }
+   
+  }
+
+  editProduct(data,id){
+    this.productService.editProduct(data,id).subscribe(
+      result => {
+        this.clear_form = true;
+        this.submit_clicked = false;
+        if(!result['error']){
+          SwalAlert.sucessAlert('','Product Updated Sucesssfully!')
+        }
+        else{
+          SwalAlert.errorAlert('',result['message'].charAt(0).toUpperCase() + result['message'].substring(1));
+        }
+        console.log(result);
+      },
+      err => {
+        console.log(err);
+        SwalAlert.errorAlert('','Server Error');
+      }
+    );
   }
 
   addProduct(data){
    //   data['product_attributes'] = { attributes_list: this.FormatAttributesList(data['product_attributes']) }
-   delete data['product_attributes'];
+   
    console.log(data);
     
     this.productService.addProduct(data).subscribe(

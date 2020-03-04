@@ -14,6 +14,7 @@ export interface Staff{
     password:String,
     created_by_id:Number,
     modified_by_id:Number,
-    branch_id:Number
+    branch_id:Number,
+    user_image:string
 
 }

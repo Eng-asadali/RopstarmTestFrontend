@@ -17,34 +17,31 @@ export class StaffService {
 
   getStaff(){
    return this.httpServices.get('user/').pipe(
-      catchError(err => of({data:[]})));
+      catchError(err => of({error:true,message:'Server error',data:[]})));
   }
+
   addStaff(data){
-    console.log("Inside staff service")
-   return this.httpServices.post(data,'user/').pipe(
-    catchError(err => of({data:[]})));
+   return this.httpServices.postFormData(data,'user/').pipe(
+    catchError(err => of({error:true,message:'Server error',data:[]})));
    
  }
 
  getStaffById(id) {
-   console.log("id"+ id)
   return this.httpServices.get('user/details/' + id + "/").pipe(
-    catchError(err => of({data:[]})));
+    catchError(err => of({error:true,message:'Server error',data:[]})));
 }
 
 
 uploadStaffById(data,id) {
-  console.log("data"+ data)
- return this.httpServices.patch(data,'user/details/'+id+ "/").pipe(
-   catchError(err => of({data:[]})));
+  return this.httpServices.patchFormData(data,'user/details/'+id+ "/").pipe(
+   catchError(err => of({error:true,message:'Server error',data:[]})));
 }
 
 
 
 deleteStaffById(id) {
-  console.log("id"+ id)
  return this.httpServices.delete('user/details/' + id + "/").pipe(
-   catchError(err => of({data:[]})));
+   catchError(err => of({error:true,message:'Server error',data:[]})));
 }
   
 }

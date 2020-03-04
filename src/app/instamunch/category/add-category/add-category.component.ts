@@ -7,7 +7,7 @@ import { FieldConfig } from '../../../Interfaces/feildConfig';
 import { CategoryService } from '../../Services/category.service';
 import { SwalAlert } from '../../../Shared/swalAlerts';
 
-import { DateUtils } from '../../../Shared/DateUtils';
+import { Status } from '../../Options/status';
 @Component({
   selector: 'app-add-category',
   templateUrl: './add-category.component.html',
@@ -33,7 +33,8 @@ export class AddCategoryComponent implements OnInit {
     this.form['form_fields'] = this.fields;
     if (this.active_route.snapshot.paramMap.get('id') != null) {
       this.edit = true;
-      this.getCategoryDateToEdit(parseInt(this.active_route.snapshot.paramMap.get('id')));
+      const category_id = parseInt(this.active_route.snapshot.paramMap.get('id'));
+      this.getCategoryDataById(category_id);
     }
     else {
       this.edit = false;
@@ -42,28 +43,28 @@ export class AddCategoryComponent implements OnInit {
   }
 
 
-  getCategoryDateToEdit(id) {
-    // this.category_id = parseInt(this.active_route.snapshot.paramMap.get('id'));
+  getCategoryDataById(id) {
     let category = this.categoryService.getCategoryById(id);
     category.subscribe(
       result => {
-    
         console.log('category by id:', result);
         this.category = result['data'][0];
         if (!result['error']) {
           this.generateForm(this.category);
-          
         }
         else {
+          this.loaded = true;
           SwalAlert.errorAlert('', result['message'].charAt(0).toUpperCase() + result['message'].substring(1));
-        }
-        this.loaded = true;
+       }
+
       },
-      err => { 
-        console.log(err);
-        SwalAlert.errorAlert('', 'Server Error!'); }
+      err => {
+        console.log('Error while getting category by id.',err);
+        this.loaded = true;
+        SwalAlert.errorAlert('', 'Server Error!');
+      }
     );
-    console.log(category);
+    
   }
 
 
@@ -72,13 +73,12 @@ export class AddCategoryComponent implements OnInit {
     this.clear_form = false;
     this.submit_clicked = true;
     if (this.edit) {
-      this.editCategory(data);
+      const category_id = parseInt(this.active_route.snapshot.paramMap.get('id'));
+      this.editCategory(data, category_id);
     }
     else {
       this.addCategory(data);
     }
-
-    //  console.log(data);
   }
 
   addCategory(data) {
@@ -102,9 +102,10 @@ export class AddCategoryComponent implements OnInit {
     );
   }
 
-  editCategory(data) {
-    this.categoryService.editCategory(data, this.category_id).subscribe(
+  editCategory(data, id) {
+    this.categoryService.editCategory(data, id).subscribe(
       result => {
+        this.submit_clicked = false;
         if (!result['error']) {
           SwalAlert.sucessAlert('', 'Category Updated Sucessfully!');
         }
@@ -131,7 +132,7 @@ export class AddCategoryComponent implements OnInit {
             },
             {
               label: 'Status', type: 'select', bootstrapGridClass: "col-lg-6", name: "status", validations: [Validators.required], required: true,
-              value: category ? category.status : 'active', options: [{ id: 'active', name: 'Active' }, { id: 'inactive', name: 'Inactive' }]
+              value: category ? category.status : 'active', options: Status
             },
             { label: 'Description', type: 'textarea', bootstrapGridClass: "col-lg-12", name: "description", value: category ? category.description : '' }
           ]
@@ -141,17 +142,17 @@ export class AddCategoryComponent implements OnInit {
           this.form['ImagebootstrapGridClass'] = 'col-lg-3';
           this.form['img_height'] = "200px";
           this.form['img_width'] = "200px";
+          this.form['image_url'] = category ? category.image : null;
           this.form['submit'] = 'Save'
         }
         else {
-          this.loaded = true;
           SwalAlert.errorAlert('', result['message'].charAt(0).toUpperCase() + result['message'].substring(1));
         }
-      },
-      err => { console.log(err); },
-      () => {
         this.loaded = true;
-        console.log('completed');
+      },
+      err => {
+        console.log('error wile getting parent categories.',err);
+        this.loaded = true;
       }
     );
 

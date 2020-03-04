@@ -20,12 +20,10 @@ export class ProductService {
       catchError(err => of({error:true,message:'Server error',data:[]})));
   }
 
-
-  // editCategory(data,id){
-   
-  //   return this.httpServices.patchFormData(data,'catalog/category/details/' + id + "/").pipe(
-  //     catchError(err => of({error:true,message:'Server error',data:[]})));
-  // }
+  editProduct(data,id){
+    return this.httpServices.patchFormDataWithoutActiveStatus(data,'catalog/product/details/'+ id + "/").pipe(
+      catchError(err => of({error:true,message:'Server error',data:[]})));
+  }
 
   getProducts() {
     return this.httpServices.get('catalog/product/').pipe(
@@ -37,10 +35,5 @@ export class ProductService {
       catchError(err => of({ error: true, message: 'Server error', data: [] }))
     );
   }
-  //   getParentCategories(){
-  //     return this.httpServices.get('catalog/parent_category/').pipe(
-  //       catchError(err => of({data:[]})));
-  //   }
-
-
+  
 }

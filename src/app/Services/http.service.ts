@@ -8,19 +8,11 @@ export class HttpService {
 
   constructor(private http: HttpClient) {
     this.loggen_in_user = JSON.parse(localStorage.getItem('user'));
-    this.loggen_in_user = {id:13};
+   // this.loggen_in_user = {id:13};
   }
 
   get(url) {
     return this.http.get(url);
-  }
-
-  postOrder(data, url) {
-    // data['created_by_id'] = this.loggen_in_user['id'];
-    // data['os'] = "web";
-    // data['status'] = "active";
-    // console.log(data);
-    return this.http.post(url, data);
   }
 
   post(data, url) {
@@ -76,7 +68,7 @@ export class HttpService {
 
   patchFormDataWithoutActiveStatus(data, url) {
     data['modified_by_id'] = this.loggen_in_user['id'];
-    data['modified_datetime'] = new Date().toISOString();
+    data['modified_datetime'] = DateUtils.getUtcDateTimeStart(new Date().toISOString());;
     data['os'] = "web";
     // console.log(data);
     var form_data = this.converToFormdata(data);

@@ -5,4 +5,5 @@ export interface Category {
     parent_category_name?:string;
     status: string;
     description: string;
+    image?:string;
   }

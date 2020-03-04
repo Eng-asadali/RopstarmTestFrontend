@@ -6,7 +6,6 @@ export const environment = {
   production: false,
   //baseUrl: 'http://192.168.2.122:8080/instamunch/' // staging
   baseUrl: 'http://51.11.55.5:8000/instamunch/' // production
-
 };
 
 /*

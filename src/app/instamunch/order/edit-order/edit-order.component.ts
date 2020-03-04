@@ -87,6 +87,7 @@ export class EditOrderComponent implements OnInit {
   editOrder(data, id) {
     this.OrderService.uploadOrderById(data, id).subscribe(
       result => {
+        this.submit_clicked = false;
         if (!result['error']) {
           SwalAlert.sucessAlert('', 'Order Updated Sucessfully!');
         }
@@ -94,15 +95,11 @@ export class EditOrderComponent implements OnInit {
           SwalAlert.errorAlert('', result['message'].charAt(0).toUpperCase() + result['message'].substring(1));
 
         }
-        console.log(result);
-
       },
       err => {
+        this.submit_clicked = false;
         console.error(err);
         SwalAlert.errorAlert('', 'Server Error');
-      },
-      () =>{
-        this.submit_clicked = false;
       }
     );
   }

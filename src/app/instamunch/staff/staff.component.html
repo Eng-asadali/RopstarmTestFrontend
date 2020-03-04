@@ -97,7 +97,19 @@
 
                     <ng-container matColumnDef="Type">
                       <th mat-header-cell *matHeaderCellDef> Type </th>
-                      <td mat-cell *matCellDef="let element"> {{element.type}} </td>
+                      <td mat-cell *matCellDef="let element">
+                          <span class="badge" [ngClass]="{
+                            'badge-info':element.type === 'staff',
+                            'badge-warning':element.type === 'waiter',
+                            'badge-primary':element.type === 'user',
+                            'badge-success':element.type === 'manager',
+                            'badge-dark':element.type === 'kitchen_manager',
+                            'badge-danger':element.type === 'admin',
+                            'badge-secondary':element.type === 'guest'
+                          }" > {{element.type  | titlecase}}</span> 
+    <!-- {'admin': 1, 'user': 2, 'guest': 3, 'manager': 4, 'waiter': 5, 'staff': 6, 'kitchen_manager':7} -->
+                     
+                   </td>
                     </ng-container>
 
                     <ng-container matColumnDef="Email">

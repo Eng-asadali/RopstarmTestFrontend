@@ -87,7 +87,6 @@ export class AddCategoryComponent implements OnInit {
         this.submit_clicked = false;
         if (!result['error']) {
           this.clear_form = true;
-          console.log('asddasd');
           SwalAlert.sucessAlert('', 'Category Added Sucessfully!');
 
         }
@@ -96,6 +95,7 @@ export class AddCategoryComponent implements OnInit {
         }
       },
       err => {
+        this.submit_clicked = false;
         console.log(err);
         SwalAlert.errorAlert('', 'Server Error');
       }
@@ -114,6 +114,7 @@ export class AddCategoryComponent implements OnInit {
         }
       },
       err => {
+        this.submit_clicked = false;
         console.log(err);
         SwalAlert.errorAlert('', 'Server Error');
       }

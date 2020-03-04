@@ -31,7 +31,7 @@ export class AddProductComponent implements OnInit {
     this.form['form_fields'] = this.fields;
     const product_id = this.active_route.snapshot.paramMap.get('id');
     if (product_id != null) {
-     this.getProductDataById(product_id);
+      this.getProductDataById(product_id);
       // console.log(category);
     }
     else {
@@ -62,11 +62,11 @@ export class AddProductComponent implements OnInit {
           value: product ? product.status : 'active', options: Status
         },
         {
-          label: 'Price', type: 'text', bootstrapGridClass: "col-lg-6", name: "price", validations: [Validators.required], required: true,
-          value: product? product.price : ''
+          label: 'Price', type: 'number', bootstrapGridClass: "col-lg-6", name: "price", validations: [Validators.required], required: true,
+          value: product ? product.price : ''
         },
         {
-          label: 'Tax Included', type: 'checkbox', bootstrapGridClass: "col-lg-12", name: "is_tax_included", required:false, value:product? product.is_tax_included : false
+          label: 'Tax Included', type: 'checkbox', bootstrapGridClass: "col-lg-12", name: "is_tax_included", required: false, value: product ? product.is_tax_included : false
         },
         // {
         //   label: 'Attribute List', type: 'attribute', bootstrapGridClass: "col-lg-12", name: "attr", validations: [Validators.required], required: false
@@ -81,14 +81,14 @@ export class AddProductComponent implements OnInit {
       this.form['ImagebootstrapGridClass'] = 'col-lg-3';
       this.form['img_height'] = "200px";
       this.form['img_width'] = "200px";
-      this.form['image_url'] = product? product.image: null;
+      this.form['image_url'] = product ? product.image : null;
       this.form['submit'] = 'Save';
       this.form['attribute'] = true;
       this.loaded = true;
     });
   }
 
-  getProductDataById(id){
+  getProductDataById(id) {
     let product = this.productService.getProuctById(id);
     product.subscribe(
       result => {
@@ -100,10 +100,12 @@ export class AddProductComponent implements OnInit {
           this.loaded = true;
           SwalAlert.errorAlert('', result['message'].charAt(0).toUpperCase() + result['message'].substring(1));
         }
-        
+
       },
-      err => { console.log(err);
-      this.loaded = true; }
+      err => {
+        console.log(err);
+        this.loaded = true;
+      }
     );
   }
 
@@ -112,60 +114,57 @@ export class AddProductComponent implements OnInit {
     this.clear_form = false;
     this.submit_clicked = true;
     delete data['product_attributes'];
-    data['is_tax_included'] == '' ? data['is_tax_included']= false : data['is_tax_included'];
+    data['is_tax_included'] == '' ? data['is_tax_included'] = false : data['is_tax_included'];
 
     console.log(data);
 
     const product_id = this.active_route.snapshot.paramMap.get('id');
-    if(product_id!=null){
-      this.editProduct(data,product_id);
+    if (product_id != null) {
+      this.editProduct(data, product_id);
     }
-    else{
+    else {
       this.addProduct(data);
     }
-   
+
   }
 
-  editProduct(data,id){
-    this.productService.editProduct(data,id).subscribe(
+  editProduct(data, id) {
+    this.productService.editProduct(data, id).subscribe(
       result => {
-        this.clear_form = true;
         this.submit_clicked = false;
-        if(!result['error']){
-          SwalAlert.sucessAlert('','Product Updated Sucesssfully!')
+        if (!result['error']) {
+          SwalAlert.sucessAlert('', 'Product Updated Sucesssfully!')
         }
-        else{
-          SwalAlert.errorAlert('',result['message'].charAt(0).toUpperCase() + result['message'].substring(1));
+        else {
+          SwalAlert.errorAlert('', result['message'].charAt(0).toUpperCase() + result['message'].substring(1));
         }
         console.log(result);
       },
       err => {
+        this.submit_clicked = false;
         console.log(err);
-        SwalAlert.errorAlert('','Server Error');
+        SwalAlert.errorAlert('', 'Server Error');
       }
     );
   }
 
-  addProduct(data){
-   //   data['product_attributes'] = { attributes_list: this.FormatAttributesList(data['product_attributes']) }
-   
-   console.log(data);
-    
+  addProduct(data) {
     this.productService.addProduct(data).subscribe(
       result => {
-        this.clear_form = true;
         this.submit_clicked = false;
-        if(!result['error']){
-          SwalAlert.sucessAlert('','Product Added Sucesssfully!')
+        if (!result['error']) {
+          this.clear_form = true;
+          SwalAlert.sucessAlert('', 'Product Added Sucesssfully!')
         }
-        else{
-          SwalAlert.errorAlert('',result['message'].charAt(0).toUpperCase() + result['message'].substring(1));
+        else {
+          SwalAlert.errorAlert('', result['message'].charAt(0).toUpperCase() + result['message'].substring(1));
         }
         console.log(result);
       },
       err => {
+        this.submit_clicked = false;
         console.log(err);
-        SwalAlert.errorAlert('','Server Error');
+        SwalAlert.errorAlert('', 'Server Error');
       }
     );
   }

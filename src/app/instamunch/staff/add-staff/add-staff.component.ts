@@ -7,6 +7,7 @@ import { FieldConfig } from '../../../Interfaces/feildConfig';
 import { StaffService } from '../../Services/staff.service';
 import { SwalAlert } from '../../../Shared/swalAlerts';
 import { experience, SalaryDisbursement, StaffType, JobShift } from '../../Options/staff';
+import { validation_patterns } from '../../../Shared/validation_patterns';
 
 @Component({
   selector: 'app-add-staff',
@@ -37,7 +38,7 @@ export class AddStaffComponent implements OnInit {
         label: 'Last Name', type: 'text', bootstrapGridClass: "col-lg-6", name: "last_name", validations: [Validators.required], required: true, value: staff ? staff.last_name : ''
       },
       {
-        label: 'Email', type: 'text', bootstrapGridClass: "col-lg-6", name: "email", validations: [Validators.required], required: true, value: staff ? staff.email : ''
+        label: 'Email', type: 'text', bootstrapGridClass: "col-lg-6", name: "email", validations: [Validators.required, Validators.pattern(validation_patterns.email_regex)], required: true, value: staff ? staff.email : ''
       },
       { label: 'Password', type: 'text', bootstrapGridClass: "col-lg-6", name: "password", validations: [Validators.required], value: staff ? staff.password : '', required: true }
 
@@ -66,10 +67,13 @@ export class AddStaffComponent implements OnInit {
   getStaffData(data) {
     console.log(data);
     data['is_epos'] = true;
-   // data['branch_id'] = 1;
+    // data['branch_id'] = 1;
     data['username'] = data.email;
-    data['user_image'] = data['image'];
-    delete data['image'];
+
+    if (data['image'] != undefined) {
+      data['user_image'] = data['image'];
+      delete data['image'];
+    }
 
     this.clear_form = false;
     this.submit_clicked = true;
@@ -80,6 +84,7 @@ export class AddStaffComponent implements OnInit {
   addStaff(data) {
     this.StaffService.addStaff(data).subscribe(
       result => {
+        this.submit_clicked = false;
         if (!result['error']) {
           SwalAlert.sucessAlert('', 'Staff Added Sucessfully!');
           this.clear_form = true;
@@ -88,15 +93,11 @@ export class AddStaffComponent implements OnInit {
           SwalAlert.errorAlert('', result['message'].charAt(0).toUpperCase() + result['message'].substring(1));
 
         }
-        console.log(result);
-
       },
       err => {
+        this.submit_clicked = false;
         console.error(err);
         SwalAlert.errorAlert('', 'Server Error');
-      },
-      () => {
-        this.submit_clicked = false;
       }
     );
   }

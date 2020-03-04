@@ -1,4 +1,4 @@
-<div class="app-main__outer">
+ <div class="app-main__outer">
   <div class="app-main__inner">
     <div class="app-page-title">
       <div class="page-title-wrapper">
@@ -255,8 +255,8 @@
                     <td class="text-center">
                       <div class="badge badge-warning">Cash</div>
                     </td>
-                    <td class="text-center">{{element.sales}}</td>
-                    <td class="text-center">{{element.tip}}</td>
+                    <td class="text-center">{{element.sales | number:'1.0-2'}}</td>
+                    <td class="text-center">{{element.tip | number:'1.0-2'}}</td>
                   </tr>
                 </tbody>
               </table>

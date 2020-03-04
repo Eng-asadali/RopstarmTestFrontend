@@ -104,8 +104,8 @@
                           'badge-info':element.order_status === 'pending',
                           'badge-warning':element.order_status === 'preparing',
                           'badge-primary':element.order_status === 'ready_to_serve',
-                          'badge-success':element.order_status === 'served',
-                          'badge-dark':element.order_status === 'completed'
+                          'badge-danger':element.order_status === 'served',
+                          'badge-success':element.order_status === 'completed'
                         }" > {{element.order_status | removeUnderScore | titlecase}}</span> 
                        <!-- {'pending':1, 'preparing': 2, 'ready_to_serve': 3, 'served': 4, 'completed': 5} -->
                         </td>

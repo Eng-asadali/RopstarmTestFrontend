@@ -7,7 +7,7 @@ import { Staff } from '../staff';
 import { FieldConfig } from '../../../Interfaces/feildConfig';
 import { StaffService } from '../../Services/staff.service';
 import { SwalAlert } from '../../../Shared/swalAlerts';
-import { experience,SalaryDisbursement,StaffType,JobShift } from '../../Options/staff';
+import { experience, SalaryDisbursement, StaffType, JobShift } from '../../Options/staff';
 
 @Component({
   selector: 'app-edit',
@@ -36,22 +36,23 @@ export class EditComponent implements OnInit {
       result => {
         console.log('Staff by id:', result);
         if (!result['error']) {
-          this.loaded = true;
           this.generateForm(result['data'][0]);
-
         }
         else {
-          this.loaded = true;
           SwalAlert.errorAlert('', result['message'].charAt(0).toUpperCase() + result['message'].substring(1));
         }
-
+        this.loaded = true;
       },
-      err => { console.log(err); },
-      () => { console.log('call completed'); }
+      err => {
+        this.loaded = true;
+        console.log(err);
+        SwalAlert.errorAlert('', 'Server Error');
+      }
     );
   }
 
   generateForm(staff?: Staff) {
+    
     this.fields = [
       { label: 'First Name', type: 'text', bootstrapGridClass: "col-lg-6", name: "first_name", validations: [Validators.required], required: true, value: staff ? staff.first_name : '' },
       {
@@ -75,7 +76,7 @@ export class EditComponent implements OnInit {
     this.form['ImagebootstrapGridClass'] = 'col-lg-3';
     this.form['img_height'] = "200px";
     this.form['img_width'] = "200px";
-    this.form['img_url'] = staff? staff.user_image:null;
+    this.form['image_url'] = staff ? staff.user_image : null;
     this.form['submit'] = 'Save';
   }
 
@@ -83,15 +84,14 @@ export class EditComponent implements OnInit {
 
     this.submit_clicked = true;
 
-    console.log(data);
     data['is_epos'] = true;
-    data['branch_id'] = 1;
+   // data['branch_id'] = 1;
 
-    if(data['image'] != undefined){
-      data['user_image']=data['image'];
+    if (data['image'] != undefined) {
+      data['user_image'] = data['image'];
       delete data['image'];
     }
-    
+
     //data['username']=data.email;
     // data['modified_by_id'] = 2;
     // data['created_by_id'] = 2;
@@ -107,7 +107,6 @@ export class EditComponent implements OnInit {
       result => {
         this.submit_clicked = false;
         if (!result['error']) {
-
           SwalAlert.sucessAlert('', 'Staff Updated Sucessfully!');
         }
         else {
@@ -118,8 +117,9 @@ export class EditComponent implements OnInit {
 
       },
       err => {
+        this.submit_clicked = false;
         console.log(err);
-        SwalAlert.errorAlert('','Server Error');
+        SwalAlert.errorAlert('', 'Server Error');
       }
     );
 

@@ -18,8 +18,7 @@ export class AuthService {
     return this.http.post<any>('user/login/',
       {
         username: contact_number,
-        password: password,
-        type: 'admin'
+        password: password
       }).pipe(map(user => {
 
         console.log(user);

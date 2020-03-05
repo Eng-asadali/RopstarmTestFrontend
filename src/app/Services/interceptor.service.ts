@@ -16,10 +16,7 @@ export class InterceptorService implements HttpInterceptor {
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     // Get the auth header from the service.
-    // const authHeader = this.auth.getToken();
-
-    // console.log(this.auth.getToken());
-    // this.auth.unsetUser();
+    
     const authHeader = this.auth.getToken();
     const branch_Key = this.auth.getBranchKey();
     const url = environment.baseUrl;
@@ -35,13 +32,7 @@ export class InterceptorService implements HttpInterceptor {
 
       cloneReq = req.clone({ headers: headers, url: url + req.url });
     }
-    //  if (authHeader != null) {
-    //   let headers = req.headers
-    //     .set("Authorization", "Token " + authHeader)
-    //    // .set("branch-Auth-Key", branch_Key);
-
-    //   cloneReq = req.clone({ headers: headers, url: url + req.url });
-    // }
+   
     else {
       cloneReq = req.clone({ url: url + req.url });
     }

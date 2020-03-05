@@ -17,7 +17,7 @@ import Swal from 'sweetalert2';
 })
 export class ProductComponent implements OnInit {
 
-  statusEnum= StatusEnum;
+  statusEnum = StatusEnum;
 
   dataSource = new MatTableDataSource<any>([]);
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -40,7 +40,7 @@ export class ProductComponent implements OnInit {
     this.getProductsList();
   }
 
-  getProductsList(){
+  getProductsList() {
     const products = this.productService.getProducts();
     products.subscribe(
       result => {
@@ -52,13 +52,14 @@ export class ProductComponent implements OnInit {
           this.dataSource.paginator = this.paginator;
         }
         else {
-          SwalAlert.errorAlert('', result['message'].charAt(0).toUpperCase() + result['message'].substring(1));
+          if (result['httpError']['status'] != 401)
+            SwalAlert.errorAlert('', result['message'].charAt(0).toUpperCase() + result['message'].substring(1));
         }
-      },
-      err => { console.log('HTTP Error', err); },
-      () => {
         this.loaded = true;
-        // console.log('HTTP request completed.');
+      },
+      err => {
+        this.loaded = true;
+        console.log('HTTP Error', err);
       }
     );
   }
@@ -72,9 +73,9 @@ export class ProductComponent implements OnInit {
     this.router.navigate(['/instamunch/product/edit', id]);
   }
 
-  async delete(){
+  async delete() {
     const response = await SwalAlert.getDeleteSwal();
-     console.log(response);
+    console.log(response);
   }
 
   applyFilter(filterValue: string) {

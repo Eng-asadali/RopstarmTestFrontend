@@ -27,7 +27,7 @@ export class ProductService {
 
   getProducts() {
     return this.httpServices.get('catalog/product/').pipe(
-      catchError(err => of({ error: true, message: 'Server error', data: [] })));
+      catchError(err => of({ error: true, message: 'Server error', data: [], httpError:err })));
   }
 
   getKitchenList() {

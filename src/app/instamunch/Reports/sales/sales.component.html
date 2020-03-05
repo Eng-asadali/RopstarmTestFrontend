@@ -62,7 +62,7 @@
               <div class="widget-subheading">All menu items</div>
             </div>
             <div class="widget-content-right">
-              <div class="widget-numbers text-white"><span>{{sales_report.overall_summary?.total_orders}}</span></div>
+              <div class="widget-numbers text-white"><span>{{sales_report.overall_summary?.total_orders| number:'1.0-2'}}</span></div>
             </div>
           </div>
         </div>
@@ -75,7 +75,7 @@
               <div class="widget-subheading">All orders</div>
             </div>
             <div class="widget-content-right">
-              <div class="widget-numbers text-white"><span>£ {{sales_report.overall_summary?.total_revenue}}</span>
+              <div class="widget-numbers text-white"><span>£ {{sales_report.overall_summary?.total_revenue | number:'1.0-2'}}</span>
               </div>
             </div>
           </div>
@@ -89,7 +89,7 @@
               <div class="widget-subheading">Overall all orders</div>
             </div>
             <div class="widget-content-right">
-              <div class="widget-numbers text-white"><span> £ {{sales_report.overall_summary?.total_tips}}</span></div>
+              <div class="widget-numbers text-white"><span> £ {{sales_report.overall_summary?.total_tips| number:'1.0-2'}}</span></div>
             </div>
           </div>
         </div>

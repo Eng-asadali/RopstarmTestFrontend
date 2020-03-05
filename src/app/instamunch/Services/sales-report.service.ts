@@ -13,7 +13,7 @@ export class SalesReportService {
 
   getSalesReport() {
     return this.httpServices.filter({},'order/reporting/').pipe(
-      catchError(err => of({error:true,message:'Server error',data:[]})));
+      catchError(err => of({error:true,message:'Server error',data:[],httpError:err})));
   }
 
   

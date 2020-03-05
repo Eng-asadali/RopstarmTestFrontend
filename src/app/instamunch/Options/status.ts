@@ -1,4 +1,4 @@
 export const Status = [
-    { id:'active',name:'active'},
+    { id:'active',name:'Active'},
     {id:'deactivate',name:'Inactive'}
 ]

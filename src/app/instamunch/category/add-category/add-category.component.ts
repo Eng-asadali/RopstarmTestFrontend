@@ -21,9 +21,9 @@ export class AddCategoryComponent implements OnInit {
   clear_form: boolean;
 
   loaded = false;
+  edit: boolean = false;
 
   category: Category;
-  edit: boolean;
   category_id: number;
 
   constructor(private categoryService: CategoryService, private route: Router,

@@ -5,5 +5,6 @@ export const validation_patterns = {
   greaterthan0:/^[1-9][0-9]*$/,
   postive_numbers:/^[0-9]*$/,
   alphabets:/^[a-zA-Z]*$/,
-  branch_contact_number:/^[0-9]{10,11}$/
+  branch_contact_number:/^[0-9]{10,11}$/,
+  decimal_numbers:/^\d*\.?\d*$/
 }

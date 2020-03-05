@@ -16,6 +16,7 @@ export class ErrorsComponent implements OnInit {
   contact_number_error = false;
   postive_number_error = false;
   branch_contact_number_error = false;
+  decimal_numbers_error = false;
 
   constructor() { }
 
@@ -37,9 +38,12 @@ export class ErrorsComponent implements OnInit {
         this.postive_number_error = true;
       else if (this.errors[this.errors_array[0]]['requiredPattern'] == validation_patterns.branch_contact_number)
         this.branch_contact_number_error = true;
+      else if (this.errors[this.errors_array[0]]['requiredPattern'] == validation_patterns.decimal_numbers)
+        this.decimal_numbers_error = true;
     }
     // console.log(this.errors[this.errors_array[0]]['requiredPattern'])
     // console.log(this.errors[this.errors_array[0]])
+    console.log(this.decimal_numbers_error);
     console.log(this.errors);
     // console.log(this.errors_array)
   }

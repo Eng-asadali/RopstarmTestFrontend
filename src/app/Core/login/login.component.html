@@ -1,5 +1,71 @@
-<form novalidate #f="ngForm" (ngSubmit)="f.form.valid && onSubmit()">
-  <input [(ngModel)]="model.username" name="email" placeholder="email"/>
-  <input [(ngModel)]="model.password" name="password" placeholder="passoword" /> 
+<!-- <form novalidate #f="ngForm" (ngSubmit)="f.form.valid && onSubmit()">
+  <input [(ngModel)]="model.username" name="email" placeholder="email" />
+  <input [(ngModel)]="model.password" name="password" placeholder="passoword" />
   <button type="submit">Login</button>
-</form>
+</form> -->
+
+<body class="dashboard " style="background-image: url(bg-login.jpg);  background-size:100%; ">
+
+
+  <div class="app-main">
+    <div class="app-main__outer">
+      <div class="">
+
+        <div class="h-100 bg-plum-plate1 bg-animation" style="background-image: url(assets/images/bg-login.jpg);">
+          <div class="d-flex h-100 justify-content-center align-items-center">
+            <div class="mx-auto app-login-box col-md-3">
+              <div class="modal-dialog w-100 mx-auto">
+                <div class="modal-content">
+                  <form novalidate #f="ngForm" (ngSubmit)="f.form.valid && onSubmit()">
+                    <div class="modal-body">
+                      <mat-progress-bar *ngIf="loginPressed"  mode="indeterminate"></mat-progress-bar>
+                      <div class=" modal-title text-center mb-3">
+                        <div class="app-logo-inverse mx-auto mb-3 mt-2 text-center"> <img
+                            src="assets/images/zenlounge-logo.png" height="150" /> </div>
+
+                        <h4 class="mt-2">
+                          <div>Welcome! <br /> Sign in to your account </div>
+                        </h4>
+
+
+
+                      </div>
+                      <br />
+                      <!-- <?php include("_form.php") ?> -->
+                     
+                      <div class="form-row">
+                        <div class="col-md-12">
+                          <div class="position-relative form-group"><input [(ngModel)]="model.username" name="email"
+                              placeholder="email" id="exampleEmail" type="email" placeholder="Email here..."
+                              class="form-control"></div>
+                        </div>
+                        <div class="col-md-12">
+                          <div class="position-relative form-group"><input [(ngModel)]="model.password" name="password"
+                              id="examplePassword" placeholder="Password here..." type="password" class="form-control">
+                          </div>
+                        </div>
+                      </div>
+                      <p style="color: red;" *ngIf="loginError">{{error_message}}</p>
+
+
+                    </div>
+                    <div class="modal-footer1 clearfix">
+                  
+                      <button class="btn btn-primary btn-lg btn-block" type="submit"> Login to Dashboard</button>
+                        
+
+                    </div>
+                  </form>
+                </div>
+              </div>
+              <div class="text-center text-white opacity-8 mt-3">Copyright © 2020 </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</body>

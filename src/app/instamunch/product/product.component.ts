@@ -7,6 +7,7 @@ import { ProductService } from '../Services/product.service';
 import { Product } from './product';
 import { SwalAlert } from '../../Shared/swalAlerts';
 import { StatusEnum } from '../Enums/status-enum';
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -69,6 +70,11 @@ export class ProductComponent implements OnInit {
   getProductId(id) {
     console.log('product id', id);
     this.router.navigate(['/instamunch/product/edit', id]);
+  }
+
+  async delete(){
+    const response = await SwalAlert.getDeleteSwal();
+     console.log(response);
   }
 
   applyFilter(filterValue: string) {

@@ -69,6 +69,10 @@ export class AuthService {
     this.router.navigate(['/'])
   }
 
+  getUser(){
+    return JSON.parse(localStorage.getItem('user'));
+  }
+  
   isAuthenticated() {
     if (localStorage.getItem('user') != 'undefined' && localStorage.getItem('user') != null) {
       return true;

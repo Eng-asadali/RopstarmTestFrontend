@@ -25,4 +25,8 @@ getKitchenById(id) {
   return this.httpServices.get('kitchen/details/' + id + "/").pipe(
     catchError(err => of({ error: true, message: 'Server error', data: [] })));
 }
+getManagers(){
+  return this.httpServices.filter({"type" : "manager"},'user/filter/').pipe(
+    catchError(err => of({error:true,message:'Server error',data:[]})));
+}
 }

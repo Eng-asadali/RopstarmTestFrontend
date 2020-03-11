@@ -6,6 +6,7 @@ import { Category } from '../category';
 import { FieldConfig } from '../../../Interfaces/feildConfig';
 import { CategoryService } from '../../Services/category.service';
 import { SwalAlert } from '../../../Shared/swalAlerts';
+import {NgSelectModule, NgOption} from '@ng-select/ng-select';
 
 import { Status } from '../../Options/status';
 @Component({
@@ -14,7 +15,7 @@ import { Status } from '../../Options/status';
   styleUrls: ['./add-category.component.css']
 })
 export class AddCategoryComponent implements OnInit {
-
+  option=[];
   form = {};
   fields: FieldConfig[] = [] as FieldConfig[];
   submit_clicked: boolean;
@@ -125,17 +126,21 @@ export class AddCategoryComponent implements OnInit {
     this.categoryService.getParentCategories().subscribe(
       result => {
         if (!result['error']) {
+          this.option=result['data']
           this.fields = [
             { label: 'Category Name', type: 'text', bootstrapGridClass: "col-lg-12", name: "name", validations: [Validators.required], required: true, value: category ? category.name : '' },
-            {
-              label: 'Parent Category', type: 'select', bootstrapGridClass: "col-lg-6", name: "parent_category_id", validations: [Validators.required], required: true,
-              value: category ? category.parent_category_id : '', options: result['data']
-            },
-            {
+            // {
+            //   label: 'Parent Category', type: 'select', bootstrapGridClass: "col-lg-6", name: "parent_category_id", validations: [Validators.required], required: true,
+            //   value: category ? category.parent_category_id : '', options: result['data']
+            // },
+             { label: 'Parent Category', type: 'ngselect', bootstrapGridClass: "col-lg-6", name: "parent_category_id",validations: [Validators.required], required: true, value: category ? category.parent_category_id : '', options: result['data']}
+
+            ,{
               label: 'Status', type: 'select', bootstrapGridClass: "col-lg-6", name: "status", validations: [Validators.required], required: true,
               value: category ? category.status : 'active', options: Status
             },
             { label: 'Description', type: 'textarea', bootstrapGridClass: "col-lg-12", name: "description", value: category ? category.description : '' }
+
           ]
           this.form['form_fields'] = this.fields;
           this.form['FormbootstrapGridClass'] = 'col-lg-9';

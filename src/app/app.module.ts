@@ -20,6 +20,7 @@ import { InterceptorService } from './Services/interceptor.service';
 import { SalesReportResolver } from './Services/sales-report.resolver';
 import { AuthGuardService } from './Services/auth-guard';
 import { DataSharingService } from './Services/data-sharing.service';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 import { HeaderComponent } from './Core/header/header.component';
 import { SidebarComponent } from './Core/sidebar/sidebar.component';
@@ -38,6 +39,8 @@ import { EditOrderComponent } from './instamunch/order/edit-order/edit-order.com
 import { LoginComponent } from './Core/login/login.component';
 import { DashboardComponent } from './Core/dashboard/dashboard.component';
 import { PageNotFoundComponent } from './Core/page-not-found/page-not-found.component';
+import { KitchenComponent } from './instamunch/kitchen/kitchen.component';
+import { AddKitchenComponent } from './instamunch/kitchen/add-kitchen/add-kitchen.component';
 
 
 @NgModule({
@@ -58,10 +61,13 @@ import { PageNotFoundComponent } from './Core/page-not-found/page-not-found.comp
     EditOrderComponent,
     LoginComponent,
     DashboardComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    KitchenComponent,
+    AddKitchenComponent
   ],
 
   imports: [
+   
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
@@ -75,7 +81,8 @@ import { PageNotFoundComponent } from './Core/page-not-found/page-not-found.comp
     MatProgressBarModule,
     SharedModule,
     NgApexchartsModule,
-    FormsModule
+    FormsModule,
+    NgSelectModule
   ],
 
   providers: [HttpService,

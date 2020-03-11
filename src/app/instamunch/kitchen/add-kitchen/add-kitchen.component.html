@@ -8,14 +8,14 @@
             </i>
           </div>
           <div> Inventory Managment
-            <div class="page-title-subheading">Category listing
+            <div class="page-title-subheading">Kitchen Details
             </div>
           </div>
         </div>
         <div class="page-title-actions">
 
           <div class="d-inline-block dropdown">
-            <a (click)="navigateToCategoryListing()" class="border-0 btn-transition btn btn-outline-focus">
+            <a (click)="navigateToProductListing()" class="border-0 btn-transition btn btn-outline-focus">
               <i class="icofont-arrow-left"></i> back to list
             </a>
             <!-- <a href="product-all.php" class="btn-shadow  btn btn-info">
@@ -29,6 +29,7 @@
 
               <i class="icofont-ui-copy"></i> Copy Product
             </button> -->
+            
             <button *ngIf="edit" disabled style="margin-left: 5px;" type="button" class="btn-shadow  btn btn-danger">
               <i class="icofont-trash"></i> Delete
             </button>
@@ -42,17 +43,17 @@
         <ul class="body-tabs body-tabs-layout tabs-animated body-tabs-animated nav">
           <li class="nav-item">
             <a role="tab" class="nav-link active" id="tab-0" data-toggle="tab" href="#tab-content-0">
-              <span>Category Information</span>
+              <span>Kitchen Information</span>
             </a>
           </li>
           <!-- <li class="nav-item">
             <a role="tab" class="nav-link" id="tab-1" data-toggle="tab" href="#tab-content-1">
-              <span>Category Pictures</span>
+              <span>Product Pictures</span>
             </a>
           </li>
           <li class="nav-item">
             <a role="tab" class="nav-link" id="tab-1" data-toggle="tab" href="#tab-content-2">
-              <span>Category Pricing</span>
+              <span>Product Pricing</span>
             </a>
           </li> -->
         </ul>
@@ -62,9 +63,8 @@
             <div class="tab-pane show active" id="tab-content-0" role="tabpanel">
               <div class="card">
                 <mat-progress-bar *ngIf="!loaded" mode="indeterminate"></mat-progress-bar>
-
-                <app-form [clear_form]="clear_form" [submit_clicked]="submit_clicked"
-                  (formValues)="getCategoryData($event)" [option]="option" [form]=form>
+                <app-form [clear_form]="clear_form" [submit_clicked]="submit_clicked" (formValues)="getKitchenData($event)"
+                  [form]=form>
                 </app-form>
                 <!-- <div class="card-body">
 

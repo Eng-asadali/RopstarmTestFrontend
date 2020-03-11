@@ -11,6 +11,7 @@ import { DoughnutChartComponent } from './doughnut-chart/doughnut-chart.componen
 
 //Pipes
 import { removeUnderScore } from './Pipes/removeUnderScore';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 @NgModule({
 
@@ -36,6 +37,7 @@ import { removeUnderScore } from './Pipes/removeUnderScore';
     ],
 
     imports: [
+        NgSelectModule,
         ReactiveFormsModule,
         CommonModule,
         NgApexchartsModule

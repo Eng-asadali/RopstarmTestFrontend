@@ -3,20 +3,17 @@ import { MatPaginator, MatTableDataSource, MatSort } from '@angular/material';
 import { SelectionModel } from '@angular/cdk/collections';
 import { Router, ActivatedRoute } from '@angular/router';
 
-import { ProductService } from '../Services/product.service';
-import { Product } from './product';
+import { KitchenService } from '../Services/kitchen.service';
+import { kitchen } from './kitchen';
 import { SwalAlert } from '../../Shared/swalAlerts';
 import { StatusEnum } from '../Enums/status-enum';
 import Swal from 'sweetalert2';
-
-
 @Component({
-  selector: 'app-product',
-  templateUrl: './product.component.html',
-  styleUrls: ['./product.component.css']
+  selector: 'app-kitchen',
+  templateUrl: './kitchen.component.html',
+  styleUrls: ['./kitchen.component.css']
 })
-export class ProductComponent implements OnInit {
-
+export class KitchenComponent implements OnInit {
   statusEnum = StatusEnum;
 
   dataSource = new MatTableDataSource<any>([]);
@@ -30,21 +27,21 @@ export class ProductComponent implements OnInit {
   table_headers: any = [];
   data: any = [];
   checkedId :any = [];
-  products: Product[];
+  kitchens: kitchen[];
 
-  constructor(private productService: ProductService, private router: Router,
+  constructor(private KitchenService: KitchenService, private router: Router,
     private currentActivatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
-    this.table_headers = ['select', 'image', 'name', 'category_id', 'estimated_prepare_time', 'status', 'actions'];
-    this.getProductsList();
+    this.table_headers = ['select', 'image', 'name', 'status', 'actions'];
+    this.getKitchenList();
   }
 
-  getProductsList() {
-    const products = this.productService.getProducts();
-    products.subscribe(
+  getKitchenList() {
+    const kitchens = this.KitchenService.getKitchens();
+    kitchens.subscribe(
       result => {
-        console.log('products list', result);
+        console.log('Kitchen list', result);
         if (!result['error']) {
           this.data = result['data'];
           this.dataSource.data = this.data;
@@ -64,13 +61,13 @@ export class ProductComponent implements OnInit {
     );
   }
 
-  navigateToProductAdd() {
+  navigateToKitchenAdd() {
     this.router.navigate(['add'], { relativeTo: this.currentActivatedRoute });
   }
 
-  getProductId(id) {
-    console.log('product id', id);
-    this.router.navigate(['/instamunch/product/edit', id]);
+  getKitchenId(id) {
+    console.log('Kitchen id', id);
+    this.router.navigate(['/instamunch/Kitchen/edit', id]);
   }
 
   async delete() {

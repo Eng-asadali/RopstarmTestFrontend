@@ -51,6 +51,7 @@ export class AddStaffComponent implements OnInit {
         value: staff ? staff.type : '', options: StaffType
       },
       { label: 'Experience', type: 'select', bootstrapGridClass: "col-lg-6", name: "experience", validations: [Validators.required], value: staff ? staff.experience : '', options: experience, required: true }
+   
     ]
     this.form['form_fields'] = this.fields;
     this.form['FormbootstrapGridClass'] = 'col-lg-9';

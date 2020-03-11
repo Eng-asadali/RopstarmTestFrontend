@@ -1,6 +1,8 @@
 import { Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChanges, ViewChild } from '@angular/core';
 import { FieldConfig } from "../../../Interfaces/feildConfig";
 import { FormBuilder, FormGroup, FormArray, FormControl, Validators, FormGroupDirective } from '@angular/forms';
+import {NgSelectModule, NgOption} from '@ng-select/ng-select';
+
 declare var $: any;
 
 @Component({
@@ -18,7 +20,7 @@ export class FormComponent implements OnInit {
   @Input() submit_clicked: boolean;
   @Input() edit_clicked: boolean;
   @Input() clear_form: boolean;
-
+  @Input() option:[]
   Form: FormGroup;
   displayValidationsErrors = false;
   map_values: any = {};

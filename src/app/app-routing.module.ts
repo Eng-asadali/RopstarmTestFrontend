@@ -1,3 +1,5 @@
+import { AddKitchenComponent } from './instamunch/kitchen/add-kitchen/add-kitchen.component';
+import { KitchenComponent } from './instamunch/kitchen/kitchen.component';
 import { EditOrderComponent } from './instamunch/order/edit-order/edit-order.component';
 import { EditComponent } from './instamunch/staff/edit/edit.component';
 import { NgModule } from '@angular/core';
@@ -62,7 +64,15 @@ const routes: Routes = [
       {
         path: 'staff/edit/:id', component: EditComponent
       },
-
+      {
+        path:'Kitchen',component:KitchenComponent
+      },
+      {
+        path:'Kitchen/add',component:AddKitchenComponent
+      },
+      {
+        path:'Kitchen/edit/:id',component:AddKitchenComponent
+      },
       {
         path: 'sales-report', component: SalesComponent, resolve: {
           cres: SalesReportResolver

@@ -57,11 +57,14 @@ export class AddProductComponent implements OnInit {
           label: 'Kitchen', type: 'select', bootstrapGridClass: "col-lg-6", name: "kitchen_id", validations: [Validators.required], required: true,
           value: product ? product.kitchen_id : '', options: result[1]['data']
         },
-        {
-          label: 'Category', type: 'select', bootstrapGridClass: "col-lg-6", name: "category_id", validations: [Validators.required], required: true,
-          value: product ? product.category_id : '', options: result[0]['data']
-        },
-        {
+        // {
+        //   label: 'Category', type: 'select', bootstrapGridClass: "col-lg-6", name: "category_id", validations: [Validators.required], required: true,
+        //   value: product ? product.category_id : '', options: result[0]['data']
+        // },
+
+        { label: 'Category', type: 'ngselect', bootstrapGridClass: "col-lg-6", name: "category_id",validations: [Validators.required], required: true, value: product ? product.category_id : '', options: result[0]['data']
+         }
+    , {
           label: 'Status', type: 'select', bootstrapGridClass: "col-lg-6", name: "status", validations: [Validators.required], required: true,
           value: product ? product.status : 'active', options: Status
         },
@@ -75,10 +78,10 @@ export class AddProductComponent implements OnInit {
         {
           label: 'Tax Included', type: 'checkbox', bootstrapGridClass: "col-lg-12", name: "is_tax_included", required: false, value: product ? product.is_tax_included : false
         },
-      //  estimated_prepare_time
-        // {
-        //   label: 'Attribute List', type: 'attribute', bootstrapGridClass: "col-lg-12", name: "attr", validations: [Validators.required], required: false
-        // },
+       
+        {
+          label: 'Attribute List', type: 'attribute', bootstrapGridClass: "col-lg-12", name: "attr", validations: [Validators.required], required: false
+        },
         { label: 'Description', type: 'textarea', bootstrapGridClass: "col-lg-12", name: "detail", value: product ? product.detail : '' }
       ]
       this.form['form_fields'] = this.fields;

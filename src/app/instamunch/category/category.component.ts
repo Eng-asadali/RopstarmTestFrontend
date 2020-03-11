@@ -7,6 +7,7 @@ import { CategoryService } from '../Services/category.service';
 import { Category } from './category';
 import { SwalAlert } from 'src/app/Shared/swalAlerts';
 import { StatusEnum } from '../Enums/status-enum';
+import {NgSelectModule, NgOption} from '@ng-select/ng-select';
 
 @Component({
   selector: 'app-category',

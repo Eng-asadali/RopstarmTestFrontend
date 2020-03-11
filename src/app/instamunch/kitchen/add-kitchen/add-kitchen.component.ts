@@ -43,13 +43,6 @@ export class AddKitchenComponent implements OnInit {
   }
 
   generateForm(kitchen?: kitchen) {
-    // let categories = this.categoryService.getCategories();
-    // let kicthen = this.productService.getKitchenList();
-
-    // const result = forkJoin(categories, kicthen);
-
-    // result.subscribe((result) => {
-    //   console.log(result);
       this.fields = [
         { label: 'Kitchen Name', type: 'text', bootstrapGridClass: "col-lg-12", name: "name", validations: [Validators.required], required: true, value: kitchen ? kitchen.name : '' },
         
@@ -63,7 +56,7 @@ export class AddKitchenComponent implements OnInit {
       this.form['MapbootstrapGridClass'] = 'col-lg-4';
       this.form['image'] = true;
       this.form['ImagebootstrapGridClass'] = 'col-lg-3';
-      this.form['img_height'] = "200px";
+      this.form['img_height'] = "150px";
       this.form['img_width'] = "200px";
       this.form['image_url'] = kitchen ? kitchen.image : null;
       this.form['submit'] = 'Save';

@@ -62,13 +62,14 @@ export class CategoryComponent implements OnInit {
     );
   }
 
-  applyFilter(filterValue: string) {
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-  }
+ 
 
   getCategoryId(category_id) {
-    console.log(category_id);
     this.router.navigate(['/instamunch/category/edit', category_id]);
+  }
+
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
   isAllSelected() {

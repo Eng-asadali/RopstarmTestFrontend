@@ -29,7 +29,7 @@ export class ProductComponent implements OnInit {
 
   table_headers: any = [];
   data: any = [];
-  checkedId :any = [];
+  checkedId: any = [];
   products: Product[];
 
   constructor(private productService: ProductService, private router: Router,
@@ -68,12 +68,16 @@ export class ProductComponent implements OnInit {
     this.router.navigate(['add'], { relativeTo: this.currentActivatedRoute });
   }
 
-  getProductId(id) {
+  getProductId(id, action) {
     console.log('product id', id);
-    this.router.navigate(['/instamunch/product/edit', id]);
+    if (action == 'edit')
+      this.router.navigate(['/instamunch/product/edit', id]);
+    else {
+      this.delete(id);
+    }
   }
 
-  async delete() {
+  async delete(product_id) {
     const response = await SwalAlert.getDeleteSwal();
     console.log(response);
   }
@@ -95,8 +99,8 @@ export class ProductComponent implements OnInit {
       this.selection.clear() :
       this.dataSource.data.forEach(row => this.selection.select(row));
     console.log(this.selection);
-  
-    
+
+
   }
 
   // $event ? selection.toggle(row) : null
@@ -106,14 +110,14 @@ export class ProductComponent implements OnInit {
     }
     else
       null;
-    this.checkedId=[]
+    this.checkedId = []
     console.log(this.selection.selected);
-    for(let i=0;i<this.selection.selected.length;i++){
-     console.log("origibal id"+this.selection.selected[i].id) ;
-     this.checkedId.push(this.selection.selected[i].id)
-     
+    for (let i = 0; i < this.selection.selected.length; i++) {
+      console.log("origibal id" + this.selection.selected[i].id);
+      this.checkedId.push(this.selection.selected[i].id)
+
     }
-    console.log("array :"+ this.checkedId)
+    console.log("array :" + this.checkedId)
   }
 
 }

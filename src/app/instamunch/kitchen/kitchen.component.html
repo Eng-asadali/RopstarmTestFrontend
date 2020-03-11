@@ -30,9 +30,9 @@
             </div>
             <button style="margin-left: 4px;" type="button" class="btn  btn-secondary"> <i class="icofont-download-alt"></i> Import </button> -->
 
-            <button disabled style="margin-left: 4px;" type="button" class="btn-shadow  btn btn-danger">
+            <!-- <button disabled style="margin-left: 4px;" type="button" class="btn-shadow  btn btn-danger">
               <i class="icofont-trash"></i> Delete Selected
-            </button>
+            </button> -->
           </div>
         </div>
       </div>
@@ -69,7 +69,7 @@
               <div class="mat-elevation-z8">
                 <table mat-table [dataSource]="dataSource" style="width: 100%;">
                   <div>
-                    <ng-container matColumnDef="select">
+                    <!-- <ng-container matColumnDef="select">
                       <th mat-header-cell *matHeaderCellDef>
                         <mat-checkbox color="primary" (change)="$event ? masterToggle() : null"
                                       [checked]="selection.hasValue() && isAllSelected()"
@@ -82,7 +82,7 @@
                                       [checked]="selection.isSelected(row)">
                         </mat-checkbox>
                       </td>
-                    </ng-container>
+                    </ng-container> -->
                     
                     <ng-container matColumnDef="image">
                       <th mat-header-cell *matHeaderCellDef> Image </th>

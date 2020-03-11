@@ -114,6 +114,25 @@
               
             </div>
 
+            <div class="form-group" *ngIf="fields[index].type == 'ngselectname'" >
+              <label>{{fields[index].label}}<span *ngIf="fields[index].required" class="required">*</span></label>
+              <!-- <ng-select [items]="option"
+                         bindLabel="option.label"
+                         placeholder="Select item"
+                         bindValue="options.id"
+                        > -->
+                         <ng-select
+                         formControlName="{{fields[index].name}}"
+                         placeholder="Select item"                         
+                       >
+                      
+                         <!-- <ng-option *ngFor="let option of fields[index].options" [value]="option.value">{{option.label}}</ng-option> -->
+                         <ng-option  *ngFor="let option of fields[index].options" [value]="option.id">{{option.first_name}} {{option.last_name}} </ng-option>
+                        </ng-select>
+              
+            </div>
+
+
             <div class="form-group" *ngIf="fields[index].type == 'franchise_multiple'">
               <label>{{fields[index].label}}<span *ngIf="fields[index].required" class="required">*</span></label>
               <select *ngIf="fields[index].name" multiple class="form-control selectpicker" data-style="btn-select"

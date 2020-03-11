@@ -33,7 +33,7 @@ export class KitchenComponent implements OnInit {
     private currentActivatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
-    this.table_headers = ['select', 'image', 'name', 'status', 'actions'];
+    this.table_headers = [ 'image', 'name', 'status', 'actions'];
     this.getKitchenList();
   }
 

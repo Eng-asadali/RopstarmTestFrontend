@@ -1,9 +1,9 @@
+import { kitchen } from './../kitchen';
 import { KitchenService } from './../../Services/kitchen.service';
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Validators } from '@angular/forms';
 import { of, forkJoin } from 'rxjs';
-import { kitchen } from '../kitchen';
 import { FieldConfig } from '../../../Interfaces/feildConfig';
 import { ProductService } from '../../Services/product.service';
 import { CategoryService } from '../../Services/category.service';
@@ -16,7 +16,7 @@ import { validation_patterns } from 'src/app/Shared/validation_patterns';
   styleUrls: ['./add-kitchen.component.css']
 })
 export class AddKitchenComponent implements OnInit {
-
+  option=[];
   form = {};
   fields: FieldConfig[] = [] as FieldConfig[];
   submit_clicked: boolean;
@@ -43,6 +43,11 @@ export class AddKitchenComponent implements OnInit {
   }
 
   generateForm(kitchen?: kitchen) {
+    this.KitchenService.getManagers().subscribe(
+      result=>{
+        if(!result['error']){
+          this.option=result['data']
+         
     // let categories = this.categoryService.getCategories();
     // let kicthen = this.productService.getKitchenList();
 
@@ -55,21 +60,24 @@ export class AddKitchenComponent implements OnInit {
         
         { label: 'Status', type: 'select', bootstrapGridClass: "col-lg-12", name: "status", validations: [Validators.required], required: true,
           value: kitchen ? kitchen.status : 'active', options: Status
-         }
-            ]
+         },
+        //  { label: 'Managers', type: 'ngselectname', bootstrapGridClass: "col-lg-12", name: "manager_id",validations: [Validators.required], required: true, value: kitchen ? kitchen.manager_id : '', options: result['data']}
+
+            ]      
       this.form['form_fields'] = this.fields;
       this.form['FormbootstrapGridClass'] = 'col-lg-9';
       this.form['map'] = false;
       this.form['MapbootstrapGridClass'] = 'col-lg-4';
       this.form['image'] = true;
       this.form['ImagebootstrapGridClass'] = 'col-lg-3';
-      this.form['img_height'] = "200px";
-      this.form['img_width'] = "200px";
+      this.form['img_height'] = "150px";
+      this.form['img_width'] = "150px";
       this.form['image_url'] = kitchen ? kitchen.image : null;
       this.form['submit'] = 'Save';
       this.form['attribute'] = true;
       this.loaded = true;
-  
+    }
+    } );
   }
 
   getKitchenDataById(id) {

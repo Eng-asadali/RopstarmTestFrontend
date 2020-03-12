@@ -8,7 +8,7 @@
             </i>
           </div>
           <div> Inventory Managment
-            <div class="page-title-subheading">Products listing
+            <div class="page-title-subheading">Expense listing
             </div>
           </div>
         </div>
@@ -44,7 +44,7 @@
       <div class="col-md-12">
 
         <h4 class="d-flex flex-wrap justify-content-between align-items-center mb-3">
-          <div>Products</div>
+          <div>Expenses</div>
           <!-- <div class="col-12 col-md-3 p-0 mb-3">
             <input type="text" class="form-control" placeholder="Search...">
           </div> -->
@@ -84,27 +84,33 @@
                       </td>
                     </ng-container>
                     
-                    <ng-container matColumnDef="image">
-                      <th mat-header-cell *matHeaderCellDef> Image </th>
-                      <td mat-cell *matCellDef="let element"> <img style="width: 30px; height: 30px;" [src]="element.image!=null ? element.image : '../../../assets/images/no_image.png'" /> </td>
+                   
+
+                    <ng-container matColumnDef="expense">
+                      <th mat-header-cell *matHeaderCellDef> Expense </th>
+                      <td mat-cell *matCellDef="let element"> {{element.title}} </td>
                     </ng-container>
 
-                    <ng-container matColumnDef="name">
-                      <th mat-header-cell *matHeaderCellDef> Name </th>
-                      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+                    <ng-container matColumnDef="amount">
+                      <th mat-header-cell *matHeaderCellDef> Amount </th>
+                      <td mat-cell *matCellDef="let element"> {{element.amount}} </td>
                     </ng-container>
 
-                    <ng-container matColumnDef="category_id">
-                      <th mat-header-cell *matHeaderCellDef> Category </th>
-                      <td mat-cell *matCellDef="let element"> {{element.category_name}} </td>
+                    <ng-container matColumnDef="type">
+                      <th mat-header-cell *matHeaderCellDef> Type </th>
+                      <td mat-cell *matCellDef="let element"> {{element.expense_type == null ? '--' : element.expense_type}} </td>
                     </ng-container>
 
-                    <ng-container matColumnDef="estimated_prepare_time">
-                      <th mat-header-cell *matHeaderCellDef> Estimated Prepare Time (Mins) </th>
-                      <td mat-cell *matCellDef="let element"> {{element.estimated_prepare_time == null ? '--' : element.estimated_prepare_time}} </td>
+                    <ng-container matColumnDef="date">
+                      <th mat-header-cell *matHeaderCellDef> Date </th>
+                      <td mat-cell *matCellDef="let element"> {{element.expense_date == null ? '--' : element.expense_date}} </td>
                     </ng-container>
 
-                    <ng-container matColumnDef="status">
+                    <ng-container matColumnDef="transaction">
+                      <th mat-header-cell *matHeaderCellDef> Transaction </th>
+                      <td mat-cell *matCellDef="let element"> {{element.transaction_type == null ? '--' : element.transaction_type}} </td>
+                    </ng-container>
+                    <!-- <ng-container matColumnDef="status">
                       <th mat-header-cell *matHeaderCellDef> Status </th>
                       <td mat-cell *matCellDef="let element"> 
                         <span class="badge" [ngClass]="{
@@ -112,14 +118,14 @@
                           'badge-danger':element.status === 'deactivate'
                         }" >{{statusEnum[element.status]}}</span> 
                       </td>
-                    </ng-container>
+                    </ng-container> -->
 
                     <ng-container matColumnDef="actions">
                       <th mat-header-cell *matHeaderCellDef> Actions </th>   
                       <td mat-cell *matCellDef="let element"> 
                         <div class="buttons">
-                          <a style="color: #8f8f8f;" (click)="getProductId(element.id,'edit')" class="mb-2 mr-2 btn-transition btn btn-outline-light btn-sm">Edit</a>
-                          <button class="mb-2 mr-2 btn-transition btn btn-outline-light btn-sm" (click)="getProductId(element.id,'delete')" >Delete</button>
+                          <a style="color: #8f8f8f;" (click)="getExpenseId(element.id,'edit')" class="mb-2 mr-2 btn-transition btn btn-outline-light btn-sm">Edit</a>
+                          <button class="mb-2 mr-2 btn-transition btn btn-outline-light btn-sm" (click)="getExpenseId(element.id,'delete')" >Delete</button>
                       </div>
                       </td>
                     </ng-container>

@@ -64,8 +64,41 @@ export class CategoryComponent implements OnInit {
 
  
 
-  getCategoryId(category_id) {
-    this.router.navigate(['/instamunch/category/edit', category_id]);
+  getCategoryId(id,action) {
+
+    console.log('Kitchen id', id);
+    if (action == 'edit')
+    this.router.navigate(['/instamunch/category/edit', id]);
+    else {
+      this.delete(id);
+    }
+  }
+
+
+  async delete(id) {
+    const response = await SwalAlert.getDeleteSwal();
+    console.log(response);
+    if(response==true){
+      this.deleteById(id);
+    }
+  }
+
+  deleteById(id) {
+    console.log(' id to delete', id);
+    this.categoryService.deleteById(id).subscribe(
+      result => {
+        if (!result['error']) {
+         this.getCategoriesList();
+          SwalAlert.sucessAlert('', 'Deleted Successfully!');
+          //this.router.navigate(['/instamunch/staff/', id]);
+
+        }
+        else
+          SwalAlert.errorAlert('', result['message'].charAt(0).toUpperCase() + result['message'].substring(1));
+
+      }
+    );
+
   }
 
   applyFilter(filterValue: string) {

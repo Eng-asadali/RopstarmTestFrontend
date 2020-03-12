@@ -6,22 +6,28 @@ import { of } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class ProductService {
+export class ExpenseService {
 
   constructor(private httpServices: HttpService) { }
+  getExpenses() {
+    return this.httpServices.get('expense/').pipe(
+      catchError(err => of({ error: true, message: 'Server error', data: [], httpError:err })));
+  }
 
-  getProuctById(id) {
-    return this.httpServices.get('catalog/product/details/' + id + "/").pipe(
+
+
+  getExpenseById(id) {
+    return this.httpServices.get('expense/details/' + id + "/").pipe(
       catchError(err => of({ error: true, message: 'Server error', data: [] })));
   }
 
-  addProduct(data){
-    return this.httpServices.postFormDataWithoutActiveStatus(data,'catalog/product/').pipe(
+  addExpense(data){
+    return this.httpServices.postFormDataWithoutActiveStatus(data,'expense/').pipe(
       catchError(err => of({error:true,message:'Server error',data:[]})));
   }
 
-  editProduct(data,id){
-    return this.httpServices.patchFormDataWithoutActiveStatus(data,'catalog/product/details/'+ id + "/").pipe(
+  editExpense(data,id){
+    return this.httpServices.patchFormDataWithoutActiveStatus(data,'expense/details/'+ id + "/").pipe(
       catchError(err => of({error:true,message:'Server error',data:[]})));
   }
 
@@ -36,7 +42,8 @@ export class ProductService {
     );
   }
   deleteById(id) {
-    return this.httpServices.delete('catalog/product/details/' + id + "/").pipe(
+    return this.httpServices.delete('expense/details/' + id + "/").pipe(
       catchError(err => of({error:true,message:'Server error',data:[]})));
    }
+
 }

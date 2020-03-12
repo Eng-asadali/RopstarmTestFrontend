@@ -1,3 +1,4 @@
+import { ExpenseComponent } from './instamunch/expense/expense.component';
 import { AddKitchenComponent } from './instamunch/kitchen/add-kitchen/add-kitchen.component';
 import { KitchenComponent } from './instamunch/kitchen/kitchen.component';
 import { EditOrderComponent } from './instamunch/order/edit-order/edit-order.component';
@@ -19,6 +20,7 @@ import { SalesComponent } from './instamunch/Reports/sales/sales.component';
 import { AddStaffComponent } from './instamunch/staff/add-staff/add-staff.component';
 import { LoginComponent } from './Core/login/login.component';
 import { PageNotFoundComponent } from './Core/page-not-found/page-not-found.component';
+import { AddExpenseComponent } from './instamunch/expense/add-expense/add-expense.component';
 
 
 const routes: Routes = [
@@ -72,6 +74,15 @@ const routes: Routes = [
       },
       {
         path:'Kitchen/edit/:id',component:AddKitchenComponent
+      },
+      {
+        path:'expense',component:ExpenseComponent
+      },
+      {
+        path:'expense/add',component:AddExpenseComponent
+      },
+      {
+        path:'expense/edit/:id',component:AddExpenseComponent
       },
       {
         path: 'sales-report', component: SalesComponent, resolve: {

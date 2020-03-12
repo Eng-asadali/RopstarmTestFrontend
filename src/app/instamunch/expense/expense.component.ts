@@ -1,21 +1,21 @@
+import { KitchenComponent } from './../kitchen/kitchen.component';
+import { ExpenseService } from './../Services/expense.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, MatTableDataSource, MatSort } from '@angular/material';
 import { SelectionModel } from '@angular/cdk/collections';
 import { Router, ActivatedRoute } from '@angular/router';
 
 import { ProductService } from '../Services/product.service';
-import { Product } from './product';
+import { expense } from './expense';
 import { SwalAlert } from '../../Shared/swalAlerts';
 import { StatusEnum } from '../Enums/status-enum';
 import Swal from 'sweetalert2';
-
-
 @Component({
-  selector: 'app-product',
-  templateUrl: './product.component.html',
-  styleUrls: ['./product.component.css']
+  selector: 'app-expense',
+  templateUrl: './expense.component.html',
+  styleUrls: ['./expense.component.css']
 })
-export class ProductComponent implements OnInit {
+export class ExpenseComponent implements OnInit {
 
   statusEnum = StatusEnum;
 
@@ -30,21 +30,21 @@ export class ProductComponent implements OnInit {
   table_headers: any = [];
   data: any = [];
   checkedId: any = [];
-  products: Product[];
+  expenses: expense[];
 
-  constructor(private productService: ProductService, private router: Router,
+  constructor(private ExpenseService: ExpenseService, private router: Router,
     private currentActivatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
-    this.table_headers = ['select', 'image', 'name', 'category_id', 'estimated_prepare_time', 'status', 'actions'];
-    this.getProductsList();
+    this.table_headers = ['select',  'expense', 'amount', 'type','date', 'transaction', 'actions'];
+    this.getExpensesList();
   }
 
-  getProductsList() {
-    const products = this.productService.getProducts();
-    products.subscribe(
+  getExpensesList() {
+    const expenses = this.ExpenseService.getExpenses();
+    expenses.subscribe(
       result => {
-        console.log('products list', result);
+        console.log('expense list', result);
         if (!result['error']) {
           this.data = result['data'];
           this.dataSource.data = this.data;
@@ -68,10 +68,10 @@ export class ProductComponent implements OnInit {
     this.router.navigate(['add'], { relativeTo: this.currentActivatedRoute });
   }
 
-  getProductId(id, action) {
-    console.log('product id', id);
+  getExpenseId(id, action) {
+    console.log('expense id', id);
     if (action == 'edit')
-      this.router.navigate(['/instamunch/product/edit', id]);
+      this.router.navigate(['instamunch/expense/edit/', id]);
     else {
       this.delete(id);
     }
@@ -87,10 +87,10 @@ export class ProductComponent implements OnInit {
   
   deleteById(id) {
     console.log(' id to delete', id);
-    this.productService.deleteById(id).subscribe(
+    this.ExpenseService.deleteById(id).subscribe(
       result => {
         if (!result['error']) {
-         this.getProductsList();
+         this.getExpensesList();
           SwalAlert.sucessAlert('', 'Deleted Successfully!');
           //this.router.navigate(['/instamunch/staff/', id]);
 

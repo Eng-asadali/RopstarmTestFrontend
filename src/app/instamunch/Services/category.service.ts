@@ -37,5 +37,8 @@ export class CategoryService {
       catchError(err => of({error:true,message:'Server error',data:[]})));
   }
 
-  
+  deleteById(id) {
+    return this.httpServices.delete('user/details/' + id + "/").pipe(
+      catchError(err => of({error:true,message:'Server error',data:[]})));
+   }
 }

@@ -95,7 +95,13 @@
                 </app-errors>
               </div>
             </div>
-
+<!-- <div class="form-group" *ngIf="fields[index].type == 'Currentdate'">
+  <mat-form-field class="example-full-width">
+    <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker" placeholder="Choose a date">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+</div> -->
             <div class="form-group" *ngIf="fields[index].type == 'ngselect'" >
               <label>{{fields[index].label}}<span *ngIf="fields[index].required" class="required">*</span></label>
               <!-- <ng-select [items]="option"
@@ -132,6 +138,7 @@
               
             </div>
 
+            
 
             <div class="form-group" *ngIf="fields[index].type == 'franchise_multiple'">
               <label>{{fields[index].label}}<span *ngIf="fields[index].required" class="required">*</span></label>
@@ -186,7 +193,7 @@
             <div class="form-group" *ngIf="fields[index].type == 'date'">
               <label>{{fields[index].label}}<span *ngIf="fields[index].required" class="required">*</span></label>
               <input *ngIf="fields[index].name" class="form-control" formControlName="{{fields[index].name}}"
-                type="date">
+               type="date">
               <div
                 *ngIf="(Form.controls[fields[index].name].dirty || displayValidationsErrors) && Form.controls[fields[index].name].invalid">
                 <app-errors [field_name]="fields[index].label" [errors]='Form.controls[fields[index].name].errors'>

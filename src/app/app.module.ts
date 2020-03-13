@@ -5,6 +5,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import {
   MatTableModule, MatPaginatorModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatCheckboxModule,
+  MatDatepickerModule,
   MatProgressBarModule, MatProgressSpinnerModule
 } from '@angular/material';
 import { NgApexchartsModule } from "ng-apexcharts";
@@ -47,6 +48,7 @@ import { AddExpenseComponent } from './instamunch/expense/add-expense/add-expens
 
 @NgModule({
   declarations: [
+
     AppComponent,
     HeaderComponent,
     SidebarComponent,
@@ -87,6 +89,7 @@ import { AddExpenseComponent } from './instamunch/expense/add-expense/add-expens
     NgApexchartsModule,
     FormsModule,
     NgSelectModule,
+    MatDatepickerModule,
     MatProgressSpinnerModule
   ],
 

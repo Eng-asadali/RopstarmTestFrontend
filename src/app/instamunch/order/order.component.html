@@ -91,7 +91,10 @@
                       <td mat-cell *matCellDef="let element"> {{element.table_key}} </td>
                     </ng-container>
 
-                    
+                    <ng-container matColumnDef="floor">
+                      <th mat-header-cell *matHeaderCellDef>Floor Name </th>
+                      <td mat-cell *matCellDef="let element"> {{element.floor_name}} </td>
+                    </ng-container>
                     <ng-container matColumnDef="order datetime">
                       <th mat-header-cell *matHeaderCellDef> Time </th>
                       <td mat-cell *matCellDef="let element"> {{element.order_datetime}} </td>

@@ -44,21 +44,7 @@
               </div>
             </div>
 
-            <div class="form-group" *ngIf="fields[index].type == 'franchise'">
-              <label>{{fields[index].label}}<span *ngIf="fields[index].required" class="required">*</span></label>
-              <select *ngIf="fields[index].name" class="form-control" data-live-search="true" data-style="btn-select"
-                data-size="5" formControlName="{{fields[index].name}}">
-                <option selected disabled value="">Select {{fields[index].label}}</option>
-                <option *ngFor="let option of fields[index].options" value="{{option.franchise.id}}">
-                  {{option.franchise.franchise_name}}</option>
-              </select>
-              <div *ngIf="displayValidationsErrors && Form.controls[fields[index].name].invalid">
-                <app-errors [field_name]="fields[index].label" [errors]='Form.controls[fields[index].name].errors'>
-                </app-errors>
-              </div>
-            </div>
-
-            <div class="form-group" *ngIf="fields[index].type == 'data'">
+            <!-- <div class="form-group" *ngIf="fields[index].type == 'data'">
               <label>{{fields[index].label}}<span *ngIf="fields[index].required" class="required">*</span></label>
               <select *ngIf="fields[index].name" class="form-control" data-style="btn-select" data-live-search="true"
                 data-size="5" data-live-search="fields[index].searchable" formControlName="{{fields[index].name}}">
@@ -69,9 +55,9 @@
                 <app-errors [field_name]="fields[index].label" [errors]='Form.controls[fields[index].name].errors'>
                 </app-errors>
               </div>
-            </div>
+            </div> -->
 
-            <div class="form-group" *ngIf="fields[index].type == 'multiple'">
+            <!-- <div class="form-group" *ngIf="fields[index].type == 'multiple'">
               <label>{{fields[index].label}}<span *ngIf="fields[index].required" class="required">*</span></label>
               <select *ngIf="fields[index].name" multiple class="form-control" data-style="btn-select" data-size="3"
                 formControlName="{{fields[index].name}}">
@@ -82,7 +68,7 @@
                 <app-errors [field_name]="fields[index].label" [errors]='Form.controls[fields[index].name].errors'>
                 </app-errors>
               </div>
-            </div>
+            </div> -->
 
             <div class="form-group" *ngIf="fields[index].type == 'ngselect'">
               <label>{{fields[index].label}}<span *ngIf="fields[index].required" class="required">*</span></label>
@@ -104,7 +90,7 @@
               <app-errors [field_name]="fields[index].label" [errors]='Form.controls[fields[index].name].errors'>
               </app-errors>
             </div>
-
+<!-- 
             <div class="form-group" *ngIf="fields[index].type == 'franchise_multiple'">
               <label>{{fields[index].label}}<span *ngIf="fields[index].required" class="required">*</span></label>
               <select *ngIf="fields[index].name" multiple class="form-control selectpicker" data-style="btn-select"
@@ -117,7 +103,7 @@
                 <app-errors [field_name]="fields[index].label" [errors]='Form.controls[fields[index].name].errors'>
                 </app-errors>
               </div>
-            </div>
+            </div> -->
 
             <div class="form-group" *ngIf="fields[index].type == 'text'">
               <label>{{fields[index].label}}<span *ngIf="fields[index].required" class="required">*</span></label>

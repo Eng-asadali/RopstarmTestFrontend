@@ -91,11 +91,17 @@ THE SOFTWARE.
 
 @angular/material/core
 
+@angular/material/datepicker
+
+@angular/material/dialog
+
 @angular/material/form-field
 
 @angular/material/paginator
 
 @angular/material/progress-bar
+
+@angular/material/progress-spinner
 
 @angular/material/select
 
@@ -107,6 +113,9 @@ THE SOFTWARE.
 MIT
 
 @angular/router
+MIT
+
+@ng-select/ng-select
 MIT
 
 apexcharts

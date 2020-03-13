@@ -10,6 +10,7 @@ import { SwalAlert } from '../../../Shared/swalAlerts';
 import {NgSelectModule, NgOption} from '@ng-select/ng-select';
 import { validation_patterns } from 'src/app/Shared/validation_patterns';
 import { expenseTypes,transactionTypes } from '../../Options/expense';
+import{validateDate}from '../../../Shared/Custom Validators/dateValidator'
 
 @Component({
   selector: 'app-add-expense',
@@ -143,7 +144,7 @@ export class AddExpenseComponent implements OnInit {
             // },
 
             {
-              label: 'Date', type: 'date', bootstrapGridClass: "col-lg-6", name: "expense_date", validations: [Validators.required], required: true,
+              label: 'Date', type: 'date', bootstrapGridClass: "col-lg-6", name: "expense_date", validations: [Validators.required,validateDate], required: true,
               value: expense ? expense.expense_date : ''
             },
             {

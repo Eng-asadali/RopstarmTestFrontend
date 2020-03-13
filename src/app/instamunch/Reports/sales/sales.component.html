@@ -62,7 +62,10 @@
               <div class="widget-subheading">All menu items</div>
             </div>
             <div class="widget-content-right">
-              <div class="widget-numbers text-white"><span>{{sales_report.overall_summary?.total_orders| number:'1.0-2'}}</span></div>
+              <div *ngIf="sales_report.overall_summary?.total_orders!='-'; else total_orders" class="widget-numbers text-white"><span>{{sales_report.overall_summary?.total_orders| number:'1.0-2'}}</span></div>
+              <ng-template #total_orders>
+                <div class="widget-numbers text-white"><span>{{sales_report.overall_summary?.total_orders}}</span></div>
+              </ng-template>
             </div>
           </div>
         </div>
@@ -75,8 +78,11 @@
               <div class="widget-subheading">All orders</div>
             </div>
             <div class="widget-content-right">
-              <div class="widget-numbers text-white"><span>£ {{sales_report.overall_summary?.total_revenue | number:'1.0-2'}}</span>
+              <div *ngIf="sales_report.overall_summary?.total_revenue!='-'; else total_revenue" class="widget-numbers text-white"><span>£ {{sales_report.overall_summary?.total_revenue | number:'1.0-2'}}</span>
               </div>
+              <ng-template #total_revenue>
+                <div class="widget-numbers text-white"><span>{{sales_report.overall_summary?.total_revenue}}</span></div>
+              </ng-template>
             </div>
           </div>
         </div>
@@ -89,7 +95,10 @@
               <div class="widget-subheading">Overall all orders</div>
             </div>
             <div class="widget-content-right">
-              <div class="widget-numbers text-white"><span> £ {{sales_report.overall_summary?.total_tips| number:'1.0-2'}}</span></div>
+              <div *ngIf="sales_report.overall_summary?.total_tips!='-'; else total_tips" class="widget-numbers text-white"><span> £ {{sales_report.overall_summary?.total_tips| number:'1.0-2'}}</span></div>
+              <ng-template #total_tips>
+                <div class="widget-numbers text-white"><span>{{sales_report.overall_summary?.total_tips}}</span></div>
+              </ng-template>
             </div>
           </div>
         </div>
@@ -122,8 +131,11 @@
 
             <div class="apexbox mb-0" style="position: relative;">
               <div id="chart">
-                <app-charts *ngIf="chartReady" [data]="salesChartData" yaxisLabel="Orders" [labels]="salesChartLabels">
+                <app-charts *ngIf="chartReady; else barChartLoader;" [data]="salesChartData" yaxisLabel="Orders" [labels]="salesChartLabels">
                 </app-charts>
+                <ng-template #barChartLoader>
+                  <mat-spinner style="margin:auto; margin-top:140px;" color="warn"></mat-spinner>
+                </ng-template>
               </div>
             </div>
           </div>

@@ -26,11 +26,11 @@ export class ProductComponent implements OnInit {
   selection = new SelectionModel<any>(this.allowMultiSelect, this.initialSelection);
 
   loaded = false;
-
   table_headers: any = [];
   data: any = [];
   checkedId: any = [];
   products: Product[];
+  product_ids: any = [];
 
   constructor(private productService: ProductService, private router: Router,
     private currentActivatedRoute: ActivatedRoute) { }
@@ -41,6 +41,7 @@ export class ProductComponent implements OnInit {
   }
 
   getProductsList() {
+    this.loaded = false;
     const products = this.productService.getProducts();
     products.subscribe(
       result => {
@@ -72,15 +73,65 @@ export class ProductComponent implements OnInit {
     console.log('product id', id);
     if (action == 'edit')
       this.router.navigate(['/instamunch/product/edit', id]);
-    else {
-      this.delete(id);
+    else
+      this.deleteProduct(id);
+  }
+
+  async deleteProduct(product_id) {
+    const response = await SwalAlert.getDeleteSwal();
+    if (response == true) {
+      this.loaded = false;
+      this.productService.deleteProductById(product_id).subscribe(
+        result => {
+          if (!result['error']) {
+            SwalAlert.sucessAlert('', 'Product Deleted Successfully!');
+            this.getProductsList();
+          }
+          else {
+            this.loaded = true;
+            SwalAlert.errorAlert('', result['message'].charAt(0).toUpperCase() + result['message'].substring(1));
+          }
+        },
+        err => {
+          this.loaded = true;
+          console.error(err);
+        }
+      )
     }
   }
 
-  async delete(product_id) {
-    const response = await SwalAlert.getDeleteSwal();
-    console.log(response);
+  async deleteMultipleProducts() {
+    if (this.product_ids.length > 0) {
+      const response = await SwalAlert.getDeleteSwal();
+      if (response == true) {
+        this.loaded = false;
+        this.productService.deleteMultipleProducts(this.product_ids).subscribe(
+          result => {
+            if (!result['error']) {
+              SwalAlert.sucessAlert('', 'Products Deleted Successfully!');
+              this.getProductsList();
+            }
+            else {
+              this.loaded = true;
+              console.log('coming');
+              console.log(result['httpError']);
+              SwalAlert.errorAlert('', result['message'].charAt(0).toUpperCase() + result['message'].substring(1));
+            }
+          },
+          err => {
+            this.loaded = true;
+            console.error(err);
+          }
+        )
+      }
+    }
+    else{
+      SwalAlert.errorAlert('','Please Select Products to Delete!');
+    }
+
+
   }
+
 
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
@@ -90,7 +141,6 @@ export class ProductComponent implements OnInit {
     const numSelected = this.selection.selected.length;
     const numRows = this.dataSource.data.length;
     return numSelected == numRows;
-    console.log(this.selection);
   }
 
   /** Selects all rows if they are not all selected; otherwise clear selection. */
@@ -98,9 +148,8 @@ export class ProductComponent implements OnInit {
     this.isAllSelected() ?
       this.selection.clear() :
       this.dataSource.data.forEach(row => this.selection.select(row));
-    console.log(this.selection);
-
-
+    this.product_ids = this.getIdsFromSelectionArrayObject(this.selection.selected);
+    console.log('products to delete', this.getIdsFromSelectionArrayObject(this.selection.selected));
   }
 
   // $event ? selection.toggle(row) : null
@@ -110,14 +159,14 @@ export class ProductComponent implements OnInit {
     }
     else
       null;
-    this.checkedId = []
-    console.log(this.selection.selected);
-    for (let i = 0; i < this.selection.selected.length; i++) {
-      console.log("origibal id" + this.selection.selected[i].id);
-      this.checkedId.push(this.selection.selected[i].id)
 
-    }
-    console.log("array :" + this.checkedId)
+    this.product_ids = this.getIdsFromSelectionArrayObject(this.selection.selected);
+    console.log('products to delete', this.getIdsFromSelectionArrayObject(this.selection.selected));
+  }
+
+  getIdsFromSelectionArrayObject(array_of_objects) {
+    let product_ids = array_of_objects.map(a => a.id);
+    return product_ids;
   }
 
 }

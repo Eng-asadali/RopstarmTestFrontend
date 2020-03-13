@@ -5,7 +5,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import {
   MatTableModule, MatPaginatorModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatCheckboxModule,
-  MatProgressBarModule
+  MatProgressBarModule, MatProgressSpinnerModule
 } from '@angular/material';
 import { NgApexchartsModule } from "ng-apexcharts";
 
@@ -82,7 +82,8 @@ import { AddKitchenComponent } from './instamunch/kitchen/add-kitchen/add-kitche
     SharedModule,
     NgApexchartsModule,
     FormsModule,
-    NgSelectModule
+    NgSelectModule,
+    MatProgressSpinnerModule
   ],
 
   providers: [HttpService,

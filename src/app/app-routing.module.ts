@@ -28,9 +28,10 @@ const routes: Routes = [
 
     children: [
       {
-        path: '', component: SalesComponent, resolve: {
-          cres: SalesReportResolver
-        }
+        path: '', component: SalesComponent, 
+        // resolve: {
+        //   cres: SalesReportResolver
+        // }
       },
 
       { path: 'category', component: CategoryComponent },

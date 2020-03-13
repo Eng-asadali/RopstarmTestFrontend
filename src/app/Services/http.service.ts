@@ -8,7 +8,7 @@ export class HttpService {
 
   constructor(private http: HttpClient) {
     this.loggen_in_user = JSON.parse(localStorage.getItem('user'));
-   // this.loggen_in_user = {id:13};
+    // this.loggen_in_user = {id:13};
   }
 
   get(url) {
@@ -23,6 +23,10 @@ export class HttpService {
     return this.http.post(url, data);
   }
 
+  postWithoutStatus(data, url) {
+    return this.http.post(url, data);
+  }
+
   postFormData(data, url) {
     data['created_by_id'] = this.loggen_in_user['id'];
     data['os'] = "web";
@@ -33,7 +37,7 @@ export class HttpService {
   }
 
   postFormDataWithoutActiveStatus(data, url) {
-    data['created_by_id'] =  this.loggen_in_user['id'];
+    data['created_by_id'] = this.loggen_in_user['id'];
     data['os'] = "web";
     // console.log(data);
     var form_data = this.converToFormdata(data);
@@ -75,12 +79,11 @@ export class HttpService {
     return this.http.patch(url, form_data);
   }
 
- delete(url) {
-    // console.log(url);
+  delete(url) {
     return this.http.delete(url);
   }
 
-   converToFormdata(data) {
+  converToFormdata(data) {
     var form_data = new FormData();
     for (var key in data) {
       // console.log(key,data[key]);

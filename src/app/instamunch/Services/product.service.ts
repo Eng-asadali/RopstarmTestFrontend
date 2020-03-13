@@ -15,19 +15,29 @@ export class ProductService {
       catchError(err => of({ error: true, message: 'Server error', data: [] })));
   }
 
-  addProduct(data){
-    return this.httpServices.postFormDataWithoutActiveStatus(data,'catalog/product/').pipe(
-      catchError(err => of({error:true,message:'Server error',data:[]})));
+  addProduct(data) {
+    return this.httpServices.postFormDataWithoutActiveStatus(data, 'catalog/product/').pipe(
+      catchError(err => of({ error: true, message: 'Server error', data: [] })));
   }
 
-  editProduct(data,id){
-    return this.httpServices.patchFormDataWithoutActiveStatus(data,'catalog/product/details/'+ id + "/").pipe(
-      catchError(err => of({error:true,message:'Server error',data:[]})));
+  editProduct(data, id) {
+    return this.httpServices.patchFormDataWithoutActiveStatus(data, 'catalog/product/details/' + id + "/").pipe(
+      catchError(err => of({ error: true, message: 'Server error', data: [] })));
+  }
+
+  deleteProductById(id: number) {
+    return this.httpServices.delete('catalog/product/details/' + id + "/").pipe(
+      catchError(err => of({ error: true, message: 'Server error', data: [] })));
+  }
+
+  deleteMultipleProducts(products_ids: []) {
+    return this.httpServices.postWithoutStatus({product_ids:products_ids},'catalog/product/delete/').pipe(
+      catchError(err => of({ error: true, message: 'Server error', data: [],httpError: err })));
   }
 
   getProducts() {
     return this.httpServices.get('catalog/product/').pipe(
-      catchError(err => of({ error: true, message: 'Server error', data: [], httpError:err })));
+      catchError(err => of({ error: true, message: 'Server error', data: [], httpError: err })));
   }
 
   getKitchenList() {
@@ -35,5 +45,5 @@ export class ProductService {
       catchError(err => of({ error: true, message: 'Server error', data: [] }))
     );
   }
-  
+
 }

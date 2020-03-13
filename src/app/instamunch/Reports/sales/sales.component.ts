@@ -36,57 +36,56 @@ export class SalesComponent implements OnInit {
   constructor(private salesReportService: SalesReportService, private activated_route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.activated_route.data.pipe(map(data => data.cres)).subscribe(result => {
-      // console.log(result);
-      let response = result;
-      response.subscribe(
-        result => {
-          if (!result['error']) {
-            console.log('sales report', result);
-            this.sales_report = result['data'];
-            this.table_headers = ['image', 'name', 'amount', 'tip'];
-            this.dataSource.data = result['data']['waiter_sales_breakdown'];
-            this.getSalesReport(result['data']['monthly_sales_breakdown']);
-            this.getMostRunningProductsReport(result['data']['product_sales_breakdown']);
-            this.dataSource.connect().next(result['data']);
-            this.dataSource.paginator = this.paginator;
-          }
-          else {
-            if (result['httpError']['status'] != 401)
-              SwalAlert.errorAlert('', result['message'].charAt(0).toUpperCase() + result['message'].substring(1));
-          }
-        },
-        err => {
+    // this.activated_route.data.pipe(map(data => data.cres)).subscribe(result => {
+    //   // console.log(result);
+    //   let response = result;
+    //   response.subscribe(
+    //     result => {
+    //       if (!result['error']) {
+    //         console.log('sales report', result);
+    //         this.sales_report = result['data'];
+    //         this.table_headers = ['image', 'name', 'amount', 'tip'];
+    //         this.dataSource.data = result['data']['waiter_sales_breakdown'];
+    //         this.getSalesReport(result['data']['monthly_sales_breakdown']);
+    //         this.getMostRunningProductsReport(result['data']['product_sales_breakdown']);
+    //         this.dataSource.connect().next(result['data']);
+    //         this.dataSource.paginator = this.paginator;
+    //       }
+    //       else {
+    //         console.log('delete');
+    //         if (result['httpError']['status'] != 401)
+    //           SwalAlert.errorAlert('', result['message'].charAt(0).toUpperCase() + result['message'].substring(1));
+    //       }
+    //     },
+    //     err => {
+    //       console.log('delete here');
+    //       this.salesChartData = [{ name: 'Orders', data: [] }];
+    //     },
+    //     () => {
 
-        },
-        () => {
-
+    //     }
+    //   )
+    // });
+    this.salesReportService.getSalesReport().subscribe(
+      result => {
+        if (!result['error']) {
+          console.log('sales report', result);
+          this.sales_report = result['data'];
+          this.table_headers = ['image', 'name', 'amount', 'tip'];
+          this.dataSource.data = result['data']['waiter_sales_breakdown'];
+          this.getSalesReport(result['data']['monthly_sales_breakdown']);
+          this.getMostRunningProductsReport(result['data']['product_sales_breakdown']);
+          this.dataSource.connect().next(result['data']);
+          this.dataSource.paginator = this.paginator;
         }
-      )
-    });
-    // this.salesReportService.getSalesReport().subscribe(
-    //   result => {
-    //     if (!result['error']) {
-    //       console.log('sales report', result);
-    //       this.sales_report = result['data'];
-    //       this.table_headers = ['image', 'name', 'amount', 'tip'];
-    //       this.dataSource.data = result['data']['waiter_sales_breakdown'];
-    //       this.getSalesReport(result['data']['monthly_sales_breakdown']);
-    //       this.getMostRunningProductsReport(result['data']['product_sales_breakdown']);
-    //       this.dataSource.connect().next(result['data']);
-    //       this.dataSource.paginator = this.paginator;
-    //     }
-    //     else {
-
-    //     }
-    //   },
-    //   err => {
-
-    //   },
-    //   () => {
-
-    //   }
-    // )
+        else {
+          this.chartReady = true;
+        }
+      },
+      err => {
+       console.log(err);
+      }
+    )
   }
 
   getSalesReport(sales_data) {
@@ -94,7 +93,7 @@ export class SalesComponent implements OnInit {
       this.salesChartData[0].data.push(record.orders);
       this.salesChartLabels.push(DateUtils.getMMM(record.month));
     });
-    this.chartReady = true;
+   this.chartReady = true;
   }
 
   getMostRunningProductsReport(most_running_product) {

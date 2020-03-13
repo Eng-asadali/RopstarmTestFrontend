@@ -113,10 +113,10 @@ export class ChartsComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes['data']) {
-      //console.log(this.chart);
-      // this.chart.updateSeries(this.data);
-    }
+    // if (changes['data']) {
+    //   //console.log(this.chart);
+    //   // this.chart.updateSeries(this.data);
+    // }
   }
 
 }

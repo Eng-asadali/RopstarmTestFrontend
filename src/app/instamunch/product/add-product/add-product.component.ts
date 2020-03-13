@@ -79,9 +79,9 @@ export class AddProductComponent implements OnInit {
           label: 'Tax Included', type: 'checkbox', bootstrapGridClass: "col-lg-12", name: "is_tax_included", required: false, value: product ? product.is_tax_included : false
         },
        
-        {
-          label: 'Attribute List', type: 'attribute', bootstrapGridClass: "col-lg-12", name: "attr", validations: [Validators.required], required: false
-        },
+        // {
+        //   label: 'Attribute List', type: 'attribute', bootstrapGridClass: "col-lg-12", name: "attr", validations: [Validators.required], required: false
+        // },
         { label: 'Description', type: 'textarea', bootstrapGridClass: "col-lg-12", name: "detail", value: product ? product.detail : '' }
       ]
       this.form['form_fields'] = this.fields;
@@ -94,7 +94,7 @@ export class AddProductComponent implements OnInit {
       this.form['img_width'] = "200px";
       this.form['image_url'] = product ? product.image : null;
       this.form['submit'] = 'Save';
-      this.form['attribute'] = true;
+      this.form['attribute'] = false;
       this.loaded = true;
     });
   }

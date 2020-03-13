@@ -13,14 +13,14 @@ export class DashboardComponent implements OnInit {
 
   constructor(private authService: AuthService, private router: Router,
     private dataSharingService: DataSharingService) {
-    console.log(this.dataSharingService.getOption());
-    console.log(this.reload);
+    // console.log(this.dataSharingService.getOption());
+    // console.log(this.reload);
     if (this.reload == true) {
       this.dataSharingService.setOption('reload', false);
       location.reload();
     }
     else {
-      console.log('in else block');
+      // console.log('in else block');
       //   location.reload();
     }
   }

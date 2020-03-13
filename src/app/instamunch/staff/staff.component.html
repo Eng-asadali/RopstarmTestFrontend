@@ -106,7 +106,7 @@
                             'badge-dark':element.type === 'kitchen_manager',
                             'badge-danger':element.type === 'admin',
                             'badge-secondary':element.type === 'guest'
-                          }" > {{element.type  | titlecase}}</span> 
+                          }" > {{element.type | removeUnderScore | titlecase}}</span> 
     <!-- {'admin': 1, 'user': 2, 'guest': 3, 'manager': 4, 'waiter': 5, 'staff': 6, 'kitchen_manager':7} -->
                      
                    </td>

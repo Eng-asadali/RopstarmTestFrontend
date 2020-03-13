@@ -117,7 +117,7 @@ export class CategoryComponent implements OnInit {
     this.isAllSelected() ?
       this.selection.clear() :
       this.dataSource.data.forEach(row => this.selection.select(row));
-    console.log(this.selection);
+    
   }
 
   // $event ? selection.toggle(row) : null

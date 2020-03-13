@@ -1,22 +1,23 @@
+import { KitchenComponent } from './../kitchen/kitchen.component';
+import { ExpenseService } from './../Services/expense.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
 import { MatPaginator, MatTableDataSource, MatSort } from '@angular/material';
 import { SelectionModel } from '@angular/cdk/collections';
+import { Router, ActivatedRoute } from '@angular/router';
 
-import { CategoryService } from '../Services/category.service';
-import { Category } from './category';
-import { SwalAlert } from 'src/app/Shared/swalAlerts';
+import { ProductService } from '../Services/product.service';
+import { expense } from './expense';
+import { SwalAlert } from '../../Shared/swalAlerts';
 import { StatusEnum } from '../Enums/status-enum';
-import {NgSelectModule, NgOption} from '@ng-select/ng-select';
-
+import Swal from 'sweetalert2';
 @Component({
-  selector: 'app-category',
-  templateUrl: './category.component.html',
-  styleUrls: ['./category.component.css']
+  selector: 'app-expense',
+  templateUrl: './expense.component.html',
+  styleUrls: ['./expense.component.css']
 })
-export class CategoryComponent implements OnInit {
+export class ExpenseComponent implements OnInit {
 
-  statusEnum= StatusEnum;
+  statusEnum = StatusEnum;
 
   dataSource = new MatTableDataSource<any>([]);
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -28,52 +29,53 @@ export class CategoryComponent implements OnInit {
 
   table_headers: any = [];
   data: any = [];
-  categories: Category[];
+  checkedId: any = [];
+  expenses: expense[];
 
-  constructor(private categoryService: CategoryService, private router: Router,
+  constructor(private ExpenseService: ExpenseService, private router: Router,
     private currentActivatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
-    this.table_headers = ['select', 'image', 'name', 'parent_category_id', 'status', 'actions'];
-    this.getCategoriesList();
-    
+    this.table_headers = ['select',  'expense', 'amount', 'type','date', 'transaction', 'actions'];
+    this.getExpensesList();
   }
 
-  getCategoriesList(){
-    const categories = this.categoryService.getCategories();
-    categories.subscribe(
+  getExpensesList() {
+    const expenses = this.ExpenseService.getExpenses();
+    expenses.subscribe(
       result => {
-        console.log('categories list:', result);
+        console.log('expense list', result);
         if (!result['error']) {
-          this.categories = result['data'];
-          this.dataSource.data = this.categories;
-          this.dataSource.connect().next(this.categories);
+          this.data = result['data'];
+          this.dataSource.data = this.data;
+          this.dataSource.connect().next(this.data);
           this.dataSource.paginator = this.paginator;
         }
         else {
-          SwalAlert.errorAlert('',result['message'].charAt(0).toUpperCase() + result['message'].substring(1));
+          if (result['httpError']['status'] != 401)
+            SwalAlert.errorAlert('', result['message'].charAt(0).toUpperCase() + result['message'].substring(1));
         }
+        this.loaded = true;
       },
       err => {
-        console.log(err); },
-      () => {
         this.loaded = true;
+        console.log('HTTP Error', err);
       }
     );
   }
 
- 
+  navigateToProductAdd() {
+    this.router.navigate(['add'], { relativeTo: this.currentActivatedRoute });
+  }
 
-  getCategoryId(id,action) {
-
-    console.log('Kitchen id', id);
+  getExpenseId(id, action) {
+    console.log('expense id', id);
     if (action == 'edit')
-    this.router.navigate(['/instamunch/category/edit', id]);
+      this.router.navigate(['instamunch/expense/edit/', id]);
     else {
       this.delete(id);
     }
   }
-
 
   async delete(id) {
     const response = await SwalAlert.getDeleteSwal();
@@ -82,13 +84,13 @@ export class CategoryComponent implements OnInit {
       this.deleteById(id);
     }
   }
-
+  
   deleteById(id) {
     console.log(' id to delete', id);
-    this.categoryService.deleteById(id).subscribe(
+    this.ExpenseService.deleteById(id).subscribe(
       result => {
         if (!result['error']) {
-         this.getCategoriesList();
+         this.getExpensesList();
           SwalAlert.sucessAlert('', 'Deleted Successfully!');
           //this.router.navigate(['/instamunch/staff/', id]);
 
@@ -117,7 +119,9 @@ export class CategoryComponent implements OnInit {
     this.isAllSelected() ?
       this.selection.clear() :
       this.dataSource.data.forEach(row => this.selection.select(row));
-    
+    console.log(this.selection);
+
+
   }
 
   // $event ? selection.toggle(row) : null
@@ -127,11 +131,14 @@ export class CategoryComponent implements OnInit {
     }
     else
       null;
+    this.checkedId = []
+    console.log(this.selection.selected);
+    for (let i = 0; i < this.selection.selected.length; i++) {
+      console.log("origibal id" + this.selection.selected[i].id);
+      this.checkedId.push(this.selection.selected[i].id)
 
-    console.log(this.selection);
+    }
+    console.log("array :" + this.checkedId)
   }
 
-  navigateToCategoryAdd() {
-    this.router.navigate(['add'], { relativeTo: this.currentActivatedRoute });
-  }
 }

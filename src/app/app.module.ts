@@ -41,6 +41,8 @@ import { DashboardComponent } from './Core/dashboard/dashboard.component';
 import { PageNotFoundComponent } from './Core/page-not-found/page-not-found.component';
 import { KitchenComponent } from './instamunch/kitchen/kitchen.component';
 import { AddKitchenComponent } from './instamunch/kitchen/add-kitchen/add-kitchen.component';
+import { ExpenseComponent } from './instamunch/expense/expense.component';
+import { AddExpenseComponent } from './instamunch/expense/add-expense/add-expense.component';
 
 
 @NgModule({
@@ -63,7 +65,9 @@ import { AddKitchenComponent } from './instamunch/kitchen/add-kitchen/add-kitche
     DashboardComponent,
     PageNotFoundComponent,
     KitchenComponent,
-    AddKitchenComponent
+    AddKitchenComponent,
+    ExpenseComponent,
+    AddExpenseComponent
   ],
 
   imports: [

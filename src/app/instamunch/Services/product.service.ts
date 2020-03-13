@@ -45,5 +45,4 @@ export class ProductService {
       catchError(err => of({ error: true, message: 'Server error', data: [] }))
     );
   }
-
 }

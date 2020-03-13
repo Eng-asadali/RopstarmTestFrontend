@@ -65,16 +65,33 @@ export class KitchenComponent implements OnInit {
     this.router.navigate(['add'], { relativeTo: this.currentActivatedRoute });
   }
 
-  getKitchenId(id) {
-    console.log('Kitchen id', id);
-    this.router.navigate(['/instamunch/Kitchen/edit', id]);
-  }
+ 
 
-  async delete() {
+  async delete(id) {
     const response = await SwalAlert.getDeleteSwal();
     console.log(response);
+    if(response==true){
+      this.deleteById(id);
+    }
   }
 
+  deleteById(id) {
+    console.log(' id to delete', id);
+    this.KitchenService.deleteById(id).subscribe(
+      result => {
+        if (!result['error']) {
+         this.getKitchenList();
+          SwalAlert.sucessAlert('', 'Deleted Successfully!');
+          //this.router.navigate(['/instamunch/staff/', id]);
+
+        }
+        else
+          SwalAlert.errorAlert('', result['message'].charAt(0).toUpperCase() + result['message'].substring(1));
+
+      }
+    );
+
+  }
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
@@ -112,5 +129,12 @@ export class KitchenComponent implements OnInit {
     }
     console.log("array :"+ this.checkedId)
   }
-
+  getKitchenId(id, action) {
+    console.log('Kitchen id', id);
+    if (action == 'edit')
+    this.router.navigate(['/instamunch/Kitchen/edit', id]);
+    else {
+      this.delete(id);
+    }
+  }
 }

@@ -55,9 +55,23 @@ export class StaffComponent implements OnInit {
   );
  }
 
-  getStaffId(id) {
+  getStaffId(id,action) {
     console.log('staff id', id);
+    if (action == 'edit')
     this.router.navigate(['/instamunch/staff/edit', id]);
+    else {
+      this.delete(id);
+    }
+  }
+
+  async delete(id) {
+    const response = await SwalAlert.getDeleteSwal();
+    console.log(response);
+    if(response==true){
+      this.deleteById(id);
+    }
+   
+   
   }
 
   applyFilter(filterValue: string) {
@@ -90,13 +104,13 @@ export class StaffComponent implements OnInit {
     console.log(this.selection);
   }
   
-  deleteStaffId(id) {
-    console.log('staff id to delete', id);
-    this.staffService.deleteStaffById(id).subscribe(
+  deleteById(id) {
+    console.log(' id to delete', id);
+    this.staffService.deleteById(id).subscribe(
       result => {
         if (!result['error']) {
          this.getStaffList();
-          SwalAlert.sucessAlert('', 'Staff Deleted Successfully!');
+          SwalAlert.sucessAlert('', ' Deleted Successfully!');
           //this.router.navigate(['/instamunch/staff/', id]);
 
         }

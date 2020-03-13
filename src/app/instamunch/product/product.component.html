@@ -32,7 +32,8 @@
             </div>
             <button style="margin-left: 4px;" type="button" class="btn  btn-secondary"> <i class="icofont-download-alt"></i> Import </button> -->
 
-            <button (click)="deleteMultipleProducts()" style="margin-left: 4px;" type="button" class="btn-shadow  btn btn-danger">
+            <button (click)="deleteMultipleProducts()" style="margin-left: 4px;" type="button"
+              class="btn-shadow  btn btn-danger">
               <i class="icofont-trash"></i> Delete Selected
             </button>
           </div>
@@ -121,17 +122,11 @@
                       <th mat-header-cell *matHeaderCellDef> Actions </th>
                       <td mat-cell *matCellDef="let element">
                         <div class="buttons">
-<<<<<<< HEAD
                           <a style="color: #8f8f8f;" (click)="getProductId(element.id,'edit')"
                             class="mb-2 mr-2 btn-transition btn btn-outline-light btn-sm">Edit</a>
-                          <button (click)="getProductId(element.id,'delete')"
-                            class="mb-2 mr-2 btn-transition btn btn-outline-light btn-sm">Delete</button>
+                          <button class="mb-2 mr-2 btn-transition btn btn-outline-light btn-sm"
+                            (click)="getProductId(element.id,'delete')">Delete</button>
                         </div>
-=======
-                          <a style="color: #8f8f8f;" (click)="getProductId(element.id,'edit')" class="mb-2 mr-2 btn-transition btn btn-outline-light btn-sm">Edit</a>
-                          <button class="mb-2 mr-2 btn-transition btn btn-outline-light btn-sm" (click)="getProductId(element.id,'delete')" >Delete</button>
-                      </div>
->>>>>>> 649db417b0ace272aa853c6fdf3f906e73971b0e
                       </td>
                     </ng-container>
                   </div>

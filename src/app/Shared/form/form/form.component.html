@@ -3,14 +3,14 @@
     <div class="row">
       <div class="{{form.FormbootstrapGridClass}}">
         <div *ngFor='let rows of row ;let i = index' class="row">
-          <!-- <div *ngFor='let index of rows ;let i = index'>{{fields[index]s[ro].bootstrapGridClass}}</div> -->
           <div *ngFor='let index of rows ;let i = index' class="{{fields[index].bootstrapGridClass}}">
 
             <div class="form-group" *ngIf="fields[index].type == 'checkbox'">
-              <!-- <input type="checkbox" id="horns" name="horns"> -->
-              <input *ngIf="fields[index].name" value="{{fields[index].value}}" [checked]="fields[index].value" formControlName="{{fields[index].name}}" type="checkbox">
+              <input *ngIf="fields[index].name" value="{{fields[index].value}}" [checked]="fields[index].value"
+                formControlName="{{fields[index].name}}" type="checkbox">
               <input *ngIf="!fields[index].name" type="checkbox">
-              <label style="margin-left: 10px;">{{fields[index].label}} <span *ngIf="fields[index].required" class="required">*</span></label>
+              <label style="margin-left: 10px;">{{fields[index].label}} <span *ngIf="fields[index].required"
+                  class="required">*</span></label>
             </div>
 
             <div class="form-group" *ngIf="fields[index].type == 'radio'">
@@ -18,18 +18,6 @@
               <input *ngIf="!fields[index].name" type="radio" value="{{fields[index].value}}" checked="checked">
               <label>{{fields[index].label}}<span *ngIf="fields[index].required" class="required">*</span></label>
             </div>
-
-            <!-- <div class="form-group" *ngIf="fields[index].type == 'select'">
-              <label>{{fields[index].label}}<span *ngIf="fields[index].required" class="required">*</span></label>
-              <ng-select formControlName="{{fields[index].name}}" placeholder="Select item"
-                [closeOnSelect]="true" [searchable]="false">
-                <ng-option *ngFor="let option of fields[index].options" [value]="option.value">{{option.label}}</ng-option>
-              </ng-select>
-              <div *ngIf="displayValidationsErrors && Form.controls[fields[index].name].invalid">
-                <app-errors [field_name]="fields[index].label" [errors]='Form.controls[fields[index].name].errors'>
-                </app-errors>
-              </div>
-            </div> -->
 
             <div class="form-group" *ngIf="fields[index].type == 'select'">
               <label>{{fields[index].label}}<span *ngIf="fields[index].required" class="required">*</span></label>
@@ -95,50 +83,27 @@
                 </app-errors>
               </div>
             </div>
-<!-- <div class="form-group" *ngIf="fields[index].type == 'Currentdate'">
-  <mat-form-field class="example-full-width">
-    <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker" placeholder="Choose a date">
-    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-    <mat-datepicker #picker></mat-datepicker>
-  </mat-form-field>
-</div> -->
-            <div class="form-group" *ngIf="fields[index].type == 'ngselect'" >
+
+            <div class="form-group" *ngIf="fields[index].type == 'ngselect'">
               <label>{{fields[index].label}}<span *ngIf="fields[index].required" class="required">*</span></label>
-              <!-- <ng-select [items]="option"
-                         bindLabel="option.label"
-                         placeholder="Select item"
-                         bindValue="options.id"
-                        > -->
-                         <ng-select
-                         formControlName="{{fields[index].name}}"
-                         placeholder="Select item"                         
-                       >
-                      
-                         <!-- <ng-option *ngFor="let option of fields[index].options" [value]="option.value">{{option.label}}</ng-option> -->
-                         <ng-option  *ngFor="let option of fields[index].options" [value]="option.id">{{option.name}}</ng-option>
-                        </ng-select>
-              
+              <ng-select formControlName="{{fields[index].name}}" placeholder="Select item">
+                <ng-option *ngFor="let option of fields[index].options" [value]="option.id">{{option.name}}</ng-option>
+              </ng-select>
+              <div *ngIf="displayValidationsErrors && Form.controls[fields[index].name].invalid">
+                <app-errors [field_name]="fields[index].label" [errors]='Form.controls[fields[index].name].errors'>
+                </app-errors>
+              </div>
             </div>
 
-            <div class="form-group" *ngIf="fields[index].type == 'ngselectname'" >
+            <div class="form-group" *ngIf="fields[index].type == 'ngselectname'">
               <label>{{fields[index].label}}<span *ngIf="fields[index].required" class="required">*</span></label>
-              <!-- <ng-select [items]="option"
-                         bindLabel="option.label"
-                         placeholder="Select item"
-                         bindValue="options.id"
-                        > -->
-                         <ng-select
-                         formControlName="{{fields[index].name}}"
-                         placeholder="Select item"                         
-                       >
-                      
-                         <!-- <ng-option *ngFor="let option of fields[index].options" [value]="option.value">{{option.label}}</ng-option> -->
-                         <ng-option  *ngFor="let option of fields[index].options" [value]="option.id">{{option.first_name}} {{option.last_name}} </ng-option>
-                        </ng-select>
-              
+              <ng-select formControlName="{{fields[index].name}}" placeholder="Select item">
+                <ng-option *ngFor="let option of fields[index].options" [value]="option.id">{{option.first_name}}
+                  {{option.last_name}} </ng-option>
+              </ng-select>
+              <app-errors [field_name]="fields[index].label" [errors]='Form.controls[fields[index].name].errors'>
+              </app-errors>
             </div>
-
-            
 
             <div class="form-group" *ngIf="fields[index].type == 'franchise_multiple'">
               <label>{{fields[index].label}}<span *ngIf="fields[index].required" class="required">*</span></label>
@@ -193,7 +158,7 @@
             <div class="form-group" *ngIf="fields[index].type == 'date'">
               <label>{{fields[index].label}}<span *ngIf="fields[index].required" class="required">*</span></label>
               <input *ngIf="fields[index].name" class="form-control" formControlName="{{fields[index].name}}"
-               type="date">
+                type="date">
               <div
                 *ngIf="(Form.controls[fields[index].name].dirty || displayValidationsErrors) && Form.controls[fields[index].name].invalid">
                 <app-errors [field_name]="fields[index].label" [errors]='Form.controls[fields[index].name].errors'>
@@ -207,24 +172,23 @@
             </div>
 
             <div class="form-group" *ngIf="fields[index].type == 'attribute'">
-              <label>{{fields[index].label}} <button type="button" style="color: white;margin-left: 6px;" class="btn btn-sm btn-success" (click)="addAttribute()"><i class="icofont-ui-add"></i></button></label>
+              <label>{{fields[index].label}} <button type="button" style="color: white;margin-left: 6px;"
+                  class="btn btn-sm btn-success" (click)="addAttribute()"><i
+                    class="icofont-ui-add"></i></button></label>
               <div formArrayName="product_attributes">
-                <div *ngFor="let attribute of Form.controls.product_attributes.controls; let i = index" [formGroupName]="i">
-                  <!-- <div formGroupName="attribute"> -->
-                    <div style="margin-bottom: 5px;" class="row">
-                      <div class="col-lg-6">
-                        <input placeholder="Name" formControlName="name" class="form-control"/>    
-                      </div>
-                      <div class="col-lg-6">
-                        <input placeholder="Value" formControlName="value" class="form-control"/>    
-                      </div>
-                    <!-- </div> -->
-                    
-                     
+                <div *ngFor="let attribute of Form.controls.product_attributes.controls; let i = index"
+                  [formGroupName]="i">
+                  <div style="margin-bottom: 5px;" class="row">
+                    <div class="col-lg-6">
+                      <input placeholder="Name" formControlName="name" class="form-control" />
+                    </div>
+                    <div class="col-lg-6">
+                      <input placeholder="Value" formControlName="value" class="form-control" />
+                    </div>
                   </div>
                 </div>
               </div>
-          
+
             </div>
             <div class="form-group" *ngIf="fields[index].type == 'textarea'">
               <label>{{fields[index].label}}<span *ngIf="fields[index].required" class="required">*</span></label>
@@ -256,7 +220,8 @@
           [ngStyle]="{'width': form.img_width ? form.img_width : '200px','height': form.img_height ? form.img_height : '200px'  }" />
         <input (change)="onImageChanged($event)" accept="image/*" id="fileInput" style="display: none;overflow:hidden"
           type="file">
-        <button class="btn btn-primary" style="margin-left: 70px; margin-top: 5px;" type="button" (click)="chooseImage();">Upload Image</button>
+        <button class="btn btn-primary" style="margin-left: 70px; margin-top: 5px;" type="button"
+          (click)="chooseImage();">Upload Image</button>
       </div>
 
 

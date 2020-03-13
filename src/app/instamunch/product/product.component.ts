@@ -57,6 +57,7 @@ export class ProductComponent implements OnInit {
             SwalAlert.errorAlert('', result['message'].charAt(0).toUpperCase() + result['message'].substring(1));
         }
         this.loaded = true;
+        this.selection.clear();
       },
       err => {
         this.loaded = true;
@@ -139,6 +140,11 @@ export class ProductComponent implements OnInit {
     const numSelected = this.selection.selected.length;
     const numRows = this.dataSource.data.length;
     return numSelected == numRows;
+  }
+
+  test(){
+    console.log('test');
+    this.selection.clear();
   }
 
   /** Selects all rows if they are not all selected; otherwise clear selection. */

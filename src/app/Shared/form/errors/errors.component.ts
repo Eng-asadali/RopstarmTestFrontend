@@ -43,9 +43,9 @@ export class ErrorsComponent implements OnInit {
     }
     // console.log(this.errors[this.errors_array[0]]['requiredPattern'])
     // console.log(this.errors[this.errors_array[0]])
-    console.log(this.decimal_numbers_error);
+    // console.log(this.decimal_numbers_error);
     console.log(this.errors);
-    // console.log(this.errors_array)
+    console.log(this.errors_array);
   }
 
 }

@@ -12,8 +12,6 @@ declare var $: any;
 })
 
 export class FormComponent implements OnInit {
-  // minDate = new Date(1900, 0, 1);
-  // maxDate =  new Date(new Date().setDate(new Date().getDate()-1))
 
   @Input() form: any;
   @Output() formValues = new EventEmitter();
@@ -38,11 +36,9 @@ export class FormComponent implements OnInit {
   constructor(private fb: FormBuilder) { }
 
   ngOnInit() {
-
     this.fields = this.form['form_fields'];
     this.Form = this.fb.group({});
     this.addControls();
-
   }
 
   ngOnDestroy() {
@@ -68,8 +64,13 @@ export class FormComponent implements OnInit {
       if (changes['clear_form'].currentValue == true) {
         this.FormGroupDirective.resetForm();
         this.displayValidationsErrors = false;
-        if ((<HTMLImageElement>document.getElementById("img")) != null)
+        if ((<HTMLImageElement>document.getElementById("img")) != null) {
           (<HTMLImageElement>document.getElementById("img")).src = '../../../../assets/images/no_image.png';
+          delete this.form_values['image'];
+          this.image_value = {};
+          // console.log(this.image_value);
+          // console.log(this.form_values);
+        }
       }
 
       // setTimeout(function () {
@@ -135,10 +136,12 @@ export class FormComponent implements OnInit {
   }
 
   submit() {
+    
     this.form_values = { ...this.Form.value, ...this.map_values, ...this.image_value };
-
+    console.log(this.form_values);
+    
     if (this.Form.valid) {
-      Object.keys(this.form_values).forEach(function (key) {
+     Object.keys(this.form_values).forEach(function (key) {
         if (this.form_values[key] == null)
           this.form_values[key] = "";
         if (key == "space") {

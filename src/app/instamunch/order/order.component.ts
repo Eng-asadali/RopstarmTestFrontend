@@ -54,6 +54,7 @@ export class OrderComponent implements OnInit {
           SwalAlert.errorAlert('', result['message'].charAt(0).toUpperCase() + result['message'].substring(1));
         }
         this.loaded = true;
+        this.selection.clear();
       },
       err => {
         this.loaded = true;

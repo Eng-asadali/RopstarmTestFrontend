@@ -1,5 +1,6 @@
 export interface order{
     table_key:String,
+    floor_name:String,
     id: String ,
     order_status:String,
     total:String ,

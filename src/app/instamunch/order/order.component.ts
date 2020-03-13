@@ -30,7 +30,7 @@ export class OrderComponent implements OnInit {
   constructor(private OrderService: OrderService, private router: Router) { }
 
   ngOnInit() {
-    this.table_headers = ['select', 'name', 'order status', 'order datetime', 'price', 'actions'];
+    this.table_headers = ['select', 'name','floor', 'order status', 'order datetime', 'price', 'actions'];
     this.orderListing();
   }
 

@@ -7,4 +7,5 @@ export const validation_patterns = {
   alphabets:/^[a-zA-Z]*$/,
   branch_contact_number:/^[0-9]{10,11}$/,
   decimal_numbers:/^\d*\.?\d*$/
+ // current_date:new Date().getFullYear()
 }

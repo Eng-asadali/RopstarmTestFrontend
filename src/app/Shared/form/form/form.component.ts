@@ -12,6 +12,9 @@ declare var $: any;
 })
 
 export class FormComponent implements OnInit {
+  // minDate = new Date(1900, 0, 1);
+  // maxDate =  new Date(new Date().setDate(new Date().getDate()-1))
+
   @Input() form: any;
   @Output() formValues = new EventEmitter();
   @Output() sendform: FormGroup;

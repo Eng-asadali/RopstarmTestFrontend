@@ -43,14 +43,14 @@ export class AddStaffComponent implements OnInit {
       { label: 'Password', type: 'text', bootstrapGridClass: "col-lg-6", name: "password", validations: [Validators.required], value: staff ? staff.password : '', required: true }
 
       , { label: 'Date of Birth', type: 'date', bootstrapGridClass: "col-lg-6", name: "date_of_birth", validations: [Validators.required], value: staff ? staff.date_of_birth : '', required: true }
-      , { label: 'Salary', type: 'number', bootstrapGridClass: "col-lg-6", name: "salary", validations: [Validators.required], value: staff ? staff.salary : '', required: true }
-      , { label: 'Salary Disbursement', type: 'select', bootstrapGridClass: "col-lg-6", name: "salary_disbursement", validations: [Validators.required], value: staff ? staff.salary_disbursement : '', options: SalaryDisbursement, required: true }
-      , { label: 'Job Shift', type: 'select', bootstrapGridClass: "col-lg-6", name: "job_shift", validations: [Validators.required], value: staff ? staff.job_shift : '', options: JobShift, required: true }
+      , { label: 'Salary', type: 'number', bootstrapGridClass: "col-lg-6", name: "salary", validations:  [Validators.required,Validators.pattern(validation_patterns.decimal_numbers)], value: staff ? staff.salary : '', required: true }
+      , { label: 'Salary Disbursement', type: 'ngselect', bootstrapGridClass: "col-lg-6", name: "salary_disbursement", validations: [Validators.required], value: staff ? staff.salary_disbursement : '', options: SalaryDisbursement, required: true }
+      , { label: 'Job Shift', type: 'ngselect', bootstrapGridClass: "col-lg-6", name: "job_shift", validations: [Validators.required], value: staff ? staff.job_shift : '', options: JobShift, required: true }
       , {
-        label: 'Type', type: 'select', bootstrapGridClass: "col-lg-6", name: "type", validations: [Validators.required], required: true,
+        label: 'Type', type: 'ngselect', bootstrapGridClass: "col-lg-6", name: "type", validations: [Validators.required], required: true,
         value: staff ? staff.type : '', options: StaffType
       },
-      { label: 'Experience', type: 'select', bootstrapGridClass: "col-lg-6", name: "experience", validations: [Validators.required], value: staff ? staff.experience : '', options: experience, required: true }
+      { label: 'Experience', type: 'ngselect', bootstrapGridClass: "col-lg-6", name: "experience", validations: [Validators.required], value: staff ? staff.experience : '', options: experience, required: true }
    
     ]
     this.form['form_fields'] = this.fields;

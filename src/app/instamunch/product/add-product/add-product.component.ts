@@ -54,7 +54,7 @@ export class AddProductComponent implements OnInit {
       this.fields = [
         { label: 'Product Name', type: 'text', bootstrapGridClass: "col-lg-12", name: "name", validations: [Validators.required], required: true, value: product ? product.name : '' },
         {
-          label: 'Kitchen', type: 'select', bootstrapGridClass: "col-lg-6", name: "kitchen_id", validations: [Validators.required], required: true,
+          label: 'Kitchen', type: 'ngselect', bootstrapGridClass: "col-lg-6", name: "kitchen_id", validations: [Validators.required], required: true,
           value: product ? product.kitchen_id : '', options: result[1]['data']
         },
         // {

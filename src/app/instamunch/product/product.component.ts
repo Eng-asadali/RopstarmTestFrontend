@@ -74,10 +74,10 @@ export class ProductComponent implements OnInit {
     if (action == 'edit')
       this.router.navigate(['/instamunch/product/edit', id]);
     else
-      this.deleteProduct(id);
+      this.deleteProductById(id);
   }
 
-  async deleteProduct(product_id) {
+  async deleteProductById(product_id) {
     const response = await SwalAlert.getDeleteSwal();
     if (response == true) {
       this.loaded = false;
@@ -96,7 +96,7 @@ export class ProductComponent implements OnInit {
           this.loaded = true;
           console.error(err);
         }
-      )
+      );
     }
   }
 
@@ -113,8 +113,6 @@ export class ProductComponent implements OnInit {
             }
             else {
               this.loaded = true;
-              console.log('coming');
-              console.log(result['httpError']);
               SwalAlert.errorAlert('', result['message'].charAt(0).toUpperCase() + result['message'].substring(1));
             }
           },

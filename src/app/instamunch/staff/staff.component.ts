@@ -27,51 +27,94 @@ export class StaffComponent implements OnInit {
   staff: any;
   loaded: boolean = false;
 
+  staff_ids: any = [];
+
   ngOnInit() {
-    this.table_headers = ['select','user image', 'name', 'Type', 'Email', 'Salary', 'Salary Disbursement', 'Job Shift', 'actions'];
+    this.table_headers = ['select', 'user image', 'name', 'Type', 'Email', 'Salary', 'Salary Disbursement', 'Job Shift', 'actions'];
     this.getStaffList();
   }
 
- getStaffList(){
-  const staff = this.staffService.getStaff();
-  staff.subscribe(
-    result => {
-      console.log('staff list:', result);
-      if (!result['error']) {
-        this.staff = result['data'];
-        this.dataSource.data = this.staff;
-        this.dataSource.connect().next(this.staff);
-        this.dataSource.paginator = this.paginator;
+  getStaffList() {
+    const staff = this.staffService.getStaff();
+    staff.subscribe(
+      result => {
+        console.log('staff list:', result);
+        if (!result['error']) {
+          this.staff = result['data'];
+          this.dataSource.data = this.staff;
+          this.dataSource.connect().next(this.staff);
+          this.dataSource.paginator = this.paginator;
+        }
+        else {
+          SwalAlert.errorAlert('', result['message'].charAt(0).toUpperCase() + result['message'].substring(1));
+        }
+        this.loaded = true;
+      },
+      err => {
+        this.loaded = true;
+        console.error(err);
       }
-      else {
-        SwalAlert.errorAlert('', result['message'].charAt(0).toUpperCase() + result['message'].substring(1));
-      }
-    },
-    err => { console.log(err); },
-    () => {
-      this.loaded = true;
-      // console.log('call completed');
-    }
-  );
- }
+    );
+  }
 
-  getStaffId(id,action) {
-    console.log('staff id', id);
+  getStaffId(staff_id, action) {
+    console.log('staff id', staff_id);
     if (action == 'edit')
-    this.router.navigate(['/instamunch/staff/edit', id]);
+      this.router.navigate(['/instamunch/staff/edit', staff_id]);
     else {
-      this.delete(id);
+      this.deleteStaffById(staff_id);
     }
   }
 
-  async delete(id) {
+  async deleteStaffById(staff_id) {
     const response = await SwalAlert.getDeleteSwal();
-    console.log(response);
-    if(response==true){
-      this.deleteById(id);
+    if (response == true) {
+      this.loaded = false;
+      this.staffService.deleteById(staff_id).subscribe(
+        result => {
+          if (!result['error']) {
+            SwalAlert.sucessAlert('', 'Staff Deleted Successfully!');
+            this.getStaffList();
+          }
+          else {
+            this.loaded = true;
+            SwalAlert.errorAlert('', result['message'].charAt(0).toUpperCase() + result['message'].substring(1));
+          }
+        },
+        err => {
+          this.loaded = true;
+          console.error(err);
+        }
+      );
     }
-   
-   
+  }
+
+  async deleteMultipleStaff() {
+    if (this.staff_ids.length > 0) {
+      const response = await SwalAlert.getDeleteSwal();
+      if (response == true) {
+        this.loaded = false;
+        this.staffService.deleteMultipeStaff(this.staff_ids).subscribe(
+          result => {
+            if (!result['error']) {
+              SwalAlert.sucessAlert('', 'Staff Deleted Successfully!');
+              this.getStaffList();
+            }
+            else {
+              this.loaded = true;
+              SwalAlert.errorAlert('', result['message'].charAt(0).toUpperCase() + result['message'].substring(1));
+            }
+          },
+          err => {
+            this.loaded = true;
+            console.error(err);
+          }
+        )
+      }
+    }
+    else {
+      SwalAlert.errorAlert('', 'Please Select Staff to Delete!');
+    }
   }
 
   applyFilter(filterValue: string) {
@@ -82,7 +125,6 @@ export class StaffComponent implements OnInit {
     const numSelected = this.selection.selected.length;
     const numRows = this.dataSource.data.length;
     return numSelected == numRows;
-    console.log(this.selection);
   }
 
   /** Selects all rows if they are not all selected; otherwise clear selection. */
@@ -90,7 +132,8 @@ export class StaffComponent implements OnInit {
     this.isAllSelected() ?
       this.selection.clear() :
       this.dataSource.data.forEach(row => this.selection.select(row));
-    console.log(this.selection);
+    this.staff_ids = this.getIdsFromSelectionArrayObject(this.selection.selected);
+    // console.log(this.selection);
   }
 
   // $event ? selection.toggle(row) : null
@@ -101,26 +144,10 @@ export class StaffComponent implements OnInit {
     else
       null;
 
-    console.log(this.selection);
+    this.staff_ids = this.getIdsFromSelectionArrayObject(this.selection.selected);
+    // console.log(this.selection);
   }
-  
-  deleteById(id) {
-    console.log(' id to delete', id);
-    this.staffService.deleteById(id).subscribe(
-      result => {
-        if (!result['error']) {
-         this.getStaffList();
-          SwalAlert.sucessAlert('', ' Deleted Successfully!');
-          //this.router.navigate(['/instamunch/staff/', id]);
 
-        }
-        else
-          SwalAlert.errorAlert('', result['message'].charAt(0).toUpperCase() + result['message'].substring(1));
-
-      }
-    );
-
-  }
 
   navigateToStaffAdd() {
     this.router.navigate(['add'], { relativeTo: this.currentActivatedRoute });
@@ -130,30 +157,9 @@ export class StaffComponent implements OnInit {
     this.router.navigate(['instamunch/staff'])
   }
 
-  // getStaffListing() {
-  //   this.loaded = false;
-  //   const staff = this.staffService.getStaff();
-  //   staff.subscribe(
-  //     result => {
-  //       console.log('staff list:', result);
-  //       if (!result['error']) {
-  //         this.loaded = true;
-
-  //         this.staff = result['data'];
-  //         this.dataSource.data = this.staff;
-  //         this.dataSource.connect().next(this.staff);
-  //         this.dataSource.paginator = this.paginator;
-  //       }
-  //       else {
-  //         SwalAlert.errorAlert('', result['message'].charAt(0).toUpperCase() + result['message'].substring(1));
-  //       }
-  //     },
-  //     err => { console.log(err); },
-  //     () => {
-  //       this.loaded = true;
-  //       // console.log('call completed');
-  //     }
-  //   );
-  // }
+  getIdsFromSelectionArrayObject(array_of_objects) {
+    let ids = array_of_objects.map(a => a.id);
+    return ids;
+  }
 
 }

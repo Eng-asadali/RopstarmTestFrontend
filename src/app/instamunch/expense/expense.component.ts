@@ -32,11 +32,13 @@ export class ExpenseComponent implements OnInit {
   checkedId: any = [];
   expenses: expense[];
 
+  expense_ids: any = [];
+
   constructor(private ExpenseService: ExpenseService, private router: Router,
     private currentActivatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
-    this.table_headers = ['select',  'expense', 'amount', 'type','date', 'transaction', 'actions'];
+    this.table_headers = ['select', 'expense', 'amount', 'type', 'date', 'transaction', 'actions'];
     this.getExpensesList();
   }
 
@@ -73,35 +75,61 @@ export class ExpenseComponent implements OnInit {
     if (action == 'edit')
       this.router.navigate(['instamunch/expense/edit/', id]);
     else {
-      this.delete(id);
+      this.deleteExpenseById(id);
     }
   }
 
-  async delete(id) {
+  async deleteExpenseById(expense_id) {
     const response = await SwalAlert.getDeleteSwal();
-    console.log(response);
-    if(response==true){
-      this.deleteById(id);
+    if (response == true) {
+      this.loaded = false;
+      this.ExpenseService.deleteById(expense_id).subscribe(
+        result => {
+          if (!result['error']) {
+            SwalAlert.sucessAlert('', 'Expense Deleted Successfully!');
+            this.getExpensesList();
+          }
+          else {
+            this.loaded = true;
+            SwalAlert.errorAlert('', result['message'].charAt(0).toUpperCase() + result['message'].substring(1));
+          }
+        },
+        err => {
+          this.loaded = true;
+          console.error(err);
+        }
+      );
     }
   }
-  
-  deleteById(id) {
-    console.log(' id to delete', id);
-    this.ExpenseService.deleteById(id).subscribe(
-      result => {
-        if (!result['error']) {
-         this.getExpensesList();
-          SwalAlert.sucessAlert('', 'Deleted Successfully!');
-          //this.router.navigate(['/instamunch/staff/', id]);
 
-        }
-        else
-          SwalAlert.errorAlert('', result['message'].charAt(0).toUpperCase() + result['message'].substring(1));
-
+  async deleteMultipleExpense() {
+    if (this.expense_ids.length > 0) {
+      const response = await SwalAlert.getDeleteSwal();
+      if (response == true) {
+        this.loaded = false;
+        this.ExpenseService.deleteMultipeExpense(this.expense_ids).subscribe(
+          result => {
+            if (!result['error']) {
+              SwalAlert.sucessAlert('', 'Expenses Deleted Successfully!');
+              this.getExpensesList();
+            }
+            else {
+              this.loaded = true;
+              SwalAlert.errorAlert('', result['message'].charAt(0).toUpperCase() + result['message'].substring(1));
+            }
+          },
+          err => {
+            this.loaded = true;
+            console.error(err);
+          }
+        )
       }
-    );
-
+    }
+    else {
+      SwalAlert.errorAlert('', 'Please Select Expense to Delete!');
+    }
   }
+
 
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
@@ -111,7 +139,6 @@ export class ExpenseComponent implements OnInit {
     const numSelected = this.selection.selected.length;
     const numRows = this.dataSource.data.length;
     return numSelected == numRows;
-    console.log(this.selection);
   }
 
   /** Selects all rows if they are not all selected; otherwise clear selection. */
@@ -119,9 +146,7 @@ export class ExpenseComponent implements OnInit {
     this.isAllSelected() ?
       this.selection.clear() :
       this.dataSource.data.forEach(row => this.selection.select(row));
-    console.log(this.selection);
-
-
+    this.expense_ids = this.getIdsFromSelectionArrayObject(this.selection.selected);
   }
 
   // $event ? selection.toggle(row) : null
@@ -131,14 +156,12 @@ export class ExpenseComponent implements OnInit {
     }
     else
       null;
-    this.checkedId = []
-    console.log(this.selection.selected);
-    for (let i = 0; i < this.selection.selected.length; i++) {
-      console.log("origibal id" + this.selection.selected[i].id);
-      this.checkedId.push(this.selection.selected[i].id)
+    this.expense_ids = this.getIdsFromSelectionArrayObject(this.selection.selected);
+  }
 
-    }
-    console.log("array :" + this.checkedId)
+  getIdsFromSelectionArrayObject(array_of_objects) {
+    let ids = array_of_objects.map(a => a.id);
+    return ids;
   }
 
 }

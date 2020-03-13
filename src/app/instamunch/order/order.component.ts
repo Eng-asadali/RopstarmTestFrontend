@@ -27,59 +27,13 @@ export class OrderComponent implements OnInit {
   loaded: boolean = false;
   table_headers: any = [];
 
+  order_ids: any
+
   constructor(private OrderService: OrderService, private router: Router) { }
 
   ngOnInit() {
     this.table_headers = ['select', 'name', 'order status', 'order datetime', 'price', 'actions'];
     this.orderListing();
-  }
-
-  getOrderId(id) {
-    console.log("order id" + id)
-    this.router.navigate(['/instamunch/order/edit', id])
-  }
-
-  isAllSelected() {
-    const numSelected = this.selection.selected.length;
-    const numRows = this.dataSource.data.length;
-    return numSelected == numRows;
-    console.log(this.selection);
-  }
-
-  /** Selects all rows if they are not all selected; otherwise clear selection. */
-  masterToggle() {
-    this.isAllSelected() ?
-      this.selection.clear() :
-      this.dataSource.data.forEach(row => this.selection.select(row));
-    console.log(this.selection);
-  }
-
-  // $event ? selection.toggle(row) : null
-  checkboxClicked(event, row) {
-    if (event) {
-      this.selection.toggle(row);
-    }
-    else
-      null;
-
-    console.log(this.selection);
-  }
-
-
-  deleteOrderId(id) {
-    console.log("delete order id" + id)
-    this.OrderService.deleteOrder(id).subscribe(
-      result => {
-        if (!result['error']) {
-          this.orderListing();
-          SwalAlert.sucessAlert('', 'Order Deleted Successfully!');
-        }
-        else {
-          SwalAlert.errorAlert('', result['message'].charAt(0).toUpperCase() + result['message'].substring(1));
-
-        }
-      }
-    );
   }
 
   orderListing() {
@@ -99,16 +53,106 @@ export class OrderComponent implements OnInit {
         else {
           SwalAlert.errorAlert('', result['message'].charAt(0).toUpperCase() + result['message'].substring(1));
         }
-      },
-      err => { console.log(err); },
-      () => {
         this.loaded = true;
-        // console.log('call completed');
+      },
+      err => {
+        this.loaded = true;
+        console.log(err);
       }
     );
   }
 
+  getOrderId(id, action) {
+    console.log("order id" + id)
+    if (action == 'edit')
+      this.router.navigate(['/instamunch/order/edit', id])
+    else
+      this.deleteOrderById(id);
+
+  }
+
+  async deleteOrderById(order_id) {
+    const response = await SwalAlert.getDeleteSwal();
+    if (response == true) {
+      this.loaded = false;
+      this.OrderService.deleteOrder(order_id).subscribe(
+        result => {
+          if (!result['error']) {
+            SwalAlert.sucessAlert('', 'Order Deleted Successfully!');
+            this.orderListing();
+          }
+          else {
+            this.loaded = true;
+            SwalAlert.errorAlert('', result['message'].charAt(0).toUpperCase() + result['message'].substring(1));
+          }
+        },
+        err => {
+          this.loaded = true;
+          console.error(err);
+        }
+      );
+    }
+  }
+
+  async deleteMultipleOrders() {
+    if (this.order_ids.length > 0) {
+      const response = await SwalAlert.getDeleteSwal();
+      if (response == true) {
+        this.loaded = false;
+        this.OrderService.deleteMultipleOrders(this.order_ids).subscribe(
+          result => {
+            if (!result['error']) {
+              SwalAlert.sucessAlert('', 'Orders Deleted Successfully!');
+              this.orderListing();
+            }
+            else {
+              this.loaded = true;
+              SwalAlert.errorAlert('', result['message'].charAt(0).toUpperCase() + result['message'].substring(1));
+            }
+          },
+          err => {
+            this.loaded = true;
+            console.error(err);
+          }
+        )
+      }
+    }
+    else {
+      SwalAlert.errorAlert('', 'Please Select Order to Delete!');
+    }
+  }
+
+  isAllSelected() {
+    const numSelected = this.selection.selected.length;
+    const numRows = this.dataSource.data.length;
+    return numSelected == numRows;
+  }
+
+  /** Selects all rows if they are not all selected; otherwise clear selection. */
+  masterToggle() {
+    this.isAllSelected() ?
+      this.selection.clear() :
+      this.dataSource.data.forEach(row => this.selection.select(row));
+    this.order_ids = this.getIdsFromSelectionArrayObject(this.selection.selected);
+  }
+
+  // $event ? selection.toggle(row) : null
+  checkboxClicked(event, row) {
+    if (event) {
+      this.selection.toggle(row);
+    }
+    else
+      null;
+
+    this.order_ids = this.getIdsFromSelectionArrayObject(this.selection.selected);
+  }
+
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+  getIdsFromSelectionArrayObject(array_of_objects) {
+    let ids = array_of_objects.map(a => a.id);
+    return ids;
   }
 }

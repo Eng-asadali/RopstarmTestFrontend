@@ -41,9 +41,16 @@ export class ExpenseService {
       catchError(err => of({ error: true, message: 'Server error', data: [] }))
     );
   }
+
   deleteById(id) {
     return this.httpServices.delete('expense/details/' + id + "/").pipe(
       catchError(err => of({error:true,message:'Server error',data:[]})));
    }
+
+   deleteMultipeExpense(ids: []){
+    return this.httpServices.postWithoutStatus({expense_ids:ids},'expense/delete/').pipe(
+      catchError(err => of({ error: true, message: 'Server error', data: [],httpError: err })));
+  }
+
 
 }

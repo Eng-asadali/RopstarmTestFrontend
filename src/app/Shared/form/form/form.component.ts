@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChanges, ViewChild } from '@angular/core';
 import { FieldConfig } from "../../../Interfaces/feildConfig";
 import { FormBuilder, FormGroup, FormArray, FormControl, Validators, FormGroupDirective } from '@angular/forms';
-import {NgSelectModule, NgOption} from '@ng-select/ng-select';
+import { NgSelectModule, NgOption } from '@ng-select/ng-select';
 
 declare var $: any;
 
@@ -20,7 +20,7 @@ export class FormComponent implements OnInit {
   @Input() submit_clicked: boolean;
   @Input() edit_clicked: boolean;
   @Input() clear_form: boolean;
-  @Input() option:[]
+  @Input() option: []
   Form: FormGroup;
   displayValidationsErrors = false;
   map_values: any = {};
@@ -48,8 +48,6 @@ export class FormComponent implements OnInit {
 
   ngOnChanges(changes: SimpleChanges) {
 
-    // if (this.clear_form == undefined) {
-    //  console.log(changes['form']);
     if (changes['form']) {
       this.timeout = setInterval(() => {
         if (this.form['form_fields'].length > 0) {
@@ -59,16 +57,6 @@ export class FormComponent implements OnInit {
           this.addControls();
           clearTimeout(this.timeout);
         }
-     //   console.log('interval');
-        // else {
-        //   // console.log(this.form['form_fields'].length);
-        //   var form = this.form;
-        //   this.form = form;
-        //   this.fields = this.form['form_fields'];
-        //   this.addControls();
-        //   clearTimeout(this.timeout);
-        // }
-
       }, 100);
 
     }
@@ -77,7 +65,8 @@ export class FormComponent implements OnInit {
       if (changes['clear_form'].currentValue == true) {
         this.FormGroupDirective.resetForm();
         this.displayValidationsErrors = false;
-        (<HTMLImageElement>document.getElementById("img")).src = '../../../../assets/images/no_image.png';
+        if ((<HTMLImageElement>document.getElementById("img")) != null)
+          (<HTMLImageElement>document.getElementById("img")).src = '../../../../assets/images/no_image.png';
       }
 
       // setTimeout(function () {
@@ -104,7 +93,6 @@ export class FormComponent implements OnInit {
           array.push(i);
         }
         if (this.fields[i].value != undefined) {
-          // console.log(this.fields[i].value);
           this.Form.addControl(this.fields[i].name, new FormControl(this.fields[i].value, this.fields[i].validations));
         }
         else
@@ -166,7 +154,6 @@ export class FormComponent implements OnInit {
   onImageChanged(event) {
     var selectedFile: File;
     selectedFile = event.target.files[0];
-    // this.sendImage.emit(selectedFile);
     this.image_value['image'] = selectedFile;
     this.readImageURL(event.target);
   }

@@ -8,6 +8,7 @@ import { FieldConfig } from '../../../Interfaces/feildConfig';
 import { StaffService } from '../../Services/staff.service';
 import { SwalAlert } from '../../../Shared/swalAlerts';
 import { experience, SalaryDisbursement, StaffType, JobShift } from '../../Options/staff';
+import{validateDate}from '../../../Shared/Custom Validators/dateValidator'
 
 @Component({
   selector: 'app-edit',
@@ -58,7 +59,7 @@ export class EditComponent implements OnInit {
       {
         label: 'Last Name', type: 'text', bootstrapGridClass: "col-lg-6", name: "last_name", validations: [Validators.required], required: true, value: staff ? staff.last_name : ''
       }
-      , { label: 'Date of Birth', type: 'date', bootstrapGridClass: "col-lg-6", name: "date_of_birth", validations: [Validators.required], value: staff ? staff.date_of_birth : '' }
+      , { label: 'Date of Birth', type: 'date', bootstrapGridClass: "col-lg-6", name: "date_of_birth", validations: [Validators.required,validateDate], value: staff ? staff.date_of_birth : '' }
       , { label: 'Salary', type: 'number', bootstrapGridClass: "col-lg-6", name: "salary", validations: [Validators.required], value: staff ? staff.salary : '' }
       , { label: 'Salary Disbursement', type: 'ngselect', bootstrapGridClass: "col-lg-6", name: "salary_disbursement", validations: [Validators.required], value: staff ? staff.salary_disbursement : '', options: SalaryDisbursement }
       , { label: 'Job Shift', type: 'ngselect', bootstrapGridClass: "col-lg-6", name: "job_shift", validations: [Validators.required], value: staff ? staff.job_shift : '', options: JobShift }

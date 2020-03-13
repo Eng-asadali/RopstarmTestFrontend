@@ -1,4 +1,6 @@
 <div *ngFor="let i of errors_array">
+    <span class="error" *ngIf="date_error">Date of birth should be valid .</span>
+
     <span class="error" *ngIf="i == 'required'">{{field_name}} is required.</span>
     <span class="error" *ngIf="i == 'email'">Email must be valid.</span>
     <span class="error" *ngIf="i == 'max'">{{field_name}} is exceeding the limit.</span>
@@ -10,5 +12,11 @@
         <span class="error" *ngIf="postive_number_error">{{field_name}} should be valid.</span>
         <span class="error" *ngIf="branch_contact_number_error">{{field_name}} should be valid.</span>
         <span class="error" *ngIf="decimal_numbers_error">{{field_name}} should be valid.</span>
+<<<<<<< HEAD
+=======
+        
+
+>>>>>>> f121df6723457baea29ad9dc731289bdad467ab3
     </span>
+
 </div>

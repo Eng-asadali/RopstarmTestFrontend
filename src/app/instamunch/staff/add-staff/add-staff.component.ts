@@ -8,7 +8,7 @@ import { StaffService } from '../../Services/staff.service';
 import { SwalAlert } from '../../../Shared/swalAlerts';
 import { experience, SalaryDisbursement, StaffType, JobShift } from '../../Options/staff';
 import { validation_patterns } from '../../../Shared/validation_patterns';
-
+import{validateDate}from '../../../Shared/Custom Validators/dateValidator'
 @Component({
   selector: 'app-add-staff',
   templateUrl: './add-staff.component.html',
@@ -42,7 +42,7 @@ export class AddStaffComponent implements OnInit {
       },
       { label: 'Password', type: 'text', bootstrapGridClass: "col-lg-6", name: "password", validations: [Validators.required], value: staff ? staff.password : '', required: true }
 
-      , { label: 'Date of Birth', type: 'date', bootstrapGridClass: "col-lg-6", name: "date_of_birth", validations: [Validators.required], value: staff ? staff.date_of_birth : '', required: true }
+      , { label: 'Date of Birth', type: 'date', bootstrapGridClass: "col-lg-6", name: "date_of_birth", validations: [Validators.required,validateDate], value: staff ? staff.date_of_birth : '', required: true }
       , { label: 'Salary', type: 'number', bootstrapGridClass: "col-lg-6", name: "salary", validations:  [Validators.required,Validators.pattern(validation_patterns.decimal_numbers)], value: staff ? staff.salary : '', required: true }
       , { label: 'Salary Disbursement', type: 'ngselect', bootstrapGridClass: "col-lg-6", name: "salary_disbursement", validations: [Validators.required], value: staff ? staff.salary_disbursement : '', options: SalaryDisbursement, required: true }
       , { label: 'Job Shift', type: 'ngselect', bootstrapGridClass: "col-lg-6", name: "job_shift", validations: [Validators.required], value: staff ? staff.job_shift : '', options: JobShift, required: true }

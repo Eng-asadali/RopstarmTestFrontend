@@ -7,9 +7,10 @@ import { expense } from '../expense';
 import { FieldConfig } from '../../../Interfaces/feildConfig';
 import { CategoryService } from '../../Services/category.service';
 import { SwalAlert } from '../../../Shared/swalAlerts';
-import {NgSelectModule, NgOption} from '@ng-select/ng-select';
+import { NgSelectModule, NgOption } from '@ng-select/ng-select';
 import { validation_patterns } from 'src/app/Shared/validation_patterns';
-import { expenseTypes,transactionTypes } from '../../Options/expense';
+import { expenseTypes, transactionTypes } from '../../Options/expense';
+import { validateDate } from '../../../Shared/Custom Validators/dateValidator'
 
 @Component({
   selector: 'app-add-expense',
@@ -18,7 +19,7 @@ import { expenseTypes,transactionTypes } from '../../Options/expense';
 })
 export class AddExpenseComponent implements OnInit {
 
-  option=[];
+  option = [];
   form = {};
   fields: FieldConfig[] = [] as FieldConfig[];
   submit_clicked: boolean;
@@ -61,16 +62,16 @@ export class AddExpenseComponent implements OnInit {
         else {
           this.loaded = true;
           SwalAlert.errorAlert('', result['message'].charAt(0).toUpperCase() + result['message'].substring(1));
-       }
+        }
 
       },
       err => {
-        console.log('Error while getting category by id.',err);
+        console.log('Error while getting category by id.', err);
         this.loaded = true;
         SwalAlert.errorAlert('', 'Server Error!');
       }
     );
-    
+
   }
 
 
@@ -88,7 +89,7 @@ export class AddExpenseComponent implements OnInit {
   }
 
   addExpense(data) {
-  
+
     this.ExpenseService.addExpense(data).subscribe(
       result => {
         this.submit_clicked = false;
@@ -133,41 +134,41 @@ export class AddExpenseComponent implements OnInit {
     //   result => {
     //     if (!result['error']) {
     //       this.option=result['data']
-          this.fields = [
-            { label: 'Expense', type: 'text', bootstrapGridClass: "col-lg-6", name: "title", validations: [Validators.required], required: true, value: expense ? expense.title : '' },
-            { label: 'Amount', type: 'number', bootstrapGridClass: "col-lg-6", name: "amount", validations:  [Validators.required,Validators.pattern(validation_patterns.decimal_numbers)], required: true, value: expense ? expense.amount : '' },
+    this.fields = [
+      { label: 'Expense', type: 'text', bootstrapGridClass: "col-lg-6", name: "title", validations: [Validators.required], required: true, value: expense ? expense.title : '' },
+      { label: 'Amount', type: 'number', bootstrapGridClass: "col-lg-6", name: "amount", validations: [Validators.required, Validators.pattern(validation_patterns.decimal_numbers)], required: true, value: expense ? expense.amount : '' },
 
-            // {
-            //   label: 'Parent Category', type: 'select', bootstrapGridClass: "col-lg-6", name: "parent_category_id", validations: [Validators.required], required: true,
-            //   value: category ? category.parent_category_id : '', options: result['data']
-            // },
+      // {
+      //   label: 'Parent Category', type: 'select', bootstrapGridClass: "col-lg-6", name: "parent_category_id", validations: [Validators.required], required: true,
+      //   value: category ? category.parent_category_id : '', options: result['data']
+      // },
 
-            {
-              label: 'Date', type: 'date', bootstrapGridClass: "col-lg-6", name: "expense_date", validations: [Validators.required], required: true,
-              value: expense ? expense.expense_date : ''
-            },
-            {
-              label: 'Type', type: 'ngselect', bootstrapGridClass: "col-lg-6", name: "expense_type", validations: [Validators.required], required: true,
-              value: expense ? expense.expense_type : '', options: expenseTypes
-            },
-            {
-              label: 'Transaction', type: 'ngselect', bootstrapGridClass: "col-lg-12", name: "transaction_type", validations: [Validators.required], required: true,
-              value: expense ? expense.transaction_type : '', options: transactionTypes
-            },
-          ]
-          this.form['form_fields'] = this.fields;
-          this.form['FormbootstrapGridClass'] = 'col-lg-12';
-          this.form['image'] = false;
-          this.form['ImagebootstrapGridClass'] = 'col-lg-3';
-         this.form['img_height'] = "200px";
-          this.form['img_width'] = "200px";
-        // this.form['image_url'] = expense ? expense.image : null;
-          this.form['submit'] = 'Save'
+      {
+        label: 'Date', type: 'date', bootstrapGridClass: "col-lg-6", name: "expense_date", validations: [Validators.required, validateDate], required: true,
+        value: expense ? expense.expense_date : ''
+      },
+      {
+        label: 'Type', type: 'ngselect', bootstrapGridClass: "col-lg-6", name: "expense_type", validations: [Validators.required], required: true,
+        value: expense ? expense.expense_type : '', options: expenseTypes
+      },
+      {
+        label: 'Transaction', type: 'ngselect', bootstrapGridClass: "col-lg-12", name: "transaction_type", validations: [Validators.required], required: true,
+        value: expense ? expense.transaction_type : '', options: transactionTypes
+      },
+    ]
+    this.form['form_fields'] = this.fields;
+    this.form['FormbootstrapGridClass'] = 'col-lg-12';
+    this.form['image'] = false;
+    this.form['ImagebootstrapGridClass'] = 'col-lg-3';
+    this.form['img_height'] = "200px";
+    this.form['img_width'] = "200px";
+    // this.form['image_url'] = expense ? expense.image : null;
+    this.form['submit'] = 'Save'
     //     }
     //     else {
     //       SwalAlert.errorAlert('', result['message'].charAt(0).toUpperCase() + result['message'].substring(1));
     //     }
-        this.loaded = true;
+    this.loaded = true;
     //   },
     //   err => {
     //     console.log('error wile getting parent categories.',err);

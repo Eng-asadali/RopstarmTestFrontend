@@ -17,7 +17,7 @@ export class ErrorsComponent implements OnInit {
   postive_number_error = false;
   branch_contact_number_error = false;
   decimal_numbers_error = false;
-
+  date_error=false;
   constructor() { }
 
   ngOnInit() {
@@ -26,7 +26,7 @@ export class ErrorsComponent implements OnInit {
 
   ngOnChanges(changes: SimpleChanges) {
     this.errors_array = Object.keys(this.errors);
-
+    console.log("ERRRRORS"+this.errors_array)
     if (this.errors_array[0] == 'pattern') {
       if (this.errors[this.errors_array[0]]['requiredPattern'] == validation_patterns.alphabets)
         this.alphabets_only_error = true;
@@ -41,11 +41,15 @@ export class ErrorsComponent implements OnInit {
       else if (this.errors[this.errors_array[0]]['requiredPattern'] == validation_patterns.decimal_numbers)
         this.decimal_numbers_error = true;
     }
+   else if(this.errors_array[0]=="invalid_date"){
+      this.date_error=true;
+    }
+
     // console.log(this.errors[this.errors_array[0]]['requiredPattern'])
     // console.log(this.errors[this.errors_array[0]])
     // console.log(this.decimal_numbers_error);
     console.log(this.errors);
-    console.log(this.errors_array);
+   //  console.log(this.errors_array)
   }
 
 }

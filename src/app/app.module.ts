@@ -44,7 +44,7 @@ import { KitchenComponent } from './instamunch/kitchen/kitchen.component';
 import { AddKitchenComponent } from './instamunch/kitchen/add-kitchen/add-kitchen.component';
 import { ExpenseComponent } from './instamunch/expense/expense.component';
 import { AddExpenseComponent } from './instamunch/expense/add-expense/add-expense.component';
-
+//import{dateValidator} from './Shared/Custom Validators/dateValidator';
 
 @NgModule({
   declarations: [
@@ -69,7 +69,8 @@ import { AddExpenseComponent } from './instamunch/expense/add-expense/add-expens
     KitchenComponent,
     AddKitchenComponent,
     ExpenseComponent,
-    AddExpenseComponent
+    AddExpenseComponent,
+  //  dateValidator
   ],
 
   imports: [
@@ -91,6 +92,7 @@ import { AddExpenseComponent } from './instamunch/expense/add-expense/add-expens
     NgSelectModule,
     MatDatepickerModule,
     MatProgressSpinnerModule
+    
   ],
 
   providers: [HttpService,

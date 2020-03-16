@@ -34,7 +34,7 @@ export class CategoryComponent implements OnInit {
     private currentActivatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
-    this.table_headers = ['select', 'image', 'name', 'parent_category_id', 'status', 'actions'];
+    this.table_headers = ['image', 'name', 'parent_category_id', 'status', 'actions'];
     this.getCategoriesList();
     
   }

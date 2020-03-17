@@ -18,6 +18,9 @@ export class ErrorsComponent implements OnInit {
   branch_contact_number_error = false;
   decimal_numbers_error = false;
   date_error=false;
+  name_error=false;
+  password_error=false;
+  maxlength=false;
   constructor() { }
 
   ngOnInit() {
@@ -26,7 +29,7 @@ export class ErrorsComponent implements OnInit {
 
   ngOnChanges(changes: SimpleChanges) {
     this.errors_array = Object.keys(this.errors);
-
+console.log(this.errors_array)
     if (this.errors_array[0] == 'pattern') {
       if (this.errors[this.errors_array[0]]['requiredPattern'] == validation_patterns.alphabets)
         this.alphabets_only_error = true;
@@ -40,10 +43,19 @@ export class ErrorsComponent implements OnInit {
         this.branch_contact_number_error = true;
       else if (this.errors[this.errors_array[0]]['requiredPattern'] == validation_patterns.decimal_numbers)
         this.decimal_numbers_error = true;
+        else if (this.errors[this.errors_array[0]]['requiredPattern'] == validation_patterns.nameRegex)
+        this.name_error = true;
+        else if (this.errors[this.errors_array[0]]['requiredPattern'] == validation_patterns.password_regex)
+        this.password_error = true;
     }
    else if(this.errors_array[0]=="invalid_date"){
       this.date_error=true;
     }
+    else if(this.errors_array[0]=="maxlength"){
+      this.maxlength=true;
+    }
+    
+
 
     // console.log(this.errors[this.errors_array[0]]['requiredPattern'])
     // console.log(this.errors[this.errors_array[0]])

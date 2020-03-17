@@ -33,14 +33,14 @@ export class AddStaffComponent implements OnInit {
 
   generateForm(staff?: Staff) {
     this.fields = [
-      { label: 'First Name', type: 'text', bootstrapGridClass: "col-lg-6", name: "first_name", validations: [Validators.required], required: true, value: staff ? staff.first_name : '' },
+      { label: 'First Name', type: 'text', bootstrapGridClass: "col-lg-6", name: "first_name", validations: [Validators.required,Validators.pattern(validation_patterns.nameRegex),Validators.maxLength(25)], required: true, value: staff ? staff.first_name : '' },
       {
-        label: 'Last Name', type: 'text', bootstrapGridClass: "col-lg-6", name: "last_name", validations: [Validators.required], required: true, value: staff ? staff.last_name : ''
+        label: 'Last Name', type: 'text', bootstrapGridClass: "col-lg-6", name: "last_name", validations: [Validators.required,Validators.pattern(validation_patterns.nameRegex),Validators.maxLength(25)], required: true, value: staff ? staff.last_name : ''
       },
       {
         label: 'Email', type: 'text', bootstrapGridClass: "col-lg-6", name: "email", validations: [Validators.required, Validators.pattern(validation_patterns.email_regex)], required: true, value: staff ? staff.email : ''
       },
-      { label: 'Password', type: 'text', bootstrapGridClass: "col-lg-6", name: "password", validations: [Validators.required], value: staff ? staff.password : '', required: true }
+      { label: 'Password', type: 'text', bootstrapGridClass: "col-lg-6", name: "password", validations: [Validators.required, Validators.pattern(validation_patterns.password_regex)], value: staff ? staff.password : '', required: true }
 
       , { label: 'Date of Birth', type: 'date', bootstrapGridClass: "col-lg-6", name: "date_of_birth", validations: [Validators.required,validateDate], value: staff ? staff.date_of_birth : '', required: true }
       , { label: 'Salary', type: 'number', bootstrapGridClass: "col-lg-6", name: "salary", validations:  [Validators.required,Validators.pattern(validation_patterns.decimal_numbers)], value: staff ? staff.salary : '', required: true }

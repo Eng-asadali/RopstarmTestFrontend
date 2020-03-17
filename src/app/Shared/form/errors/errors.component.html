@@ -12,6 +12,9 @@
         <span class="error" *ngIf="postive_number_error">{{field_name}} should be valid.</span>
         <span class="error" *ngIf="branch_contact_number_error">{{field_name}} should be valid.</span>
         <span class="error" *ngIf="decimal_numbers_error">{{field_name}} should be valid.</span>
+        <span class="error" *ngIf="name_error">{{field_name}} should not contain numbers.</span>
+        <span class="error" *ngIf="password_error">{{field_name}} should be at least 8 characters long and should contain one number,one character and one special character.</span>
+
     </span>
 
 </div>

@@ -57,7 +57,6 @@ export class FormComponent implements OnInit {
           clearTimeout(this.timeout);
         }
       }, 100);
-
     }
 
     if (changes['clear_form']) {
@@ -68,8 +67,6 @@ export class FormComponent implements OnInit {
           (<HTMLImageElement>document.getElementById("img")).src = '../../../../assets/images/no_image.png';
           delete this.form_values['image'];
           this.image_value = {};
-          // console.log(this.image_value);
-          // console.log(this.form_values);
         }
       }
 
@@ -131,17 +128,19 @@ export class FormComponent implements OnInit {
       value: ''
     });
     (arr as FormArray).push(attribute);
+  }
 
-
+  minusAttribute() {
+    var arr = this.Form.get('product_attributes');
+    (arr as FormArray).removeAt(0);
   }
 
   submit() {
-    
+
     this.form_values = { ...this.Form.value, ...this.map_values, ...this.image_value };
     console.log(this.form_values);
-    
     if (this.Form.valid) {
-     Object.keys(this.form_values).forEach(function (key) {
+      Object.keys(this.form_values).forEach(function (key) {
         if (this.form_values[key] == null)
           this.form_values[key] = "";
         if (key == "space") {
@@ -154,8 +153,6 @@ export class FormComponent implements OnInit {
       console.log('form is not valid');
     }
   }
-
-
 
   onImageChanged(event) {
     var selectedFile: File;

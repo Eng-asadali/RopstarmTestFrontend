@@ -16,7 +16,7 @@ import { validation_patterns } from 'src/app/Shared/validation_patterns';
   styleUrls: ['./add-kitchen.component.css']
 })
 export class AddKitchenComponent implements OnInit {
-  option=[];
+  option = [];
   form = {};
   fields: FieldConfig[] = [] as FieldConfig[];
   submit_clicked: boolean;
@@ -37,47 +37,48 @@ export class AddKitchenComponent implements OnInit {
       // console.log(category);
     }
     else {
-      this.edit= false;
+      this.edit = false;
       this.generateForm();
     }
   }
 
   generateForm(kitchen?: kitchen) {
     this.KitchenService.getManagers().subscribe(
-      result=>{
-        if(!result['error']){
-          this.option=result['data']
-         
-    // let categories = this.categoryService.getCategories();
-    // let kicthen = this.productService.getKitchenList();
+      result => {
+        if (!result['error']) {
+          this.option = result['data']
 
-    // const result = forkJoin(categories, kicthen);
+          // let categories = this.categoryService.getCategories();
+          // let kicthen = this.productService.getKitchenList();
 
-    // result.subscribe((result) => {
-    //   console.log(result);
-      this.fields = [
-        { label: 'Kitchen Name', type: 'text', bootstrapGridClass: "col-lg-12", name: "name", validations: [Validators.required], required: true, value: kitchen ? kitchen.name : '' },
-        
-        { label: 'Status', type: 'select', bootstrapGridClass: "col-lg-12", name: "status", validations: [Validators.required], required: true,
-          value: kitchen ? kitchen.status : 'active', options: Status
-         },
-        //  { label: 'Managers', type: 'ngselectname', bootstrapGridClass: "col-lg-12", name: "manager_id",validations: [Validators.required], required: true, value: kitchen ? kitchen.manager_id : '', options: result['data']}
+          // const result = forkJoin(categories, kicthen);
 
-            ]      
-      this.form['form_fields'] = this.fields;
-      this.form['FormbootstrapGridClass'] = 'col-lg-9';
-      this.form['map'] = false;
-      this.form['MapbootstrapGridClass'] = 'col-lg-4';
-      this.form['image'] = true;
-      this.form['ImagebootstrapGridClass'] = 'col-lg-3';
-      this.form['img_height'] = "150px";
-      this.form['img_width'] = "200px";
-      this.form['image_url'] = kitchen ? kitchen.image : null;
-      this.form['submit'] = 'Save';
-      this.form['attribute'] = true;
-      this.loaded = true;
-    }
-    } );
+          // result.subscribe((result) => {
+          //   console.log(result);
+          this.fields = [
+            { label: 'Kitchen Name', type: 'text', bootstrapGridClass: "col-lg-12", name: "name", validations: [Validators.required, Validators.maxLength(50)], required: true, value: kitchen ? kitchen.name : '' },
+
+            {
+              label: 'Status', type: 'select', bootstrapGridClass: "col-lg-12", name: "status", validations: [Validators.required], required: true,
+              value: kitchen ? kitchen.status : 'active', options: Status
+            },
+            //  { label: 'Managers', type: 'ngselectname', bootstrapGridClass: "col-lg-12", name: "manager_id",validations: [Validators.required], required: true, value: kitchen ? kitchen.manager_id : '', options: result['data']}
+
+          ]
+          this.form['form_fields'] = this.fields;
+          this.form['FormbootstrapGridClass'] = 'col-lg-9';
+          this.form['map'] = false;
+          this.form['MapbootstrapGridClass'] = 'col-lg-4';
+          this.form['image'] = true;
+          this.form['ImagebootstrapGridClass'] = 'col-lg-3';
+          this.form['img_height'] = "150px";
+          this.form['img_width'] = "200px";
+          this.form['image_url'] = kitchen ? kitchen.image : null;
+          this.form['submit'] = 'Save';
+          this.form['attribute'] = true;
+          this.loaded = true;
+        }
+      });
   }
 
   getKitchenDataById(id) {
@@ -106,7 +107,7 @@ export class AddKitchenComponent implements OnInit {
     this.clear_form = false;
     this.submit_clicked = true;
     //delete data['product_attributes'];
-   // data['is_tax_included'] == '' ? data['is_tax_included'] = false : data['is_tax_included'];
+    // data['is_tax_included'] == '' ? data['is_tax_included'] = false : data['is_tax_included'];
 
     console.log(data);
 

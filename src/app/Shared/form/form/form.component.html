@@ -90,7 +90,7 @@
               <app-errors [field_name]="fields[index].label" [errors]='Form.controls[fields[index].name].errors'>
               </app-errors>
             </div>
-<!-- 
+            <!-- 
             <div class="form-group" *ngIf="fields[index].type == 'franchise_multiple'">
               <label>{{fields[index].label}}<span *ngIf="fields[index].required" class="required">*</span></label>
               <select *ngIf="fields[index].name" multiple class="form-control selectpicker" data-style="btn-select"
@@ -158,9 +158,14 @@
             </div>
 
             <div class="form-group" *ngIf="fields[index].type == 'attribute'">
-              <label>{{fields[index].label}} <button type="button" style="color: white;margin-left: 6px;"
-                  class="btn btn-sm btn-success" (click)="addAttribute()"><i
-                    class="icofont-ui-add"></i></button></label>
+              <label>{{fields[index].label}}
+
+                <button type="button" style="color: white;margin-left: 6px;" class="btn btn-sm btn-success"
+                  (click)="addAttribute()"><i class="icofont-ui-add"></i></button>
+                  <button type="button" style="color: white;margin-left: 6px;" class="btn btn-sm btn-danger"
+                  (click)="minusAttribute()"><i style="margin-top: -2px;" class="fa fa-minus"></i></button>
+
+              </label>
               <div formArrayName="product_attributes">
                 <div *ngFor="let attribute of Form.controls.product_attributes.controls; let i = index"
                   [formGroupName]="i">
@@ -174,8 +179,8 @@
                   </div>
                 </div>
               </div>
-
             </div>
+
             <div class="form-group" *ngIf="fields[index].type == 'textarea'">
               <label>{{fields[index].label}}<span *ngIf="fields[index].required" class="required">*</span></label>
               <textarea *ngIf="fields[index].name" class="form-control" formControlName="{{fields[index].name}}"
@@ -190,9 +195,6 @@
             <!-- <button [disabled]="submit_clicked" *ngIf="fields[index].type == 'submit'" class="btn btn-primary  btn-lg"
               type="submit" (click)="displayValidations()">{{fields[index].label}}</button> -->
 
-            <div>
-
-            </div>
             <!-- <button style="margin-left: -50px;" *ngIf="fields[index].type == 'edit'" class="btn btn-primary pull-right" type="submit" (click)="displayValidations()">{{fields[index].label}}</button> -->
 
           </div>

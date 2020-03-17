@@ -135,7 +135,7 @@ export class AddExpenseComponent implements OnInit {
     //     if (!result['error']) {
     //       this.option=result['data']
     this.fields = [
-      { label: 'Expense', type: 'text', bootstrapGridClass: "col-lg-6", name: "title", validations: [Validators.required], required: true, value: expense ? expense.title : '' },
+      { label: 'Expense', type: 'text', bootstrapGridClass: "col-lg-6", name: "title", validations: [Validators.required, Validators.maxLength(50)], required: true, value: expense ? expense.title : '' },
       { label: 'Amount', type: 'number', bootstrapGridClass: "col-lg-6", name: "amount", validations: [Validators.required, Validators.pattern(validation_patterns.decimal_numbers)], required: true, value: expense ? expense.amount : '' },
 
       // {

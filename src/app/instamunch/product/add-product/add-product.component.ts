@@ -38,7 +38,7 @@ export class AddProductComponent implements OnInit {
       // console.log(category);
     }
     else {
-      this.edit= false;
+      this.edit = false;
       this.generateForm();
     }
   }
@@ -52,7 +52,7 @@ export class AddProductComponent implements OnInit {
     result.subscribe((result) => {
       console.log(result);
       this.fields = [
-        { label: 'Product Name', type: 'text', bootstrapGridClass: "col-lg-12", name: "name", validations: [Validators.required], required: true, value: product ? product.name : '' },
+        { label: 'Product Name', type: 'text', bootstrapGridClass: "col-lg-12", name: "name", validations: [Validators.required,Validators.maxLength(50)], required: true, value: product ? product.name : '' },
         {
           label: 'Kitchen', type: 'ngselect', bootstrapGridClass: "col-lg-6", name: "kitchen_id", validations: [Validators.required], required: true,
           value: product ? product.kitchen_id : '', options: result[1]['data']
@@ -62,14 +62,15 @@ export class AddProductComponent implements OnInit {
         //   value: product ? product.category_id : '', options: result[0]['data']
         // },
 
-        { label: 'Category', type: 'ngselect', bootstrapGridClass: "col-lg-6", name: "category_id",validations: [Validators.required], required: true, value: product ? product.category_id : '', options: result[0]['data']
-         }
-    , {
+        {
+          label: 'Category', type: 'ngselect', bootstrapGridClass: "col-lg-6", name: "category_id", validations: [Validators.required], required: true, value: product ? product.category_id : '', options: result[0]['data']
+        }
+        , {
           label: 'Status', type: 'select', bootstrapGridClass: "col-lg-6", name: "status", validations: [Validators.required], required: true,
           value: product ? product.status : 'active', options: Status
         },
         {
-          label: 'Price', type: 'number', bootstrapGridClass: "col-lg-6", name: "price", validations: [Validators.required,Validators.pattern(validation_patterns.decimal_numbers)], required: true,
+          label: 'Price', type: 'number', bootstrapGridClass: "col-lg-6", name: "price", validations: [Validators.required, Validators.pattern(validation_patterns.decimal_numbers)], required: true,
           value: product ? product.price : ''
         },
         {
@@ -78,11 +79,10 @@ export class AddProductComponent implements OnInit {
         {
           label: 'Tax Included', type: 'checkbox', bootstrapGridClass: "col-lg-12", name: "is_tax_included", required: false, value: product ? product.is_tax_included : false
         },
-       
         // {
-        //   label: 'Attribute List', type: 'attribute', bootstrapGridClass: "col-lg-12", name: "attr", validations: [Validators.required], required: false
+        //   label: 'Attribute List', type: 'attribute', bootstrapGridClass: "col-lg-12", name: "attr", required: false
         // },
-        { label: 'Description', type: 'textarea', bootstrapGridClass: "col-lg-12", name: "detail", value: product ? product.detail : '' }
+        { label: 'Description', type: 'textarea', bootstrapGridClass: "col-lg-12", name: "detail", validations:[Validators.maxLength(250)], value: product ? product.detail : '' }
       ]
       this.form['form_fields'] = this.fields;
       this.form['FormbootstrapGridClass'] = 'col-lg-9';
@@ -94,7 +94,7 @@ export class AddProductComponent implements OnInit {
       this.form['img_width'] = "200px";
       this.form['image_url'] = product ? product.image : null;
       this.form['submit'] = 'Save';
-      this.form['attribute'] = false;
+      // this.form['attribute'] = true;
       this.loaded = true;
     });
   }
@@ -121,19 +121,22 @@ export class AddProductComponent implements OnInit {
   }
 
   getProductData(data) {
-    console.log(data);
     this.clear_form = false;
     this.submit_clicked = true;
-    delete data['product_attributes'];
+    delete data['attr'];
+
     data['is_tax_included'] == '' ? data['is_tax_included'] = false : data['is_tax_included'];
 
     console.log(data);
 
     const product_id = this.active_route.snapshot.paramMap.get('id');
+    
     if (product_id != null) {
       this.editProduct(data, product_id);
     }
     else {
+      data['product_attributes'] = { attributes_list: this.FormatAttributesList(data['product_attributes']) };
+      console.log(data);
       this.addProduct(data);
     }
 

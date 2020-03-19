@@ -8,3 +8,8 @@
     height: 100%;
     width: 100%;
  }
+
+ th{
+     padding-left: 10px;
+     padding-right: 10px;
+ }

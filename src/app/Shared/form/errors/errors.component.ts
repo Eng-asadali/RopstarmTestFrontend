@@ -29,7 +29,6 @@ export class ErrorsComponent implements OnInit {
 
   ngOnChanges(changes: SimpleChanges) {
     this.errors_array = Object.keys(this.errors);
-console.log(this.errors_array)
     if (this.errors_array[0] == 'pattern') {
       if (this.errors[this.errors_array[0]]['requiredPattern'] == validation_patterns.alphabets)
         this.alphabets_only_error = true;
@@ -60,7 +59,7 @@ console.log(this.errors_array)
     // console.log(this.errors[this.errors_array[0]]['requiredPattern'])
     // console.log(this.errors[this.errors_array[0]])
     // console.log(this.decimal_numbers_error);
-    console.log(this.errors);
+    // console.log(this.errors);
    //  console.log(this.errors_array)
   }
 

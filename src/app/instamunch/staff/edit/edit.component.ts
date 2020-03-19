@@ -8,7 +8,8 @@ import { FieldConfig } from '../../../Interfaces/feildConfig';
 import { StaffService } from '../../Services/staff.service';
 import { SwalAlert } from '../../../Shared/swalAlerts';
 import { experience, SalaryDisbursement, StaffType, JobShift } from '../../Options/staff';
-import{validateDate}from '../../../Shared/Custom Validators/dateValidator'
+import { validateDate } from '../../../Shared/Custom Validators/dateValidator';
+import { validation_patterns } from '../../../Shared/validation_patterns';
 
 @Component({
   selector: 'app-edit',
@@ -53,15 +54,15 @@ export class EditComponent implements OnInit {
   }
 
   generateForm(staff?: Staff) {
-    
+
     this.fields = [
-      { label: 'First Name', type: 'text', bootstrapGridClass: "col-lg-6", name: "first_name", validations: [Validators.required], required: true, value: staff ? staff.first_name : '' },
+      { label: 'First Name', type: 'text', bootstrapGridClass: "col-lg-6", name: "first_name", validations: [Validators.required, Validators.pattern(validation_patterns.nameRegex), Validators.maxLength(25)], required: true, value: staff ? staff.first_name : '' },
       {
-        label: 'Last Name', type: 'text', bootstrapGridClass: "col-lg-6", name: "last_name", validations: [Validators.required], required: true, value: staff ? staff.last_name : ''
+        label: 'Last Name', type: 'text', bootstrapGridClass: "col-lg-6", name: "last_name", validations: [Validators.required, Validators.pattern(validation_patterns.nameRegex), Validators.maxLength(25)], required: true, value: staff ? staff.last_name : ''
       }
-      , { label: 'Date of Birth', type: 'date', bootstrapGridClass: "col-lg-6", name: "date_of_birth", validations: [Validators.required,validateDate], value: staff ? staff.date_of_birth : '' }
+      , { label: 'Date of Birth', type: 'date', bootstrapGridClass: "col-lg-6", name: "date_of_birth", validations: [Validators.required, validateDate], value: staff ? staff.date_of_birth : '' }
       , { label: 'Salary', type: 'number', bootstrapGridClass: "col-lg-6", name: "salary", validations: [Validators.required], value: staff ? staff.salary : '' }
-      , { label: 'Salary Disbursement', type: 'ngselect', bootstrapGridClass: "col-lg-6", name: "salary_disbursement", validations: [Validators.required], value: staff ? staff.salary_disbursement : '', options: SalaryDisbursement }
+      , { label: 'Salary Disbursement', type: 'ngselect', bootstrapGridClass: "col-lg-6", name: "salary_disbursement", validations: [Validators.required,Validators.pattern(validation_patterns.decimal_numbers),Validators.max(999999999999999999)], value: staff ? staff.salary_disbursement : '', options: SalaryDisbursement }
       , { label: 'Job Shift', type: 'ngselect', bootstrapGridClass: "col-lg-6", name: "job_shift", validations: [Validators.required], value: staff ? staff.job_shift : '', options: JobShift }
       , {
         label: 'Type', type: 'ngselect', bootstrapGridClass: "col-lg-6", name: "type", validations: [Validators.required], required: true,
@@ -86,7 +87,7 @@ export class EditComponent implements OnInit {
     this.submit_clicked = true;
 
     data['is_epos'] = true;
-   // data['branch_id'] = 1;
+    // data['branch_id'] = 1;
 
     if (data['image'] != undefined) {
       data['user_image'] = data['image'];

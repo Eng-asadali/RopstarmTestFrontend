@@ -7,6 +7,4 @@ export const transactionTypes = [
 export const expenseTypes = [
     { id: 'food', name: 'food' },
     { id: 'hygiene', name: 'hygiene' },
-   
-    
 ]

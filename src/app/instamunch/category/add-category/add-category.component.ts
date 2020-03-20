@@ -6,10 +6,8 @@ import { Category } from '../category';
 import { FieldConfig } from '../../../Interfaces/feildConfig';
 import { CategoryService } from '../../Services/category.service';
 import { SwalAlert } from '../../../Shared/swalAlerts';
-import { NgSelectModule, NgOption } from '@ng-select/ng-select';
-import { validation_patterns } from '../../../Shared/validation_patterns';
-
 import { Status } from '../../Options/status';
+
 @Component({
   selector: 'app-add-category',
   templateUrl: './add-category.component.html',

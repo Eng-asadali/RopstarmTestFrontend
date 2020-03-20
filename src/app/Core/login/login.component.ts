@@ -36,7 +36,7 @@ export class LoginComponent implements OnInit {
         var response: response = data;
         if (!response.error) {
           this.dataSharingSrvice.setOption('reload', true);
-          this.router.navigate(['instamunch']);
+          this.router.navigate(['admin']);
         }
         else {
           this.loginError = true;

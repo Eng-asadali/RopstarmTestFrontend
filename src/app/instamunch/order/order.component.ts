@@ -32,7 +32,7 @@ export class OrderComponent implements OnInit {
   constructor(private OrderService: OrderService, private router: Router) { }
 
   ngOnInit() {
-    this.table_headers = ['select', 'name','floor', 'order status', 'order datetime', 'price', 'actions'];
+    this.table_headers = ['select', 'name', 'floor', 'order status', 'order datetime', 'price', 'actions'];
     this.orderListing();
   }
 
@@ -66,7 +66,7 @@ export class OrderComponent implements OnInit {
   getOrderId(id, action) {
     console.log("order id" + id)
     if (action == 'edit')
-      this.router.navigate(['/instamunch/order/edit', id])
+      this.router.navigate([this.router.url + '/edit', id]);
     else
       this.deleteOrderById(id);
 

@@ -26,7 +26,7 @@ import { AddExpenseComponent } from './instamunch/expense/add-expense/add-expens
 const routes: Routes = [
   { path: '', component: LoginComponent, pathMatch: 'full' },
   {
-    path: 'instamunch', component: DashboardComponent, canActivate: [AuthGuard],
+    path: 'admin', component: DashboardComponent, canActivate: [AuthGuard],
 
     children: [
       {

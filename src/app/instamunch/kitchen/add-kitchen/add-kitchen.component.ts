@@ -184,7 +184,8 @@ export class AddKitchenComponent implements OnInit {
   }
 
   navigateToProductListing() {
-    this.router.navigate(['instamunch/Kitchen'])
+    let url = this.router.url.split('/');
+    this.router.navigate([url[0]+"/"+url[1]+"/"+url[2]]);
   }
 
 }

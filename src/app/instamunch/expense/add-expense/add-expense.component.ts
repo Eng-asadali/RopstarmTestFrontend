@@ -180,6 +180,7 @@ export class AddExpenseComponent implements OnInit {
 
 
   navigateToCategoryListing() {
-    this.route.navigate(['instamunch/expense']);
+    let url = this.route.url.split('/');
+    this.route.navigate([url[0]+"/"+url[1]+"/"+url[2]]);
   }
 }

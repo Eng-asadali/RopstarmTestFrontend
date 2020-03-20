@@ -61,7 +61,7 @@ export class StaffComponent implements OnInit {
   getStaffId(staff_id, action) {
     console.log('staff id', staff_id);
     if (action == 'edit')
-      this.router.navigate(['/instamunch/staff/edit', staff_id]);
+      this.router.navigate([this.router.url + '/edit', staff_id]);
     else {
       this.deleteStaffById(staff_id);
     }

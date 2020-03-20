@@ -129,7 +129,8 @@ export class EditComponent implements OnInit {
 
 
   navigateToProductListing() {
-    this.router.navigate(['instamunch/staff'])
+    let url = this.router.url.split('/');
+    this.router.navigate([url[0]+"/"+url[1]+"/"+url[2]]);
   }
 
 }

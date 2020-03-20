@@ -167,6 +167,7 @@ export class AddCategoryComponent implements OnInit {
 
 
   navigateToCategoryListing() {
-    this.route.navigate(['instamunch/category']);
+    let url = this.route.url.split('/');
+    this.route.navigate([url[0]+"/"+url[1]+"/"+url[2]]);
   }
 }

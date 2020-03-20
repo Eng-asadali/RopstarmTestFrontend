@@ -132,7 +132,7 @@ export class KitchenComponent implements OnInit {
   getKitchenId(id, action) {
     console.log('Kitchen id', id);
     if (action == 'edit')
-    this.router.navigate(['/instamunch/Kitchen/edit', id]);
+    this.router.navigate([ this.router.url + '/edit', id]);
     else {
       this.delete(id);
     }

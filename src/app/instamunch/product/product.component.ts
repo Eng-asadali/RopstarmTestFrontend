@@ -36,7 +36,7 @@ export class ProductComponent implements OnInit {
     private currentActivatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
-    this.table_headers = ['select', 'image', 'name','status', 'category_id', 'estimated_prepare_time',  'actions'];
+    this.table_headers = ['select', 'image', 'name', 'status', 'category_id', 'estimated_prepare_time', 'actions'];
     this.getProductsList();
   }
 
@@ -73,7 +73,7 @@ export class ProductComponent implements OnInit {
   getProductId(id, action) {
     console.log('product id', id);
     if (action == 'edit')
-      this.router.navigate(['/instamunch/product/edit', id]);
+      this.router.navigate([this.router.url + '/edit', id]);
     else
       this.deleteProductById(id);
   }
@@ -124,8 +124,8 @@ export class ProductComponent implements OnInit {
         )
       }
     }
-    else{
-      SwalAlert.errorAlert('','Please Select Products to Delete!');
+    else {
+      SwalAlert.errorAlert('', 'Please Select Products to Delete!');
     }
 
 
@@ -142,7 +142,7 @@ export class ProductComponent implements OnInit {
     return numSelected == numRows;
   }
 
-  test(){
+  test() {
     console.log('test');
     this.selection.clear();
   }

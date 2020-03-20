@@ -74,7 +74,7 @@ export class ExpenseComponent implements OnInit {
   getExpenseId(id, action) {
     console.log('expense id', id);
     if (action == 'edit')
-      this.router.navigate(['instamunch/expense/edit/', id]);
+      this.router.navigate([this.router.url + '/edit', id]);
     else {
       this.deleteExpenseById(id);
     }

@@ -106,7 +106,8 @@ export class EditOrderComponent implements OnInit {
   }
 
   navigateToOrderListing() {
-    this.router.navigate(['instamunch/order']);
+    let url = this.router.url.split('/');
+    this.router.navigate([url[0]+"/"+url[1]+"/"+url[2]]);
   }
 
   // updateOrderData(data){

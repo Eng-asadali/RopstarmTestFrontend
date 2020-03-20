@@ -94,15 +94,29 @@ export class FormComponent implements OnInit {
           array.push(i);
         }
         if (this.fields[i].value != undefined) {
-          this.Form.addControl(this.fields[i].name, new FormControl(this.fields[i].value, this.fields[i].validations));
+          if (this.fields[i].type != 'attribute')
+            this.Form.addControl(this.fields[i].name, new FormControl(this.fields[i].value, this.fields[i].validations));
         }
         else
           this.Form.addControl(this.fields[i].name, new FormControl('', this.fields[i].validations));
+
+        if (this.fields[i].type == 'attribute' && this.fields[i].value != '') {
+          this.Form.addControl('product_attributes', this.fb.array([]));
+
+          const product_attributes = this.parseProductAttributes(this.fields[i].value);
+          for (let i = 0; i < product_attributes.length; i++) {
+            this.addAttribute(product_attributes[i].name, product_attributes[i].value);
+          }
+          console.log(product_attributes);
+        }
       }
       if (this.fields[i].type == 'submit') {
         array.push(i);
         this.row.push(array);
       }
+
+
+
     }
 
     if (this.form['attribute']) {
@@ -121,18 +135,38 @@ export class FormComponent implements OnInit {
     // }, 10);
   }
 
-  addAttribute() {
+  parseProductAttributes(product_attributes: string) {
+    console.log(product_attributes);
+    const object = product_attributes;
+    let array = [];
+    var attributes_list = object['attributes_list'];
+    for (let i = 0; i < attributes_list.length; i++) {
+      let formatted_obj = {
+        name: attributes_list[i]['name'],
+        value: attributes_list[i]['value'].toString()
+      }
+      array.push(formatted_obj);
+    }
+
+    console.log(array);
+    return array;
+
+
+  }
+
+  addAttribute(name?, value?) {
     var arr = this.Form.get('product_attributes');
     const attribute = this.fb.group({
-      name: '',
-      value: ''
+      name: name ? name : '',
+      value: value ? value : ''
     });
     (arr as FormArray).push(attribute);
   }
 
   minusAttribute() {
     var arr = this.Form.get('product_attributes');
-    (arr as FormArray).removeAt(0);
+    let last_index = (arr as FormArray).length - 1 ;
+    (arr as FormArray).removeAt(last_index);
   }
 
   submit() {

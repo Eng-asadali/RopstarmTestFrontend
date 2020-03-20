@@ -136,7 +136,7 @@ export class AddExpenseComponent implements OnInit {
     //       this.option=result['data']
     this.fields = [
       { label: 'Expense', type: 'text', bootstrapGridClass: "col-lg-6", name: "title", validations: [Validators.required, Validators.maxLength(50)], required: true, value: expense ? expense.title : '' },
-      { label: 'Amount', type: 'number', bootstrapGridClass: "col-lg-6", name: "amount", validations: [Validators.required, Validators.pattern(validation_patterns.decimal_numbers)], required: true, value: expense ? expense.amount : '' },
+      { label: 'Amount', type: 'number', bootstrapGridClass: "col-lg-6", name: "amount", validations: [Validators.required, Validators.pattern(validation_patterns.decimal_numbers),Validators.max(999999999999999999)], required: true, value: expense ? expense.amount : '' },
 
       // {
       //   label: 'Parent Category', type: 'select', bootstrapGridClass: "col-lg-6", name: "parent_category_id", validations: [Validators.required], required: true,

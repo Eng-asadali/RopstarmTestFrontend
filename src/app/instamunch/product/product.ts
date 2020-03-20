@@ -9,4 +9,5 @@ export interface Product {
     image?: string;
     is_tax_included: boolean;
     estimated_prepare_time?: string;
+    product_attributes: string;
   }

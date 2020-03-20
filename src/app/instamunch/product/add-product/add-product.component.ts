@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Validators } from '@angular/forms';
-import { of, forkJoin } from 'rxjs';
+import { of, forkJoin, empty } from 'rxjs';
 
 import { Product } from '../product';
 import { FieldConfig } from '../../../Interfaces/feildConfig';
@@ -52,7 +52,7 @@ export class AddProductComponent implements OnInit {
     result.subscribe((result) => {
       console.log(result);
       this.fields = [
-        { label: 'Product Name', type: 'text', bootstrapGridClass: "col-lg-12", name: "name", validations: [Validators.required,Validators.maxLength(50)], required: true, value: product ? product.name : '' },
+        { label: 'Product Name', type: 'text', bootstrapGridClass: "col-lg-12", name: "name", validations: [Validators.required, Validators.maxLength(50)], required: true, value: product ? product.name : '' },
         {
           label: 'Kitchen', type: 'ngselect', bootstrapGridClass: "col-lg-6", name: "kitchen_id", validations: [Validators.required], required: true,
           value: product ? product.kitchen_id : '', options: result[1]['data']
@@ -61,7 +61,6 @@ export class AddProductComponent implements OnInit {
         //   label: 'Category', type: 'select', bootstrapGridClass: "col-lg-6", name: "category_id", validations: [Validators.required], required: true,
         //   value: product ? product.category_id : '', options: result[0]['data']
         // },
-
         {
           label: 'Category', type: 'ngselect', bootstrapGridClass: "col-lg-6", name: "category_id", validations: [Validators.required], required: true, value: product ? product.category_id : '', options: result[0]['data']
         }
@@ -70,19 +69,19 @@ export class AddProductComponent implements OnInit {
           value: product ? product.status : 'active', options: Status
         },
         {
-          label: 'Price', type: 'number', bootstrapGridClass: "col-lg-6", name: "price", validations: [Validators.required, Validators.pattern(validation_patterns.decimal_numbers)], required: true,
+          label: 'Price', type: 'number', bootstrapGridClass: "col-lg-6", name: "price", validations: [Validators.required, Validators.pattern(validation_patterns.decimal_numbers), Validators.max(999999999999999999)], required: true,
           value: product ? product.price : ''
         },
         {
-          label: 'Estimated Prepare Time (Mins)', type: 'number', bootstrapGridClass: "col-lg-12", name: "estimated_prepare_time", validations: [Validators.pattern(validation_patterns.postive_numbers)], required: false, value: product ? product.estimated_prepare_time : ''
+          label: 'Estimated Prepare Time (Mins)', type: 'number', bootstrapGridClass: "col-lg-12", name: "estimated_prepare_time", validations: [Validators.pattern(validation_patterns.postive_numbers), Validators.max(999999999999999999)], required: false, value: product ? product.estimated_prepare_time : ''
         },
         {
           label: 'Tax Included', type: 'checkbox', bootstrapGridClass: "col-lg-12", name: "is_tax_included", required: false, value: product ? product.is_tax_included : false
         },
-        // {
-        //   label: 'Attribute List', type: 'attribute', bootstrapGridClass: "col-lg-12", name: "attr", required: false
-        // },
-        { label: 'Description', type: 'textarea', bootstrapGridClass: "col-lg-12", name: "detail", validations:[Validators.maxLength(250)], value: product ? product.detail : '' }
+        {
+          label: 'Attribute List', type: 'attribute', bootstrapGridClass: "col-lg-12", name: "attr", required: false, value: product ? product.product_attributes : ''
+        },
+        { label: 'Description', type: 'textarea', bootstrapGridClass: "col-lg-12", name: "detail", validations: [Validators.maxLength(250)], value: product ? product.detail : '' }
       ]
       this.form['form_fields'] = this.fields;
       this.form['FormbootstrapGridClass'] = 'col-lg-9';
@@ -94,7 +93,7 @@ export class AddProductComponent implements OnInit {
       this.form['img_width'] = "200px";
       this.form['image_url'] = product ? product.image : null;
       this.form['submit'] = 'Save';
-      // this.form['attribute'] = true;
+      this.form['attribute'] = true;
       this.loaded = true;
     });
   }
@@ -127,19 +126,23 @@ export class AddProductComponent implements OnInit {
 
     data['is_tax_included'] == '' ? data['is_tax_included'] = false : data['is_tax_included'];
 
-    console.log(data);
+    // console.log(data);
 
     const product_id = this.active_route.snapshot.paramMap.get('id');
-    
+    let formatted_attributes = this.FormatAttributesList(data['product_attributes']);
+    // console.log(formatted_attributes.length, formatted_attributes);
+    // if (formatted_attributes != null)
+    data['product_attributes'] = JSON.stringify({ attributes_list: formatted_attributes });
+    // else
+    //   delete data['product_attributes'];
+
     if (product_id != null) {
       this.editProduct(data, product_id);
     }
     else {
-      data['product_attributes'] = { attributes_list: this.FormatAttributesList(data['product_attributes']) };
-      console.log(data);
+      // console.log(data);
       this.addProduct(data);
     }
-
   }
 
   editProduct(data, id) {
@@ -184,16 +187,45 @@ export class AddProductComponent implements OnInit {
   }
 
   FormatAttributesList(data) {
-    let attributes_list = {};
-    console.log(data);
-    data.forEach(element => {
-      console.log(element, element.value);
-      element.value = element.value.split(',');
-      element['is_selected'] = this.formatSelected(element.value.length);
+    // let attributes_list = {};
+    // console.log(data);
+    let is_empty = true;
+    for (let i = 0; i < data.length; i++) {
+      if (data[i].value != '' && data[i].name != '' && data[i].value != "" && data[i].name != "") {
+        data[i].value = data[i].value.split(',');
+        data[i]['is_selected'] = this.formatSelected(data[i].value.length);
+        is_empty = false;
+      }
+      else {
+        delete data[i];
+      }
+
+    }
+
+    var filtered = data.filter(function (el) {
+      return el != null;
     });
-    attributes_list = data;
-    return attributes_list;
-    console.log(data);
+    return filtered;
+
+    // if (!is_empty) {
+    //   var filtered = data.filter(function (el) {
+    //     return el != null;
+    //   });
+    //   return filtered;
+    // }
+    // else {
+    //   return null;
+    // }
+
+
+
+    // data.forEach(element => {
+    //   element.value = element.value.split(',');
+    //   element['is_selected'] = this.formatSelected(element.value.length);
+    // });
+
+    // attributes_list = data;
+    // return data;
   }
 
   formatSelected(length) {

@@ -21,6 +21,11 @@ import { AddStaffComponent } from './instamunch/staff/add-staff/add-staff.compon
 import { LoginComponent } from './Core/login/login.component';
 import { PageNotFoundComponent } from './Core/page-not-found/page-not-found.component';
 import { AddExpenseComponent } from './instamunch/expense/add-expense/add-expense.component';
+import { LogsComponent } from './instamunch/staff-log/logs/logs.component';
+import { AddLogsComponent } from './instamunch/staff-log/add-logs/add-logs.component';
+import { QueryListComponent } from './instamunch/staff-log/query-list/query-list.component';
+import { AddQueryComponent } from './instamunch/staff-log/add-query/add-query.component';
+import { EditQuestionComponent } from './instamunch/staff-log/edit-question/edit-question.component';
 
 
 const routes: Routes = [
@@ -84,6 +89,24 @@ const routes: Routes = [
       },
       {
         path:'expense/edit/:id',component:AddExpenseComponent
+      },
+      {
+        path: 'logs', component: LogsComponent
+      },
+      {
+        path: 'logs/add', component: AddLogsComponent
+      },     
+      {
+        path: 'logs/edit/:id', component: AddLogsComponent
+      },
+      {
+        path: 'log/queries/:id', component: QueryListComponent
+      },
+      {
+        path: 'log/query/add/:id',component: AddQueryComponent
+      },
+      {
+        path: 'log/query/edit/:id',component:  EditQuestionComponent
       },
       {
         path: 'sales-report', component: SalesComponent, resolve: {

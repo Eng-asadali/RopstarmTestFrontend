@@ -36,7 +36,7 @@ export class ProductComponent implements OnInit {
     private currentActivatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
-    this.table_headers = ['select', 'image', 'name', 'status', 'category_id', 'estimated_prepare_time', 'actions'];
+    this.table_headers = ['select', 'image', 'name', 'status',  'price','estimated_prepare_time', 'category_id','actions'];
     this.getProductsList();
   }
 

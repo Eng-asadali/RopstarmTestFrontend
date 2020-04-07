@@ -134,4 +134,10 @@ export class CategoryComponent implements OnInit {
   navigateToCategoryAdd() {
     this.router.navigate(['add'], { relativeTo: this.currentActivatedRoute });
   }
+
+  refresh(){
+    this.loaded = false;
+    this.dataSource.data = [];
+    this.getCategoriesList();
+  }
 }

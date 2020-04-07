@@ -44,7 +44,11 @@ import { KitchenComponent } from './instamunch/kitchen/kitchen.component';
 import { AddKitchenComponent } from './instamunch/kitchen/add-kitchen/add-kitchen.component';
 import { ExpenseComponent } from './instamunch/expense/expense.component';
 import { AddExpenseComponent } from './instamunch/expense/add-expense/add-expense.component';
-//import{dateValidator} from './Shared/Custom Validators/dateValidator';
+import { AddLogsComponent } from './instamunch/staff-log/add-logs/add-logs.component';
+import { AddQueryComponent } from './instamunch/staff-log/add-query/add-query.component';
+import { EditQuestionComponent } from './instamunch/staff-log/edit-question/edit-question.component';
+import { LogsComponent } from './instamunch/staff-log/logs/logs.component';
+import { QueryListComponent } from './instamunch/staff-log/query-list/query-list.component';
 
 @NgModule({
   declarations: [
@@ -70,11 +74,14 @@ import { AddExpenseComponent } from './instamunch/expense/add-expense/add-expens
     AddKitchenComponent,
     ExpenseComponent,
     AddExpenseComponent,
-  //  dateValidator
+    AddLogsComponent,
+    AddQueryComponent,
+    EditQuestionComponent,
+    QueryListComponent,
+    LogsComponent
   ],
 
   imports: [
-   
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
@@ -92,7 +99,7 @@ import { AddExpenseComponent } from './instamunch/expense/add-expense/add-expens
     NgSelectModule,
     MatDatepickerModule,
     MatProgressSpinnerModule
-    
+
   ],
 
   providers: [HttpService,

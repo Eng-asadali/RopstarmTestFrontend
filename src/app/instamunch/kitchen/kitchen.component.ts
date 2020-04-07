@@ -61,6 +61,13 @@ export class KitchenComponent implements OnInit {
     );
   }
 
+  refresh(){
+    this.loaded = false;
+    this.dataSource.data = [];
+    this.getKitchenList();
+  }
+     
+  
   navigateToKitchenAdd() {
     this.router.navigate(['add'], { relativeTo: this.currentActivatedRoute });
   }

@@ -57,7 +57,13 @@ export class StaffComponent implements OnInit {
       }
     );
   }
+  
+  refresh(){
+    this.loaded = false;
+    this.dataSource.data = [];
+    this.getStaffList() ;
 
+  }
   getStaffId(staff_id, action) {
     console.log('staff id', staff_id);
     if (action == 'edit')

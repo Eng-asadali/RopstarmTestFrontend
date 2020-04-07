@@ -63,6 +63,13 @@ export class OrderComponent implements OnInit {
     );
   }
 
+
+  refresh(){
+    this.loaded = false;
+    this.dataSource.data = [];
+    this.orderListing();
+  }
+
   getOrderId(id, action) {
     console.log("order id" + id)
     if (action == 'edit')

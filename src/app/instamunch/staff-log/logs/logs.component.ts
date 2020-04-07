@@ -59,6 +59,12 @@ export class LogsComponent implements OnInit {
     );
   }
 
+  refresh(){
+    this.loaded = false;
+    this.dataSource.data = [];
+    this.getStaffList();
+  }
+  
   getLogId(staff_id, action) {
     console.log('log id', staff_id);
     if (action == 'edit')

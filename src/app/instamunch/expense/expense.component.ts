@@ -67,6 +67,14 @@ export class ExpenseComponent implements OnInit {
     );
   }
 
+
+  refresh(){
+    this.loaded = false;
+    this.dataSource.data = [];
+    this.getExpensesList();
+  }
+
+
   navigateToProductAdd() {
     this.router.navigate(['add'], { relativeTo: this.currentActivatedRoute });
   }

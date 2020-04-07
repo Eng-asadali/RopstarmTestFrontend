@@ -172,5 +172,10 @@ export class ProductComponent implements OnInit {
     let product_ids = array_of_objects.map(a => a.id);
     return product_ids;
   }
+  refresh(){
+    this.loaded = false;
+    this.dataSource.data = [];
+    this.getProductsList() ;
 
+  }
 }

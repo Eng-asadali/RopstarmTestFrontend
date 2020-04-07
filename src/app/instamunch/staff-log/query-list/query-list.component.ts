@@ -58,6 +58,14 @@ export class QueryListComponent implements OnInit {
     );
   }
 
+
+  refresh(){
+    this.loaded = false;
+    this.dataSource.data = [];
+    this.getQueriesList(this.currentActivatedRoute.snapshot.paramMap.get('id')) ;
+
+  }
+
   getQuestionId(staff_id, action) {
     console.log('question id', staff_id);
     if (action == 'edit')

@@ -70,7 +70,7 @@ export class LogsComponent implements OnInit {
     if (action == 'edit')
       this.router.navigate(['/admin/logs/edit', staff_id]);
     else if ((action == 'query')) {
-      this.router.navigate(['/admin/log/queries/', staff_id]);
+      this.router.navigate(['/admin/log/query/add', staff_id]);
 
     }
     else  {

@@ -1,7 +1,9 @@
 import { LogsService } from './../../Services/logs.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Validators } from '@angular/forms';
+import { MatPaginator, MatTableDataSource, MatSort } from '@angular/material';
+import { SelectionModel } from '@angular/cdk/collections';
 
 import { question } from '../question';
 import { FieldConfig } from '../../../Interfaces/feildConfig';
@@ -16,27 +18,48 @@ import{validateDate}from '../../../Shared/Custom Validators/dateValidator'
   styleUrls: ['./add-query.component.css']
 })
 export class AddQueryComponent implements OnInit {
+ 
+ 
+  dataSource = new MatTableDataSource<any>([]);
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  initialSelection = [];
+  allowMultiSelect = true;
+  selection = new SelectionModel<any>(this.allowMultiSelect, this.initialSelection);
+
+  table_headers: any = [];
+  data: any = [];
+  staff: any;
+  loaded: boolean = false;
+  kitchen_log_id:string
+  question_ids: any = [];
+ 
+ 
+ 
   form = {};
+
+
+
   fields: FieldConfig[] = [] as FieldConfig[];
   submit_clicked: boolean;
   clear_form: boolean;
   edit: boolean = false;
-  loaded = false;
+  
   question:question
   constructor(private LogsService: LogsService,
-    private active_route: ActivatedRoute, private router: Router) { }
+    private active_route: ActivatedRoute, private router: Router,private currentActivatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
-
+    this.table_headers = ['select', 'Query',  'actions'];
+    this.getQueriesList(this.currentActivatedRoute.snapshot.paramMap.get('id'));
+    this.kitchen_log_id=this.currentActivatedRoute.snapshot.paramMap.get('id')
+ 
     this.form['form_fields'] = this.fields;
   
       this.edit = false;
       this.loaded = true;
       this.generateForm();
-    
+      
 
-
-   
   }
 
   getQuestionById(id) {
@@ -93,8 +116,9 @@ export class AddQueryComponent implements OnInit {
   generateForm(question?: question) {
     //console.log("question"+questions.question)
     this.fields = [
-      { label: 'Question', type: 'text', bootstrapGridClass: "col-lg-12", name: "question", validations: [Validators.required,Validators.maxLength(50)], required: true, value: question ? question.question : '' }
-       
+      { label: 'Question', type: 'text', bootstrapGridClass: "col-lg-12", name: "question", validations: [Validators.required,Validators.maxLength(50)], required: true, value: question ? question.question : '' }     
+      ,{ label: 'Type', type: 'select', bootstrapGridClass: "col-lg-12", name: "type" }     
+
     ]
     this.form['form_fields'] = this.fields;
     this.form['FormbootstrapGridClass'] = 'col-lg-12';
@@ -115,8 +139,7 @@ export class AddQueryComponent implements OnInit {
     this.clear_form = false;
     this.submit_clicked = true;
    
-      this.addQuery(data)
-    
+      this.addQuery(data) 
   }
  
 
@@ -127,6 +150,7 @@ export class AddQueryComponent implements OnInit {
         if (!result['error']) {
           SwalAlert.sucessAlert('', 'Question Added Sucessfully!');
           this.clear_form = true;
+          this.getQueriesList(this.currentActivatedRoute.snapshot.paramMap.get('id'));
         }
         else {
           SwalAlert.errorAlert('', result['message'].charAt(0).toUpperCase() + result['message'].substring(1));
@@ -144,7 +168,140 @@ export class AddQueryComponent implements OnInit {
 
 
   navigateToQueryListing() {
-    this.router.navigate(['admin/log/queries/',this.active_route.snapshot.paramMap.get('id')])
+    this.router.navigate(['admin/logs'])
   }
+  getQueriesList(id) {
+    const question = this.LogsService.getQuestions(id);
+    question.subscribe(
+      result => {
+        console.log('Question list:', result);
+        if (!result['error']) {
+          this.staff = result['data'];
+          this.dataSource.data = this.staff;
+          this.dataSource.connect().next(this.staff);
+          this.dataSource.paginator = this.paginator;
+        }
+        else {
+          SwalAlert.errorAlert('', result['message'].charAt(0).toUpperCase() + result['message'].substring(1));
+        }
+        this.loaded = true;
+        this.selection.clear();
+      },
+      err => {
+        this.loaded = true;
+        console.error(err);
+      }
+    );
+  }
+
+  getQuestionId(staff_id, action) {
+    console.log('question id', staff_id);
+    if (action == 'edit')
+      this.router.navigate(['admin/log/query/edit/', staff_id]);
+    else {
+      this.deleteQuestionById(staff_id);
+    }
+  }
+
+  async deleteQuestionById(question_id) {
+    const response = await SwalAlert.getDeleteSwal();
+    if (response == true) {
+      this.loaded = false;
+      this.LogsService.deleteQuestionsById(question_id).subscribe(
+        result => {
+          if (!result['error']) {
+            SwalAlert.sucessAlert('', 'Staff Deleted Successfully!');
+            this.getQueriesList(this.currentActivatedRoute.snapshot.paramMap.get('id'));
+          }
+          else {
+            this.loaded = true;
+            SwalAlert.errorAlert('', result['message'].charAt(0).toUpperCase() + result['message'].substring(1));
+          }
+        },
+        err => {
+          this.loaded = true;
+          console.error(err);
+        }
+      );
+    }
+  }
+
+  async deleteMultipleQuestions() {
+    if (this.question_ids.length > 0) {
+      const response = await SwalAlert.getDeleteSwal();
+      if (response == true) {
+        this.loaded = false;
+        this.LogsService.deleteMultipeQuestions(this.question_ids).subscribe(
+          result => {
+            if (!result['error']) {
+              SwalAlert.sucessAlert('', 'Question Deleted Successfully!');
+              this.getQueriesList(this.currentActivatedRoute.snapshot.paramMap.get('id'));
+            }
+            else {
+              this.loaded = true;
+              SwalAlert.errorAlert('', result['message'].charAt(0).toUpperCase() + result['message'].substring(1));
+            }
+          },
+          err => {
+            this.loaded = true;
+            console.error(err);
+          }
+        )
+      }
+    }
+    else {
+      SwalAlert.errorAlert('', 'Please Select Question to Delete!');
+    }
+  }
+
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+  isAllSelected() {
+    const numSelected = this.selection.selected.length;
+    const numRows = this.dataSource.data.length;
+    return numSelected == numRows;
+  }
+
+  /** Selects all rows if they are not all selected; otherwise clear selection. */
+  masterToggle() {
+    this.isAllSelected() ?
+      this.selection.clear() :
+      this.dataSource.data.forEach(row => this.selection.select(row));
+    this.question_ids = this.getIdsFromSelectionArrayObject(this.selection.selected);
+    // console.log(this.selection);
+  }
+
+  // $event ? selection.toggle(row) : null
+  checkboxClicked(event, row) {
+    if (event) {
+      this.selection.toggle(row);
+    }
+    else
+      null;
+
+    this.question_ids = this.getIdsFromSelectionArrayObject(this.selection.selected);
+    // console.log(this.selection);
+  }
+
+
+  navigateToLogAdd() {
+    this.router.navigate(['/admin/log/query/add',this.currentActivatedRoute.snapshot.paramMap.get('id')])
+  }
+
+ 
+
+  getIdsFromSelectionArrayObject(array_of_objects) {
+    let ids = array_of_objects.map(a => a.id);
+    return ids;
+  }
+
+  navigateToLogListing() {
+    this.router.navigate(['admin/logs'])
+  }
+
+
+
 
 }

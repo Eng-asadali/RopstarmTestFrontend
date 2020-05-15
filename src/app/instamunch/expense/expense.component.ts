@@ -4,7 +4,6 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, MatTableDataSource, MatSort } from '@angular/material';
 import { SelectionModel } from '@angular/cdk/collections';
 import { Router, ActivatedRoute } from '@angular/router';
-
 import { ProductService } from '../Services/product.service';
 import { expense } from './expense';
 import { SwalAlert } from '../../Shared/swalAlerts';
@@ -18,7 +17,6 @@ import Swal from 'sweetalert2';
 export class ExpenseComponent implements OnInit {
 
   statusEnum = StatusEnum;
-
   dataSource = new MatTableDataSource<any>([]);
   @ViewChild(MatPaginator) paginator: MatPaginator;
   initialSelection = [];

@@ -50,9 +50,11 @@ import { EditQuestionComponent } from './instamunch/staff-log/edit-question/edit
 import { LogsComponent } from './instamunch/staff-log/logs/logs.component';
 import { QueryListComponent } from './instamunch/staff-log/query-list/query-list.component';
 
+
+import {twentyfourToTwelevehr  } from './Shared/Pipes/twentyfourToTwelevehr';
+
 @NgModule({
   declarations: [
-
     AppComponent,
     HeaderComponent,
     SidebarComponent,
@@ -78,7 +80,8 @@ import { QueryListComponent } from './instamunch/staff-log/query-list/query-list
     AddQueryComponent,
     EditQuestionComponent,
     QueryListComponent,
-    LogsComponent
+    LogsComponent,
+    twentyfourToTwelevehr
   ],
 
   imports: [

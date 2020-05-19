@@ -49,9 +49,11 @@ import { AddQueryComponent } from './instamunch/staff-log/add-query/add-query.co
 import { EditQuestionComponent } from './instamunch/staff-log/edit-question/edit-question.component';
 import { LogsComponent } from './instamunch/staff-log/logs/logs.component';
 import { QueryListComponent } from './instamunch/staff-log/query-list/query-list.component';
-
+import {MatDialogModule} from "@angular/material";
+import{MatToolbarModule} from "@angular/material";
 
 import {twentyfourToTwelevehr  } from './Shared/Pipes/twentyfourToTwelevehr';
+import { DialogBoxComponent } from './instamunch/staff-log/dialog-box/dialog-box.component';
 
 @NgModule({
   declarations: [
@@ -81,7 +83,8 @@ import {twentyfourToTwelevehr  } from './Shared/Pipes/twentyfourToTwelevehr';
     EditQuestionComponent,
     QueryListComponent,
     LogsComponent,
-    twentyfourToTwelevehr
+    twentyfourToTwelevehr,
+    DialogBoxComponent
   ],
 
   imports: [
@@ -101,10 +104,13 @@ import {twentyfourToTwelevehr  } from './Shared/Pipes/twentyfourToTwelevehr';
     FormsModule,
     NgSelectModule,
     MatDatepickerModule,
-    MatProgressSpinnerModule
-
+    MatProgressSpinnerModule,
+    MatDialogModule,
+    MatToolbarModule
   ],
-
+  entryComponents: [
+    DialogBoxComponent
+  ],
   providers: [HttpService,
     AuthService,
     SalesReportResolver,

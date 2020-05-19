@@ -4,6 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Validators } from '@angular/forms';
 import { MatPaginator, MatTableDataSource, MatSort } from '@angular/material';
 import { SelectionModel } from '@angular/cdk/collections';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 
 import { question } from '../question';
 import { FieldConfig } from '../../../Interfaces/feildConfig';
@@ -11,7 +12,7 @@ import { SwalAlert } from '../../../Shared/swalAlerts';
 import { option } from '../../Options/logs';
 import { validation_patterns } from '../../../Shared/validation_patterns';
 import{validateDate}from '../../../Shared/Custom Validators/dateValidator'
-
+import {DialogBoxComponent} from '../dialog-box/dialog-box.component' 
 @Component({
   selector: 'app-add-query',
   templateUrl: './add-query.component.html',
@@ -33,11 +34,7 @@ export class AddQueryComponent implements OnInit {
   kitchen_log_id:string
   question_ids: any = [];
  
- 
- 
   form = {};
-
-
 
   fields: FieldConfig[] = [] as FieldConfig[];
   submit_clicked: boolean;
@@ -46,7 +43,7 @@ export class AddQueryComponent implements OnInit {
   
   question:question
   constructor(private LogsService: LogsService,
-    private active_route: ActivatedRoute, private router: Router,private currentActivatedRoute: ActivatedRoute) { }
+    private active_route: ActivatedRoute, private router: Router,private currentActivatedRoute: ActivatedRoute,public dialog: MatDialog) { }
 
   ngOnInit() {
     this.table_headers = ['select', 'Query',  'actions'];
@@ -117,7 +114,7 @@ export class AddQueryComponent implements OnInit {
     //console.log("question"+questions.question)
     this.fields = [
       { label: 'Question', type: 'text', bootstrapGridClass: "col-lg-12", name: "question", validations: [Validators.required,Validators.maxLength(50)], required: true, value: question ? question.question : '' }     
-      ,{ label: 'Type', type: 'select', bootstrapGridClass: "col-lg-12", name: "type" }     
+      // ,{ label: 'Type', type: 'select', bootstrapGridClass: "col-lg-12", name: "type" }     
 
     ]
     this.form['form_fields'] = this.fields;
@@ -301,7 +298,37 @@ export class AddQueryComponent implements OnInit {
     this.router.navigate(['admin/logs'])
   }
 
+//   openDialog(){
+//     const dialogConfig=new MatDialogConfig();
+// dialogConfig.disableClose=true;
+// dialogConfig.autoFocus=true;
+//   }
 
+openDialog(queryID): void {
+  const dialogRef = this.dialog.open(DialogBoxComponent, {
+    width: '800px',
+    height:'300px',
+    
+    data: {queryID: queryID}
+  });
 
-
+  dialogRef.afterClosed().subscribe(result => {
+    console.log('The dialog was closed');
+   // this.animal = result;
+   this.table_headers = ['select', 'Query',  'actions'];
+    this.getQueriesList(this.currentActivatedRoute.snapshot.paramMap.get('id'));
+    this.kitchen_log_id=this.currentActivatedRoute.snapshot.paramMap.get('id')
+ 
+    this.form['form_fields'] = this.fields;
+  
+      this.edit = false;
+      this.loaded = true;
+      this.generateForm();
+  });
+}
+refresh(){
+  this.loaded = false;
+  this.dataSource.data = [];
+  this.getQueriesList(this.currentActivatedRoute.snapshot.paramMap.get('id'));
+}
 }

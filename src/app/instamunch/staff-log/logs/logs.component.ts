@@ -28,14 +28,14 @@ export class LogsComponent implements OnInit {
 
   staff_ids: any = [];
 
- 
+
 
   ngOnInit() {
     this.table_headers = ['select', 'Log Title', 'Category', 'Interval Days', 'Priority', 'actions'];
-    this.getStaffList();
+    this.getLogList();
   }
 
-  getStaffList() {
+  getLogList() {
     const staff = this.LogsService.getStaff();
     staff.subscribe(
       result => {
@@ -62,9 +62,9 @@ export class LogsComponent implements OnInit {
   refresh(){
     this.loaded = false;
     this.dataSource.data = [];
-    this.getStaffList();
+    this.getLogList();
   }
-  
+
   getLogId(staff_id, action) {
     console.log('log id', staff_id);
     if (action == 'edit')
@@ -78,7 +78,7 @@ export class LogsComponent implements OnInit {
     }
   }
 
- 
+
   async deleteLogsById(staff_id) {
     const response = await SwalAlert.getDeleteSwal();
     if (response == true) {
@@ -86,8 +86,8 @@ export class LogsComponent implements OnInit {
       this.LogsService.deleteLogsById(staff_id).subscribe(
         result => {
           if (!result['error']) {
-            SwalAlert.sucessAlert('', 'Staff Deleted Successfully!');
-            this.getStaffList();
+            SwalAlert.sucessAlert('', 'Log Deleted Successfully!');
+            this.getLogList();
           }
           else {
             this.loaded = true;
@@ -111,7 +111,7 @@ export class LogsComponent implements OnInit {
           result => {
             if (!result['error']) {
               SwalAlert.sucessAlert('', 'Staff Deleted Successfully!');
-              this.getStaffList();
+              this.getLogList();
             }
             else {
               this.loaded = true;
@@ -126,7 +126,7 @@ export class LogsComponent implements OnInit {
       }
     }
     else {
-      SwalAlert.errorAlert('', 'Please Select Staff to Delete!');
+      SwalAlert.errorAlert('', 'Please Select Log to Delete!');
     }
   }
 
@@ -164,10 +164,6 @@ export class LogsComponent implements OnInit {
 
   navigateToStaffAdd() {
     this.router.navigate(['add'], { relativeTo: this.currentActivatedRoute });
-  }
-
-  navigateToStaffListing() {
-    this.router.navigate(['admin/staff'])
   }
 
   getIdsFromSelectionArrayObject(array_of_objects) {

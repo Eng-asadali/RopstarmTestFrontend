@@ -48,27 +48,28 @@ export class AddLogsComponent implements OnInit {
     // this.loaded = true;
     // this.generateForm();
   }
- 
- 
+
+
   generateForm(log?: log) {
     //console.log("log"+log.title)
 
     let users=this.StaffService.getStaff();
     users.subscribe((result)=>{
       console.log("users"+result)
-   
+
     this.fields = [
       {
-        label: 'Title', type: 'text', bootstrapGridClass: "col-lg-6", name: "title", validations: [Validators.required,Validators.maxLength(25)], required: true, value: log ? log.title : ''
+        label: 'Title', type: 'text', bootstrapGridClass: "col-lg-6", name: "title", validations: [Validators.required,Validators.maxLength(50)], required: true, value: log ? log.title : null
       },
-      { label: 'category', type: 'ngselect', bootstrapGridClass: "col-lg-6", name: "category", validations: [Validators.required], required: true, value: log ? log.category : '', options: categories },
+      { label: 'Category', type: 'ngselect', bootstrapGridClass: "col-lg-6", name: "category", validations: [Validators.required], required: true, value: log ? log.category : null, options: categories },
 
       {
-        label: 'Days Interval', type: 'number', bootstrapGridClass: "col-lg-6", name: "days_interval", validations: [Validators.required,Validators.pattern(validation_patterns.decimal_numbers)], required: true, value: log ? log.days_interval : ''
+        label: 'Days Interval', type: 'number', bootstrapGridClass: "col-lg-6", name: "days_interval", validations: [Validators.required,Validators.pattern(validation_patterns.decimal_numbers),
+        Validators.max(2147483647)], required: true, value: log ? log.days_interval : ''
       },
-      { label: 'priority', type: 'ngselect', bootstrapGridClass: "col-lg-6", name: "priority", validations: [Validators.required], required: true, value: log ? log.priority : '' , options: priority},
-      { label: 'Assigned to', type: 'ngselectname', bootstrapGridClass: "col-lg-12", name: "assigned_to_id", validations: [Validators.required],required: true,value: log ? log.assigned_to_id : '' , options: result['data']}
-    
+      { label: 'priority', type: 'ngselect', bootstrapGridClass: "col-lg-6", name: "priority", validations: [Validators.required], required: true, value: log ? log.priority : null , options: priority},
+      { label: 'Assigned to', type: 'ngselectname', bootstrapGridClass: "col-lg-12", name: "assigned_to_id", validations: [Validators.required],required: true,value: log ? log.assigned_to_id : null , options: result['data']}
+
     ]
     this.form['form_fields'] = this.fields;
     this.form['FormbootstrapGridClass'] = 'col-lg-12';
@@ -103,7 +104,7 @@ export class AddLogsComponent implements OnInit {
       result => {
         this.submit_clicked = false;
         if (!result['error']) {
-          SwalAlert.sucessAlert('', 'log Updated Sucessfully!');
+          SwalAlert.sucessAlert('', 'Log Updated Sucessfully!');
         }
         else {
           SwalAlert.errorAlert('', result['message'].charAt(0).toUpperCase() + result['message'].substring(1));
@@ -152,12 +153,11 @@ export class AddLogsComponent implements OnInit {
       result => {
         this.submit_clicked = false;
         if (!result['error']) {
-          SwalAlert.sucessAlert('', 'log Added Sucessfully!');
+          SwalAlert.sucessAlert('', 'Log Added Sucessfully!');
           this.clear_form = true;
         }
         else {
           SwalAlert.errorAlert('', result['message'].charAt(0).toUpperCase() + result['message'].substring(1));
-
         }
       },
       err => {

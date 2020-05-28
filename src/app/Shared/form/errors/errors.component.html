@@ -2,9 +2,9 @@
     <span class="error" *ngIf="date_error">{{field_name}} should be valid .</span>
     <span class="error" *ngIf="i == 'required'">{{field_name}} is required.</span>
     <span class="error" *ngIf="i == 'email'">Email must be valid.</span>
-    <span class="error" *ngIf="i == 'max'">{{field_name}} is exceeding the limit.</span>
-    <span class="error" *ngIf="i == 'maxlength'">{{field_name}} is exceeding the limit {{errors['maxlength']['requiredLength']}}.</span>
-  
+    <span class="error" *ngIf="i == 'max'">{{field_name}} is exceeding the limit {{errors['max']['max']}}.</span>
+    <span class="error" *ngIf="i == 'maxlength'">{{field_name}} is exceeding the length {{errors['maxlength']['requiredLength']}}.</span>
+
     <span class="error" *ngIf="i == 'pattern'">
         <span class="error" *ngIf="alphabets_only_error">{{field_name}} should contain alphabets only.</span>
         <span class="error" *ngIf="email_error">{{field_name}} should be valid.</span>

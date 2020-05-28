@@ -56,13 +56,13 @@ export class AddKitchenComponent implements OnInit {
           // result.subscribe((result) => {
           //   console.log(result);
           this.fields = [
-            { label: 'Kitchen Name', type: 'text', bootstrapGridClass: "col-lg-12", name: "name", validations: [Validators.required, Validators.maxLength(50)], required: true, value: kitchen ? kitchen.name : '' },
+            { label: 'Kitchen Name', type: 'text', bootstrapGridClass: "col-lg-12", name: "name", validations: [Validators.required, Validators.maxLength(50)], required: true, value: kitchen ? kitchen.name : null },
 
             {
               label: 'Status', type: 'select', bootstrapGridClass: "col-lg-12", name: "status", validations: [Validators.required], required: true,
               value: kitchen ? kitchen.status : 'active', options: Status
             },
-            //  { label: 'Managers', type: 'ngselectname', bootstrapGridClass: "col-lg-12", name: "manager_id",validations: [Validators.required], required: true, value: kitchen ? kitchen.manager_id : '', options: result['data']}
+            //  { label: 'Managers', type: 'ngselectname', bootstrapGridClass: "col-lg-12", name: "manager_id",validations: [Validators.required], required: true, value: kitchen ? kitchen.manager_id : null, options: result['data']}
 
           ]
           this.form['form_fields'] = this.fields;

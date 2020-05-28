@@ -52,15 +52,15 @@ export class EditOrderComponent implements OnInit {
 
   generateForm(order?: order) {
     this.fields = [
-      { label: 'Amount Recieved', type: 'number', bootstrapGridClass: "col-lg-6", name: "amount_received", validations: [Validators.required,Validators.pattern(validation_patterns.decimal_numbers)], required: true, value: order ? order.amount_received : '' },
+      { label: 'Amount Recieved', type: 'number', bootstrapGridClass: "col-lg-6", name: "amount_received", validations: [Validators.required,Validators.pattern(validation_patterns.decimal_numbers)], required: true, value: order ? order.amount_received : null },
       {
-        label: 'Amount Returned', type: 'number', bootstrapGridClass: "col-lg-6", name: "amount_returned", validations: [Validators.required,Validators.pattern(validation_patterns.decimal_numbers)], required: true, value: order ? order.amount_returned : ''
+        label: 'Amount Returned', type: 'number', bootstrapGridClass: "col-lg-6", name: "amount_returned", validations: [Validators.required,Validators.pattern(validation_patterns.decimal_numbers)], required: true, value: order ? order.amount_returned : null
       },
       {
-        label: 'Order Status', type: 'select', bootstrapGridClass: "col-lg-6", name: "order_status", validations: [Validators.required], required: true, value: order ? order.order_status : '', options: orderStatus
+        label: 'Order Status', type: 'select', bootstrapGridClass: "col-lg-6", name: "order_status", validations: [Validators.required], required: true, value: order ? order.order_status : null, options: orderStatus
       },
       {
-        label: 'Tip', type: 'number', bootstrapGridClass: "col-lg-6", name: "tip", validations: [Validators.required,Validators.pattern(validation_patterns.decimal_numbers)], required: true, value: order ? order.tip : ''
+        label: 'Tip', type: 'number', bootstrapGridClass: "col-lg-6", name: "tip", validations: [Validators.required,Validators.pattern(validation_patterns.decimal_numbers)], required: true, value: order ? order.tip : null
       }]
     this.form['form_fields'] = this.fields;
     this.form['FormbootstrapGridClass'] = 'col-lg-12';

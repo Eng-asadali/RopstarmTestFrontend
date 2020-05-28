@@ -127,18 +127,18 @@ export class AddCategoryComponent implements OnInit {
         if (!result['error']) {
           this.option = result['data']
           this.fields = [
-            { label: 'Category Name', type: 'text', bootstrapGridClass: "col-lg-12", name: "name", validations: [Validators.required, Validators.maxLength(50)], required: true, value: category ? category.name : '' },
+            { label: 'Category Name', type: 'text', bootstrapGridClass: "col-lg-12", name: "name", validations: [Validators.required, Validators.maxLength(50)], required: true, value: category ? category.name : null },
             // {
             //   label: 'Parent Category', type: 'select', bootstrapGridClass: "col-lg-6", name: "parent_category_id", validations: [Validators.required], required: true,
-            //   value: category ? category.parent_category_id : '', options: result['data']
+            //   value: category ? category.parent_category_id : null, options: result['data']
             // },
-            { label: 'Parent Category', type: 'ngselect', bootstrapGridClass: "col-lg-6", name: "parent_category_id", validations: [Validators.required], required: true, value: category ? category.parent_category_id : '', options: result['data'] }
+            { label: 'Parent Category', type: 'ngselect', bootstrapGridClass: "col-lg-6", name: "parent_category_id", validations: [Validators.required], required: true, value: category ? category.parent_category_id : null, options: result['data'] }
 
             , {
               label: 'Status', type: 'select', bootstrapGridClass: "col-lg-6", name: "status", validations: [Validators.required], required: true,
               value: category ? category.status : 'active', options: Status
             },
-            { label: 'Description', type: 'textarea', bootstrapGridClass: "col-lg-12", name: "description", validations: [Validators.maxLength(250)], value: category ? category.description : '' }
+            { label: 'Description', type: 'textarea', bootstrapGridClass: "col-lg-12", name: "description", validations: [Validators.maxLength(250)], value: category ? category.description : null }
 
           ]
           this.form['form_fields'] = this.fields;

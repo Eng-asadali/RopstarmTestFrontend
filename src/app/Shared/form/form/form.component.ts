@@ -94,40 +94,50 @@ export class FormComponent implements OnInit {
           array.push(i);
         }
         if (this.fields[i].value != undefined) {
-          if (this.fields[i].type != 'attribute')
-            this.Form.addControl(this.fields[i].name, new FormControl(this.fields[i].value, this.fields[i].validations));
-        }
-        else
-          this.Form.addControl(this.fields[i].name, new FormControl('', this.fields[i].validations));
 
-        if (this.fields[i].type == 'attribute' && this.fields[i].value != '') {
-          this.Form.addControl('product_attributes', this.fb.array([]));
 
-          const product_attributes = this.parseProductAttributes(this.fields[i].value);
-          for (let i = 0; i < product_attributes.length; i++) {
-            this.addAttribute(product_attributes[i].name, product_attributes[i].value);
+          if (this.fields[i].type == 'attribute' && this.fields[i].value != null) {
+            this.Form.addControl('product_attributes', this.fb.array([]));
+            const product_attributes = this.parseProductAttributes(this.fields[i].value);
+            for (let i = 0; i < product_attributes.length; i++) {
+              this.addAttribute(product_attributes[i].name, product_attributes[i].value);
+            }
           }
-          console.log(product_attributes);
+
+
+
+          else
+            this.Form.addControl(this.fields[i].name, new FormControl(this.fields[i].value, this.fields[i].validations));
+
         }
+        else {
+          console.log(this.fields[i]);
+          if (this.fields[i].type == 'attribute' && this.fields[i].value == null) {
+            console.log('asdad');
+            this.Form.addControl('product_attributes', this.fb.array([
+              this.fb.group({
+                name: '',
+                value: ''
+              })
+            ]));
+          }
+          else
+            this.Form.addControl(this.fields[i].name, new FormControl(null, this.fields[i].validations));
+
+
+        }
+
       }
       if (this.fields[i].type == 'submit') {
         array.push(i);
         this.row.push(array);
       }
 
-
-
     }
 
-    if (this.form['attribute']) {
-      this.Form.addControl('product_attributes', this.fb.array([
-        this.fb.group({
-          name: '',
-          value: ''
-        }),
+    // if (this.form['attribute']) {
 
-      ]));
-    }
+    // }
 
     // console.log(this.Form);
     // setTimeout(function () {
@@ -155,17 +165,18 @@ export class FormComponent implements OnInit {
   }
 
   addAttribute(name?, value?) {
-    var arr = this.Form.get('product_attributes');
+    var arr = <FormArray>this.Form.get('product_attributes');
+    console.log(arr);
     const attribute = this.fb.group({
       name: name ? name : '',
       value: value ? value : ''
     });
-    (arr as FormArray).push(attribute);
+    arr.push(attribute);
   }
 
   minusAttribute() {
     var arr = this.Form.get('product_attributes');
-    let last_index = (arr as FormArray).length - 1 ;
+    let last_index = (arr as FormArray).length - 1;
     (arr as FormArray).removeAt(last_index);
   }
 

@@ -33,25 +33,25 @@ export class AddStaffComponent implements OnInit {
 
   generateForm(staff?: Staff) {
     this.fields = [
-      { label: 'First Name', type: 'text', bootstrapGridClass: "col-lg-6", name: "first_name", validations: [Validators.required,Validators.pattern(validation_patterns.nameRegex),Validators.maxLength(25)], required: true, value: staff ? staff.first_name : '' },
+      { label: 'First Name', type: 'text', bootstrapGridClass: "col-lg-6", name: "first_name", validations: [Validators.required,Validators.pattern(validation_patterns.nameRegex),Validators.maxLength(25)], required: true, value: staff ? staff.first_name : null },
       {
-        label: 'Last Name', type: 'text', bootstrapGridClass: "col-lg-6", name: "last_name", validations: [Validators.required,Validators.pattern(validation_patterns.nameRegex),Validators.maxLength(25)], required: true, value: staff ? staff.last_name : ''
+        label: 'Last Name', type: 'text', bootstrapGridClass: "col-lg-6", name: "last_name", validations: [Validators.required,Validators.pattern(validation_patterns.nameRegex),Validators.maxLength(25)], required: true, value: staff ? staff.last_name : null
       },
       {
-        label: 'Email', type: 'text', bootstrapGridClass: "col-lg-6", name: "email", validations: [Validators.required, Validators.pattern(validation_patterns.email_regex)], required: true, value: staff ? staff.email : ''
+        label: 'Email', type: 'text', bootstrapGridClass: "col-lg-6", name: "email", validations: [Validators.required, Validators.pattern(validation_patterns.email_regex)], required: true, value: staff ? staff.email : null
       },
-      { label: 'Password', type: 'text', bootstrapGridClass: "col-lg-6", name: "password", validations: [Validators.required, Validators.pattern(validation_patterns.password_regex)], value: staff ? staff.password : '', required: true }
+      { label: 'Password', type: 'text', bootstrapGridClass: "col-lg-6", name: "password", validations: [Validators.required, Validators.pattern(validation_patterns.password_regex)], value: staff ? staff.password : null, required: true }
 
-      , { label: 'Date of Birth', type: 'date', bootstrapGridClass: "col-lg-6", name: "date_of_birth", validations: [Validators.required,validateDate], value: staff ? staff.date_of_birth : '', required: true }
-      , { label: 'Salary', type: 'number', bootstrapGridClass: "col-lg-6", name: "salary", validations:  [Validators.required,Validators.pattern(validation_patterns.decimal_numbers),Validators.max(999999999999999999)], value: staff ? staff.salary : '', required: true }
-      , { label: 'Salary Disbursement', type: 'ngselect', bootstrapGridClass: "col-lg-6", name: "salary_disbursement", validations: [Validators.required], value: staff ? staff.salary_disbursement : '', options: SalaryDisbursement, required: true }
-      , { label: 'Job Shift', type: 'ngselect', bootstrapGridClass: "col-lg-6", name: "job_shift", validations: [Validators.required], value: staff ? staff.job_shift : '', options: JobShift, required: true }
+      , { label: 'Date of Birth', type: 'date', bootstrapGridClass: "col-lg-6", name: "date_of_birth", validations: [Validators.required,validateDate], value: staff ? staff.date_of_birth : null, required: true }
+      , { label: 'Salary', type: 'number', bootstrapGridClass: "col-lg-6", name: "salary", validations:  [Validators.required,Validators.pattern(validation_patterns.decimal_numbers),Validators.max(999999999999999999)], value: staff ? staff.salary : null, required: true }
+      , { label: 'Salary Disbursement', type: 'ngselect', bootstrapGridClass: "col-lg-6", name: "salary_disbursement", validations: [Validators.required], value: staff ? staff.salary_disbursement : null, options: SalaryDisbursement, required: true }
+      , { label: 'Job Shift', type: 'ngselect', bootstrapGridClass: "col-lg-6", name: "job_shift", validations: [Validators.required], value: staff ? staff.job_shift : null, options: JobShift, required: true }
       , {
         label: 'Type', type: 'ngselect', bootstrapGridClass: "col-lg-6", name: "type", validations: [Validators.required], required: true,
-        value: staff ? staff.type : '', options: StaffType
+        value: staff ? staff.type : null, options: StaffType
       },
-      { label: 'Experience', type: 'ngselect', bootstrapGridClass: "col-lg-6", name: "experience", validations: [Validators.required], value: staff ? staff.experience : '', options: experience, required: true }
-   
+      { label: 'Experience', type: 'ngselect', bootstrapGridClass: "col-lg-6", name: "experience", validations: [Validators.required], value: staff ? staff.experience : null, options: experience, required: true }
+
     ]
     this.form['form_fields'] = this.fields;
     this.form['FormbootstrapGridClass'] = 'col-lg-9';

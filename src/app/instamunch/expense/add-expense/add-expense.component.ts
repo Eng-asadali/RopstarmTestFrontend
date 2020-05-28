@@ -135,25 +135,25 @@ export class AddExpenseComponent implements OnInit {
     //     if (!result['error']) {
     //       this.option=result['data']
     this.fields = [
-      { label: 'Expense', type: 'text', bootstrapGridClass: "col-lg-6", name: "title", validations: [Validators.required, Validators.maxLength(50)], required: true, value: expense ? expense.title : '' },
-      { label: 'Amount', type: 'number', bootstrapGridClass: "col-lg-6", name: "amount", validations: [Validators.required, Validators.pattern(validation_patterns.decimal_numbers),Validators.max(999999999999999999)], required: true, value: expense ? expense.amount : '' },
+      { label: 'Expense', type: 'text', bootstrapGridClass: "col-lg-6", name: "title", validations: [Validators.required, Validators.maxLength(50)], required: true, value: expense ? expense.title : null },
+      { label: 'Amount', type: 'number', bootstrapGridClass: "col-lg-6", name: "amount", validations: [Validators.required, Validators.pattern(validation_patterns.decimal_numbers),Validators.max(999999999999999999)], required: true, value: expense ? expense.amount : null },
 
       // {
       //   label: 'Parent Category', type: 'select', bootstrapGridClass: "col-lg-6", name: "parent_category_id", validations: [Validators.required], required: true,
-      //   value: category ? category.parent_category_id : '', options: result['data']
+      //   value: category ? category.parent_category_id : null, options: result['data']
       // },
 
       {
         label: 'Date', type: 'date', bootstrapGridClass: "col-lg-6", name: "expense_date", validations: [Validators.required, validateDate], required: true,
-        value: expense ? expense.expense_date : ''
+        value: expense ? expense.expense_date : null
       },
       {
         label: 'Type', type: 'ngselect', bootstrapGridClass: "col-lg-6", name: "expense_type", validations: [Validators.required], required: true,
-        value: expense ? expense.expense_type : '', options: expenseTypes
+        value: expense ? expense.expense_type : null, options: expenseTypes
       },
       {
         label: 'Transaction', type: 'ngselect', bootstrapGridClass: "col-lg-12", name: "transaction_type", validations: [Validators.required], required: true,
-        value: expense ? expense.transaction_type : '', options: transactionTypes
+        value: expense ? expense.transaction_type : null, options: transactionTypes
       },
     ]
     this.form['form_fields'] = this.fields;

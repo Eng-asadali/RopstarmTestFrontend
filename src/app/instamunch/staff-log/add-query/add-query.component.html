@@ -39,14 +39,41 @@
                 <!-- <mat-progress-bar *ngIf="!loaded" mode="indeterminate"></mat-progress-bar>
               -->
 
-                <div class="card-header">Add New Query
+                <form [formGroup]="queryForm" #formDir="ngForm" (ngSubmit)="onSubmit(queryForm)">
+                  <div class="card-header">
 
-                </div>
+                    <div style="width: 100%;" class="row">
+
+                      <div class="col-lg 6">
+                        Add New Query
+                      </div>
 
 
-                <app-form [clear_form]="clear_form" [submit_clicked]="submit_clicked"
+                      <div class="col-lg 6">
+                        <button type="submit" style="float: right; margin-right: -30px;" class="btn btn-sm btn-success">
+                          Add Query
+                        </button>
+                      </div>
+
+                    </div>
+                  </div>
+
+
+                  <div style="margin: 20px" class="">
+                    <div class="form-group">
+                      <label for="question">Question <span style="color: red;">*</span></label>
+                      <input type="question" formControlName="question" class="form-control" id="question">
+                      <span style="color: red;" *ngIf="getFormControl('question').invalid &&
+                      (getFormControl('question').dirty || getFormControl('question').touched ||formDir.submitted)">
+                        Question is required.
+                      </span>
+                    </div>
+                  </div>
+
+                </form>
+                <!-- <app-form [clear_form]="clear_form" [submit_clicked]="submit_clicked"
                   (formValues)="getQueryData($event)" [form]=form>
-                </app-form>
+                </app-form> -->
                 <br>
 
                 <div class="card-header">Queries Listing

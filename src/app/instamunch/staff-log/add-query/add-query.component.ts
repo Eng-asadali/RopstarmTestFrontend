@@ -1,26 +1,28 @@
 import { LogsService } from './../../Services/logs.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Validators } from '@angular/forms';
+import { Validators, FormGroupDirective } from '@angular/forms';
 import { MatPaginator, MatTableDataSource, MatSort } from '@angular/material';
 import { SelectionModel } from '@angular/cdk/collections';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 import { question } from '../question';
 import { FieldConfig } from '../../../Interfaces/feildConfig';
 import { SwalAlert } from '../../../Shared/swalAlerts';
 import { option } from '../../Options/logs';
 import { validation_patterns } from '../../../Shared/validation_patterns';
-import{validateDate}from '../../../Shared/Custom Validators/dateValidator'
-import {DialogBoxComponent} from '../dialog-box/dialog-box.component' 
+import { validateDate } from '../../../Shared/Custom Validators/dateValidator';
+import { DialogBoxComponent } from '../dialog-box/dialog-box.component';
+import { FormGroup, FormControl } from '@angular/forms';
+
 @Component({
   selector: 'app-add-query',
   templateUrl: './add-query.component.html',
   styleUrls: ['./add-query.component.css']
 })
 export class AddQueryComponent implements OnInit {
- 
- 
+  queryForm: FormGroup;
+
   dataSource = new MatTableDataSource<any>([]);
   @ViewChild(MatPaginator) paginator: MatPaginator;
   initialSelection = [];
@@ -31,31 +33,35 @@ export class AddQueryComponent implements OnInit {
   data: any = [];
   staff: any;
   loaded: boolean = false;
-  kitchen_log_id:string
+  kitchen_log_id: string
   question_ids: any = [];
- 
+
   form = {};
 
   fields: FieldConfig[] = [] as FieldConfig[];
   submit_clicked: boolean;
   clear_form: boolean;
   edit: boolean = false;
-  
-  question:question
+
+  question: question;
+  @ViewChild('formDir') FormGroupDirective: FormGroupDirective;
+
   constructor(private LogsService: LogsService,
-    private active_route: ActivatedRoute, private router: Router,private currentActivatedRoute: ActivatedRoute,public dialog: MatDialog) { }
+    private active_route: ActivatedRoute, private router: Router, private currentActivatedRoute: ActivatedRoute, public dialog: MatDialog) { }
 
   ngOnInit() {
-    this.table_headers = ['select', 'Query',  'actions'];
+    this.table_headers = ['select', 'Query', 'actions'];
     this.getQueriesList(this.currentActivatedRoute.snapshot.paramMap.get('id'));
-    this.kitchen_log_id=this.currentActivatedRoute.snapshot.paramMap.get('id')
- 
+    this.kitchen_log_id = this.currentActivatedRoute.snapshot.paramMap.get('id')
+
     this.form['form_fields'] = this.fields;
-  
-      this.edit = false;
-      this.loaded = true;
-      this.generateForm();
-      
+
+    this.edit = false;
+    this.loaded = true;
+    this.generateForm();
+    this.queryForm = new FormGroup({
+      question: new FormControl(null, [Validators.required])
+    });
 
   }
 
@@ -66,11 +72,11 @@ export class AddQueryComponent implements OnInit {
         console.log("INSIDE  EDIT ")
         console.log('question by id:', result);
         this.question = result['data'];
-        
+
         console.log('RESULT:', result);
         if (!result['error']) {
           this.loaded = true;
-          console.log("question data above generate form"+this.question)
+          console.log("question data above generate form" + this.question)
           this.generateForm(this.question);
         }
         else {
@@ -87,8 +93,6 @@ export class AddQueryComponent implements OnInit {
     );
 
   }
-
- 
 
 
   editQuestion(data, id) {
@@ -113,8 +117,8 @@ export class AddQueryComponent implements OnInit {
   generateForm(question?: question) {
     //console.log("question"+questions.question)
     this.fields = [
-      { label: 'Question', type: 'text', bootstrapGridClass: "col-lg-12", name: "question", validations: [Validators.required,Validators.maxLength(50)], required: true, value: question ? question.question : '' }     
-      // ,{ label: 'Type', type: 'select', bootstrapGridClass: "col-lg-12", name: "type" }     
+      { label: 'Question', type: 'text', bootstrapGridClass: "col-lg-12", name: "question", validations: [Validators.required, Validators.maxLength(50)], required: true, value: question ? question.question : '' }
+      // ,{ label: 'Type', type: 'select', bootstrapGridClass: "col-lg-12", name: "type" }
 
     ]
     this.form['form_fields'] = this.fields;
@@ -135,18 +139,18 @@ export class AddQueryComponent implements OnInit {
     console.log(data);
     this.clear_form = false;
     this.submit_clicked = true;
-   
-      this.addQuery(data) 
+
+    this.addQuery(data)
   }
- 
+
 
   addQuery(data) {
     this.LogsService.addQuestion(data).subscribe(
       result => {
         this.submit_clicked = false;
         if (!result['error']) {
-          SwalAlert.sucessAlert('', 'Question Added Sucessfully!');
-          this.clear_form = true;
+          SwalAlert.sucessAlert('', 'Query Added Sucessfully!');
+          this.reset();
           this.getQueriesList(this.currentActivatedRoute.snapshot.paramMap.get('id'));
         }
         else {
@@ -162,11 +166,25 @@ export class AddQueryComponent implements OnInit {
     );
   }
 
+  onSubmit(form) {
+    if(form.valid){
+      this.addQuery(form.value);
+    }
+  }
+
+  reset() {
+    this.FormGroupDirective.resetForm();
+  }
+
+  getFormControl(name) {
+    return this.queryForm.get(name);
+  }
 
 
   navigateToQueryListing() {
     this.router.navigate(['admin/logs'])
   }
+
   getQueriesList(id) {
     const question = this.LogsService.getQuestions(id);
     question.subscribe(
@@ -207,7 +225,7 @@ export class AddQueryComponent implements OnInit {
       this.LogsService.deleteQuestionsById(question_id).subscribe(
         result => {
           if (!result['error']) {
-            SwalAlert.sucessAlert('', 'Staff Deleted Successfully!');
+            SwalAlert.sucessAlert('', 'Query Deleted Successfully!');
             this.getQueriesList(this.currentActivatedRoute.snapshot.paramMap.get('id'));
           }
           else {
@@ -284,10 +302,10 @@ export class AddQueryComponent implements OnInit {
 
 
   navigateToLogAdd() {
-    this.router.navigate(['/admin/log/query/add',this.currentActivatedRoute.snapshot.paramMap.get('id')])
+    this.router.navigate(['/admin/log/query/add', this.currentActivatedRoute.snapshot.paramMap.get('id')])
   }
 
- 
+
 
   getIdsFromSelectionArrayObject(array_of_objects) {
     let ids = array_of_objects.map(a => a.id);
@@ -298,37 +316,33 @@ export class AddQueryComponent implements OnInit {
     this.router.navigate(['admin/logs'])
   }
 
-//   openDialog(){
-//     const dialogConfig=new MatDialogConfig();
-// dialogConfig.disableClose=true;
-// dialogConfig.autoFocus=true;
-//   }
+  openDialog(queryID): void {
+    const dialogRef = this.dialog.open(DialogBoxComponent, {
+      width: '800px',
+      height: '300px',
 
-openDialog(queryID): void {
-  const dialogRef = this.dialog.open(DialogBoxComponent, {
-    width: '800px',
-    height:'300px',
-    
-    data: {queryID: queryID}
-  });
+      data: { queryID: queryID }
+    });
 
-  dialogRef.afterClosed().subscribe(result => {
-    console.log('The dialog was closed');
-   // this.animal = result;
-   this.table_headers = ['select', 'Query',  'actions'];
-    this.getQueriesList(this.currentActivatedRoute.snapshot.paramMap.get('id'));
-    this.kitchen_log_id=this.currentActivatedRoute.snapshot.paramMap.get('id')
- 
-    this.form['form_fields'] = this.fields;
-  
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      // this.animal = result;
+      this.table_headers = ['select', 'Query', 'actions'];
+      this.getQueriesList(this.currentActivatedRoute.snapshot.paramMap.get('id'));
+      this.kitchen_log_id = this.currentActivatedRoute.snapshot.paramMap.get('id')
+
+      this.form['form_fields'] = this.fields;
+
       this.edit = false;
       this.loaded = true;
       this.generateForm();
-  });
-}
-refresh(){
-  this.loaded = false;
-  this.dataSource.data = [];
-  this.getQueriesList(this.currentActivatedRoute.snapshot.paramMap.get('id'));
-}
+    });
+  }
+
+  refresh() {
+    this.loaded = false;
+    this.dataSource.data = [];
+    this.getQueriesList(this.currentActivatedRoute.snapshot.paramMap.get('id'));
+  }
+
 }

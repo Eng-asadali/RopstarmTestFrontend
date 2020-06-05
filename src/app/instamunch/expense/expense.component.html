@@ -52,7 +52,7 @@
             <i (click)="refresh()" class="fa fa-refresh fa-spin" style="font-size: 30px; margin-top: 5px;"></i>
           </ng-template>
           <input style="width: 90%; float: right;" type="text" class="form-control"
-          (keyup)="applyFilter($event.target.value)" placeholder="Search...">       
+          (keyup)="applyFilter($event.target.value)" placeholder="Search...">
            </div>
         </h4>
         <div class="main-card mb-3 card">
@@ -66,7 +66,7 @@
                                     </div> -->
                                     <mat-progress-bar *ngIf="!loaded" mode="indeterminate"></mat-progress-bar>
           <div class="card-body">
-            
+
             <div class="table-responsive">
               <!-- <mat-form-field style="width: 100%;">
                 <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search...">
@@ -89,10 +89,10 @@
                         </mat-checkbox>
                       </td>
                     </ng-container>
-                    
-                   
 
-                    <ng-container matColumnDef="expense">
+
+
+                    <ng-container matColumnDef="expense" sticky>
                       <th mat-header-cell *matHeaderCellDef> Expense </th>
                       <td mat-cell *matCellDef="let element"> {{element.title}} </td>
                     </ng-container>
@@ -118,25 +118,27 @@
                     </ng-container>
                     <!-- <ng-container matColumnDef="status">
                       <th mat-header-cell *matHeaderCellDef> Status </th>
-                      <td mat-cell *matCellDef="let element"> 
+                      <td mat-cell *matCellDef="let element">
                         <span class="badge" [ngClass]="{
                           'badge-success':element.status === 'active',
                           'badge-danger':element.status === 'deactivate'
-                        }" >{{statusEnum[element.status]}}</span> 
+                        }" >{{statusEnum[element.status]}}</span>
                       </td>
                     </ng-container> -->
 
                     <ng-container matColumnDef="actions">
-                      <th mat-header-cell *matHeaderCellDef width='90px'> Actions </th>   
-                      <td mat-cell *matCellDef="let element"> 
+                      <th mat-header-cell *matHeaderCellDef width='90px'> Actions </th>
+                      <td mat-cell *matCellDef="let element">
                         <div class="buttons">
-                          <button style="float: right;"  (click)="getExpenseId(element.id,'delete')"
+                          <!-- <button style="float: right;"  (click)="getExpenseId(element.id,'delete')"
                           class="btn btn-danger btn-sm"><i style="margin-top: -2px;" class="fa fa-trash-o"></i></button>
                         <button (click)="getExpenseId(element.id,'edit')"
-                          class="btn btn-success btn-sm"><i style="margin-top: -2px;" class="fa fa-edit"></i></button>
-                          <!-- <a style="color: #8f8f8f;" (click)="getExpenseId(element.id,'edit')" class="mb-2 mr-2 btn-transition btn btn-outline-light btn-sm">Edit</a>
-                          <button class="mb-2 mr-2 btn-transition btn btn-outline-light btn-sm" (click)="getExpenseId(element.id,'delete')" >Delete</button>
-                    -->
+                          class="btn btn-success btn-sm"><i style="margin-top: -2px;" class="fa fa-edit"></i></button> -->
+
+                          <button style="margin-right: 2px;" (click)="getExpenseId(element.id,'edit')"
+                            class="table_button btn btn-success btn-sm"><i class="fa fa-edit"></i></button>
+                          <button (click)="getExpenseId(element.id,'delete')"
+                            class="table_button btn btn-danger btn-sm"><i class="fa fa-trash-o"></i></button>
                         </div>
                       </td>
                     </ng-container>
@@ -145,11 +147,12 @@
                   <tr mat-row *matRowDef="let row; columns: table_headers;"></tr>
                 </table>
 
-                <mat-paginator #paginator [pageSize]="10" showFirstLastButtons [pageSizeOptions]="[10,50,100,500]">
-                </mat-paginator>
+
 
               </div>
             </div>
+            <mat-paginator #paginator [pageSize]="10" showFirstLastButtons [pageSizeOptions]="[10,50,100,500]">
+            </mat-paginator>
           </div>
 
 

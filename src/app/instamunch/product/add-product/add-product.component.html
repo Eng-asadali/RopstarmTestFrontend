@@ -29,7 +29,7 @@
 
               <i class="icofont-ui-copy"></i> Copy Product
             </button> -->
-            
+
             <!-- <button *ngIf="edit" disabled style="margin-left: 5px;" type="button" class="btn-shadow  btn btn-danger">
               <i class="icofont-trash"></i> Delete
             </button> -->
@@ -63,8 +63,8 @@
             <div class="tab-pane show active" id="tab-content-0" role="tabpanel">
               <div class="card">
                 <mat-progress-bar *ngIf="!loaded" mode="indeterminate"></mat-progress-bar>
-                <app-form [clear_form]="clear_form" [submit_clicked]="submit_clicked" (formValues)="getProductData($event)"
-                  [form]=form>
+                <app-form [clear_form]="clear_form" [submit_clicked]="submit_clicked"
+                  (formValues)="getProductData($event)" [form]=form>
                 </app-form>
                 <!-- <div class="card-body">
 

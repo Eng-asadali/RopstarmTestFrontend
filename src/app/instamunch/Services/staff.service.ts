@@ -15,6 +15,11 @@ export class StaffService {
       catchError(err => of({ error: true, message: 'Server error', data: [] })));
   }
 
+  getStaffWithoutAdmin() {
+    return this.httpServices.get('user/filter/').pipe(
+      catchError(err => of({ error: true, message: 'Server error', data: [] })));
+  }
+
   addStaff(data) {
     return this.httpServices.postFormData(data, 'user/').pipe(
       catchError(err => of({ error: true, message: 'Server error', data: [] })));

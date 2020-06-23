@@ -1,7 +1,8 @@
 import { LogsService } from './../../Services/logs.service';
+import { NoopScrollStrategy } from '@angular/cdk/overlay';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Validators, FormGroupDirective } from '@angular/forms';
+import { Validators, FormGroupDirective, FormBuilder, FormArray } from '@angular/forms';
 import { MatPaginator, MatTableDataSource, MatSort } from '@angular/material';
 import { SelectionModel } from '@angular/cdk/collections';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -46,7 +47,7 @@ export class AddQueryComponent implements OnInit {
   question: question;
   @ViewChild('formDir') FormGroupDirective: FormGroupDirective;
 
-  constructor(private LogsService: LogsService,
+  constructor(private LogsService: LogsService, private fb: FormBuilder,
     private active_route: ActivatedRoute, private router: Router, private currentActivatedRoute: ActivatedRoute, public dialog: MatDialog) { }
 
   ngOnInit() {
@@ -60,10 +61,34 @@ export class AddQueryComponent implements OnInit {
     this.loaded = true;
     this.generateForm();
     this.queryForm = new FormGroup({
-      question: new FormControl(null, [Validators.required])
+      question: new FormControl(null, [Validators.required]),
+      reply_type: new FormControl(null, [Validators.required])
     });
 
+    this.queryForm.addControl('answer_options', this.fb.array([
+      this.fb.group({
+        name: ''
+      })
+    ]));
+
+    console.log(this.queryForm);
+
   }
+
+  addAttribute(name?, value?) {
+    var arr = <FormArray>this.queryForm.get('answer_options');
+    const attribute = this.fb.group({
+      name: name ? name : ''
+    });
+    arr.push(attribute);
+  }
+
+  minusAttribute() {
+    var arr = this.queryForm.get('answer_options');
+    let last_index = (arr as FormArray).length - 1;
+    (arr as FormArray).removeAt(last_index);
+  }
+
 
   getQuestionById(id) {
     let question = this.LogsService.getQuestionById(id);
@@ -145,6 +170,14 @@ export class AddQueryComponent implements OnInit {
 
 
   addQuery(data) {
+    let answerOptions = [];
+    if (data.answer_options && data.answer_options.length > 0) {
+      data.answer_options.forEach(element => {
+        answerOptions.push(element.name);
+      });
+    }
+    data.answer_options = answerOptions;
+    data.kitchen_log_id = Number(this.currentActivatedRoute.snapshot.paramMap.get('id'));
     this.LogsService.addQuestion(data).subscribe(
       result => {
         this.submit_clicked = false;
@@ -318,6 +351,7 @@ export class AddQueryComponent implements OnInit {
 
   openDialog(queryID): void {
     const dialogRef = this.dialog.open(DialogBoxComponent, {
+      scrollStrategy: new NoopScrollStrategy(),
       width: '800px',
       height: '300px',
 

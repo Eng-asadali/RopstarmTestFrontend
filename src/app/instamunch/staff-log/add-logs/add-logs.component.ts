@@ -53,10 +53,13 @@ export class AddLogsComponent implements OnInit {
   generateForm(log?: log) {
     //console.log("log"+log.title)
 
-    let users=this.StaffService.getStaff();
+    let users=this.StaffService.getStaffWithoutAdmin();
     users.subscribe((result)=>{
       console.log("users"+result)
-
+    // let users=this.StaffService.getStaff();
+    // users.subscribe((result)=>{
+    //   console.log("users"+result)
+    // });
     this.fields = [
       {
         label: 'Title', type: 'text', bootstrapGridClass: "col-lg-6", name: "title", validations: [Validators.required,Validators.maxLength(50)], required: true, value: log ? log.title : null

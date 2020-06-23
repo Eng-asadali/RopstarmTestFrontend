@@ -40,7 +40,8 @@ export class LogsService {
   }
 
   editQuestion(data,id){
-    return this.httpServices.patch(data,'logs/kitchen_logs/questionnaire/'+ id + "/").pipe(
+    http://168.63.140.202:8001/instamunch//96/
+    return this.httpServices.patch(data,'logs/kitchen_logs/questionnaire/question/'+ id + "/").pipe(
       catchError(err => of({error:true,message:'Server error',data:[]})));
   }
 

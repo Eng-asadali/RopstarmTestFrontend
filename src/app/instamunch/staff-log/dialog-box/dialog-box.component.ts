@@ -4,7 +4,7 @@ import { QueryListComponent } from './../query-list/query-list.component';
 import { LogsService } from './../../Services/logs.service';
 import {  ViewChild,AfterViewInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Validators } from '@angular/forms';
+import { Validators, FormGroup, FormControl, FormBuilder, FormArray } from '@angular/forms';
 
 import { question } from '../question';
 import { FieldConfig } from '../../../Interfaces/feildConfig';
@@ -24,6 +24,7 @@ export interface DialogData {
 export class DialogBoxComponent implements OnInit {
 
   constructor(  public dialogRef: MatDialogRef<DialogBoxComponent>,
+    private fb: FormBuilder,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,private LogsService: LogsService,
     private active_route: ActivatedRoute, private router: Router) { }
     @ViewChild(QueryListComponent) child;
@@ -35,7 +36,8 @@ export class DialogBoxComponent implements OnInit {
     edit: boolean = false;
     loaded = false;
     question:question
-   
+    queryForm: FormGroup;
+    queryData;
 
      
         
@@ -49,13 +51,54 @@ export class DialogBoxComponent implements OnInit {
         //this.kitchen_log_id = this.child.kitchen_log_id;
        // console.log("kitchen id from query list components:"+this.kitchen_log_id);
       }
+
+      this.queryForm = new FormGroup({
+        question: new FormControl(null, [Validators.required]),
+        // reply_type: new FormControl(null, [Validators.required])
+      });
+
+      this.queryForm.addControl('answer_options', this.fb.array([
+        this.fb.group({
+          name: ''
+        })
+      ]));
       
     }
   
+    getFormControl(name) {
+      return this.queryForm.get(name);
+    }
+
     getQuestionById(id) {
       let question = this.LogsService.getQuestionById(id);
       question.subscribe(
         result => {
+
+          this.queryData = result['data'];
+
+          this.queryForm.patchValue({
+            question: result['data']['question']
+          })
+
+          let ans= result['data']['answer_options'];
+          if (ans && ans.length) {
+            var arr = this.queryForm.get('answer_options');
+            (arr as FormArray).removeAt(0);
+            let ans_arr = this.queryForm.get('answer_options') as FormArray;
+            ans.forEach(element => {
+               let con=   this.fb.group({
+                    name: element
+                  });
+               ans_arr.push(con);
+            });
+          }
+
+          // this.queryForm.addControl('answer_options', this.fb.array([
+          //   this.fb.group({
+          //     name: ''
+          //   })
+          // ]));
+
           console.log("INSIDE  EDIT ")
           console.log('question by id:', result);
           this.question = result['data'];
@@ -82,7 +125,21 @@ export class DialogBoxComponent implements OnInit {
   
     }
   
-   
+    addAttribute(name?, value?) {
+      var arr = <FormArray>this.queryForm.get('answer_options');
+      const attribute = this.fb.group({
+        name: name ? name : ''
+      });
+      arr.push(attribute);
+    }
+  
+    minusAttribute() {
+      var arr = this.queryForm.get('answer_options');
+      let last_index = (arr as FormArray).length - 1;
+      (arr as FormArray).removeAt(last_index);
+    }
+  
+  
   
   
     editQuestion(data, id) {

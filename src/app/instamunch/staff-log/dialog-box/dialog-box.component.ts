@@ -23,10 +23,14 @@ export interface DialogData {
 })
 export class DialogBoxComponent implements OnInit {
 
+  queryId;
+
   constructor(  public dialogRef: MatDialogRef<DialogBoxComponent>,
     private fb: FormBuilder,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,private LogsService: LogsService,
-    private active_route: ActivatedRoute, private router: Router) { }
+    private active_route: ActivatedRoute, private router: Router) { 
+      this.queryId = data;
+    }
     @ViewChild(QueryListComponent) child;
     kitchen_log_id:string;
     form = {};
@@ -39,7 +43,6 @@ export class DialogBoxComponent implements OnInit {
     queryForm: FormGroup;
     queryData;
 
-     
         
       
     ngOnInit() {
@@ -140,7 +143,40 @@ export class DialogBoxComponent implements OnInit {
     }
   
   
+    onSubmit(form) {
+      if(form.valid){
+        this.editQuery(form.value);
+      }
+    }
+
+    editQuery(data) {
+      let answerOptions = [];
+      if (data.answer_options && data.answer_options.length > 0) {
+        data.answer_options.forEach(element => {
+          answerOptions.push(element.name);
+        });
+      }
+      data.answer_options = answerOptions;
+      // data.kitchen_log_id = Number(this.currentActivatedRoute.snapshot.paramMap.get('id'));
+
+      this.LogsService.editQuestion(data, this.queryId.queryID).subscribe(
+        result => {
+          this.submit_clicked = false;
+          if (!result['error']) {
+            SwalAlert.sucessAlert('', 'Query Updated Sucessfully!');
+          }
+          else {
+            SwalAlert.errorAlert('', result['message'].charAt(0).toUpperCase() + result['message'].substring(1));
   
+          }
+        },
+        err => {
+          this.submit_clicked = false;
+          console.error(err);
+          SwalAlert.errorAlert('', 'Server Error');
+        }
+      );
+    }
   
     editQuestion(data, id) {
       this.LogsService.editQuestion(data, id).subscribe(
@@ -188,8 +224,6 @@ export class DialogBoxComponent implements OnInit {
       
         const log_id =this.data.queryID;
         this.editQuestion(data, log_id);
-      
-      
     }
    
   

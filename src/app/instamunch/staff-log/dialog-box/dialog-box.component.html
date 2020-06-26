@@ -81,7 +81,7 @@
                     </div>
                   </div> -->
                   
-                  <div style="margin: 20px" class="col-md-12" *ngIf="queryData?.reply_type === 'reasoning'">
+                <div style="margin: 20px" class="col-md-12" *ngIf="queryData?.reply_type === 'reasoning'">
                   <div class="form-group" >
                     <label>Add Reasoning <span style="color: red;">*</span>
       
@@ -103,7 +103,11 @@
                     </div>
                   </div>
                 </div>
-
+                
+                <div  class="d-block text-right card-footer">
+                  <button [disabled]="submit_clicked" class="btn btn-success pull-right " style="margin-bottom: 15px;" type="submit"
+                    >Submit</button>
+                </div>
 
                 </form>
             <!-- </div> -->

@@ -26,6 +26,8 @@ import { AddLogsComponent } from './instamunch/staff-log/add-logs/add-logs.compo
 import { QueryListComponent } from './instamunch/staff-log/query-list/query-list.component';
 import { AddQueryComponent } from './instamunch/staff-log/add-query/add-query.component';
 import { EditQuestionComponent } from './instamunch/staff-log/edit-question/edit-question.component';
+import { DealsComponent } from './instamunch/deals/deals.component';
+import { AddDealsComponent } from './instamunch/deals/add-deals/add-deal.component';
 
 
 const routes: Routes = [
@@ -48,6 +50,15 @@ const routes: Routes = [
       {
         path: 'category/edit/:id', component: AddCategoryComponent
       },
+      {
+        path: 'deals', component: DealsComponent
+      },
+      {
+        path: 'deals/add', component: AddDealsComponent
+      },
+      // {
+      //   path: 'deals/edit/:id', component: EditDealsComponent
+      // },
       {
         path: 'product', component: ProductComponent
       },

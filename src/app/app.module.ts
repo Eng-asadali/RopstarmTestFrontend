@@ -54,6 +54,9 @@ import{MatToolbarModule} from "@angular/material";
 
 import {twentyfourToTwelevehr  } from './Shared/Pipes/twentyfourToTwelevehr';
 import { DialogBoxComponent } from './instamunch/staff-log/dialog-box/dialog-box.component';
+import { DealsComponent } from './instamunch/deals/deals.component';
+import { AddDealsComponent } from './instamunch/deals/add-deals/add-deal.component';
+ 
 
 @NgModule({
   declarations: [
@@ -67,10 +70,12 @@ import { DialogBoxComponent } from './instamunch/staff-log/dialog-box/dialog-box
     AddProductComponent,
     StaffComponent,
     OrderComponent,
+    DealsComponent,
     SalesComponent,
     AddStaffComponent,
     EditComponent,
     EditOrderComponent,
+    AddDealsComponent,
     LoginComponent,
     DashboardComponent,
     PageNotFoundComponent,

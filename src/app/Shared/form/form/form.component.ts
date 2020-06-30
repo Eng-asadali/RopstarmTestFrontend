@@ -111,9 +111,7 @@ export class FormComponent implements OnInit {
 
         }
         else {
-          console.log(this.fields[i]);
           if (this.fields[i].type == 'attribute' && this.fields[i].value == null) {
-            console.log('asdad');
             this.Form.addControl('product_attributes', this.fb.array([
               this.fb.group({
                 name: '',

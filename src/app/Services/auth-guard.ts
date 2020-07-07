@@ -4,27 +4,20 @@ import { AuthService } from './auth.service';
 
 @Injectable()
 export class AuthGuardService implements CanActivate {
-    constructor(public auth: AuthService, public router: Router) { }
+  constructor(public auth: AuthService, public router: Router) { }
 
-    canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-           
-        let is_authenticated;
-        let key = route.queryParams.key;
-        
-        // if (key != undefined && key == 12) {
-        //     is_authenticated = true
-        // }
-        // else {
-            if (this.auth.isAuthenticated())
-                is_authenticated = true;
-            else {
-                this.router.navigate(['/']);
-                is_authenticated = false;
-            }
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
 
-//        }
-        // console.log(is_authenticated);
-        return is_authenticated;
-
+    let is_authenticated;
+    let key = route.queryParams.key;
+    if (this.auth.isAuthenticated())
+      is_authenticated = true;
+    else {
+      this.router.navigate(['/']);
+      is_authenticated = false;
     }
+
+    return is_authenticated;
+
+  }
 }

@@ -22,22 +22,23 @@ export class LoginComponent implements OnInit {
 
   constructor(private authService: AuthService, private router: Router,
     private activated_route: ActivatedRoute, private dataSharingSrvice: DataSharingService) {
-    this.activated_route.queryParams.subscribe(params => {
-      this.partner_id = params['partner_id'];
-      localStorage.setItem('partner_id', this.partner_id);
-      console.log(this.partner_id); // Print the parameter to the console. 
-    });
+
   }
 
   ngOnInit() {
+    this.activated_route.queryParams.subscribe(params => {
+      this.partner_id = params['partner_id'];
+      localStorage.setItem('partner_id', this.partner_id);
+    });
     //console.log(this.activated_route.snapshot.queryParams['key']);
+    // if (this.authService.getUser())
+    //   this.router.navigate(['admin']);
   }
 
   onSubmit() {
     this.loginPressed = true;
     this.loginError = false;
-
-    // this.authService.unsetUser();
+    this.authService.unsetUser();
     this.authService.login(this.model['username'], this.model['password'], this.partner_id).subscribe(
       data => {
         this.loginPressed = false;
@@ -49,9 +50,7 @@ export class LoginComponent implements OnInit {
         else {
           this.loginError = true;
           this.error_message = response['message'];
-
         }
-        //  console.log(data);
       },
       err => {
         this.loginPressed = false;

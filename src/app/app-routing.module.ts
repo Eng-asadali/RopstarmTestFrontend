@@ -6,7 +6,6 @@ import { EditComponent } from './instamunch/staff/edit/edit.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { SalesReportResolver } from './Services/sales-report.resolver';
 import { AuthGuardService as AuthGuard } from './Services/auth-guard';
 
 import { DashboardComponent } from './Core/dashboard/dashboard.component';
@@ -32,15 +31,13 @@ import { AddDealsComponent } from './instamunch/deals/add-deals/add-deal.compone
 
 const routes: Routes = [
   { path: '', component: LoginComponent, pathMatch: 'full' },
+  { path: 'login', component: LoginComponent },
   {
     path: 'admin', component: DashboardComponent, canActivate: [AuthGuard],
 
     children: [
       {
-        path: '', component: SalesComponent, 
-        // resolve: {
-        //   cres: SalesReportResolver
-        // }
+        path: '', component: SalesComponent
       },
 
       { path: 'category', component: CategoryComponent },
@@ -84,29 +81,29 @@ const routes: Routes = [
         path: 'staff/edit/:id', component: EditComponent
       },
       {
-        path:'Kitchen',component:KitchenComponent
+        path: 'Kitchen', component: KitchenComponent
       },
       {
-        path:'Kitchen/add',component:AddKitchenComponent
+        path: 'Kitchen/add', component: AddKitchenComponent
       },
       {
-        path:'Kitchen/edit/:id',component:AddKitchenComponent
+        path: 'Kitchen/edit/:id', component: AddKitchenComponent
       },
       {
-        path:'expense',component:ExpenseComponent
+        path: 'expense', component: ExpenseComponent
       },
       {
-        path:'expense/add',component:AddExpenseComponent
+        path: 'expense/add', component: AddExpenseComponent
       },
       {
-        path:'expense/edit/:id',component:AddExpenseComponent
+        path: 'expense/edit/:id', component: AddExpenseComponent
       },
       {
         path: 'logs', component: LogsComponent
       },
       {
         path: 'logs/add', component: AddLogsComponent
-      },     
+      },
       {
         path: 'logs/edit/:id', component: AddLogsComponent
       },
@@ -114,15 +111,16 @@ const routes: Routes = [
         path: 'log/queries/:id', component: QueryListComponent
       },
       {
-        path: 'log/query/add/:id',component: AddQueryComponent
+        path: 'log/query/add/:id', component: AddQueryComponent
       },
       {
-        path: 'log/query/edit/:id',component:  EditQuestionComponent
+        path: 'log/query/edit/:id', component: EditQuestionComponent
       },
       {
-        path: 'sales-report', component: SalesComponent, resolve: {
-          cres: SalesReportResolver
-        }
+        path: 'sales-report', component: SalesComponent
+        // resolve: {
+        //   cres: SalesReportResolver
+        // }
       },
     ]
 

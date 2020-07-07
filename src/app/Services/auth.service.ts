@@ -12,9 +12,8 @@ export class AuthService {
   data = this.dataSource.asObservable();
 
   constructor(private http: HttpClient, private router: Router) { }
-  
+
   login(contact_number: string, password: string, partner_id: any) {
-    console.log(partner_id);
     return this.http.post<any>('user/login/',
       {
         username: contact_number,
@@ -57,17 +56,19 @@ export class AuthService {
 
     if (user != null)
       branch_key = user['branch_key'];
-    // console.log();
-    // if (branch_key != 'undefined' && branch_key != null) {
-    //   branch_key = JSON.parse(localStorage.getItem('user'))['branch_key'];
-    // }
 
     return branch_key;
   }
 
   unsetUser() {
     localStorage.removeItem('user');
-    this.router.navigate(['/'])
+  }
+
+  navigateUser() {
+    localStorage.removeItem('user');
+    let partner_id = localStorage.getItem('partner_id');
+    this.router.navigateByUrl('/?partner_id='+partner_id);
+    // this.router.navigate(['/login?', { partner_id: partner_id }]);
   }
 
   getUser() {
@@ -75,7 +76,7 @@ export class AuthService {
   }
 
   isAuthenticated() {
-    if (localStorage.getItem('user') != 'undefined' && localStorage.getItem('user') != null) {
+    if (localStorage.getItem('user')) {
       return true;
     }
   }

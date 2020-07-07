@@ -8,8 +8,7 @@ export class HttpService {
   partner_id;
   constructor(private http: HttpClient) {
     this.loggen_in_user = JSON.parse(localStorage.getItem('user'));
-    this.partner_id = JSON.parse(localStorage.getItem('partner_id'));
-    console.log(this.partner_id);
+    this.partner_id = localStorage.getItem('partner_id');
     // this.loggen_in_user = {id:13};
   }
 
@@ -27,6 +26,9 @@ export class HttpService {
   }
 
   postWithoutStatus(data, url) {
+    data['os'] = "web";
+    data['status'] = "active";
+    data['partner_id'] = this.partner_id;
     return this.http.post(url, data);
   }
 
@@ -51,6 +53,7 @@ export class HttpService {
 
   filter(data, url) {
     // console.log(data);
+    data['partner_id'] = this.partner_id;
     return this.http.post(url, data);
   }
 

@@ -15,14 +15,13 @@ export class DashboardComponent implements OnInit {
     private dataSharingService: DataSharingService) {
     // console.log(this.dataSharingService.getOption());
     // console.log(this.reload);
-    if (this.reload == true) {
-      this.dataSharingService.setOption('reload', false);
-      location.reload();
-    }
-    else {
-      // console.log('in else block');
-      //   location.reload();
-    }
+    // if (this.reload == true) {
+    //   this.dataSharingService.setOption('reload', false);
+    //   location.reload();
+    // }
+    // else {
+
+    // }
   }
 
   ngOnInit() {

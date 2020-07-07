@@ -36,7 +36,6 @@ export class CategoryComponent implements OnInit {
   ngOnInit() {
     this.table_headers = ['image', 'name','status', 'parent_category_id',  'actions'];
     this.getCategoriesList();
-    
   }
 
   getCategoriesList(){
@@ -62,7 +61,7 @@ export class CategoryComponent implements OnInit {
     );
   }
 
- 
+
 
   getCategoryId(id,action) {
 
@@ -117,7 +116,7 @@ export class CategoryComponent implements OnInit {
     this.isAllSelected() ?
       this.selection.clear() :
       this.dataSource.data.forEach(row => this.selection.select(row));
-    
+
   }
 
   // $event ? selection.toggle(row) : null

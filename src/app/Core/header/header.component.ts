@@ -11,16 +11,15 @@ import { AuthGuardService } from 'src/app/Services/auth-guard';
 export class HeaderComponent implements OnInit {
 
   user: any;
-  constructor(private router: Router, private authService: AuthService) { }
+  constructor(private router: Router, private authService: AuthService) {
+  }
 
   ngOnInit() {
-    this.user= this.authService.getUser();
-    // console.log(this.user);
+    this.user = this.authService.getUser();
   }
 
   logout() {
-    this.authService.unsetUser();
-    this.router.navigate(['']);
+    this.authService.navigateUser();
   }
 
 }

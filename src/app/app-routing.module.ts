@@ -56,9 +56,9 @@ const routes: Routes = [
       {
         path: 'deals/add', component: AddDealsComponent
       },
-      // {
-      //   path: 'deals/edit/:id', component: EditDealsComponent
-      // },
+      {
+        path: 'deals/edit/:id', component: AddDealsComponent
+      },
       {
         path: 'product', component: ProductComponent
       },

@@ -111,6 +111,8 @@
                       <td mat-cell *matCellDef="let element">
                         <span class="badge" [ngClass]="{
                           'badge-info':element.order_status === 'pending',
+                          'badge-success':element.order_status === 'confirmed',
+                          'badge-danger':element.order_status === 'cancelled',
                           'badge-warning':element.order_status === 'preparing',
                           'badge-primary':element.order_status === 'ready_to_serve',
                           'badge-danger':element.order_status === 'served',

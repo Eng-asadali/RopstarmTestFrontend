@@ -73,4 +73,29 @@ export class LogsService {
     return this.httpServices.postWithoutStatus({kitchen_questionnaire_ids:ids},'logs/kitchen_logs/questionnaire/delete/').pipe(
       catchError(err => of({ error: true, message: 'Server error', data: [],httpError: err })));
   }
+  getDeals(){
+    return this.httpServices.get('promotions/').pipe(
+       catchError(err => of({error:true,message:'Server error',data:[]}))
+       );
+   }
+  addDeall(data){
+    return this.httpServices.postFormData(data, 'promotions/').pipe(
+      catchError(err => of({ error: true, message: 'Server error', data: [] })));
+  }
+  editDeall(data,id){
+    return this.httpServices.patchFormData(data,'promotions/' + id + "/").pipe(
+      catchError(err => of({ error: true, message: 'Server error', data: [] })));
+  }
+  deleteById(id){
+    return this.httpServices.delete('promotions/' + id + "/").pipe(
+      catchError(err => of({ error: true, message: 'Server error', data: [] })));
+  }
+  itemType() {
+    return this.httpServices.get('catalog/product/').pipe(
+      catchError(err => of({ error: true, message: 'Server error', data: [] })));
+  }
+  getDealsById(id) {
+    return this.httpServices.get('promotions/deal/items/' + id + "/").pipe(
+      catchError(err => of({error:true,message:'Server error',data:[]})));
+  }
 }

@@ -12,14 +12,14 @@ export class AuthService {
   data = this.dataSource.asObservable();
 
   constructor(private http: HttpClient, private router: Router) { }
-
-  login(contact_number: string, password: string) {
-
+  
+  login(contact_number: string, password: string, partner_id: any) {
+    console.log(partner_id);
     return this.http.post<any>('user/login/',
       {
         username: contact_number,
         password: password,
-        partner_id : '2'
+        partner_id: parseInt(partner_id)
       }).pipe(map(user => {
 
         console.log(user);
@@ -29,9 +29,9 @@ export class AuthService {
         }
         return user;
       },
-      err => {
-        
-      }
+        err => {
+
+        }
       ));
   }
 
@@ -70,10 +70,10 @@ export class AuthService {
     this.router.navigate(['/'])
   }
 
-  getUser(){
+  getUser() {
     return JSON.parse(localStorage.getItem('user'));
   }
-  
+
   isAuthenticated() {
     if (localStorage.getItem('user') != 'undefined' && localStorage.getItem('user') != null) {
       return true;

@@ -5,9 +5,11 @@ import { DateUtils } from '../Shared/DateUtils';
 @Injectable()
 export class HttpService {
   loggen_in_user;
-
+  partner_id;
   constructor(private http: HttpClient) {
     this.loggen_in_user = JSON.parse(localStorage.getItem('user'));
+    this.partner_id = JSON.parse(localStorage.getItem('partner_id'));
+    console.log(this.partner_id);
     // this.loggen_in_user = {id:13};
   }
 
@@ -19,6 +21,7 @@ export class HttpService {
     data['created_by_id'] = this.loggen_in_user['id'];
     data['os'] = "web";
     data['status'] = "active";
+    data['partner_id'] = this.partner_id;
     console.log(data);
     return this.http.post(url, data);
   }
@@ -31,6 +34,7 @@ export class HttpService {
     data['created_by_id'] = this.loggen_in_user['id'];
     data['os'] = "web";
     data['status'] = "active";
+    data['partner_id'] = this.partner_id;
     var form_data = this.converToFormdata(data);
     // console.log(form_data);
     return this.http.post(url, form_data);
@@ -39,6 +43,7 @@ export class HttpService {
   postFormDataWithoutActiveStatus(data, url) {
     data['created_by_id'] = this.loggen_in_user['id'];
     data['os'] = "web";
+    data['partner_id'] = this.partner_id;
     // console.log(data);
     var form_data = this.converToFormdata(data);
     return this.http.post(url, form_data);
@@ -55,6 +60,7 @@ export class HttpService {
     data['created_by_id'] = this.loggen_in_user['id'];
     data['os'] = "web";
     data['status'] = "active";
+    data['partner_id'] = this.partner_id;
     // console.log(data);
     return this.http.patch(url, data);
   }
@@ -66,6 +72,7 @@ export class HttpService {
     data['os'] = "web";
     data['status'] = "active";
     var form_data = this.converToFormdata(data);
+    data['partner_id'] = this.partner_id;
     // console.log(form_data);
     return this.http.patch(url, form_data);
   }
@@ -74,6 +81,7 @@ export class HttpService {
     data['modified_by_id'] = this.loggen_in_user['id'];
     data['modified_datetime'] = DateUtils.getUtcDateTimeStart(new Date().toISOString());;
     data['os'] = "web";
+    data['partner_id'] = this.partner_id;
     // console.log(data);
     var form_data = this.converToFormdata(data);
     return this.http.patch(url, form_data);

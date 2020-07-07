@@ -89,7 +89,7 @@
                         (click)="minusAttribute()"><i style="margin-top: -2px;" class="fa fa-minus"></i></button>
             </label>
             <div formArrayName="deal_items">
-              <div *ngFor="let attribute of addForm.controls.deal_items.controls; let i = index"
+              <div *ngFor="let attribute of addForm.controls.deal_items['controls']; let i = index"
                         [formGroupName]="i">
                 <div style="margin-bottom: 5px;" class="row">
                   <div class="col-md-4"><div class="form-group">

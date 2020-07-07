@@ -25,8 +25,16 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit() {
-
-
+    if (document.getElementById('custom_js') != null) {
+      document.getElementById('custom_js').remove();
+    }
+    const node = document.createElement('script');
+    node.src = 'assets/scripts/main.js';
+    node.type = 'text/javascript';
+    node.async = false;
+    node.id = 'custom_js';
+    node.charset = 'utf-8';
+    document.getElementsByTagName('head')[0].appendChild(node);
   }
 
 }

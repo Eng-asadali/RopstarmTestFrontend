@@ -49,14 +49,15 @@ import { AddQueryComponent } from './instamunch/staff-log/add-query/add-query.co
 import { EditQuestionComponent } from './instamunch/staff-log/edit-question/edit-question.component';
 import { LogsComponent } from './instamunch/staff-log/logs/logs.component';
 import { QueryListComponent } from './instamunch/staff-log/query-list/query-list.component';
-import {MatDialogModule} from "@angular/material";
-import{MatToolbarModule} from "@angular/material";
+import { MatDialogModule } from "@angular/material";
+import { MatToolbarModule } from "@angular/material";
 
-import {twentyfourToTwelevehr  } from './Shared/Pipes/twentyfourToTwelevehr';
+import { twentyfourToTwelevehr } from './Shared/Pipes/twentyfourToTwelevehr';
 import { DialogBoxComponent } from './instamunch/staff-log/dialog-box/dialog-box.component';
 import { DealsComponent } from './instamunch/deals/deals.component';
 import { AddDealsComponent } from './instamunch/deals/add-deals/add-deal.component';
- 
+import { MatMenuModule } from '@angular/material/menu';
+import { MatIconModule } from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -94,6 +95,8 @@ import { AddDealsComponent } from './instamunch/deals/add-deals/add-deal.compone
 
   imports: [
     BrowserModule,
+    MatIconModule,
+    MatMenuModule,
     BrowserAnimationsModule,
     AppRoutingModule,
     HttpClientModule,

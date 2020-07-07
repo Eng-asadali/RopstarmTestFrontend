@@ -8,6 +8,8 @@ import { Category } from './deals';
 import { SwalAlert } from 'src/app/Shared/swalAlerts';
 import { StatusEnum } from '../Enums/status-enum';
 import {NgSelectModule, NgOption} from '@ng-select/ng-select';
+import { LogsService } from './../Services/logs.service';
+
 
 @Component({
   selector: 'app-deals',
@@ -30,18 +32,18 @@ export class DealsComponent implements OnInit {
   data: any = [];
   categories: Category[];
 
-  constructor(private categoryService: CategoryService, private router: Router,
+  constructor(private categoryService: CategoryService, private router: Router,private LogsService: LogsService,
     private currentActivatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
     this.table_headers = ['image', 'name','status', 'parent_category_id',  'actions'];
-    this.getCategoriesList();
+    this.getDeals();
     
   }
 
-  getCategoriesList(){
-    const categories = this.categoryService.getCategories();
-    categories.subscribe(
+  getDeals(){
+    const deals = this.LogsService.getDeals();
+    deals.subscribe(
       result => {
         console.log('categories list:', result);
         if (!result['error']) {
@@ -64,7 +66,7 @@ export class DealsComponent implements OnInit {
 
  
 
-  getCategoryId(id,action) {
+  getDealId(id,action) {
 
     console.log('Kitchen id', id);
     if (action == 'edit')
@@ -84,11 +86,11 @@ export class DealsComponent implements OnInit {
   }
 
   deleteById(id) {
-    console.log(' id to delete', id);
-    this.categoryService.deleteById(id).subscribe(
+     console.log(' id to delete', id);
+    this.LogsService.deleteById(id).subscribe(
       result => {
         if (!result['error']) {
-         this.getCategoriesList();
+         this.getDeals();
           SwalAlert.sucessAlert('', 'Deleted Successfully!');
           //this.router.navigate(['/instamunch/staff/', id]);
 
@@ -138,6 +140,6 @@ export class DealsComponent implements OnInit {
   refresh(){
     this.loaded = false;
     this.dataSource.data = [];
-    this.getCategoriesList();
+    this.getDeals();
   }
 }

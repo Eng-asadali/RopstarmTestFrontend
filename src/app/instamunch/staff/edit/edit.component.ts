@@ -110,6 +110,7 @@ export class EditComponent implements OnInit {
         this.submit_clicked = false;
         if (!result['error']) {
           SwalAlert.sucessAlert('', 'Staff Updated Sucessfully!');
+          this.navigateToProductListing();
         }
         else {
           SwalAlert.errorAlert('', result['message'].charAt(0).toUpperCase() + result['message'].substring(1));

@@ -108,6 +108,7 @@ export class AddCategoryComponent implements OnInit {
         this.submit_clicked = false;
         if (!result['error']) {
           SwalAlert.sucessAlert('', 'Category Updated Sucessfully!');
+          this.navigateToCategoryListing();
         }
         else {
           SwalAlert.errorAlert('', result['message'].charAt(0).toUpperCase() + result['message'].substring(1));

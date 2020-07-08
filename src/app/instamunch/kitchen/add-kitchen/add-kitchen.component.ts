@@ -127,6 +127,7 @@ export class AddKitchenComponent implements OnInit {
         this.submit_clicked = false;
         if (!result['error']) {
           SwalAlert.sucessAlert('', 'Kitchen Updated Sucesssfully!')
+          this.navigateToProductListing();
         }
         else {
           SwalAlert.errorAlert('', result['message'].charAt(0).toUpperCase() + result['message'].substring(1));
@@ -148,6 +149,7 @@ export class AddKitchenComponent implements OnInit {
         if (!result['error']) {
           this.clear_form = true;
           SwalAlert.sucessAlert('', 'Kitchen Added Sucesssfully!')
+          
         }
         else {
           SwalAlert.errorAlert('', result['message'].charAt(0).toUpperCase() + result['message'].substring(1));

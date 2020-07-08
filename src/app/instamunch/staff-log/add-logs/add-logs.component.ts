@@ -108,6 +108,7 @@ export class AddLogsComponent implements OnInit {
         this.submit_clicked = false;
         if (!result['error']) {
           SwalAlert.sucessAlert('', 'Log Updated Sucessfully!');
+          this.navigateToQueryListing();
         }
         else {
           SwalAlert.errorAlert('', result['message'].charAt(0).toUpperCase() + result['message'].substring(1));

@@ -4,7 +4,7 @@
       <div class="{{form.FormbootstrapGridClass}}">
         <div *ngFor='let rows of row ;let i = index' class="row">
           <div *ngFor='let index of rows ;let i = index' class="{{fields[index].bootstrapGridClass}}">
-
+            
             <div class="form-group" *ngIf="fields[index].type == 'checkbox'">
               <input *ngIf="fields[index].name" value="{{fields[index].value}}" [checked]="fields[index].value"
                 formControlName="{{fields[index].name}}" type="checkbox">

@@ -20,8 +20,12 @@
                     <div class="modal-body">
                       <mat-progress-bar *ngIf="loginPressed"  mode="indeterminate"></mat-progress-bar>
                       <div class=" modal-title text-center mb-3">
-                        <div class="app-logo-inverse mx-auto mb-3 mt-2 text-center"> <img
+                        <div *ngIf="partner_id == 1" class="app-logo-inverse mx-auto mb-3 mt-2 text-center"> <img
                             src="assets/images/zenlounge-logo.png" height="150" /> </div>
+                        <div *ngIf="partner_id == 2" class="app-logo-inverse mx-auto mb-3 mt-2 text-center"> <img
+                            src="assets/images/insta_img.png" height="150" /> </div>
+                        <div *ngIf="partner_id == 3" class="app-logo-inverse mx-auto mb-3 mt-2 text-center"> <img
+                            src="assets/images/lokal_image.png" height="150" /> </div>
 
                         <h4 class="mt-2">
                           <div>Welcome! <br /> Sign in to your account </div>

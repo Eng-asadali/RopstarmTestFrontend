@@ -62,6 +62,7 @@ export class AuthService {
 
   unsetUser() {
     localStorage.removeItem('user');
+    localStorage.removeItem('partner_id');
   }
 
   navigateUser() {

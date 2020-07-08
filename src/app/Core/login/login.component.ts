@@ -28,22 +28,25 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
     this.activated_route.queryParams.subscribe(params => {
       this.partner_id = params['partner_id'];
-      localStorage.setItem('partner_id', this.partner_id);
     });
     console.log(this.activated_route.snapshot.queryParams['key']);
-    if (localStorage.getItem('user') && localStorage.getItem('partner_id'))
+    console.log( this.partner_id);
+    console.log( localStorage.getItem('partner_id'));
+
+    if (localStorage.getItem('user') && localStorage.getItem('partner_id')== this.partner_id)
       this.router.navigate(['admin']);
   }
 
   onSubmit() {
     this.loginPressed = true;
     this.loginError = false;
-    this.authService.unsetUser();
+    // this.authService.unsetUser();
     this.authService.login(this.model['username'], this.model['password'], this.partner_id).subscribe(
       data => {
         this.loginPressed = false;
         var response: response = data;
         if (!response.error) {
+          localStorage.setItem('partner_id', this.partner_id);
           this.dataSharingSrvice.setOption('reload', true);
           this.router.navigate(['admin']);
         }

@@ -30,9 +30,9 @@ export class LoginComponent implements OnInit {
       this.partner_id = params['partner_id'];
       localStorage.setItem('partner_id', this.partner_id);
     });
-    //console.log(this.activated_route.snapshot.queryParams['key']);
-    // if (this.authService.getUser())
-    //   this.router.navigate(['admin']);
+    console.log(this.activated_route.snapshot.queryParams['key']);
+    if (localStorage.getItem('user') && localStorage.getItem('partner_id'))
+      this.router.navigate(['admin']);
   }
 
   onSubmit() {

@@ -32,13 +32,20 @@ export class EditOrderComponent implements OnInit {
   }
 
   getOrderById(id) {
+    this.submit_clicked = false;
     let order = this.OrderService.getOrderbyid(id);
     order.subscribe(
       result => {
         console.log('Order by id:', result);
         if (!result['error']) {
+
+          if(result['data'][0]['order_status']=="cancelled")
+           this.submit_clicked=true;
+
+
           this.generateForm(result['data'][0]);
           this.loaded = true;
+           
         }
         else {
           this.loaded = true;

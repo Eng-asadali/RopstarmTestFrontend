@@ -5,6 +5,7 @@ import { SelectionModel } from '@angular/cdk/collections';
 
 import { OrderService } from '../Services/order.service';
 import { SwalAlert } from 'src/app/Shared/swalAlerts';
+import { CurrencyService } from '../Services/currency.service';
 
 @Component({
   selector: 'app-order',
@@ -29,7 +30,7 @@ export class OrderComponent implements OnInit {
 
   order_ids: any
 
-  constructor(private OrderService: OrderService, private router: Router) { }
+  constructor(private OrderService: OrderService, private router: Router,public currency_service:CurrencyService) { }
 
   ngOnInit() {
     this.table_headers = ['select', 'name', 'floor', 'order status', 'order datetime', 'price', 'actions'];

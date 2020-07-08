@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../Services/auth.service';
 import { Router } from '@angular/router';
 import { AuthGuardService } from 'src/app/Services/auth-guard';
+import { LogoService } from 'src/app/instamunch/Services/logo.service';
 
 @Component({
   selector: 'app-header',
@@ -11,7 +12,7 @@ import { AuthGuardService } from 'src/app/Services/auth-guard';
 export class HeaderComponent implements OnInit {
 
   user: any;
-  constructor(private router: Router, private authService: AuthService) {
+  constructor(private router: Router, private authService: AuthService,public logo: LogoService) {
   }
 
   ngOnInit() {

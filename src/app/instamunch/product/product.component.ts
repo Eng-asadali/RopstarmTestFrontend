@@ -8,6 +8,7 @@ import { Product } from './product';
 import { SwalAlert } from '../../Shared/swalAlerts';
 import { StatusEnum } from '../Enums/status-enum';
 import Swal from 'sweetalert2';
+import { CurrencyService } from '../Services/currency.service';
 
 
 @Component({
@@ -32,7 +33,7 @@ export class ProductComponent implements OnInit {
   products: Product[];
   product_ids: any = [];
 
-  constructor(private productService: ProductService, private router: Router,
+  constructor(private productService: ProductService, private router: Router,public currency_service:CurrencyService,
     private currentActivatedRoute: ActivatedRoute) { }
 
   ngOnInit() {

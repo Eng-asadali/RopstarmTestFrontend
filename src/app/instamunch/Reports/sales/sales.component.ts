@@ -6,6 +6,7 @@ import { map } from 'rxjs/operators';
 import { SalesReportService } from '../../Services/sales-report.service';
 import { DateUtils } from 'src/app/Shared/DateUtils';
 import { SwalAlert } from '../../../Shared/swalAlerts';
+import { CurrencyService } from '../../Services/currency.service';
 
 @Component({
   selector: 'app-sales',
@@ -33,7 +34,7 @@ export class SalesComponent implements OnInit {
   chartReady: boolean = false;
   chartReadyD: boolean = false;
 
-  constructor(private salesReportService: SalesReportService, private activated_route: ActivatedRoute) { }
+  constructor(private salesReportService: SalesReportService, private activated_route: ActivatedRoute,public currency_service:CurrencyService) { }
 
   ngOnInit() {
     // this.activated_route.data.pipe(map(data => data.cres)).subscribe(result => {

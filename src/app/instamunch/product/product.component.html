@@ -115,7 +115,7 @@
                       </ng-container>
 
                       <ng-container matColumnDef="price">
-                        <th style="padding-left: 5px;padding-right: 5px;" mat-header-cell *matHeaderCellDef> Price (£)
+                        <th style="padding-left: 5px;padding-right: 5px;" mat-header-cell *matHeaderCellDef> Price ({{currency_service.getCurrencySymbol()}})
                         </th>
                         <td style="padding-left: 5px;padding-right: 5px;" mat-cell *matCellDef="let element">
                           {{element.price}} </td>

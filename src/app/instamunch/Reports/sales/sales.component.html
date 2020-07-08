@@ -78,7 +78,7 @@
               <div class="widget-subheading">All orders</div>
             </div>
             <div class="widget-content-right">
-              <div *ngIf="sales_report.overall_summary?.total_revenue!='-'; else total_revenue" class="widget-numbers text-white"><span>£ {{sales_report.overall_summary?.total_revenue | number:'1.0-2'}}</span>
+              <div *ngIf="sales_report.overall_summary?.total_revenue!='-'; else total_revenue" class="widget-numbers text-white"><span>{{currency_service.getCurrencySymbol()}} {{sales_report.overall_summary?.total_revenue | number:'1.0-2'}}</span>
               </div>
               <ng-template #total_revenue>
                 <div class="widget-numbers text-white"><span>{{sales_report.overall_summary?.total_revenue}}</span></div>
@@ -95,7 +95,7 @@
               <div class="widget-subheading">Overall all orders</div>
             </div>
             <div class="widget-content-right">
-              <div *ngIf="sales_report.overall_summary?.total_tips!='-'; else total_tips" class="widget-numbers text-white"><span> £ {{sales_report.overall_summary?.total_tips| number:'1.0-2'}}</span></div>
+              <div *ngIf="sales_report.overall_summary?.total_tips!='-'; else total_tips" class="widget-numbers text-white"><span> {{currency_service.getCurrencySymbol()}} {{sales_report.overall_summary?.total_tips| number:'1.0-2'}}</span></div>
               <ng-template #total_tips>
                 <div class="widget-numbers text-white"><span>{{sales_report.overall_summary?.total_tips}}</span></div>
               </ng-template>
@@ -162,7 +162,7 @@
                         </div>
                         <div class="widget-content-right">
                           <div class="font-size-xlg text-muted">
-                            <small class="opacity-5 pr-1">£</small>
+                            <small class="opacity-5 pr-1">{{currency_service.getCurrencySymbol()}}</small>
                             <span> {{item.overall}}</span>
                             <!-- <small class="text-danger pl-2">
                               <i class="fa fa-angle-down"></i>
@@ -243,8 +243,8 @@
                     <!-- <th class="text-center">#</th> -->
                     <th>Name</th>
                     <th class="text-center">Type</th>
-                    <th class="text-center">Amount (£) </th>
-                    <th class="text-center">Tip Amount (£)</th>
+                    <th class="text-center">Amount ({{currency_service.getCurrencySymbol()}}) </th>
+                    <th class="text-center">Tip Amount ({{currency_service.getCurrencySymbol()}})</th>
                  </tr>
                 </thead>
                 <tbody>

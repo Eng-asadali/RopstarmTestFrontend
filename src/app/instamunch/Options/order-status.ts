@@ -5,7 +5,7 @@ export const orderStatus = [
    {id:'served',name:'Served'},
    {id:'completed',name:'Completed'},
    {id:'confirmed',name:'Confirmed'},
-   {id:'in_payment',name:'In Payment'},
+   // {id:'in_payment',name:'In Payment'},
    {id:'cancelled',name:'Cancelled'}
 ]
 

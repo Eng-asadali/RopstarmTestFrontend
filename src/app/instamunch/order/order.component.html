@@ -112,7 +112,7 @@
                         <span class="badge" [ngClass]="{
                           'badge-info':element.order_status === 'pending',
                           'badge-danger':(element.order_status === 'cancelled' || element.order_status === 'served'),
-                          'badge-warning':(element.order_status === 'preparing' || element.order_status === 'in_payment'),
+                          'badge-warning':element.order_status === 'preparing' ,
                           'badge-primary':element.order_status === 'ready_to_serve',
                           'badge-success':(element.order_status === 'completed' || element.order_status === 'confirmed')
                         }"> {{element.order_status | removeUnderScore | titlecase}}</span>

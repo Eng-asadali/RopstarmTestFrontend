@@ -107,14 +107,16 @@
                     </ng-container>
 
                     <ng-container matColumnDef="order status">
-                      <th mat-header-cell *matHeaderCellDef> Status </th> 
+                      <th mat-header-cell *matHeaderCellDef> Status </th>
                       <td mat-cell *matCellDef="let element">
                         <span class="badge" [ngClass]="{
                           'badge-info':element.order_status === 'pending',
-                          'badge-danger':(element.order_status === 'cancelled' || element.order_status === 'served'),
+                          'badge-danger':(element.order_status === 'cancelled'),
                           'badge-warning':element.order_status === 'preparing' ,
                           'badge-primary':element.order_status === 'ready_to_serve',
-                          'badge-success':(element.order_status === 'completed' || element.order_status === 'confirmed')
+                          'badge-success':(element.order_status === 'completed'),
+                          'badge-yellow':element.order_status === 'confirmed',
+                          'badge-pink':element.order_status === 'served'
                         }"> {{element.order_status | removeUnderScore | titlecase}}</span>
                         <!-- {'pending':1, 'preparing': 2, 'ready_to_serve': 3, 'served': 4, 'completed': 5} -->
                       </td>

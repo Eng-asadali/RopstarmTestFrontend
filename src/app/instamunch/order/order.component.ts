@@ -44,7 +44,6 @@ export class OrderComponent implements OnInit {
     const orders = this.OrderService.getOrders(this.postData);
     orders.subscribe(
       result => {
-        debugger;
         console.log('orders list:', result);
         if (!result['error']) {
           this.orders = result['data'];

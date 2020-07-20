@@ -7,3 +7,13 @@
   margin-top: 3px;
   margin-bottom: 3px;
 }
+
+.badge-yellow{
+  background-color: #d0d01b;
+  color: white;
+}
+
+.badge-pink{
+  background-color: #ce235d;
+  color: white;
+}

@@ -58,6 +58,27 @@
               (keyup)="applyFilter($event.target.value)" placeholder="Search...">
           </div>
         </h4>
+
+
+        <div class="filters">
+          <div class="row">
+
+              <div class="col-lg-3">
+                  <div class="position-relative form-group">
+                      <label class="">By Kitchen </label>
+                      <select class="custom-select" (change)="changeKitchen($event.target.value)">
+                        <option value="">Select</option>
+                        <option *ngFor="let kitchen of kitchenDropDown" [value]="kitchen.id">
+                          {{kitchen.name}}
+                        </option>
+                      </select>
+                  </div>
+              </div>
+             
+          </div>
+      </div>
+
+
         <div class="main-card mb-3 card">
           <!-- <div class="card-header">Products
                                         <div class="btn-actions-pane-right">
@@ -112,6 +133,13 @@
                         </th>
                         <td style="padding-left: 5px;padding-right: 5px;" mat-cell *matCellDef="let element">
                           {{element.category_name}} </td>
+                      </ng-container>
+
+                      <ng-container matColumnDef="kitchen_name">
+                        <th style="padding-left: 5px;padding-right: 5px;" mat-header-cell *matHeaderCellDef> Kitchen Name
+                        </th>
+                        <td style="padding-left: 5px;padding-right: 5px;" mat-cell *matCellDef="let element">
+                          {{element.kitchen_name}} </td>
                       </ng-container>
 
                       <ng-container matColumnDef="price">

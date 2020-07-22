@@ -33,13 +33,32 @@ export class OrderComponent implements OnInit {
   constructor(private OrderService: OrderService, private router: Router,public currency_service:CurrencyService) { }
 
   ngOnInit() {
-    this.table_headers = ['select', 'name', 'floor', 'order status', 'order datetime', 'price', 'actions'];
+    this.table_headers = ['select','id' ,'name', 'floor','type', 'order status', 'order datetime', 'price', 'actions'];
     this.orderListing();
   }
 
-  orderListing() {
+  onChangeType(type) {
+    this.orderListing(type, null);
+  }
+  onChangeStatus(status) {
+    this.orderListing(null, status);
+  }
+
+  orderListing(type = null,status=null) {
     this.loaded = false;
-    this.postData['action'] = 'action';
+    this.postData['action'] = 'admin_filter';
+    if (type) {
+      this.postData['type'] = type;
+    }else if (status){
+      this.postData['order_status'] = status;
+    }
+    
+    if (type == 0) {
+      delete this.postData['type'];
+    }
+    if ( status == 0) {
+      delete this.postData['order_status'];
+    }
 
     const orders = this.OrderService.getOrders(this.postData);
     orders.subscribe(

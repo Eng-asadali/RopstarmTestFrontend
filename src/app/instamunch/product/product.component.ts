@@ -32,18 +32,41 @@ export class ProductComponent implements OnInit {
   checkedId: any = [];
   products: Product[];
   product_ids: any = [];
+  kitchenDropDown;
+  postData = {};
 
   constructor(private productService: ProductService, private router: Router,public currency_service:CurrencyService,
     private currentActivatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
-    this.table_headers = ['select', 'image', 'name', 'status',  'price','estimated_prepare_time', 'category_id','actions'];
+    this.getKitchen();
+    this.table_headers = ['select', 'image', 'name','kitchen_name', 'status',  'price','estimated_prepare_time', 'category_id','actions'];
     this.getProductsList();
   }
 
-  getProductsList() {
+
+  getKitchen(){
     this.loaded = false;
-    const products = this.productService.getProducts();
+    this.productService.getKitchenList().subscribe(
+    result => {
+      this.kitchenDropDown = result['data'];
+    });
+  }
+
+  changeKitchen(value) {
+    this.getProductsList(value);
+  }
+
+
+  getProductsList(value=null) {
+    this.loaded = false;
+    let products = null;
+    if(value){
+      this.postData['kitchen_id'] = value;
+       products = this.productService.getFilterTable(this.postData);
+    }else{
+    products = this.productService.getProducts();
+    }
     products.subscribe(
       result => {
         console.log('products list', result);

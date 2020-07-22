@@ -57,6 +57,10 @@ export class HttpService {
     return this.http.post(url, data);
   }
 
+  filterProduct(data, url) {
+    return this.http.post(url, data);
+  }
+
   patch(data, url) {
     data['modified_by_id'] = this.loggen_in_user['id'];
     data['modified_datetime'] = DateUtils.getUtcDateTimeStart(new Date().toISOString());

@@ -40,6 +40,14 @@ export class ProductService {
       catchError(err => of({ error: true, message: 'Server error', data: [], httpError: err })));
   }
 
+  getFilterTable(data) {
+    return this.httpServices.filterProduct(data, 'catalog/product/filter/').pipe(
+      catchError(err => of({ error: true, message: 'Server error', data: [] })));
+
+    // return this.httpServices.post(data,'catalog/product/filter/').pipe(
+    //   catchError(err => of({ error: true, message: 'Server error', data: [], httpError: err })));
+  }
+
   getKitchenList() {
     return this.httpServices.get('kitchen/').pipe(
       catchError(err => of({ error: true, message: 'Server error', data: [] }))

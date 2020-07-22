@@ -43,8 +43,9 @@ export class InterceptorService implements HttpInterceptor {
         }
       }), err => {
         if (err instanceof HttpErrorResponse && err.status === 401) {
-          this.auth.unsetUser();
-          this.router.navigateByUrl('');
+          // this.auth.unsetUser();
+          // this.router.navigateByUrl('');
+          this.auth.navigateUser();
         }
       }));
   }

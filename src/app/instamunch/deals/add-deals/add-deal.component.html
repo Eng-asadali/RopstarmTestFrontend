@@ -41,7 +41,7 @@
       
 
       <div class="row">
-        <div style="margin: 5px" class="col-md-4">
+        <div style="margin: 5px" class="col-md-3">
           <div class="form-group">
             <label for="name">Deal Name </label>
             <input type="text" formControlName="name" class="form-control" id="name">
@@ -52,7 +52,7 @@
           </div>
         </div>
 
-        <div style="margin: 5px" class="col-md-4">
+        <div style="margin: 5px" class="col-md-3">
           <!-- <div class="form-group">
             <label for="duration">Deal Duration </label>
             <input type="date" formControlName="duration" class="form-control" id="duration">
@@ -77,12 +77,25 @@
             </span>
           </div>
         </div>
+
+        <div style="margin: 5px" class="col-md-6">
+          <div class="form-group">
+            <label for="duration">Deal Description </label>
+            <textarea  class="form-control" formControlName="duration"
+            rows="4" cols="30" nullValue> </textarea>
+            <!-- <span style="color: red;" *ngIf="getFormControl('duration').invalid &&
+            (getFormControl('duration').dirty || getFormControl('duration').touched ||formDir.submitted)">
+              Duration  is required.
+            </span> -->
+          </div>
+        </div>
+
       </div>
       
       <div class="row">
         <div style="margin: 5px" class="col-md-12">
           <div class="form-group">
-            <label for="deal_name">Item 
+            <label for="deal_name">Slot 
               <button type="button" style="color: white;margin-left: 6px;" class="btn btn-sm btn-success"
                       (click)="addAttribute()"><i class="icofont-ui-add"></i></button>
                         <button type="button" style="color: white;margin-left: 6px;" class="btn btn-sm btn-danger"
@@ -90,8 +103,25 @@
             </label>
             <div formArrayName="deal_items">
               <div *ngFor="let attribute of addForm.controls.deal_items['controls']; let i = index"
-                        [formGroupName]="i">
-                <div style="margin-bottom: 5px;" class="row">
+              [formGroupName]="i">
+
+             
+              <div class="row">
+                <div style="margin: 5px" class="col-md-4">
+                  <div class="form-group">
+                    <label for="name"> Name </label>
+                    <input type="text" formControlName="item_name" class="form-control" id="item_name">
+                  </div>
+                </div>
+
+                <div  class="col-md-4">
+                  <div class="form-group checkbox-layout">
+                    <input type="checkbox" formControlName="category" id="category{{i}}">
+                    <label for="Category{{i}}" class="checkbox-label"> Category </label>
+                  </div>                 
+                </div>
+              </div>
+                <div style="margin-bottom: 5px;" >
                   <div class="col-md-4"><div class="form-group">
                       <label>Select Item</label>
                       <select class="form-control" data-live-search="true" data-style="btn-select"

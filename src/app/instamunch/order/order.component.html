@@ -64,8 +64,8 @@
               <div class="col-lg-3">
                   <div class="position-relative form-group">
                       <label class="">By Order Type </label>
-                      <select type="select" class="custom-select" (change)="onChangeType($event.target.value)">
-                          <option value="0">Select	</option>
+                      <select class="form-control" data-live-search="true" data-style="btn-select" data-size="5" (change)="onChangeType($event.target.value)">
+                          <option value="0">All	</option>
                           <option value="delivery">Delivery	</option>
                           <option value="pick up">Pick Up</option>
                           <option value="in house">In House</option>
@@ -76,8 +76,8 @@
               <div class="col-lg-3">
                 <div class="position-relative form-group">
                     <label class="">By Order Status </label>
-                    <select type="select" class="custom-select" (change)="onChangeStatus($event.target.value)">
-                      <option value="0">Select	</option>  
+                    <select class="form-control" data-live-search="true" data-style="btn-select" data-size="5" (change)="onChangeStatus($event.target.value)">
+                      <option value="0">All	</option>  
                       <option value="pending">Pending	</option>
                         <option value="preparing">Preparing</option>
                         <option value="ready_to_serve">Ready to Serve</option>

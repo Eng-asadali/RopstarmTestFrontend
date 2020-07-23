@@ -98,4 +98,9 @@ export class LogsService {
     return this.httpServices.get('promotions/deal/items/' + id + "/").pipe(
       catchError(err => of({error:true,message:'Server error',data:[]})));
   }
+  getCategories(){
+    return this.httpServices.get('catalog/category/').pipe(
+       catchError(err => of({error:true,message:'Server error',data:[]}))
+       );
+   }
 }

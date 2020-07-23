@@ -37,23 +37,23 @@
       </div>
     </div>
     <div class="card">
-    <form [formGroup]="addForm" #formDir="ngForm" (ngSubmit)="onSubmit(addForm)">
-      
+      <form [formGroup]="addForm" #formDir="ngForm" (ngSubmit)="onSubmit(addForm)">
 
-      <div class="row">
-        <div style="margin: 5px" class="col-md-3">
-          <div class="form-group">
-            <label for="name">Deal Name </label>
-            <input type="text" formControlName="name" class="form-control" id="name">
-            <span style="color: red;" *ngIf="getFormControl('name').invalid &&
+
+        <div class="row">
+          <div style="margin: 5px" class="col-md-3">
+            <div class="form-group">
+              <label for="name">Deal Name </label>
+              <input type="text" formControlName="name" class="form-control" id="name">
+              <span style="color: red;" *ngIf="getFormControl('name').invalid &&
             (getFormControl('name').dirty || getFormControl('name').touched ||formDir.submitted)">
-              Deal Name is required.
-            </span>
+                Deal Name is required.
+              </span>
+            </div>
           </div>
-        </div>
 
-        <div style="margin: 5px" class="col-md-3">
-          <!-- <div class="form-group">
+          <div style="margin: 5px" class="col-md-3">
+            <!-- <div class="form-group">
             <label for="duration">Deal Duration </label>
             <input type="date" formControlName="duration" class="form-control" id="duration">
             <span style="color: red;" *ngIf="getFormControl('duration').invalid &&
@@ -61,91 +61,147 @@
               Duration  is required.
             </span>
           </div> -->
-          <div class="form-group">
-            <label for="duration">Deal Duration </label>
-            <select class="form-control" data-live-search="true" data-style="btn-select"
-              data-size="5" formControlName="duration">
-              <option selected disabled value="">Select Duration</option>
-              <option value="Quarterly">Quarterly</option>
-              <option value="Daily">Daily</option>
-              <option value="Weekly">Weekly</option>
-              <option value="Monthly">Monthly</option>
-            </select>
-            <span style="color: red;" *ngIf="getFormControl('duration').invalid &&
+            <div class="form-group">
+              <label for="duration">Deal Duration </label>
+              <select class="form-control" data-live-search="true" data-style="btn-select" data-size="5"
+                formControlName="duration">
+                <option selected disabled value="">Select Duration</option>
+                <option value="Quarterly">Quarterly</option>
+                <option value="Daily">Daily</option>
+                <option value="Weekly">Weekly</option>
+                <option value="Monthly">Monthly</option>
+              </select>
+              <span style="color: red;" *ngIf="getFormControl('duration').invalid &&
             (getFormControl('duration').dirty || getFormControl('duration').touched ||formDir.submitted)">
-              Duration  is required.
-            </span>
+                Duration is required.
+              </span>
+            </div>
           </div>
-        </div>
 
-        <div style="margin: 5px" class="col-md-6">
-          <div class="form-group">
-            <label for="duration">Deal Description </label>
-            <textarea  class="form-control" formControlName="duration"
-            rows="4" cols="30" nullValue> </textarea>
-            <!-- <span style="color: red;" *ngIf="getFormControl('duration').invalid &&
+          <div style="margin: 5px" class="col-md-6">
+            <div class="form-group">
+              <label for="duration">Deal Description </label>
+              <textarea class="form-control" formControlName="duration" rows="4" cols="30" nullValue> </textarea>
+              <!-- <span style="color: red;" *ngIf="getFormControl('duration').invalid &&
             (getFormControl('duration').dirty || getFormControl('duration').touched ||formDir.submitted)">
               Duration  is required.
             </span> -->
+            </div>
           </div>
+
         </div>
 
-      </div>
-      
-      <div class="row">
-        <div style="margin: 5px" class="col-md-12">
-          <div class="form-group">
-            <label for="deal_name">Slot 
-              <button type="button" style="color: white;margin-left: 6px;" class="btn btn-sm btn-success"
-                      (click)="addAttribute()"><i class="icofont-ui-add"></i></button>
-                        <button type="button" style="color: white;margin-left: 6px;" class="btn btn-sm btn-danger"
-                        (click)="minusAttribute()"><i style="margin-top: -2px;" class="fa fa-minus"></i></button>
-            </label>
-            <div formArrayName="deal_items">
-              <div *ngFor="let attribute of addForm.controls.deal_items['controls']; let i = index"
-              [formGroupName]="i">
+        <div class="row">
+          <div style="margin: 5px" class="col-md-12">
+            <div class="form-group">
+              <label for="deal_name">Slot
+                <button type="button" style="color: white;margin-left: 6px;" class="btn btn-sm btn-success"
+                  (click)="addAttribute()"><i class="icofont-ui-add"></i></button>
+                <button type="button" style="color: white;margin-left: 6px;" class="btn btn-sm btn-danger"
+                  (click)="minusAttribute()"><i style="margin-top: -2px;" class="fa fa-minus"></i></button>
+              </label>
+              <div formArrayName="deal_items">
+                <div *ngFor="let attribute of addForm.controls.deal_items['controls']; let i = index"
+                  [formGroupName]="i">
 
-             
-              <div class="row">
-                <div style="margin: 5px" class="col-md-4">
-                  <div class="form-group">
-                    <label for="name"> Name </label>
-                    <input type="text" formControlName="item_name" class="form-control" id="item_name">
+
+                  <div class="row">
+                    <div style="margin: 5px" class="col-md-4">
+                      <div class="form-group">
+                        <label for="name"> Name </label>
+                        <input type="text" formControlName="item" class="form-control" id="item_name">
+                      </div>
+                    </div>
+
+                    <div class="col-md-4">
+                      <div class="form-group checkbox-layout">
+                        <input type="checkbox" formControlName="categoryChkBox" id="categoryChkBox{{i}}">
+                        <label for="categoryChkBox{{i}}" class="checkbox-label"> Category </label>
+                      </div>
+                    </div>
                   </div>
-                </div>
+                  <div style="margin-bottom: 5px;" class="col-md-4">
+                   
+                      <div class="form-group"
+                        *ngIf="addForm.controls.deal_items.controls[i].controls.categoryChkBox.value">
+                        <label>Select Item</label>
+                        <select class="form-control" data-live-search="true" data-style="btn-select" data-size="5"
+                          formControlName="item">
+                          <option selected disabled value="">Select</option>
+                          <option *ngFor="let option of fieldsddd" value="{{option.id}}">{{option.name}}</option>
+                        </select>
+                      </div>
+                  </div>
 
-                <div  class="col-md-4">
-                  <div class="form-group checkbox-layout">
-                    <input type="checkbox" formControlName="category" id="category{{i}}">
-                    <label for="Category{{i}}" class="checkbox-label"> Category </label>
-                  </div>                 
+                  <div formArrayName="itemsArr">
+                    <div *ngFor="let child of attribute.get('itemsArr').controls;let j=index" [formGroupName]="j">
+                      <!-- <input formControlName="productItems"> -->
+                      <div *ngIf="!addForm.controls.deal_items.controls[i].controls.categoryChkBox.value" style="margin-bottom: 5px;">
+                        <div class="col-md-4">
+                          <div class="form-group">
+                            <label>Select Item
+                              <button type="button" style="color: white;margin-left: 6px;" class="btn btn-sm btn-success"
+                            (click)="addAttributeCategory(i, j)"><i class="icofont-ui-add"></i></button>
+                          <button type="button" style="color: white;margin-left: 6px;" class="btn btn-sm btn-danger"
+                            (click)="minusAttributeCategory(i)"><i style="margin-top: -2px;"
+                              class="fa fa-minus"></i></button>
+                            </label>
+                        <select class="form-control" data-live-search="true" data-style="btn-select" data-size="5"
+                          formControlName="productItems">
+                          <option selected disabled value="">Select</option>
+                          <option *ngFor="let option of fieldsdd" value="{{option.id}}">{{option.name}}</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                    </div>
+                  </div>
+
+
+
                 </div>
               </div>
-                <div style="margin-bottom: 5px;" >
-                  <div class="col-md-4"><div class="form-group">
-                      <label>Select Item</label>
-                      <select class="form-control" data-live-search="true" data-style="btn-select"
-                        data-size="5" formControlName="item">
-                        <option selected disabled value="">Select</option>
-                        <option *ngFor="let option of fieldsdd" value="{{option.id}}">{{option.name}}</option>
-                      </select>
+
+              <!-- <div formArrayName="product_items">
+                <div *ngFor="let attribute of addForm.controls.product_items['controls']; let i = index"
+                  [formGroupName]="i">
+
+                  <div style="margin-bottom: 5px;">
+                    <div class="col-md-4">
+                      <div class="form-group"
+                        *ngIf="!addForm.controls.deal_items.controls[i].controls.categoryChkBox.value">
+                        <label>Select Item
+                          <button type="button" style="color: white;margin-left: 6px;" class="btn btn-sm btn-success"
+                            (click)="addAttributeCategory()"><i class="icofont-ui-add"></i></button>
+                          <button type="button" style="color: white;margin-left: 6px;" class="btn btn-sm btn-danger"
+                            (click)="minusAttributeCategory()"><i style="margin-top: -2px;"
+                              class="fa fa-minus"></i></button>
+                        </label>
+                        <select class="form-control" data-live-search="true" data-style="btn-select" data-size="5"
+                          formControlName="item">
+                          <option selected disabled value="">Select</option>
+                          <option *ngFor="let option of fieldsdd" value="{{option.id}}">{{option.name}}</option>
+                        </select>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>  
+              </div> -->
+
+
+
             </div>
           </div>
+
         </div>
 
-      </div>
-    
-    <div  class="d-block text-right card-footer ">
-      <button [disabled]="submit_clicked" class="btn btn-success pull-right " style="margin-bottom: 15px;" type="submit"
-        >Submit</button>
-    </div>
+        <div class="d-block text-right card-footer ">
+          <button [disabled]="submit_clicked" class="btn btn-success pull-right " style="margin-bottom: 15px;"
+            type="submit">Submit</button>
+        </div>
 
-    </form>
-  </div>
+      </form>
+    </div>
     <div class="row">
       <div class="col-md-12 col-lg-12">
         <!-- <ul class="body-tabs body-tabs-layout tabs-animated body-tabs-animated nav">
@@ -168,18 +224,18 @@
         <div class="card mb-3">
 
           <div class="tab-content">
-              <div class="tab-pane show active" id="tab-content-0" role="tabpanel">
-                <div class="card">
-                  <!-- <mat-progress-bar *ngIf="!loaded" mode="indeterminate"></mat-progress-bar> -->
+            <div class="tab-pane show active" id="tab-content-0" role="tabpanel">
+              <div class="card">
+                <!-- <mat-progress-bar *ngIf="!loaded" mode="indeterminate"></mat-progress-bar> -->
 
-                  <!-- <app-form [clear_form]="clear_form" [submit_clicked]="submit_clicked"
+                <!-- <app-form [clear_form]="clear_form" [submit_clicked]="submit_clicked"
                     (formValues)="getCategoryData($event)" [option]="option" [form]=form>
                   </app-form> -->
-                  
 
-                </div>
 
               </div>
+
+            </div>
             <div class="tab-pane show" id="tab-content-1" role="tabpanel">
               <div class="card">
                 <!-- <div class="card-header">Product Information</div> -->

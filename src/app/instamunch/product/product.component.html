@@ -66,8 +66,8 @@
               <div class="col-lg-3">
                   <div class="position-relative form-group">
                       <label class="">By Kitchen </label>
-                      <select class="custom-select" (change)="changeKitchen($event.target.value)">
-                        <option value="">Select</option>
+                      <select  class="form-control" data-live-search="true" data-style="btn-select" data-size="5" (change)="changeKitchen($event.target.value)">
+                        <option value="">All</option>
                         <option *ngFor="let kitchen of kitchenDropDown" [value]="kitchen.id">
                           {{kitchen.name}}
                         </option>

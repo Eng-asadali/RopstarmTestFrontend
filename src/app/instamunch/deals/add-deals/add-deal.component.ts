@@ -53,11 +53,11 @@ export class AddDealsComponent implements OnInit {
       is_recurrence: new FormControl(true),
       price: new FormControl(100)
     });
-    this.addForm.addControl('deal_items', this.fb.array([
+    this.addForm.addControl('deal_categories', this.fb.array([
       this.fb.group({
         item: '',
         categoryChkBox: false,
-        itemsArr: this.fb.array([
+        deal_items: this.fb.array([
           this.fb.group({
             productItems: ''
           })
@@ -83,9 +83,9 @@ export class AddDealsComponent implements OnInit {
 
         let ans = this.queryData[0]['products'];
         if (ans && ans.length) {
-          var arr = this.addForm.get('deal_items');
+          var arr = this.addForm.get('deal_categories');
           (arr as FormArray).removeAt(0);
-          let ans_arr = this.addForm.get('deal_items') as FormArray;
+          let ans_arr = this.addForm.get('deal_categories') as FormArray;
           ans.forEach(element => {
             let con = this.fb.group({
               item: element.id
@@ -143,8 +143,8 @@ export class AddDealsComponent implements OnInit {
   editDeal(data, get_id) {
     let dealItems = [];
     let formData: FormData = new FormData();
-    if (data.deal_items && data.deal_items.length > 0) {
-      data.deal_items.forEach(element => {
+    if (data.deal_categories && data.deal_categories.length > 0) {
+      data.deal_categories.forEach(element => {
         if (element.item) {
 
           dealItems.push((element.item));
@@ -154,7 +154,7 @@ export class AddDealsComponent implements OnInit {
       });
     }
 
-    data.deal_items = dealItems;
+    data.deal_categories = dealItems;
     this.LogsService.editDeall(data, get_id).subscribe(
       result => {
         this.submit_clicked = false;
@@ -176,18 +176,18 @@ export class AddDealsComponent implements OnInit {
     );
   }
   addDeal(data) {
-    let deal_items = [];
+    let deal_categories = [];
     let formData: FormData = new FormData();
-    if (data.deal_items && data.deal_items.length > 0) {
-      data.deal_items.forEach(element => {
-        deal_items.push((element.item));
+    if (data.deal_categories && data.deal_categories.length > 0) {
+      data.deal_categories.forEach(element => {
+        deal_categories.push((element.item));
         // formData.append('deal_items', element.item);  
         // data.deal_items = element.item;
       });
     }
 
 
-    data.deal_items = deal_items;
+    data.deal_categories = deal_categories;
     this.LogsService.addDeall(data).subscribe(
       result => {
         this.submit_clicked = false;
@@ -214,11 +214,11 @@ export class AddDealsComponent implements OnInit {
   }
 
   addAttribute(item?, value?) {
-    var arr = <FormArray>this.addForm.get('deal_items');
+    var arr = <FormArray>this.addForm.get('deal_categories');
     const attribute = this.fb.group({
       item: item ? item : '',
       categoryChkBox:false,
-      itemsArr: this.fb.array([
+      deal_items: this.fb.array([
         this.fb.group({
           productItems: ''
         })
@@ -228,8 +228,8 @@ export class AddDealsComponent implements OnInit {
   }
 
   addAttributeCategory(i, j) {
-    const control = this.addForm.get('deal_items') as FormArray;
-    var arr = <FormArray>control.at(i).get('itemsArr');
+    const control = this.addForm.get('deal_categories') as FormArray;
+    var arr = <FormArray>control.at(i).get('deal_items');
     const attribute = this.fb.group({
       productItems: ''
     });
@@ -237,13 +237,13 @@ export class AddDealsComponent implements OnInit {
   }
 
   minusAttribute() {
-    var arr = this.addForm.get('deal_items');
+    var arr = this.addForm.get('deal_categories');
     let last_index = (arr as FormArray).length - 1;
     (arr as FormArray).removeAt(last_index);
   }
   minusAttributeCategory(i) {
-    const control = this.addForm.get('deal_items') as FormArray;
-    var arr = <FormArray>control.at(i).get('itemsArr');
+    const control = this.addForm.get('deal_categories') as FormArray;
+    var arr = <FormArray>control.at(i).get('deal_items');
     let last_index = arr .length - 1;
     (arr as FormArray).removeAt(last_index);
   }

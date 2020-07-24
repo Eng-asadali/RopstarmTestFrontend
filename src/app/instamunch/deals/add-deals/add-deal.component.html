@@ -100,8 +100,8 @@
                 <button type="button" style="color: white;margin-left: 6px;" class="btn btn-sm btn-danger"
                   (click)="minusAttribute()"><i style="margin-top: -2px;" class="fa fa-minus"></i></button>
               </label>
-              <div formArrayName="deal_items">
-                <div *ngFor="let attribute of addForm.controls.deal_items['controls']; let i = index"
+              <div formArrayName="deal_categories">
+                <div *ngFor="let attribute of addForm.controls.deal_categories['controls']; let i = index"
                   [formGroupName]="i">
 
 
@@ -123,7 +123,7 @@
                   <div style="margin-bottom: 5px;" class="col-md-4">
                    
                       <div class="form-group"
-                        *ngIf="addForm.controls.deal_items.controls[i].controls.categoryChkBox.value">
+                        *ngIf="addForm.controls.deal_categories.controls[i].controls.categoryChkBox.value">
                         <label>Select Item</label>
                         <select class="form-control" data-live-search="true" data-style="btn-select" data-size="5"
                           formControlName="item">
@@ -133,10 +133,10 @@
                       </div>
                   </div>
 
-                  <div formArrayName="itemsArr">
-                    <div *ngFor="let child of attribute.get('itemsArr').controls;let j=index" [formGroupName]="j">
+                  <div formArrayName="deal_items">
+                    <div *ngFor="let child of attribute.get('deal_items').controls;let j=index" [formGroupName]="j">
                       <!-- <input formControlName="productItems"> -->
-                      <div *ngIf="!addForm.controls.deal_items.controls[i].controls.categoryChkBox.value" style="margin-bottom: 5px;">
+                      <div *ngIf="!addForm.controls.deal_categories.controls[i].controls.categoryChkBox.value" style="margin-bottom: 5px;">
                         <div class="col-md-4">
                           <div class="form-group">
                             <label>Select Item

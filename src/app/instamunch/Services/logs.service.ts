@@ -79,7 +79,7 @@ export class LogsService {
        );
    }
   addDeall(data){
-    return this.httpServices.postFormData(data, 'promotions/').pipe(
+    return this.httpServices.post(data, 'promotions/').pipe(
       catchError(err => of({ error: true, message: 'Server error', data: [] })));
   }
   editDeall(data,id){

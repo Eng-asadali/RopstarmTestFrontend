@@ -37,9 +37,9 @@ export class HttpService {
     data['os'] = "web";
     data['status'] = "active";
     data['partner_id'] = this.partner_id;
-    var form_data = this.converToFormdata(data);
+    // var form_data = this.converToFormdata(data);
     // console.log(form_data);
-    return this.http.post(url, form_data);
+    return this.http.post(url, data);
   }
 
   postFormDataWithoutActiveStatus(data, url) {

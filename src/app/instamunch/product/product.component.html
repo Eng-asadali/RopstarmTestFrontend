@@ -74,6 +74,17 @@
                       </select>
                   </div>
               </div>
+              <div class="col-lg-3">
+                <div class="position-relative form-group">
+                    <label class="">By Category </label>
+                    <select  class="form-control" data-live-search="true" data-style="btn-select" data-size="5" (change)="changeCategory($event.target.value)">
+                      <option value="">All</option>
+                      <option *ngFor="let category of CategoryDropDown" [value]="category.id">
+                        {{category.name}}
+                      </option>
+                    </select>
+                </div>
+            </div>
              
           </div>
       </div>

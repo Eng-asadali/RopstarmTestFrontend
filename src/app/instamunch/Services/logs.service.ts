@@ -83,11 +83,11 @@ export class LogsService {
       catchError(err => of({ error: true, message: 'Server error', data: [] })));
   }
   editDeall(data,id){
-    return this.httpServices.patchFormData(data,'promotions/' + id + "/").pipe(
+    return this.httpServices.patch(data,'promotions/details/' + id + "/").pipe(
       catchError(err => of({ error: true, message: 'Server error', data: [] })));
   }
   deleteById(id){
-    return this.httpServices.delete('promotions/' + id + "/").pipe(
+    return this.httpServices.delete('promotions/details/' + id + "/").pipe(
       catchError(err => of({ error: true, message: 'Server error', data: [] })));
   }
   itemType() {

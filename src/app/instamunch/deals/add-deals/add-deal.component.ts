@@ -8,6 +8,7 @@ import { CategoryService } from '../../Services/category.service';
 import { SwalAlert } from '../../../Shared/swalAlerts';
 import { Status } from '../../Options/status';
 import { LogsService } from './../../Services/logs.service';
+import { element } from 'protractor';
 
 @Component({
   selector: 'app-add-deal',
@@ -50,16 +51,19 @@ export class AddDealsComponent implements OnInit {
     this.addForm = new FormGroup({
       name: new FormControl(null, [Validators.required]),
       duration: new FormControl(null, [Validators.required]),
+      description: new FormControl(null),
       is_recurrence: new FormControl(true),
       price: new FormControl(100)
     });
     this.addForm.addControl('deal_categories', this.fb.array([
       this.fb.group({
-        item: '',
-        categoryChkBox: false,
+        name: '',
+        is_category: false,
+        item: null,
         deal_items: this.fb.array([
           this.fb.group({
-            productItems: ''
+            productItems: '',
+            productId: ''
           })
         ])
       })
@@ -79,27 +83,27 @@ export class AddDealsComponent implements OnInit {
     question.subscribe(
       result => {
         this.queryData = result['data'];
-        this.addForm.patchValue(this.queryData[0]);
+        this.queryData[0].deal_categories = this.queryData[0].deal_category;
+        if (this.queryData[0].deal_categories) {
+          this.queryData[0].deal_categories.forEach((mainElement, i) => {
+            mainElement.deal_items = mainElement.products;
 
-        let ans = this.queryData[0]['products'];
-        if (ans && ans.length) {
-          var arr = this.addForm.get('deal_categories');
-          (arr as FormArray).removeAt(0);
-          let ans_arr = this.addForm.get('deal_categories') as FormArray;
-          ans.forEach(element => {
-            let con = this.fb.group({
-              item: element.id
-            });
-            ans_arr.push(con);
+            if (mainElement.deal_items) {
+              mainElement.deal_items.forEach((element, j) => {
+                this.addAttributeCategory(i, element, j, mainElement.id)
+              });
+            }
+
+
           });
         }
+
+        this.addForm.patchValue(this.queryData[0]);
 
         this.deal = result['data'];
         this.deal_log_id = result['data']['id']
         if (!result['error']) {
           this.loaded = true;
-          //console.log("question data above generate form"+this.question)
-          //this.generateForm(this.question);
         }
         else {
           this.loaded = true;
@@ -141,25 +145,37 @@ export class AddDealsComponent implements OnInit {
   // }
 
   editDeal(data, get_id) {
-    let dealItems = [];
-    let formData: FormData = new FormData();
-    if (data.deal_categories && data.deal_categories.length > 0) {
-      data.deal_categories.forEach(element => {
-        if (element.item) {
-
-          dealItems.push((element.item));
+    if (data.deal_categories && data.deal_categories.length) {
+      data.deal_categories.forEach((element) => {
+        if (!element.is_category) {
+          let deal_items = [];
+          let productId = 0;
+          if (element.deal_items && element.deal_items.length > 0) {
+            element.deal_items.forEach(deal => {
+              deal_items.push((Number(deal.productItems)));
+              if (deal.productId) {
+                productId = deal.productId; 
+              }
+            });
+          }
+          if (productId) {
+            element.id = productId;
+          }
+          element.deal_items = deal_items;
+        } else {
+          let deal_items = [];
+          deal_items.push(Number(element.item));
+          element.deal_items = deal_items;
+          delete element.item;
         }
-        // formData.append('deal_items', element.item);  
-        // data.deal_items = element.item;
       });
-    }
+    } 
 
-    data.deal_categories = dealItems;
     this.LogsService.editDeall(data, get_id).subscribe(
       result => {
         this.submit_clicked = false;
         if (!result['error']) {
-          SwalAlert.sucessAlert('', 'Question Edited Sucessfully!');
+          SwalAlert.sucessAlert('', 'Deal Edited Sucessfully!');
           this.clear_form = true;
           this.navigateToDealListing();
         }
@@ -176,23 +192,33 @@ export class AddDealsComponent implements OnInit {
     );
   }
   addDeal(data) {
-    let deal_categories = [];
-    let formData: FormData = new FormData();
-    if (data.deal_categories && data.deal_categories.length > 0) {
-      data.deal_categories.forEach(element => {
-        deal_categories.push((element.item));
-        // formData.append('deal_items', element.item);  
-        // data.deal_items = element.item;
+    if (data.deal_categories && data.deal_categories.length) {
+      data.deal_categories.forEach((element) => {
+        if (!element.is_category) {
+          let deal_items = [];
+          
+          if (element.deal_items && element.deal_items.length > 0) {
+            element.deal_items.forEach(deal => {
+              deal_items.push((Number(deal.productItems)));
+            });
+          }
+          
+          element.deal_items = deal_items;
+        } else {
+          let deal_items = [];
+          deal_items.push(Number(element.item));
+          element.deal_items = deal_items;
+          delete element.item;
+        }
       });
     }
 
 
-    data.deal_categories = deal_categories;
     this.LogsService.addDeall(data).subscribe(
       result => {
         this.submit_clicked = false;
         if (!result['error']) {
-          SwalAlert.sucessAlert('', 'Question Added Sucessfully!');
+          SwalAlert.sucessAlert('', 'Deal Added Sucessfully!');
           this.clear_form = true;
           this.navigateToDealListing();
         }
@@ -213,25 +239,31 @@ export class AddDealsComponent implements OnInit {
     return this.addForm.get(name);
   }
 
-  addAttribute(item?, value?) {
+  addAttribute(name?, value?) {
     var arr = <FormArray>this.addForm.get('deal_categories');
     const attribute = this.fb.group({
-      item: item ? item : '',
-      categoryChkBox:false,
+      name: name ? name : '',
+      is_category: false,
+      item: null,
       deal_items: this.fb.array([
         this.fb.group({
-          productItems: ''
+          productItems: '',
+          productId: ''
         })
       ])
     });
     arr.push(attribute);
   }
 
-  addAttributeCategory(i, j) {
+  addAttributeCategory(i, data?, j?, id?) {
     const control = this.addForm.get('deal_categories') as FormArray;
     var arr = <FormArray>control.at(i).get('deal_items');
+    if (data && j === 0) {
+      (arr as FormArray).removeAt(0);
+    }
     const attribute = this.fb.group({
-      productItems: ''
+      productItems: data ? data.id : '',
+      productId: id ? id : ''
     });
     arr.push(attribute);
   }
@@ -244,7 +276,7 @@ export class AddDealsComponent implements OnInit {
   minusAttributeCategory(i) {
     const control = this.addForm.get('deal_categories') as FormArray;
     var arr = <FormArray>control.at(i).get('deal_items');
-    let last_index = arr .length - 1;
+    let last_index = arr.length - 1;
     (arr as FormArray).removeAt(last_index);
   }
 

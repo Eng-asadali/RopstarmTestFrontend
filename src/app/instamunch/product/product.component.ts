@@ -33,6 +33,7 @@ export class ProductComponent implements OnInit {
   products: Product[];
   product_ids: any = [];
   kitchenDropDown;
+  CategoryDropDown;
   postData = {};
 
   constructor(private productService: ProductService, private router: Router,public currency_service:CurrencyService,
@@ -40,8 +41,9 @@ export class ProductComponent implements OnInit {
 
   ngOnInit() {
     this.getKitchen();
+    this.getCategory();
     this.table_headers = ['select', 'image', 'name','kitchen_name', 'status',  'price','estimated_prepare_time', 'category_id','actions'];
-    this.getProductsList();
+    this.getProductsList(null, null);
   }
 
 
@@ -52,17 +54,32 @@ export class ProductComponent implements OnInit {
       this.kitchenDropDown = result['data'];
     });
   }
-
-  changeKitchen(value) {
-    this.getProductsList(value);
+  getCategory(){
+    this.loaded = false;
+    this.productService.getCategories().subscribe(
+    result => {
+      this.CategoryDropDown = result['data'];
+    });
   }
 
+  changeKitchen(value) {
+    
+    this.getProductsList(value,1);
+  }
+  changeCategory(value) {
+    this.getProductsList(value, 2);
+  }
 
-  getProductsList(value=null) {
+  // 1: kitchen, 2: category
+  getProductsList(value=null, type) {
     this.loaded = false;
     let products = null;
     if(value){
-      this.postData['kitchen_id'] = value;
+      if (type === 1) {
+        this.postData['kitchen_id'] = value;
+      } else{
+        this.postData['category_id'] = value;
+      }
        products = this.productService.getFilterTable(this.postData);
     }else{
     products = this.productService.getProducts();
@@ -110,7 +127,7 @@ export class ProductComponent implements OnInit {
         result => {
           if (!result['error']) {
             SwalAlert.sucessAlert('', 'Product Deleted Successfully!');
-            this.getProductsList();
+            this.getProductsList(null, null);
           }
           else {
             this.loaded = true;
@@ -134,7 +151,7 @@ export class ProductComponent implements OnInit {
           result => {
             if (!result['error']) {
               SwalAlert.sucessAlert('', 'Products Deleted Successfully!');
-              this.getProductsList();
+              this.getProductsList(null, null);
             }
             else {
               this.loaded = true;
@@ -199,7 +216,7 @@ export class ProductComponent implements OnInit {
   refresh(){
     this.loaded = false;
     this.dataSource.data = [];
-    this.getProductsList() ;
+    this.getProductsList(null, null);
 
   }
 }

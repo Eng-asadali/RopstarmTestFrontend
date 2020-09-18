@@ -6,4 +6,5 @@ export interface Category {
     status: string;
     description: string;
     image?:string;
+    ordering:number;
   }

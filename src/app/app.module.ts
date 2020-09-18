@@ -6,7 +6,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {
   MatTableModule, MatPaginatorModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatCheckboxModule,
   MatDatepickerModule,
-  MatProgressBarModule, MatProgressSpinnerModule
+  MatProgressBarModule, MatProgressSpinnerModule, MatTooltipModule
 } from '@angular/material';
 import { NgApexchartsModule } from "ng-apexcharts";
 
@@ -115,6 +115,7 @@ import { MatIconModule } from '@angular/material';
     MatProgressSpinnerModule,
     MatDialogModule,
     MatToolbarModule,
+    MatTooltipModule,
     ReactiveFormsModule
   ],
   entryComponents: [

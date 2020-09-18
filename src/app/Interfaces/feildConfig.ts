@@ -19,4 +19,5 @@ export interface FieldConfig {
     row?:boolean;
     searchable?:boolean;
     required?:boolean;
+    info_check?:string;
     }

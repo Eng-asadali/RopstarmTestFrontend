@@ -73,8 +73,9 @@ export class AddProductComponent implements OnInit {
           value: product ? product.price : null
         },
         {
-          label: 'Estimated Prepare Time (Mins)', type: 'number', bootstrapGridClass: "col-lg-12", name: "estimated_prepare_time", validations: [Validators.pattern(validation_patterns.postive_numbers), Validators.max(999999999999999999)], required: false, value: product ? product.estimated_prepare_time : 30
+          label: 'Estimated Prepare Time (Mins)', type: 'number', bootstrapGridClass: "col-lg-6", name: "estimated_prepare_time", validations: [Validators.pattern(validation_patterns.postive_numbers), Validators.max(999999999999999999)], required: false, value: product ? product.estimated_prepare_time : 30
         },
+        {label: 'Ordering', type: 'number', bootstrapGridClass: "col-lg-6" , name: "ordering",  info_check : "Number use to sort the items in a menu listing e.g item with 0 ordering will appear before an item with ordering 1. ", value: product ? product.ordering : null}, 
         {
           label: 'Tax Included', type: 'checkbox', bootstrapGridClass: "col-lg-12", name: "is_tax_included", required: false, value: product ? product.is_tax_included : false
         },

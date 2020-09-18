@@ -134,9 +134,9 @@
             </div>
 
             <div class="form-group" *ngIf="fields[index].type == 'number'">
-              <label>{{fields[index].label}}<span *ngIf="fields[index].required" class="required">*</span></label>
+              <label>{{fields[index].label}}<span *ngIf="fields[index].required" class="required">*</span><span style="margin-left: 5px;" *ngIf="fields[index].info_check" [matTooltip]="fields[index].info_check"><i class="icofont-info-circle"></i></span></label>
               <input *ngIf="fields[index].name" class="form-control" formControlName="{{fields[index].name}}"
-                type="number">
+                type="number" min="0">
               <div
                 *ngIf="(Form.controls[fields[index].name].dirty || displayValidationsErrors) && Form.controls[fields[index].name].invalid">
                 <app-errors [field_name]="fields[index].label" [errors]='Form.controls[fields[index].name].errors'>

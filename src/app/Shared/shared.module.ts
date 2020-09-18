@@ -12,6 +12,7 @@ import { DoughnutChartComponent } from './doughnut-chart/doughnut-chart.componen
 //Pipes
 import { removeUnderScore } from './Pipes/removeUnderScore';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { MatTooltip, MatTooltipModule } from '@angular/material';
 
 @NgModule({
 
@@ -33,14 +34,16 @@ import { NgSelectModule } from '@ng-select/ng-select';
         FormComponent,
         ChartsComponent,
         DoughnutChartComponent,
-        removeUnderScore
+        removeUnderScore,
+        MatTooltipModule
     ],
 
     imports: [
         NgSelectModule,
         ReactiveFormsModule,
         CommonModule,
-        NgApexchartsModule
+        NgApexchartsModule,
+        MatTooltipModule
     ],
 
 })

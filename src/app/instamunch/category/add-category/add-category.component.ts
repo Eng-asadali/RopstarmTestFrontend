@@ -139,7 +139,7 @@ export class AddCategoryComponent implements OnInit {
             },
             { label: 'Parent Category', type: 'ngselect', bootstrapGridClass: "col-lg-6", name: "parent_category_id", validations: [Validators.required], required: true, value: category ? category.parent_category_id : null, options: result['data'] },
 
-            {label: 'Ordering' , type: 'number' , bootstrapGridClass: "col-lg-6" , name: "ordering",  value: category ? category.ordering : null , info_check : "Number use to sort the items in a menu listing e.g item with 0 ordering will appear before an item with ordering 1. "    }, 
+            {label: 'Ordering' , type: 'number' , bootstrapGridClass: "col-lg-6" , name: "ordering",  value: category ? category.ordering : 1 , validations: [Validators.required], required: true, info_check : "Number use to sort the items in a menu listing e.g item with 0 ordering will appear before an item with ordering 1. "    }, 
             { label: 'Description', type: 'textarea', bootstrapGridClass: "col-lg-12", name: "description", validations: [Validators.maxLength(250)], value: category ? category.description : null }
 
           ]

@@ -19,6 +19,9 @@ export class LogoService {
       case '3':
         return "Lokal"
         break;
-    }
+      case '4':
+      return "Cakeaway"
+      break;
+  }
   }
 }

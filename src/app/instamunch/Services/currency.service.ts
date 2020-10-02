@@ -19,6 +19,9 @@ export class CurrencyService {
       case '3':
         return "Rs"
         break;
+      case '4':
+      return "Rs"
+      break;
     }
   }
 }

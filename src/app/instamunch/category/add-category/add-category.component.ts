@@ -146,11 +146,13 @@ export class AddCategoryComponent implements OnInit {
           this.form['form_fields'] = this.fields;
           this.form['FormbootstrapGridClass'] = 'col-lg-9';
           this.form['image'] = true;
+          this.form['cover_image'] = true;
           this.form['ImagebootstrapGridClass'] = 'col-lg-3';
           this.form['img_height'] = "200px";
           this.form['img_width'] = "200px";
           this.form['image_url'] = category ? category.image : null;
           this.form['submit'] = 'Save'
+          
         }
         else {
           SwalAlert.errorAlert('', result['message'].charAt(0).toUpperCase() + result['message'].substring(1));

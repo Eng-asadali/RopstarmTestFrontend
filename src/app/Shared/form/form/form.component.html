@@ -219,6 +219,17 @@
           (click)="chooseImage();">Upload Image</button>
       </div>
 
+      <div class="{{form.ImagebootstrapGridClass}}" *ngIf="form.cover_image">
+        <label><b>Cover img</b></label>
+        <img id="cover_img" [src]="form.image_url ? form.image_url : '../../../../assets/images/no_image.png'"
+          class=" img-bordered  "
+          [ngStyle]="{'width': form.img_width ? form.img_width : '200px','height': form.img_height ? form.img_height : '200px'  }" />
+        <input (change)="onImageChanged2($event)" accept="image/*" id="fileInput2" style="display: none;overflow:hidden"
+          type="file">
+        <button class="btn btn-primary" style="margin-left: 70px; margin-top: 5px;" type="button"
+          (click)="chooseImage2();">Upload Image</button>
+      </div>
+
 
     </div>
   </div>

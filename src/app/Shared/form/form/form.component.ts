@@ -27,6 +27,7 @@ export class FormComponent implements OnInit {
   map_values: any = {};
   form_values: any = {};
   image_value: any = {};
+  cover_image_value: any = {};
   timeout;
 
   row: any = [];
@@ -67,6 +68,7 @@ export class FormComponent implements OnInit {
           (<HTMLImageElement>document.getElementById("img")).src = '../../../../assets/images/no_image.png';
           delete this.form_values['image'];
           this.image_value = {};
+          this.cover_image_value = {};
         }
       }
 
@@ -180,7 +182,7 @@ export class FormComponent implements OnInit {
 
   submit() {
 
-    this.form_values = { ...this.Form.value, ...this.map_values, ...this.image_value };
+    this.form_values = { ...this.Form.value, ...this.map_values, ...this.image_value, ...this.cover_image_value };
     console.log(this.form_values);
     if (this.Form.valid) {
       Object.keys(this.form_values).forEach(function (key) {
@@ -214,6 +216,23 @@ export class FormComponent implements OnInit {
     }
   }
 
+  onImageChanged2(event) {
+    var selectedFile: File;
+    selectedFile = event.target.files[0];
+    this.cover_image_value['cover_image'] = selectedFile;
+    this.readImageURL2(event.target);
+  }
+
+  readImageURL2(input) {
+    if (input.files && input.files[0]) {
+      var reader = new FileReader();
+      reader.onload = function (e) {
+        $('#cover_img').attr('src', e.target['result']);
+      }
+      reader.readAsDataURL(input.files[0]);
+    }
+  }
+
 
   displayValidations() {
     if (this.Form.valid == false) {
@@ -223,6 +242,9 @@ export class FormComponent implements OnInit {
 
   chooseImage() {
     document.getElementById("fileInput").click();
+  }
+  chooseImage2() {
+    document.getElementById("fileInput2").click();
   }
 
 }

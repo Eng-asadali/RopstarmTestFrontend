@@ -82,9 +82,9 @@ export class AddProductComponent implements OnInit {
         {
           label: 'Attribute List', type: 'attribute', bootstrapGridClass: "col-lg-12", name: "product_attributes", required: false, value: product ? product.product_attributes : null
         },
-        { label: 'Description', type: 'textarea', bootstrapGridClass: "col-lg-12", name: "detail", validations: [Validators.maxLength(250)], value: product ? product.detail : null }
-        // {  type: 'hidden', bootstrapGridClass: "col-lg-12", name: "isavailable", value: product ? product.isavailable : null},
-        // {  type: 'hidden', bootstrapGridClass: "col-lg-12", name: "kitchen_status", value: product ? product.kitchen_status : null}
+        { label: 'Description', type: 'textarea', bootstrapGridClass: "col-lg-12", name: "detail", validations: [Validators.maxLength(250)], value: product ? product.detail : null },
+        {  type: 'hidden', bootstrapGridClass: "col-lg-12", name: "isavailable", value: product ? product.isavailable : null},
+        {  type: 'hidden', bootstrapGridClass: "col-lg-12", name: "kitchen_status", value: product ? product.kitchen_status : null}
       ]
       this.form['form_fields'] = this.fields;
       this.form['FormbootstrapGridClass'] = 'col-lg-9';

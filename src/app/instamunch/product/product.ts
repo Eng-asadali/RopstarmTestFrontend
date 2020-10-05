@@ -1,4 +1,6 @@
 export interface Product {
+  isavailable:boolean;
+  kitchen_status:boolean;
     id: number;
     name: string;
     kitchen_id: number,

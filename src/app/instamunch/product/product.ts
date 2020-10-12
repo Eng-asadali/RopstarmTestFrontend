@@ -1,4 +1,6 @@
 export interface Product {
+  nutrition:string;
+  allergens:string;
   isavailable:boolean;
   kitchen_status:boolean;
     id: number;

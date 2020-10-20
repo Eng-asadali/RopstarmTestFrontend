@@ -28,6 +28,9 @@ export class LogoService {
       case '6':
       return "Tiffany"
       break;
+      case '7':
+      return "Apeslounge"
+      break;
   }
   }
 }

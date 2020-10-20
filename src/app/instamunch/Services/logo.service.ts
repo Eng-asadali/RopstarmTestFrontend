@@ -22,6 +22,12 @@ export class LogoService {
       case '4':
       return "Cakeaway"
       break;
+      case '5':
+      return "Uppercrust"
+      break;
+      case '6':
+      return "Tiffany"
+      break;
   }
   }
 }

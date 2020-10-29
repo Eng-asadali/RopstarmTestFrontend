@@ -52,7 +52,7 @@ export class AddProductComponent implements OnInit {
     result.subscribe((result) => {
       console.log(result);
       this.fields = [
-        { label: 'Product Name', type: 'text', bootstrapGridClass: "col-lg-12", name: "name", validations: [Validators.required, Validators.maxLength(50)], required: true, value: product ? product.name : null },
+        { label: 'Product Name', type: 'text', bootstrapGridClass: "col-lg-12", name: "name", validations: [Validators.required, Validators.maxLength(150)], required: true, value: product ? product.name : null },
         {
           label: 'Kitchen', type: 'ngselect', bootstrapGridClass: "col-lg-6", name: "kitchen_id", validations: [Validators.required], required: true,
           value: product ? product.kitchen_id : null, options: result[1]['data']
@@ -91,7 +91,7 @@ export class AddProductComponent implements OnInit {
         {
           label: 'Attribute List', type: 'attribute', bootstrapGridClass: "col-lg-12", name: "product_attributes", required: false, value: product ? product.product_attributes : null
         },
-        { label: 'Description', type: 'textarea', bootstrapGridClass: "col-lg-12", name: "detail", validations: [Validators.maxLength(250)], value: product ? product.detail : null },
+        { label: 'Description', type: 'textarea', bootstrapGridClass: "col-lg-12", name: "detail", validations: [Validators.maxLength(500)], value: product ? product.detail : null },
         {  type: 'hidden', bootstrapGridClass: "col-lg-12", name: "isavailable", value: product ? product.isavailable : null},
         {  type: 'hidden', bootstrapGridClass: "col-lg-12", name: "kitchen_status", value: product ? product.kitchen_status : null}
       ]

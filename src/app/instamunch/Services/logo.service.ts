@@ -31,6 +31,9 @@ export class LogoService {
       case '7':
       return "Apeslounge"
       break;
+      case '8':
+      return "Capital Grill"
+      break;
       case '9':
       return "Ratro Roastery"
       break;

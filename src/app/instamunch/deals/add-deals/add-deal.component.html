@@ -41,10 +41,10 @@
 
 
         <div class="row">
-          <div style="margin: 5px" class="col-md-3">
+          <div style="margin-left: 5px" class="col-md-3">
             <div class="form-group">
-              <label for="name">Deal Name </label>
-              <input type="text" formControlName="name" class="form-control" id="name">
+              <label style="margin-left: 15px; margin-top: 17px;" for="name">Deal Name </label>
+              <input type="text" formControlName="name" style="margin-left: 15px;" class="form-control" id="name">
               <span style="color: red;" *ngIf="getFormControl('name').invalid &&
             (getFormControl('name').dirty || getFormControl('name').touched ||formDir.submitted)">
                 Deal Name is required.
@@ -52,18 +52,10 @@
             </div>
           </div>
 
-          <div style="margin: 5px" class="col-md-3">
-            <!-- <div class="form-group">
-            <label for="duration">Deal Duration </label>
-            <input type="date" formControlName="duration" class="form-control" id="duration">
-            <span style="color: red;" *ngIf="getFormControl('duration').invalid &&
-            (getFormControl('duration').dirty || getFormControl('duration').touched ||formDir.submitted)">
-              Duration  is required.
-            </span>
-          </div> -->
+          <div style="margin-left: 5px" class="col-md-3">
             <div class="form-group">
-              <label for="duration">Deal Duration </label>
-              <select class="form-control" data-live-search="true" data-style="btn-select" data-size="5"
+              <label style="margin-top: 17px;" for="duration">Deal Duration </label>
+              <select class="form-control"  data-live-search="true" data-style="btn-select" data-size="5"
                 formControlName="duration">
                 <option selected disabled value="">Select Duration</option>
                 <option value="Quarterly">Quarterly</option>
@@ -77,11 +69,13 @@
               </span>
             </div>
           </div>
+        </div>
+        <div class="row">
 
-          <div style="margin: 5px" class="col-md-6">
+          <div  class="col-md-6">
             <div class="form-group">
-              <label for="duration">Deal Description </label>
-              <textarea class="form-control" formControlName="description" rows="4" cols="30" nullValue> </textarea>
+              <label style="margin-left: 15px;" for="duration">Deal Description </label>
+              <textarea class="form-control" style="margin-left: 18px;" formControlName="description" rows="4" cols="30" nullValue> </textarea>
               <!-- <span style="color: red;" *ngIf="getFormControl('duration').invalid &&
             (getFormControl('duration').dirty || getFormControl('duration').touched ||formDir.submitted)">
               Duration  is required.
@@ -94,7 +88,7 @@
         <div class="row">
           <div style="margin: 5px" class="col-md-12">
             <div class="form-group">
-              <label for="deal_name">Slot
+              <label style="margin-left: 10px;" for="deal_name">Slot
                 <button type="button" style="color: white;margin-left: 6px;" class="btn btn-sm btn-success"
                   (click)="addAttribute()"><i class="icofont-ui-add"></i></button>
                 <button type="button" style="color: white;margin-left: 6px;" class="btn btn-sm btn-danger"
@@ -108,8 +102,8 @@
                   <div class="row">
                     <div style="margin: 5px" class="col-md-4">
                       <div class="form-group">
-                        <label for="name"> Name </label>
-                        <input type="text" formControlName="name" class="form-control" id="item_name">
+                        <label style="margin-left: 15px" for="name"> Name </label>
+                        <input type="text" style="margin-left: 30px" formControlName="name" class="form-control">
                       </div>
                     </div>
 
@@ -120,27 +114,29 @@
                       </div>
                     </div>
                   </div>
-                  <div style="margin-bottom: 5px;" class="col-md-4">
-                    
-                    <div class="form-group"
-                      *ngIf="addForm.controls.deal_categories.controls[i].controls.is_category.value">
-                      <label>Select Item</label>
-                      <select class="form-control" data-live-search="true" data-style="btn-select" data-size="5"
-                        formControlName="item">
-                        <option selected disabled value="">Select</option>
-                        <option *ngFor="let option of fieldsddd" value="{{option.id}}">{{option.name}}</option>
-                      </select>
+                  <div class="row">
+                    <div style="margin-bottom: 5px;" class="col-md-4">
+                      
+                      <div class="form-group"
+                        *ngIf="addForm.controls.deal_categories.controls[i].controls.is_category.value">
+                        <label style="margin-left: 22px;">Select Item</label>
+                        <select  class="form-control" style="margin-left: 35px;" data-live-search="true" data-style="btn-select" data-size="5"
+                          formControlName="item">
+                          <option selected disabled value="">Select</option>
+                          <option *ngFor="let option of fieldsddd" value="{{option.id}}">{{option.name}}</option>
+                        </select>
+                      </div>
                     </div>
                   </div>
-
                   <div formArrayName="deal_items">
                     <div *ngFor="let child of attribute.get('deal_items').controls;let j=index" [formGroupName]="j">
                       <!-- <input formControlName="productItems"> -->
                       <div *ngIf="!addForm.controls.deal_categories.controls[i].controls.is_category.value"
                         style="margin-bottom: 5px;">
+                        <div class="row">
                         <div class="col-md-4">
                           <div class="form-group">
-                            <label>Select Item
+                            <label style="margin-left: 20px;">Select Item
                               <span *ngIf="j === 0">
                                 <button type="button" style="color: white;margin-left: 6px;"
                                   class="btn btn-sm btn-success" (click)="addAttributeCategory(i, j)"><i
@@ -151,13 +147,48 @@
                               </span>
                             </label>
                             <input type="hidden" formControlName="productId">
-                            <select class="form-control" data-live-search="true" data-style="btn-select" data-size="5"
+                            <select style="margin-left: 35px;" #productSelect (change)="changeProduct(productSelect.value, j)" class="form-control" data-live-search="true" data-style="btn-select" data-size="5"
                               formControlName="productItems">
                               <option selected disabled value="">Select</option>
                               <option *ngFor="let option of fieldsdd" value="{{option.id}}">{{option.name}}</option>
                             </select>
                           </div>
                         </div>
+                        <div class="col-md-12">
+                          <div class="categories-filter" style="margin-left: 22px" *ngIf="varientArray[j] && varientArray[j]?.value">
+                            <div class="col-sm-4" *ngFor="let varient of varientArray[j]?.value; let i= index">
+                              <div class="label" *ngIf="i === 0">{{varientArray?.name}}</div>
+                                <div class="checkbox">
+                                    <div><input type="radio" name="varient_{{j}}" id="varient{{i}}_{{j}}" (change)="varientCheckbox($event, i, j)" value=""><span style="margin-left:5px">{{varient.value}} ({{varient.price}})</span></div>
+                                </div>
+                            </div>
+                          </div>
+                        </div>
+
+
+
+
+                        <!-- <div class="col-md-12">
+                          <div class="categories-filter" style="margin-left: 22px" *ngIf="producVarients?.variant && producVarients?.variant?.value">
+                            <div class="col-sm-4" *ngFor="let varient of producVarients?.variant?.value; let i= index">
+
+                              {{i}}========{{j}}==========={{producVarientsindex}}
+                                <div>
+                                  <div class="label" *ngIf="i === 0">{{producVarients?.variant?.name}}</div>
+                                  <div class="checkbox">
+                                      <div ><input type="radio" name="varient" id="varient{{i}}" (change)="varientCheckbox(producVarients, $event, i)" value=""><span style="margin-left:5px">{{varient.value}} ({{varient.price}})</span></div>
+                                  </div>
+                                </div>
+                            </div>
+                        </div>
+                        </div> -->
+
+
+
+
+
+
+                      </div>
                       </div>
                     </div>
                   </div>
@@ -171,6 +202,31 @@
           </div>
 
         </div>
+
+      <div class="row">
+        <div class="col-md-12">
+        <div style="margin-left: 15px" >
+          <div class="form-group">
+            <label style="margin-left: 10px;" for="name">Add On </label>
+            <ng-select style="margin-left: 24px; padding-right: 28px;" [multiple]="true" formControlName="addon" placeholder="Select AddOn">
+              <ng-option *ngFor="let option of addON" [value]="option.id">{{option.name}}</ng-option>
+            </ng-select>
+          </div>
+        </div>
+      </div>
+      </div>
+
+
+
+        <!-- <div class="form-group" *ngIf="fields[index].type == 'multiselect'">
+          <label>Add On<span *ngIf="fields[index].required" class="required">*</span></label>
+          <ng-select [multiple]="true" formControlName="{{fields[index].name}}" placeholder="Select item">
+            <ng-option *ngFor="let option of fields[index].options" [value]="option.id">{{option.name}}</ng-option>
+          </ng-select>
+         
+        </div> -->
+
+
 
         <div class="d-block text-right card-footer ">
           <button [disabled]="submit_clicked" class="btn btn-success pull-right " style="margin-bottom: 15px;"

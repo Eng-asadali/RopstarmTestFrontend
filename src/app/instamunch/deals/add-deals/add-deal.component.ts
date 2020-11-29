@@ -89,6 +89,12 @@ export class AddDealsComponent implements OnInit {
     return this.fb.group({
       name: [data.name],
       is_category: [data.is_category],
+      deal_items: this.fb.array([
+        this.fb.group({
+          productItems: '',
+          productId: ''
+        })
+      ])
     });
   }
 
@@ -98,7 +104,6 @@ export class AddDealsComponent implements OnInit {
       result => {
         this.queryData = result['data'];
         this.queryData[0].deal_categories = this.queryData[0].deal_category;
-        this.addForm.patchValue(this.queryData[0]);
         
         if (this.queryData[0].deal_categories) {          
           const control = this.addForm.get('deal_categories') as FormArray;
@@ -107,16 +112,27 @@ export class AddDealsComponent implements OnInit {
             control.push(abc); 
             mainElement.deal_items = mainElement.products;
 
-            if (mainElement.deal_items) {
+            if (mainElement.is_category) {
+              //TODO: here set category item when checkbox is selected
+            }
+
+            if (mainElement.deal_items && !mainElement.is_category) {
               mainElement.deal_items.forEach((element, j) => {
                 this.addAttributeCategory(i, element, j, mainElement.id, control)
               });
+
+              let last_index = (control as FormArray).length;
+              if ((this.queryData[0].deal_categories.length + 1) === last_index) {
+                (control as FormArray).removeAt(last_index - 1);
+              }
+
+
             }
             
           });
-
-          console.log(this.addForm)
         }
+
+        this.addForm.patchValue(this.queryData[0]);
 
         this.deal = result['data'];
         this.deal_log_id = result['data']['id']
@@ -297,6 +313,7 @@ export class AddDealsComponent implements OnInit {
     (arr as FormArray).removeAt(last_index);
     this.varientArray.splice(last_index, 1);
   }
+
   minusAttributeCategory(i) {
     const control = this.addForm.get('deal_categories') as FormArray;
     var arr = <FormArray>control.at(i).get('deal_items');
@@ -310,8 +327,6 @@ export class AddDealsComponent implements OnInit {
         result['data'].forEach(element => {
           this.fieldsdd.push(element);
         });
-        console.log("this.fieldsdd",this.fieldsdd);
-
       }
     }
     );

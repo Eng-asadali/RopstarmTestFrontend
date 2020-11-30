@@ -294,7 +294,9 @@ export class AddDealsComponent implements OnInit {
 
   addAttributeCategory(i, data?, j?, id?, control?) {
     var arr;
-    console.log("checking iiiiii",i);
+    if (!control) {
+      control = this.addForm.get('deal_categories') as FormArray;
+    }
     if (<FormArray>control.at(i)) {
       arr = <FormArray>control.at(i).get('deal_items');
       if (data && j === 0) {

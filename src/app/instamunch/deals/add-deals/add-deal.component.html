@@ -147,7 +147,7 @@
                               </span>
                             </label>
                             <input type="hidden" formControlName="productId">
-                            <select style="margin-left: 35px;" #productSelect (change)="changeProduct(productSelect.value, j)" class="form-control" data-live-search="true" data-style="btn-select" data-size="5"
+                            <select style="margin-left: 35px;" #productSelect (change)="changeProduct(productSelect.value, j, i)" class="form-control" data-live-search="true" data-style="btn-select" data-size="5"
                               formControlName="productItems">
                               <option selected  value="">Select</option>
                               <option *ngFor="let option of fieldsdd" value="{{option.id}}">{{option.name}}</option>
@@ -155,11 +155,11 @@
                           </div>
                         </div>
                         <div class="col-md-12">
-                          <div class="categories-filter" style="margin-left: 22px" *ngIf="varientArray[j] && varientArray[j]?.values">
-                            <div class="col-sm-4" *ngFor="let varient of varientArray[j]?.values; let i= index">
-                              <div class="label" *ngIf="i === 0">{{varientArray?.name}}</div>
+                          <div class="categories-filter" style="margin-left: 22px" *ngIf="varientArray[i] && varientArray[i][j] && varientArray[i][j]?.values && varientArray[i][j]?.display">
+                            <div class="col-sm-4" *ngFor="let varient of varientArray[i][j]?.values; let k= index">
+                              <div class="label" *ngIf="k === 0">{{varientArray?.name}}</div>
                                 <div class="checkbox">
-                                    <div><input type="radio" name="varient_{{j}}" id="varient{{i}}_{{j}}" (change)="varientCheckbox($event, i, j)" value=""><span style="margin-left:5px">{{varient.value}} ({{varient.price}})</span></div>
+                                    <div><input type="radio" name="varient_{{j}}_{{i}}" id="varient{{k}}_{{j}}_{{i}}" [checked]="varient.is_selected" (change)="varientCheckbox($event, k, j, i)" [value]="varient.is_selected"><span style="margin-left:5px">{{varient.value}} ({{varient.price}})</span></div>
                                 </div>
                             </div>
                           </div>

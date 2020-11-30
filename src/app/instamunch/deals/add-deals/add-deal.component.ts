@@ -50,6 +50,13 @@ export class AddDealsComponent implements OnInit {
       this.edit = true;
       const deal_id = parseInt(this.active_route.snapshot.paramMap.get('id'));
       this.getDealDataById(deal_id);
+    } else {
+      const varient = [{
+        price: 0,
+        is_selected: false,
+        value: 0
+      }]
+      this.varientArray.push(varient)
     }
     // else {
     //   this.edit = false;
@@ -116,7 +123,9 @@ export class AddDealsComponent implements OnInit {
               //TODO: here set category item when checkbox is selected
             }
 
+            
             if (mainElement.deal_items && !mainElement.is_category) {
+              this.varientArray.push([]);
               mainElement.deal_items.forEach((element, j) => {
                 this.addAttributeCategory(i, element, j, mainElement.id, control)
               });
@@ -125,10 +134,7 @@ export class AddDealsComponent implements OnInit {
               if ((this.queryData[0].deal_categories.length + 1) === last_index) {
                 (control as FormArray).removeAt(last_index - 1);
               }
-
-
             }
-            
           });
         }
 
@@ -284,12 +290,13 @@ export class AddDealsComponent implements OnInit {
       ])
     });
     arr.push(attribute);
-    const varient = {
+    const varient = [{
       price: 0,
       is_selected: false,
       value: 0
-    }
-    this.varientArray.push(varient)
+    }]
+    let last_index = (arr as FormArray).length;
+    this.varientArray.splice(last_index - 1, 0, varient);
   }
 
   addAttributeCategory(i, data?, j?, id?, control?) {
@@ -307,6 +314,13 @@ export class AddDealsComponent implements OnInit {
         productId: id ? id : ''
       });
       arr.push(attribute);
+      const varient = [{
+        price: 0,
+        is_selected: false,
+        value: 0
+      }]
+      data.variants.display = true;
+      this.varientArray[i].push(data.variants);
     }
   }
 
@@ -428,24 +442,30 @@ export class AddDealsComponent implements OnInit {
 
   // }
 
-  changeProduct(value, j) {
+  changeProduct(value, j, i) {
     var newArray = this.fieldsdd.filter(function (el) {
       return Number(value) === el.id;
     });
     this.producVarients = newArray && newArray.length > 0 ? newArray[0] : null;
 
-    this.varientArray[j] = this.producVarients.variants;
-    console.log("coming",this.varientArray);
+    this.varientArray[i][j] = this.producVarients.variants;
+
+    if (this.varientArray[i][j].values && this.varientArray[i][j].values.length > 0) {
+      this.varientArray[i][j].display = true;
+    }
+
+    console.log(this.varientArray)
 
     // if(j==0) {
-      this.producVarientsindex = j;
+      this.producVarientsindex = i;
+      // this.producVarientsindex = j;
     // }
   }
 
-  varientCheckbox(event, i, k) {
-    if (this.varientArray[k]['value'] && this.varientArray[k]['value'].length > 0) {
-      this.varientArray[k]['value'].forEach((element, j) => {
-        if (j === i) {
+  varientCheckbox(event, k, j, i) {
+    if (this.varientArray[i][j]['value'] && this.varientArray[i][j]['value'].length > 0) {
+      this.varientArray[i][j]['value'].forEach((element, j) => {
+        if (j === k) {
           element.is_selected = event.target.checked
         } else {
           element.is_selected = false

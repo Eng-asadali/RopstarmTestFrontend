@@ -294,6 +294,7 @@ export class AddDealsComponent implements OnInit {
 
   addAttributeCategory(i, data?, j?, id?, control?) {
     var arr;
+    console.log("checking iiiiii",i);
     if (<FormArray>control.at(i)) {
       arr = <FormArray>control.at(i).get('deal_items');
       if (data && j === 0) {
@@ -426,7 +427,10 @@ export class AddDealsComponent implements OnInit {
       return Number(value) === el.id;
     });
     this.producVarients = newArray && newArray.length > 0 ? newArray[0] : null;
-    this.varientArray[j] = this.producVarients.variant;
+
+    this.varientArray[j] = this.producVarients.variants;
+    console.log("coming",this.varientArray);
+
     // if(j==0) {
       this.producVarientsindex = j;
     // }

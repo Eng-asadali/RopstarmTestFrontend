@@ -121,7 +121,7 @@
                         *ngIf="addForm.controls.deal_categories.controls[i].controls.is_category.value">
                         <label style="margin-left: 22px;">Select Item</label>
                         <select  class="form-control" style="margin-left: 35px;" data-live-search="true" data-style="btn-select" data-size="5"
-                          formControlName="item">
+                          formControlName="item"> 
                           <option selected disabled value="">Select</option>
                           <option *ngFor="let option of fieldsddd" value="{{option.id}}">{{option.name}}</option>
                         </select>

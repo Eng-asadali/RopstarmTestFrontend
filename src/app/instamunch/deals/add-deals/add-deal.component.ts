@@ -61,7 +61,7 @@ export class AddDealsComponent implements OnInit {
       description: new FormControl(null),
       is_recurrence: new FormControl(true),
       price: new FormControl(100),
-      addon: new FormControl(100)
+      addon: new FormControl()
     });
     this.addForm.addControl('deal_categories', this.fb.array([
       this.fb.group({
@@ -320,8 +320,12 @@ export class AddDealsComponent implements OnInit {
   minusAttributeCategory(i) {
     const control = this.addForm.get('deal_categories') as FormArray;
     var arr = <FormArray>control.at(i).get('deal_items');
-    let last_index = arr.length - 1;
-    (arr as FormArray).removeAt(last_index);
+    let last_index = null;
+    if(arr.length > 1){
+     last_index = arr.length - 1;
+     (arr as FormArray).removeAt(last_index);
+    }
+    
   }
 
   itemCatalog() {

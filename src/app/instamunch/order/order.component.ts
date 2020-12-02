@@ -33,7 +33,7 @@ export class OrderComponent implements OnInit {
   constructor(private OrderService: OrderService, private router: Router,public currency_service:CurrencyService) { }
 
   ngOnInit() {
-    this.table_headers = ['select','id' ,'name', 'floor','type', 'order status', 'order datetime', 'price', 'actions'];
+    this.table_headers = ['select','id' ,'name', 'floor','type', 'transaction id','order status', 'order datetime', 'price', 'actions'];
     this.orderListing();
   }
 

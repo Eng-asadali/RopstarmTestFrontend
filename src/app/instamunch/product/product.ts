@@ -12,7 +12,9 @@ export interface Product {
     price: number;
     image?: string;
     is_tax_included: boolean;
+    is_add_on:boolean;
     estimated_prepare_time?: string;
     product_attributes: string;
+    varients:string;
     ordering:number;
   }

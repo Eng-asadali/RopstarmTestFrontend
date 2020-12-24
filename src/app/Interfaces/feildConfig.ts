@@ -20,4 +20,6 @@ export interface FieldConfig {
     searchable?:boolean;
     required?:boolean;
     info_check?:string;
+    price?:any;
+    ngFor?:any;
     }

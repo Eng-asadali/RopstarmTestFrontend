@@ -23,9 +23,14 @@ export class AddDealsComponent implements OnInit {
   clear_form: boolean;
   fieldsdd = [];
   fieldsddd = [];
-
+  addON=[];
+  addon;
   loaded = false;
   edit: boolean = false;
+  producVarients;
+  producVarientsindex;
+  selectedProductVarients;
+  // @ViewChild('productSelect') productSelect: ElementRef;
 
   category: Category;
   category_id: number;
@@ -33,16 +38,25 @@ export class AddDealsComponent implements OnInit {
   queryData: any;
   deal: any;
   deal_log_id: any;
+  varientArray = [];
   constructor(private categoryService: CategoryService, private route: Router, private LogsService: LogsService,
     private fb: FormBuilder,
     private active_route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.getAddOn();
     this.form['form_fields'] = this.fields;
     if (this.active_route.snapshot.paramMap.get('id') != null) {
       this.edit = true;
       const deal_id = parseInt(this.active_route.snapshot.paramMap.get('id'));
       this.getDealDataById(deal_id);
+    } else {
+      const varient = [{
+        price: 0,
+        is_selected: false,
+        value: 0
+      }]
+      this.varientArray.push(varient)
     }
     // else {
     //   this.edit = false;
@@ -53,7 +67,8 @@ export class AddDealsComponent implements OnInit {
       duration: new FormControl(null, [Validators.required]),
       description: new FormControl(null),
       is_recurrence: new FormControl(true),
-      price: new FormControl(100)
+      price: new FormControl(100),
+      addon: new FormControl()
     });
     this.addForm.addControl('deal_categories', this.fb.array([
       this.fb.group({
@@ -77,6 +92,18 @@ export class AddDealsComponent implements OnInit {
     this.categoryCatalog();
   }
 
+  setDealCategories(data) {
+    return this.fb.group({
+      name: [data.name],
+      is_category: [data.is_category],
+      deal_items: this.fb.array([
+        this.fb.group({
+          productItems: '',
+          productId: ''
+        })
+      ])
+    });
+  }
 
   getDealDataById(id) {
     let question = this.LogsService.getDealsById(id);
@@ -84,17 +111,30 @@ export class AddDealsComponent implements OnInit {
       result => {
         this.queryData = result['data'];
         this.queryData[0].deal_categories = this.queryData[0].deal_category;
-        if (this.queryData[0].deal_categories) {
+        
+        if (this.queryData[0].deal_categories) {          
+          const control = this.addForm.get('deal_categories') as FormArray;
           this.queryData[0].deal_categories.forEach((mainElement, i) => {
+            let abc = this.setDealCategories(mainElement)
+            control.push(abc); 
             mainElement.deal_items = mainElement.products;
 
-            if (mainElement.deal_items) {
-              mainElement.deal_items.forEach((element, j) => {
-                this.addAttributeCategory(i, element, j, mainElement.id)
-              });
+            if (mainElement.is_category) {
+              //TODO: here set category item when checkbox is selected
             }
 
+            
+            if (mainElement.deal_items && !mainElement.is_category) {
+              this.varientArray.push([]);
+              mainElement.deal_items.forEach((element, j) => {
+                this.addAttributeCategory(i, element, j, mainElement.id, control)
+              });
 
+              let last_index = (control as FormArray).length;
+              if ((this.queryData[0].deal_categories.length + 1) === last_index) {
+                (control as FormArray).removeAt(last_index - 1);
+              }
+            }
           });
         }
 
@@ -121,7 +161,7 @@ export class AddDealsComponent implements OnInit {
   }
 
   onSubmit(form) {
-    if (form.valid) {
+    if (form.valid ) {
       let get_id = parseInt(this.active_route.snapshot.paramMap.get('id'));;
       if (get_id) {
         this.editDeal(form.value, get_id);
@@ -196,10 +236,9 @@ export class AddDealsComponent implements OnInit {
       data.deal_categories.forEach((element) => {
         if (!element.is_category) {
           let deal_items = [];
-          
           if (element.deal_items && element.deal_items.length > 0) {
-            element.deal_items.forEach(deal => {
-              deal_items.push((Number(deal.productItems)));
+            element.deal_items.forEach((deal, i) => {
+              deal_items.push({id:Number (deal.productItems), variant: this.varientArray[i]});
             });
           }
           
@@ -212,8 +251,6 @@ export class AddDealsComponent implements OnInit {
         }
       });
     }
-
-
     this.LogsService.addDeall(data).subscribe(
       result => {
         this.submit_clicked = false;
@@ -253,31 +290,56 @@ export class AddDealsComponent implements OnInit {
       ])
     });
     arr.push(attribute);
+    const varient = [{
+      price: 0,
+      is_selected: false,
+      value: 0
+    }]
+    let last_index = (arr as FormArray).length;
+    this.varientArray.splice(last_index - 1, 0, varient);
   }
 
-  addAttributeCategory(i, data?, j?, id?) {
-    const control = this.addForm.get('deal_categories') as FormArray;
-    var arr = <FormArray>control.at(i).get('deal_items');
-    if (data && j === 0) {
-      (arr as FormArray).removeAt(0);
+  addAttributeCategory(i, data?, j?, id?, control?) {
+    var arr;
+    if (!control) {
+      control = this.addForm.get('deal_categories') as FormArray;
     }
-    const attribute = this.fb.group({
-      productItems: data ? data.id : '',
-      productId: id ? id : ''
-    });
-    arr.push(attribute);
+    if (<FormArray>control.at(i)) {
+      arr = <FormArray>control.at(i).get('deal_items');
+      if (data && j === 0) {
+        (arr as FormArray).removeAt(0);
+      }
+      const attribute = this.fb.group({
+        productItems: data ? data.id : '',
+        productId: id ? id : ''
+      });
+      arr.push(attribute);
+      const varient = [{
+        price: 0,
+        is_selected: false,
+        value: 0
+      }]
+      data.variants.display = true;
+      this.varientArray[i].push(data.variants);
+    }
   }
 
   minusAttribute() {
     var arr = this.addForm.get('deal_categories');
     let last_index = (arr as FormArray).length - 1;
     (arr as FormArray).removeAt(last_index);
+    this.varientArray.splice(last_index, 1);
   }
+
   minusAttributeCategory(i) {
     const control = this.addForm.get('deal_categories') as FormArray;
     var arr = <FormArray>control.at(i).get('deal_items');
-    let last_index = arr.length - 1;
-    (arr as FormArray).removeAt(last_index);
+    let last_index = null;
+    if(arr.length > 1){
+     last_index = arr.length - 1;
+     (arr as FormArray).removeAt(last_index);
+    }
+    
   }
 
   itemCatalog() {
@@ -300,6 +362,21 @@ export class AddDealsComponent implements OnInit {
         });
       }
     }
+    );
+
+  }
+
+
+  getAddOn(){
+    this.LogsService.getAddOn().subscribe(
+      result => {
+      // this.addOnID =result['data'];
+      this.addON = [];
+      for (let i = 0; i < result['data'].length; i++) {
+        this.addON.push({ id: result['data'][i]['id'], name: result['data'][i]['name'] });
+      }
+      },
+      
     );
 
   }
@@ -365,6 +442,41 @@ export class AddDealsComponent implements OnInit {
 
   // }
 
+  changeProduct(value, j, i) {
+    var newArray = this.fieldsdd.filter(function (el) {
+      return Number(value) === el.id;
+    });
+    this.producVarients = newArray && newArray.length > 0 ? newArray[0] : null;
+
+    this.varientArray[i][j] = this.producVarients.variants;
+
+    if (this.varientArray[i][j].values && this.varientArray[i][j].values.length > 0) {
+      this.varientArray[i][j].display = true;
+    }
+
+    console.log(this.varientArray)
+
+    // if(j==0) {
+      this.producVarientsindex = i;
+      // this.producVarientsindex = j;
+    // }
+  }
+
+  varientCheckbox(event, k, j, i) {
+    if (this.varientArray[i][j]['value'] && this.varientArray[i][j]['value'].length > 0) {
+      this.varientArray[i][j]['value'].forEach((element, j) => {
+        if (j === k) {
+          element.is_selected = event.target.checked
+        } else {
+          element.is_selected = false
+        }
+      });
+      // localStorage.setItem('varient', JSON.stringify(this.varientArray[k]));
+      // this.varientArray[k] = JSON.parse(localStorage.getItem('varient'));
+      // console.log(this.varientArray);
+      // console.log(JSON.parse(localStorage.getItem('varient')));
+    }
+  }
 
   navigateToDealListing() {
     let url = this.route.url.split('/');

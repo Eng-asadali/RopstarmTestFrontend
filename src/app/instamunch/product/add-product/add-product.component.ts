@@ -22,7 +22,7 @@ export class AddProductComponent implements OnInit {
   fields: FieldConfig[] = [] as FieldConfig[];
   submit_clicked: boolean;
   clear_form: boolean;
-
+   addON=[];
   loaded = false;
   edit: boolean = false;
 
@@ -30,6 +30,7 @@ export class AddProductComponent implements OnInit {
     private active_route: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
+    this.getAddOn();
     this.form['form_fields'] = this.fields;
     const product_id = this.active_route.snapshot.paramMap.get('id');
     if (product_id != null) {
@@ -41,6 +42,21 @@ export class AddProductComponent implements OnInit {
       this.edit = false;
       this.generateForm();
     }
+  }
+  getAddOn(){
+    this.productService.getAddOn().subscribe(
+      result => {
+        console.log("aya",result);
+      // this.addOnID =result['data'];
+      this.addON = [];
+    for (let i = 0; i < result['data'].length; i++) {
+      this.addON.push({ id: result['data'][i]['id'], name: result['data'][i]['name'] });
+    }
+      console.log("gya",this.addON);
+      },
+      
+    );
+
   }
 
   generateForm(product?: Product) {
@@ -86,11 +102,14 @@ export class AddProductComponent implements OnInit {
         },
         
         {
-          label: 'Tax Included', type: 'checkbox', bootstrapGridClass: "col-lg-12", name: "is_tax_included", required: false, value: product ? product.is_tax_included : false
+          label: 'Tax Included', type: 'checkbox', bootstrapGridClass: "col-lg-6", name: "is_tax_included", required: false, value: product ? product.is_tax_included : false
         },
         {
-          label: 'Attribute List', type: 'attribute', bootstrapGridClass: "col-lg-12", name: "product_attributes", required: false, value: product ? product.product_attributes : null
+          label: 'Is Add On', type: 'checkbox', bootstrapGridClass: "col-lg-6", name: "is_add_on", required: false, value: product ? product.is_add_on : false
         },
+        { label: 'Attribute List', type: 'attribute', bootstrapGridClass: "col-lg-12", name: "product_attributes", required: false, value: product ? product.product_attributes : null },
+        { label: 'Varients', type: 'varients', bootstrapGridClass: "col-lg-12", name: "varients", required: false, value: product ? product.varients : null },
+        { label: 'Add On', type: 'multiselect', bootstrapGridClass: "col-lg-12", name: "addon", options:this.addON , required: false },
         { label: 'Description', type: 'textarea', bootstrapGridClass: "col-lg-12", name: "detail", validations: [Validators.maxLength(500)], value: product ? product.detail : null },
         {  type: 'hidden', bootstrapGridClass: "col-lg-12", name: "isavailable", value: product ? product.isavailable : null},
         {  type: 'hidden', bootstrapGridClass: "col-lg-12", name: "kitchen_status", value: product ? product.kitchen_status : null}
@@ -108,6 +127,9 @@ export class AddProductComponent implements OnInit {
       this.loaded = true;
     });
   }
+  
+
+ 
 
   getProductDataById(id) {
     let product = this.productService.getProuctById(id);
@@ -141,9 +163,16 @@ export class AddProductComponent implements OnInit {
 
     const product_id = this.active_route.snapshot.paramMap.get('id');
     let formatted_attributes = this.FormatAttributesList(data['product_attributes']);
+    // let formatted_varients = this.FormatVarientList(data['varients']);
     // console.log(formatted_attributes.length, formatted_attributes);
     // if (formatted_attributes != null)
+    let varientsArray = {
+      name: data.name,
+      values: data.variants
+    };
     data['product_attributes'] = JSON.stringify({ attributes_list: formatted_attributes });
+    data['variants'] = JSON.stringify(varientsArray);
+    delete data['varients'];
     // else
     //   delete data['product_attributes'];
 
@@ -151,7 +180,9 @@ export class AddProductComponent implements OnInit {
       this.editProduct(data, product_id);
     }
     else {
-      // console.log(data);
+      console.log(data);
+      console.log(varientsArray);
+      
       this.addProduct(data);
     }
   }
@@ -214,10 +245,14 @@ export class AddProductComponent implements OnInit {
 
     }
 
-    var filtered = data.filter(function (el) {
-      return el != null;
-    });
-    return filtered;
+    if (data) {
+      var filtered = data.filter(function (el) {
+        return el != null;
+      });
+      return filtered;
+    } else {
+      return null
+    }
 
     // if (!is_empty) {
     //   var filtered = data.filter(function (el) {
@@ -241,6 +276,59 @@ export class AddProductComponent implements OnInit {
   }
 
   formatSelected(length) {
+    let is_selected = [];
+    for (var i = 0; i < length; i++) {
+      is_selected.push(false);
+    }
+    return is_selected;
+  }
+
+  FormatVarientList(data) {
+    // let attributes_list = {};
+    // console.log(data);
+    let is_empty = true;
+    for (let i = 0; i < data.length; i++) {
+      if (data[i].value != '' && data[i].name != '' && data[i].value != "" && data[i].name != "") {
+        data[i].value = data[i].value.split(',');
+        data[i]['is_selected'] = this.formatSelectedvarients(data[i].value.length);
+        is_empty = false;
+      }
+      else {
+        delete data[i];
+      }
+
+    }
+    if (data) {
+      var filtered = data.filter(function (el) {
+        return el != null;
+      });
+      return filtered;
+    } else {
+      return null;
+    }
+
+    // if (!is_empty) {
+    //   var filtered = data.filter(function (el) {
+    //     return el != null;
+    //   });
+    //   return filtered;
+    // }
+    // else {
+    //   return null;
+    // }
+
+
+
+    // data.forEach(element => {
+    //   element.value = element.value.split(',');
+    //   element['is_selected'] = this.formatSelected(element.value.length);
+    // });
+
+    // attributes_list = data;
+    // return data;
+  }
+
+  formatSelectedvarients(length) {
     let is_selected = [];
     for (var i = 0; i < length; i++) {
       is_selected.push(false);

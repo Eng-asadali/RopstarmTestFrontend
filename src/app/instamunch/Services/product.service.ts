@@ -58,4 +58,9 @@ export class ProductService {
        catchError(err => of({error:true,message:'Server error',data:[]}))
        );
    }
+   getAddOn(){
+    return this.httpServices.get('catalog/addon/').pipe(
+      catchError(err => of({error:true,message:'Server error',data:[]}))
+      );
+   }
 }

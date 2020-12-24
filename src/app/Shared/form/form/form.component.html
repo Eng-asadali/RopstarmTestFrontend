@@ -69,10 +69,21 @@
                 </app-errors>
               </div>
             </div> -->
-
+            
             <div class="form-group" *ngIf="fields[index].type == 'ngselect'">
               <label>{{fields[index].label}}<span *ngIf="fields[index].required" class="required">*</span></label>
               <ng-select formControlName="{{fields[index].name}}" placeholder="Select item">
+                <ng-option *ngFor="let option of fields[index].options" [value]="option.id">{{option.name}}</ng-option>
+              </ng-select>
+              <div *ngIf="displayValidationsErrors && Form.controls[fields[index].name].invalid">
+                <app-errors [field_name]="fields[index].label" [errors]='Form.controls[fields[index].name].errors'>
+                </app-errors>
+              </div>
+            </div>
+
+            <div class="form-group" *ngIf="fields[index].type == 'multiselect'">
+              <label>{{fields[index].label}}<span *ngIf="fields[index].required" class="required">*</span></label>
+              <ng-select [multiple]="true" formControlName="{{fields[index].name}}" placeholder="Select item">
                 <ng-option *ngFor="let option of fields[index].options" [value]="option.id">{{option.name}}</ng-option>
               </ng-select>
               <div *ngIf="displayValidationsErrors && Form.controls[fields[index].name].invalid">
@@ -179,6 +190,35 @@
                     </div>
                     <div class="col-lg-6">
                       <input placeholder="Value 1, Value 2, Value 3" formControlName="value" class="form-control" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group" *ngIf="fields[index].type == 'varients'">
+              <label>{{fields[index].label}}
+
+                <button type="button" style="color: white;margin-left: 6px;" class="btn btn-sm btn-success"
+                  (click)="addvarients()"><i class="icofont-ui-add"></i></button>
+                  <button type="button" style="color: white;margin-left: 6px;" class="btn btn-sm btn-danger"
+                  (click)="minusvarients()"><i style="margin-top: -2px;" class="fa fa-minus"></i></button>
+
+              </label>
+              <div style="margin-bottom: 5px;" class="row">
+              <div class="col-lg-6">
+                <input placeholder="Name" formControlName="name" class="form-control" />
+              </div>
+             </div>
+              <div formArrayName="variants">
+                <div *ngFor="let attribute of Form.controls.variants.controls; let i = index"
+                  [formGroupName]="i">
+                  <div style="margin-bottom: 5px;" class="row">
+                    <div class="col-lg-6">
+                      <input placeholder="Value" formControlName="value" class="form-control" />
+                    </div>
+                    <div class="col-lg-6">
+                      <input type="number"  placeholder="Price" formControlName="price" class="form-control" />
                     </div>
                   </div>
                 </div>

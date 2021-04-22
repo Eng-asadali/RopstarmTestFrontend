@@ -58,6 +58,10 @@ import { DealsComponent } from './instamunch/deals/deals.component';
 import { AddDealsComponent } from './instamunch/deals/add-deals/add-deal.component';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material';
+import { InventoryParentComponent } from './instamunch/inventory/inventoryparent.component';
+import { AddparentcategoryComponent } from './instamunch/inventory/addparentcategory/addparentcategory.component';
+import { InventoryCategoryComponent } from './instamunch/inventory-category/inventory-category.component';
+import { AddInventoryCategoryComponent } from './instamunch/inventory-category/add-category/add-category.component';
 
 @NgModule({
   declarations: [
@@ -90,7 +94,11 @@ import { MatIconModule } from '@angular/material';
     QueryListComponent,
     LogsComponent,
     twentyfourToTwelevehr,
-    DialogBoxComponent
+    DialogBoxComponent,
+    InventoryParentComponent,
+    AddparentcategoryComponent,
+    InventoryCategoryComponent,
+    AddInventoryCategoryComponent,
   ],
 
   imports: [

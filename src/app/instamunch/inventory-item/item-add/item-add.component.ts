@@ -123,7 +123,7 @@ export class ItemAddComponent implements OnInit {
       result => {
         this.submit_clicked = false;
         if (!result['error']) {
-          SwalAlert.sucessAlert('', 'Category Updated Sucesssfully!')
+          SwalAlert.sucessAlert('', 'Item Updated Sucesssfully!')
           this.navigateToProductListing();
         }
         else {
@@ -145,7 +145,7 @@ export class ItemAddComponent implements OnInit {
         this.submit_clicked = false;
         if (!result['error']) {
           this.clear_form = true;
-          SwalAlert.sucessAlert('', 'Category Added Sucesssfully!')
+          SwalAlert.sucessAlert('', 'Item Added Sucesssfully!')
           
         }
         else {

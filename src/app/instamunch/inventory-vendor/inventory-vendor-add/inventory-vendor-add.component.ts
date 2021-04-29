@@ -103,7 +103,7 @@ export class InventoryVendorAddComponent implements OnInit {
         result => {
           this.submit_clicked = false;
           if (!result['error']) {
-            SwalAlert.sucessAlert('', 'Parent Category Updated Sucesssfully!')
+            SwalAlert.sucessAlert('', 'Vendor Updated Sucesssfully!')
             this.navigateToProductListing();
           }
           else {
@@ -125,7 +125,7 @@ export class InventoryVendorAddComponent implements OnInit {
           this.submit_clicked = false;
           if (!result['error']) {
             this.clear_form = true;
-            SwalAlert.sucessAlert('', 'Parent Category Added Sucesssfully!')
+            SwalAlert.sucessAlert('', 'Vendor Added Sucesssfully!')
             
           }
           else {

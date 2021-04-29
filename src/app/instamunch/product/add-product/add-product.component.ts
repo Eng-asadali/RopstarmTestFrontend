@@ -5,11 +5,11 @@ import { of, forkJoin, empty } from 'rxjs';
 
 import { Product } from '../product';
 import { FieldConfig } from '../../../Interfaces/feildConfig';
-import { ProductService } from '../../Services/product.service';
 import { CategoryService } from '../../Services/category.service';
 import { SwalAlert } from '../../../Shared/swalAlerts';
 import { Status } from '../../Options/status';
 import { validation_patterns } from 'src/app/Shared/validation_patterns';
+import { ProductService } from '../../Services/product.service';
 
 @Component({
   selector: 'app-add-product',
@@ -172,7 +172,7 @@ export class AddProductComponent implements OnInit {
     };
     data['product_attributes'] = JSON.stringify({ attributes_list: formatted_attributes });
     data['variants'] = JSON.stringify(varientsArray);
-    delete data['varients'];
+    // delete data['varients'];
     // else
     //   delete data['product_attributes'];
 

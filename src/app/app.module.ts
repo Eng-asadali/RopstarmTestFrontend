@@ -62,6 +62,10 @@ import { InventoryParentComponent } from './instamunch/inventory/inventoryparent
 import { AddparentcategoryComponent } from './instamunch/inventory/addparentcategory/addparentcategory.component';
 import { InventoryCategoryComponent } from './instamunch/inventory-category/inventory-category.component';
 import { AddInventoryCategoryComponent } from './instamunch/inventory-category/add-category/add-category.component';
+import { InventoryVendorComponent } from './instamunch/inventory-vendor/inventory-vendor.component';
+import { InventoryVendorAddComponent } from './instamunch/inventory-vendor/inventory-vendor-add/inventory-vendor-add.component';
+import { InventoryItemComponent } from './instamunch/inventory-item/inventory-item.component';
+import { ItemAddComponent } from './instamunch/inventory-item/item-add/item-add.component';
 
 @NgModule({
   declarations: [
@@ -99,6 +103,10 @@ import { AddInventoryCategoryComponent } from './instamunch/inventory-category/a
     AddparentcategoryComponent,
     InventoryCategoryComponent,
     AddInventoryCategoryComponent,
+    InventoryVendorComponent,
+    InventoryVendorAddComponent,
+    InventoryItemComponent,
+    ItemAddComponent,
   ],
 
   imports: [

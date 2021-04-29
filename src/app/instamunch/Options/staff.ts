@@ -6,8 +6,9 @@ export const StaffType = [
     { id: 'waiter', name: 'Waiter' },
     { id: 'staff', name: 'Staff' },
     { id: 'kitchen_manager', name: 'Kitchen Manager' },
+    { id: 'counter_attendant', name: 'Counter Attendant' },
 ]
-// user_type_dict = {'admin': 1, 'user': 2, 'guest': 3, 'manager': 4, 'waiter': 5, 'staff': 6, 'kitchen_manager':7}
+// user_type_dict = {'admin': 1, 'user': 2, 'guest': 3, 'manager': 4, 'waiter': 5, 'staff': 6, 'kitchen_manager':7, 'app user':8,'counter_attendant':9}
 export const SalaryDisbursement = [
     { id: 'Hourly', name: 'Hourly' },
     { id: 'Daily', name: 'Daily' },

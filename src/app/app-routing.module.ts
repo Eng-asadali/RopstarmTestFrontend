@@ -31,6 +31,10 @@ import { InventoryParentComponent } from './instamunch/inventory/inventoryparent
 import { AddparentcategoryComponent } from './instamunch/inventory/addparentcategory/addparentcategory.component';
 import { InventoryCategoryComponent } from './instamunch/inventory-category/inventory-category.component';
 import { AddInventoryCategoryComponent } from './instamunch/inventory-category/add-category/add-category.component';
+import { InventoryVendorComponent } from './instamunch/inventory-vendor/inventory-vendor.component';
+import { InventoryVendorAddComponent } from './instamunch/inventory-vendor/inventory-vendor-add/inventory-vendor-add.component';
+import { InventoryItemComponent } from './instamunch/inventory-item/inventory-item.component';
+import { ItemAddComponent } from './instamunch/inventory-item/item-add/item-add.component';
 
 
 const routes: Routes = [
@@ -56,6 +60,23 @@ const routes: Routes = [
       },
       {
         path: 'inventorycategory/edit/:id', component: AddInventoryCategoryComponent
+      },
+      { path: 'inventoryvendor', component: InventoryVendorComponent },
+      {
+        path: 'inventoryvendor/add', component: InventoryVendorAddComponent
+      },
+      {
+        path: 'inventoryvendor/edit/:id', component: InventoryVendorAddComponent
+      },
+      { path: 'inventoryitem', component: InventoryItemComponent },
+      {
+        path: 'inventoryitem/add', component: ItemAddComponent
+      },
+      {
+        path: 'inventoryitem/edit/:id', component: ItemAddComponent
+      },
+      {
+        path: 'inventorycategory/edit/:id', component: InventoryVendorAddComponent
       },
       { path: 'category', component: CategoryComponent },
       {

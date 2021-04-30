@@ -8,6 +8,7 @@ export const validation_patterns = {
   password_regex:/^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*`'#?&./-])[A-Za-z\d$@$!%`'*#?&./-]{8,}$/,
   branch_contact_number:/^[0-9]{10,11}$/,
   decimal_numbers:/^\d*\.?\d*$/,
+  only_int: /^[0-9]*$/,
   nameRegex:/^[a-zA-Z`'/-]*$/
 
 }

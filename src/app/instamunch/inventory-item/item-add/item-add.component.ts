@@ -9,6 +9,7 @@ import { InventoryItemService } from '../../Services/inventory-item.service';
 import { InventoryCategoryService } from '../../Services/inventory-category.service';
 import { InventoryVendorService } from '../../Services/inventory-vendor.service';
 import { forkJoin } from 'rxjs';
+import { validation_patterns } from 'src/app/Shared/validation_patterns';
 
 
 @Component({
@@ -79,13 +80,13 @@ export class ItemAddComponent implements OnInit {
     this.fields = [
       { label: 'Name', type: 'text', bootstrapGridClass: "col-lg-12", name: "name", validations: [Validators.required, Validators.maxLength(50)], required: true, value: item ? item.name : null },
       { label: 'Description', type: 'textarea', bootstrapGridClass: "col-lg-12", name: "description", validations: [Validators.required, Validators.maxLength(250)], required: true, value: item ? item.description : null },
-      { label: 'Price per unit', type: 'number', bootstrapGridClass: "col-lg-6", name: "price_per_unit", validations: [Validators.required], required: true, value: item ? item.price_per_unit : null },
-      { label: 'Quantity', type: 'number', bootstrapGridClass: "col-lg-6", name: "quantity", validations: [Validators.required], required: true, value: item ? item.quantity : null },
-      { label: 'Cost', type: 'number', bootstrapGridClass: "col-lg-6", name: "cost", validations: [Validators.required], required: true, value: item ? item.cost : null },
+      { label: 'Price per unit', type: 'number', bootstrapGridClass: "col-lg-6", name: "price_per_unit", validations: [Validators.required,Validators.pattern(validation_patterns.decimal_numbers)], required: true, value: item ? item.price_per_unit : null },
+      { label: 'Quantity', type: 'number', bootstrapGridClass: "col-lg-6", name: "quantity", validations: [Validators.required,Validators.pattern(validation_patterns.only_int)], required: true, value: item ? item.quantity : null },
+      // { label: 'Cost', type: 'number', bootstrapGridClass: "col-lg-6", name: "cost", validations: [Validators.required], required: true, value: item ? item.cost : null },
       { label: 'Category', type: 'ngselect', bootstrapGridClass: "col-lg-6", name: "category", validations: [Validators.required], required: true, value: item ? item.category_id : null, options:result[0]['data'] },
       { label: 'Vendor', type: 'ngselect', bootstrapGridClass: "col-lg-6", name: "vendor", validations: [Validators.required], required: true, value: item ? item.vendor_id : null, options: result[1]['data'] },
       {
-        label: 'Status', type: 'select', bootstrapGridClass: "col-lg-6", name: "status", validations: [Validators.required], required: true,
+        label: 'Status', type: 'select', bootstrapGridClass: "col-lg-12", name: "status", validations: [Validators.required], required: true,
         value: item ? item.status : 'Active', options: Status2
       },
     ]

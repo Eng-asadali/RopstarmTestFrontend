@@ -35,6 +35,8 @@ import { InventoryVendorComponent } from './instamunch/inventory-vendor/inventor
 import { InventoryVendorAddComponent } from './instamunch/inventory-vendor/inventory-vendor-add/inventory-vendor-add.component';
 import { InventoryItemComponent } from './instamunch/inventory-item/inventory-item.component';
 import { ItemAddComponent } from './instamunch/inventory-item/item-add/item-add.component';
+import { InventoryOrdersComponent } from './instamunch/inventory-orders/inventory-orders.component';
+import { AddOrdersComponent } from './instamunch/inventory-orders/add-orders/add-orders.component';
 
 
 const routes: Routes = [
@@ -74,6 +76,13 @@ const routes: Routes = [
       },
       {
         path: 'inventoryitem/edit/:id', component: ItemAddComponent
+      },
+      { path: 'inventoryorders', component: InventoryOrdersComponent },
+      {
+        path: 'inventoryorders/add', component: AddOrdersComponent
+      },
+      {
+        path: 'inventoryorders/edit/:id', component: AddOrdersComponent
       },
       {
         path: 'inventorycategory/edit/:id', component: InventoryVendorAddComponent

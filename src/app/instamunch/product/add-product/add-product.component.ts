@@ -111,8 +111,8 @@ export class AddProductComponent implements OnInit {
         { label: 'Varients', type: 'varients', bootstrapGridClass: "col-lg-12", name: "varients", required: false, value: product ? product.varients : null },
         { label: 'Add On', type: 'multiselect', bootstrapGridClass: "col-lg-12", name: "addon", options:this.addON , required: false },
         { label: 'Description', type: 'textarea', bootstrapGridClass: "col-lg-12", name: "detail", validations: [Validators.maxLength(500)], value: product ? product.detail : null },
-        {  type: 'hidden', bootstrapGridClass: "col-lg-12", name: "isavailable", value: product ? product.isavailable : null},
-        {  type: 'hidden', bootstrapGridClass: "col-lg-12", name: "kitchen_status", value: product ? product.kitchen_status : null}
+        {  type: 'hidden', bootstrapGridClass: "col-lg-12", name: "isavailable", value: product ? product.isavailable : true},
+        {  type: 'hidden', bootstrapGridClass: "col-lg-12", name: "kitchen_status", value: product ? product.kitchen_status : true}
       ]
       this.form['form_fields'] = this.fields;
       this.form['FormbootstrapGridClass'] = 'col-lg-9';

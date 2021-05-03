@@ -19,7 +19,7 @@ export class InventoryVendorComponent implements OnInit {
     private currentActivatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
-    this.table_headers = ['name','address','city', 'orders', 'actions'];
+    this.table_headers = ['name','address','phone_number','city', 'orders', 'actions'];
     this.getInventory()
   }
   refresh(){

@@ -285,7 +285,6 @@ export class FormComponent implements OnInit {
   submit() {
 
     this.form_values = { ...this.Form.value, ...this.map_values, ...this.image_value, ...this.cover_image_value };
-    console.log(this.form_values);
     if (this.Form.valid) {
       Object.keys(this.form_values).forEach(function (key) {
         if (this.form_values[key] == null)

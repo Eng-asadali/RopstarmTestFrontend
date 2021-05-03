@@ -62,9 +62,9 @@ export class InventoryVendorAddComponent implements OnInit {
         { label: 'Name', type: 'text', bootstrapGridClass: "col-lg-12", name: "name", validations: [Validators.required, Validators.maxLength(50)], required: true, value: inventoryVendor ? inventoryVendor.name : null },
         { label: 'Address', type: 'text', bootstrapGridClass: "col-lg-12", name: "address", validations: [Validators.required, Validators.maxLength(50)], required: true, value: inventoryVendor ? inventoryVendor.address : null },
         { label: 'City', type: 'text', bootstrapGridClass: "col-lg-12", name: "city", validations: [Validators.required, Validators.maxLength(50)], required: true, value: inventoryVendor ? inventoryVendor.city : null },
-        { label: 'Orders', type: 'number', bootstrapGridClass: "col-lg-12", name: "orders", validations: [Validators.required], required: true, value: inventoryVendor ? inventoryVendor.orders : null },
-        //  { label: 'Managers', type: 'ngselectname', bootstrapGridClass: "col-lg-12", name: "manager_id",validations: [Validators.required], required: true, value: parentCategory ? parentCategory.manager_id : null, options: result['data']}
-  
+        { label: 'Orders', type: 'number', bootstrapGridClass: "col-lg-6", name: "orders", validations: [Validators.required], required: true, value: inventoryVendor ? inventoryVendor.orders : null },
+        { label: 'Phone Number', type: 'number', bootstrapGridClass: "col-lg-6", name: "phone_number",validations: [Validators.required], required: true, value: inventoryVendor ? inventoryVendor.phone_number : null},
+
       ]
       this.form['form_fields'] = this.fields;
             this.form['FormbootstrapGridClass'] = 'col-lg-9';

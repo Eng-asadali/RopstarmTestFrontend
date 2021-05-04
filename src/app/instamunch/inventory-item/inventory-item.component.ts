@@ -19,7 +19,7 @@ export class InventoryItemComponent implements OnInit {
     private currentActivatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
-    this.table_headers = ['name','price_per_unit','quantity','cost','category','actions'];
+    this.table_headers = ['item_file','name','price_per_unit','quantity','cost','category','actions'];
     this.getInventory()
   }
   refresh(){

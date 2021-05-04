@@ -91,9 +91,15 @@ export class ItemAddComponent implements OnInit {
       },
     ]
     this.form['form_fields'] = this.fields;
+    this.form['form_fields'] = this.fields;
     this.form['FormbootstrapGridClass'] = 'col-lg-9';
     this.form['map'] = false;
     this.form['MapbootstrapGridClass'] = 'col-lg-4';
+    this.form['image'] = true;
+    this.form['ImagebootstrapGridClass'] = 'col-lg-3';
+    this.form['img_height'] = "200px";
+    this.form['img_width'] = "200px";
+    this.form['image_url'] = item ? item.item_file : null;
     this.form['submit'] = 'Save';
     this.form['attribute'] = true;
     this.loaded = true;

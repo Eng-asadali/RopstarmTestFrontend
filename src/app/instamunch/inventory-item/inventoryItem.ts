@@ -9,4 +9,5 @@ export interface Item{
     vendor:String,
     vendor_id:String,
     status:String,
+    item_file: String
 }

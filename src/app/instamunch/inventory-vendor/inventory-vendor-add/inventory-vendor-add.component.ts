@@ -5,6 +5,7 @@ import { SwalAlert } from 'src/app/Shared/swalAlerts';
 import { Validators } from '@angular/forms';
 import { inventoryVendor } from '../inventory-vendot';
 import { InventoryVendorService } from '../../Services/inventory-vendor.service';
+import { validation_patterns } from 'src/app/Shared/validation_patterns';
 
 @Component({
   selector: 'app-inventory-vendor-add',
@@ -63,7 +64,7 @@ export class InventoryVendorAddComponent implements OnInit {
         { label: 'Address', type: 'text', bootstrapGridClass: "col-lg-12", name: "address", validations: [Validators.required, Validators.maxLength(50)], required: true, value: inventoryVendor ? inventoryVendor.address : null },
         { label: 'City', type: 'text', bootstrapGridClass: "col-lg-12", name: "city", validations: [Validators.required, Validators.maxLength(50)], required: true, value: inventoryVendor ? inventoryVendor.city : null },
         { label: 'Orders', type: 'number', bootstrapGridClass: "col-lg-6", name: "orders", validations: [Validators.required], required: true, value: inventoryVendor ? inventoryVendor.orders : null },
-        { label: 'Phone Number', type: 'number', bootstrapGridClass: "col-lg-6", name: "phone_number",validations: [Validators.required], required: true, value: inventoryVendor ? inventoryVendor.phone_number : null},
+        { label: 'Phone Number', type: 'number', bootstrapGridClass: "col-lg-6", name: "phone_number",validations: [Validators.required, Validators.pattern(validation_patterns.only_int)], required: true, value: inventoryVendor ? inventoryVendor.phone_number : null},
 
       ]
       this.form['form_fields'] = this.fields;

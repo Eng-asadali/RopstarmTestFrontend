@@ -18,12 +18,12 @@ export class InventoryVendorAddComponent implements OnInit {
     fields: FieldConfig[] = [] as FieldConfig[];
     submit_clicked: boolean;
     clear_form: boolean;
-  
+
     loaded = false;
     edit: boolean = false;
-  
+
     constructor(private inventoryVendorService: InventoryVendorService,private active_route: ActivatedRoute, private router: Router) { }
-  
+
     ngOnInit() {
       this.form['form_fields'] = this.fields;
       const parentCategory_id = this.active_route.snapshot.paramMap.get('id');
@@ -49,7 +49,7 @@ export class InventoryVendorAddComponent implements OnInit {
             this.loaded = true;
             SwalAlert.errorAlert('', result['message'].charAt(0).toUpperCase() + result['message'].substring(1));
           }
-  
+
         },
         err => {
           console.log(err);
@@ -64,7 +64,7 @@ export class InventoryVendorAddComponent implements OnInit {
         { label: 'Address', type: 'text', bootstrapGridClass: "col-lg-12", name: "address", validations: [Validators.required, Validators.maxLength(50)], required: true, value: inventoryVendor ? inventoryVendor.address : null },
         { label: 'City', type: 'text', bootstrapGridClass: "col-lg-12", name: "city", validations: [Validators.required, Validators.maxLength(50)], required: true, value: inventoryVendor ? inventoryVendor.city : null },
         { label: 'Orders', type: 'number', bootstrapGridClass: "col-lg-6", name: "orders", validations: [Validators.required], required: true, value: inventoryVendor ? inventoryVendor.orders : null },
-        { label: 'Phone Number', type: 'number', bootstrapGridClass: "col-lg-6", name: "phone_number",validations: [Validators.required, Validators.pattern(validation_patterns.only_int)], required: true, value: inventoryVendor ? inventoryVendor.phone_number : null},
+        { label: 'Phone Number', type: 'number', bootstrapGridClass: "col-lg-6", name: "phone_number",validations: [Validators.required, Validators.pattern(validation_patterns.only_int), Validators.maxLength(15)], required: true, value: inventoryVendor ? inventoryVendor.phone_number : null},
 
       ]
       this.form['form_fields'] = this.fields;
@@ -79,7 +79,7 @@ export class InventoryVendorAddComponent implements OnInit {
             this.form['submit'] = 'Save';
             this.form['attribute'] = true;
             this.loaded = true;
-      
+
     }
     getparentCategoryData(data) {
       console.log(data);
@@ -87,9 +87,9 @@ export class InventoryVendorAddComponent implements OnInit {
       this.submit_clicked = true;
       //delete data['product_attributes'];
       // data['is_tax_included'] == '' ? data['is_tax_included'] = false : data['is_tax_included'];
-  
+
       console.log(data);
-  
+
       const parentCategory_id = this.active_route.snapshot.paramMap.get('id');
       if (parentCategory_id != null) {
         this.editparentCategory(data, parentCategory_id);
@@ -97,7 +97,7 @@ export class InventoryVendorAddComponent implements OnInit {
       else {
         this.addparentCategory(data);
       }
-  
+
     }
     editparentCategory(data, id) {
       this.inventoryVendorService.editparentCategory(data, id).subscribe(
@@ -119,7 +119,7 @@ export class InventoryVendorAddComponent implements OnInit {
         }
       );
     }
-  
+
     addparentCategory(data) {
       this.inventoryVendorService.addparentCategory(data).subscribe(
         result => {
@@ -127,7 +127,7 @@ export class InventoryVendorAddComponent implements OnInit {
           if (!result['error']) {
             this.clear_form = true;
             SwalAlert.sucessAlert('', 'Vendor Added Sucesssfully!')
-            
+
           }
           else {
             SwalAlert.errorAlert('', result['message'].charAt(0).toUpperCase() + result['message'].substring(1));

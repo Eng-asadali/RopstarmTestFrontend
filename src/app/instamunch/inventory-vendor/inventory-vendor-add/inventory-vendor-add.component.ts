@@ -64,7 +64,7 @@ export class InventoryVendorAddComponent implements OnInit {
         { label: 'Address', type: 'text', bootstrapGridClass: "col-lg-12", name: "address", validations: [Validators.required, Validators.maxLength(50)], required: true, value: inventoryVendor ? inventoryVendor.address : null },
         { label: 'City', type: 'text', bootstrapGridClass: "col-lg-12", name: "city", validations: [Validators.required, Validators.maxLength(50)], required: true, value: inventoryVendor ? inventoryVendor.city : null },
         { label: 'Orders', type: 'number', bootstrapGridClass: "col-lg-6", name: "orders", validations: [Validators.required], required: true, value: inventoryVendor ? inventoryVendor.orders : null },
-        { label: 'Phone Number', type: 'number', bootstrapGridClass: "col-lg-6", name: "phone_number",validations: [Validators.required, Validators.pattern(validation_patterns.only_int), Validators.maxLength(15)], required: true, value: inventoryVendor ? inventoryVendor.phone_number : null},
+        { label: 'Phone Number', type: 'number', bootstrapGridClass: "col-lg-6", name: "phone_number",validations: [Validators.required, Validators.pattern(validation_patterns.only_int), Validators.max(999999999999999)], required: true, value: inventoryVendor ? inventoryVendor.phone_number : null},
 
       ]
       this.form['form_fields'] = this.fields;

@@ -54,7 +54,7 @@ export class AddProductComponent implements OnInit {
     }
       console.log("gya",this.addON);
       },
-      
+
     );
 
   }
@@ -91,8 +91,8 @@ export class AddProductComponent implements OnInit {
         {
           label: 'Estimated Prepare Time (Mins)', type: 'number', bootstrapGridClass: "col-lg-6", name: "estimated_prepare_time", validations: [Validators.pattern(validation_patterns.postive_numbers), Validators.max(999999999999999999)], required: false, value: product ? product.estimated_prepare_time : 30
         },
-        {label: 'Ordering', type: 'number', bootstrapGridClass: "col-lg-6" , name: "ordering",  info_check : "Number use to sort the items in a menu listing e.g item with 0 ordering will appear before an item with ordering 1. ", value: product ? product.ordering : 1, validations: [Validators.required], required: true}, 
-        
+        {label: 'Ordering', type: 'number', bootstrapGridClass: "col-lg-6" , name: "ordering",  info_check : "Number use to sort the items in a menu listing e.g item with 0 ordering will appear before an item with ordering 1. ", value: product ? product.ordering : 1, validations: [Validators.required], required: true},
+
         {
           label: 'Nutrition', type: 'text', bootstrapGridClass: "col-lg-6", name: "nutrition", required: false, value: product ? product.nutrition : null
         },
@@ -100,19 +100,19 @@ export class AddProductComponent implements OnInit {
         {
           label: 'Allergens', type: 'text', bootstrapGridClass: "col-lg-6", name: "allergens", required: false,value: product ? product.allergens : null
         },
-        
+
         {
           label: 'Tax Included', type: 'checkbox', bootstrapGridClass: "col-lg-6", name: "is_tax_included", required: false, value: product ? product.is_tax_included : false
         },
-        {
-          label: 'Is Add On', type: 'checkbox', bootstrapGridClass: "col-lg-6", name: "is_add_on", required: false, value: product ? product.is_add_on : false
-        },
+        // {
+        //   label: 'Is Add On', type: 'checkbox', bootstrapGridClass: "col-lg-6", name: "is_add_on", required: false, value: product ? product.is_add_on : false
+        // },
         { label: 'Attribute List', type: 'attribute', bootstrapGridClass: "col-lg-12", name: "product_attributes", required: false, value: product ? product.product_attributes : null },
-        { label: 'Varients', type: 'varients', bootstrapGridClass: "col-lg-12", name: "varients", required: false, value: product ? product.varients : null },
-        { label: 'Add On', type: 'multiselect', bootstrapGridClass: "col-lg-12", name: "addon", options:this.addON , required: false },
+        // { label: 'Varients', type: 'varients', bootstrapGridClass: "col-lg-12", name: "varients", required: false, value: product ? product.varients : null },
+        // { label: 'Add On', type: 'multiselect', bootstrapGridClass: "col-lg-12", name: "addon", options:this.addON , required: false },
         { label: 'Description', type: 'textarea', bootstrapGridClass: "col-lg-12", name: "detail", validations: [Validators.maxLength(500)], value: product ? product.detail : null },
-        {  type: 'hidden', bootstrapGridClass: "col-lg-12", name: "isavailable", value: product ? product.isavailable : true},
-        {  type: 'hidden', bootstrapGridClass: "col-lg-12", name: "kitchen_status", value: product ? product.kitchen_status : true}
+        {  type: 'hidden', bootstrapGridClass: "col-lg-6", name: "isavailable", value: product ? product.isavailable : true},
+        {  type: 'hidden', bootstrapGridClass: "col-lg-6", name: "kitchen_status", value: product ? product.kitchen_status : true}
       ]
       this.form['form_fields'] = this.fields;
       this.form['FormbootstrapGridClass'] = 'col-lg-9';
@@ -127,9 +127,9 @@ export class AddProductComponent implements OnInit {
       this.loaded = true;
     });
   }
-  
 
- 
+
+
 
   getProductDataById(id) {
     let product = this.productService.getProuctById(id);
@@ -182,7 +182,7 @@ export class AddProductComponent implements OnInit {
     else {
       console.log(data);
       console.log(varientsArray);
-      
+
       this.addProduct(data);
     }
   }

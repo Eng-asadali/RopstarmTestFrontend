@@ -104,7 +104,7 @@ export class ItemAddComponent implements OnInit {
     this.form['attribute'] = true;
     this.loaded = true;
   }
-    
+
   });
 }
   getcategoryData(data) {
@@ -153,12 +153,11 @@ export class ItemAddComponent implements OnInit {
         if (!result['error']) {
           this.clear_form = true;
           SwalAlert.sucessAlert('', 'Item Added Sucesssfully!')
-          
+
         }
         else {
-          SwalAlert.errorAlert('', result['message'].charAt(0).toUpperCase() + result['message'].substring(1));
+          SwalAlert.errorAlert('', result['message'].toUpperCase() +' , '+ result['data']['message']);
         }
-        console.log(result);
       },
       err => {
         this.submit_clicked = false;

@@ -27,6 +27,16 @@ import { AddQueryComponent } from './instamunch/staff-log/add-query/add-query.co
 import { EditQuestionComponent } from './instamunch/staff-log/edit-question/edit-question.component';
 import { DealsComponent } from './instamunch/deals/deals.component';
 import { AddDealsComponent } from './instamunch/deals/add-deals/add-deal.component';
+import { InventoryParentComponent } from './instamunch/inventory/inventoryparent.component';
+import { AddparentcategoryComponent } from './instamunch/inventory/addparentcategory/addparentcategory.component';
+import { InventoryCategoryComponent } from './instamunch/inventory-category/inventory-category.component';
+import { AddInventoryCategoryComponent } from './instamunch/inventory-category/add-category/add-category.component';
+import { InventoryVendorComponent } from './instamunch/inventory-vendor/inventory-vendor.component';
+import { InventoryVendorAddComponent } from './instamunch/inventory-vendor/inventory-vendor-add/inventory-vendor-add.component';
+import { InventoryItemComponent } from './instamunch/inventory-item/inventory-item.component';
+import { ItemAddComponent } from './instamunch/inventory-item/item-add/item-add.component';
+import { InventoryOrdersComponent } from './instamunch/inventory-orders/inventory-orders.component';
+import { AddOrdersComponent } from './instamunch/inventory-orders/add-orders/add-orders.component';
 
 
 const routes: Routes = [
@@ -39,7 +49,44 @@ const routes: Routes = [
       {
         path: '', component: SalesComponent
       },
-
+      { path: 'inventoryparent', component: InventoryParentComponent },
+      {
+        path: 'inventoryparent/add', component: AddparentcategoryComponent
+      },
+      {
+        path: 'inventoryparent/edit/:id', component: AddparentcategoryComponent
+      },
+      { path: 'inventorycategory', component: InventoryCategoryComponent },
+      {
+        path: 'inventorycategory/add', component: AddInventoryCategoryComponent
+      },
+      {
+        path: 'inventorycategory/edit/:id', component: AddInventoryCategoryComponent
+      },
+      { path: 'inventoryvendor', component: InventoryVendorComponent },
+      {
+        path: 'inventoryvendor/add', component: InventoryVendorAddComponent
+      },
+      {
+        path: 'inventoryvendor/edit/:id', component: InventoryVendorAddComponent
+      },
+      { path: 'inventoryitem', component: InventoryItemComponent },
+      {
+        path: 'inventoryitem/add', component: ItemAddComponent
+      },
+      {
+        path: 'inventoryitem/edit/:id', component: ItemAddComponent
+      },
+      { path: 'inventoryorders', component: InventoryOrdersComponent },
+      {
+        path: 'inventoryorders/add', component: AddOrdersComponent
+      },
+      {
+        path: 'inventoryorders/edit/:id', component: AddOrdersComponent
+      },
+      {
+        path: 'inventorycategory/edit/:id', component: InventoryVendorAddComponent
+      },
       { path: 'category', component: CategoryComponent },
       {
         path: 'category/add', component: AddCategoryComponent

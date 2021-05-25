@@ -40,6 +40,7 @@ export class FormComponent implements OnInit {
     this.fields = this.form['form_fields'];
     this.Form = this.fb.group({});
     this.addControls();
+    this.addControlsvarients();
   }
 
   ngOnDestroy() {
@@ -55,6 +56,7 @@ export class FormComponent implements OnInit {
           this.form = form;
           this.fields = this.form['form_fields'];
           this.addControls();
+          this.addControlsvarients();
           clearTimeout(this.timeout);
         }
       }, 100);
@@ -145,6 +147,72 @@ export class FormComponent implements OnInit {
     // }, 10);
   }
 
+  addControlsvarients() {
+    this.row = [];
+    var count = 0;
+    var array = [];
+    for (var i = 0; i < this.fields.length; i++) {
+      if (this.fields[i].name != undefined) {
+        var bootstrapGridClass = parseInt(this.fields[i].bootstrapGridClass.split('-')[2]);
+        count = count + bootstrapGridClass;
+        if (count % 12 == 0) {
+          array.push(i);
+          this.row.push(array);
+          array = [];
+        }
+        else {
+          array.push(i);
+        }
+        if (this.fields[i].value != undefined) {
+
+
+          if (this.fields[i].type == 'varients' && this.fields[i].value != null) {
+            this.Form.addControl('variants', this.fb.array([]));
+            const variants = this.parseProductVarients(this.fields[i].value);
+            for (let i = 0; i < variants.length; i++) {
+              this.addvarients(variants[i].value, variants[i].price);
+            }
+          }
+
+
+
+          else
+            this.Form.addControl(this.fields[i].name, new FormControl(this.fields[i].value, this.fields[i].validations));
+
+        }
+        else {
+          if (this.fields[i].type == 'varients' && this.fields[i].value == null) {
+            this.Form.addControl('variants', this.fb.array([
+              this.fb.group({
+                value: '',
+                price: ''
+              })
+            ]));
+          }
+          else
+            this.Form.addControl(this.fields[i].name, new FormControl(null, this.fields[i].validations));
+
+
+        }
+
+      }
+      if (this.fields[i].type == 'submit') {
+        array.push(i);
+        this.row.push(array);
+      }
+
+    }
+
+    // if (this.form['attribute']) {
+
+    // }
+
+    // console.log(this.Form);
+    // setTimeout(function () {
+    //   $('ng-select > div:first-child').addClass('form-control');
+    // }, 10);
+  }
+
   parseProductAttributes(product_attributes: string) {
     console.log(product_attributes);
     const object = product_attributes;
@@ -154,6 +222,24 @@ export class FormComponent implements OnInit {
       let formatted_obj = {
         name: attributes_list[i]['name'],
         value: attributes_list[i]['value'].toString()
+      }
+      array.push(formatted_obj);
+    }
+
+    console.log(array);
+    return array;
+
+
+  }
+  parseProductVarients(variants: string) {
+    console.log(variants);
+    const object = variants;
+    let array = [];
+    var varient_list = object['varient_list'];
+    for (let i = 0; i < varient_list.length; i++) {
+      let formatted_obj = {
+        value: varient_list[i]['value'],
+        price: varient_list[i]['price'].toString()
       }
       array.push(formatted_obj);
     }
@@ -180,10 +266,25 @@ export class FormComponent implements OnInit {
     (arr as FormArray).removeAt(last_index);
   }
 
+  addvarients(value?, price?) {
+    var arr = <FormArray>this.Form.get('variants');
+    console.log(arr);
+    const varients = this.fb.group({
+      value: value ? value : '',
+      price: price ? price : ''
+    });
+    arr.push(varients);
+  }
+
+  minusvarients() {
+    var arr = this.Form.get('variants');
+    let last_index = (arr as FormArray).length - 1;
+    (arr as FormArray).removeAt(last_index);
+  }
+
   submit() {
 
     this.form_values = { ...this.Form.value, ...this.map_values, ...this.image_value, ...this.cover_image_value };
-    console.log(this.form_values);
     if (this.Form.valid) {
       Object.keys(this.form_values).forEach(function (key) {
         if (this.form_values[key] == null)

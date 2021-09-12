@@ -1,4 +1,4 @@
-import { parentCategory } from './../inventoryParent';
+import { parentCategory } from '../inventoryparent';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FieldConfig } from 'src/app/Interfaces/feildConfig';

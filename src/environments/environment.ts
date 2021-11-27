@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
 
-  baseUrl: 'http://137.184.26.178:8080/instamunch/'// staging
+  baseUrl: 'https://www.maccestech.com/instamunch/'// staging
   //baseUrl: 'http://68.183.27.20:8000/instamunch/' // production
 };
 

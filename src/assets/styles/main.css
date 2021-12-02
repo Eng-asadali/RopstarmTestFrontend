@@ -10884,8 +10884,8 @@ button,
 }
 
 .fixed-sidebar .app-sidebar {
-    position: fixed;
-    height: 100vh
+    position: absolute;
+    height: 120vh
 }
 
 .fixed-sidebar .app-main .app-main__outer {

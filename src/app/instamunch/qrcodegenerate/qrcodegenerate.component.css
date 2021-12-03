@@ -1,0 +1,239 @@
+.bg-theme{
+    background-color: #e60000 !important;
+  }
+  
+  .custom-class-dropzone-preview{
+    display: block !important;
+  }
+  .no-records.ng-star-inserted {
+    text-align: center;
+    padding-top: 25px;
+    font-size: large;
+  }
+  td.mat-cell.cdk-cell.cdk-column-actions.mat-column-actions.ng-star-inserted {
+    padding-right: 0px !important;
+    border-bottom-style: none !important;
+  }
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+  }
+  
+  .mat-table {
+      /* overflow: none; */
+      overflow-y: hidden;
+      height: auto;
+  
+  }
+  
+  .mat-row, .mat-header-row {
+    min-width: 1130px;
+    width: 100%;
+  }
+  
+  .mobile-label {
+    display: none;
+  }
+  
+  @media(max-width: 600px) {
+    .mobile-label {
+      width: 80px;
+      display: inline-block;
+          font-weight: bold;
+    }
+  
+    .mat-header-row {
+      display: none;
+    }
+  
+    .mat-row {
+      flex-direction: column;
+      align-items: start;
+      padding: 8px 24px;
+    }
+  }
+  th.mat-header-cell.cdk-header-cell.cdk-column-select.mat-column-select.ng-star-inserted {
+    border-bottom-style: none;
+  }
+  td.mat-cell.cdk-cell.cdk-column-select.mat-column-select.ng-star-inserted{
+    border-bottom-style: none;
+  }
+  /* .mat-cell:last-of-type, mat-header-cell:last-of-type, mat-footer-cell:last-of-type {
+  padding-right:0px !important;
+  padding-left: 9px !important
+  } */
+  
+  mat-datepicker-toggle {
+    display: inline-block;
+  }
+  mat-form-field {
+    left: -15px;
+    width: 100%;
+    font-family: "Vodafone Rg";
+  }
+  .page-content.container-fluid {
+    background-color: #F8F8F8;
+  }
+  mat-header-cell {
+    font-family: "Vodafone Rg";
+  }
+  .datadisply{
+    font-family: "Vodafone Rg";
+  }
+  
+  
+  .bg-theme {
+    background-color: #e60000 !important;
+  }
+  div#mat-tab-label-0-0 {
+    background-color: #62A8EA;
+    color: white;
+  }
+  
+  .custom-class-dropzone-preview {
+    display: block !important;
+  }
+  .no-records.ng-star-inserted {
+    text-align: center;
+    padding-top: 25px;
+    font-size: large;
+  }
+  td.mat-cell.cdk-cell.cdk-column-actions.mat-column-actions.ng-star-inserted {
+    padding-right: 0px !important;
+  }
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  
+  /* Firefox */
+  input[type="number"] {
+    -moz-appearance: textfield;
+  }
+  .search-input-hardware {
+    margin-bottom: 15px !important;
+    /* height: 34px; */
+    padding: 6px 12px;
+    box-shadow: none;
+    border-radius: 3px;
+    /* font-size: 14px; */
+    /* line-height: 1.42857143; */
+    /* color: #555; */
+    /* background-color: #fff; */
+    /* background-image: none; */
+  }
+  input#mat-input-1 {
+    margin-bottom: 15px !important;
+    height: 34px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    padding-left: 40px !important;
+  }
+  /* .form-group {
+      position: relative;
+  } */
+  
+  .error-message {
+    position: absolute;
+  }
+  i.ri-add-circle-fill {
+    position: relative;
+    top: 2px;
+  }
+  .example-container {
+    display: flex;
+    flex-direction: column;
+    /* max-height: 500px; */
+    min-width: 300px;
+  }
+  
+  
+  .mat-row,
+  .mat-header-row {
+    min-width: 1130px;
+    width: 100%;
+  }
+  
+  .mobile-label {
+    display: none;
+  }
+  
+  /* .mat-cell:last-of-type,
+  mat-header-cell:last-of-type,
+  mat-footer-cell:last-of-type {
+    padding-right: 0px !important;
+    padding-left: 9px !important;
+  } */
+  
+  .custom-Information-tooltip-hardware {
+    position: relative;
+    left: 133px;
+    bottom: 42px;
+  }
+  .modal-dialog {
+    width: auto !important;
+  }
+  i.input-search-icon.ri-search-line {
+    transform: translateY(-84%) !important;
+   
+  }
+  .ri-refresh-fill:before {
+    margin-right: 2px;
+  }
+  .page-content.container-fluid {
+    background-color: #f8f8f8;
+  }
+  .col-lg-8.card-group-row__col {
+    background-color: white;
+    padding-top: 10px;
+  }
+  .panel.panel-default.round {
+    height: atuo;
+  }
+  @media (max-width: 600px) {
+    .mobile-label {
+      width: 80px;
+      display: inline-block;
+      font-weight: bold;
+    }
+  
+    .mat-header-row {
+      display: none;
+    }
+  
+    .mat-row {
+      flex-direction: column;
+      align-items: start;
+      padding: 8px 24px;
+    }
+  }
+  .input-search .form-control {
+    border-radius: 4px !important;
+  }
+  .margin-bottom-12{
+    margin-bottom: -12px;
+  }
+  .font{
+    font-family: 'Vodafone Rg' !important;
+  }
+  
+  .modal-content {
+    border: none;
+    border-radius: 4px;
+    box-shadow: 0 0px 0px rgb(0 0 0 / 20%);
+  }
+  
+  
+  .mat-cell {
+    border: 1px #e4eaec solid;
+  }
+  mat-cell:first-of-type{
+    padding-left: 5px !important;
+  }
+  

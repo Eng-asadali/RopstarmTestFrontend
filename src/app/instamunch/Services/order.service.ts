@@ -37,4 +37,10 @@ export class OrderService {
       catchError(err => of({ error: true, message: 'Server error', data: [] })));
   }
 
+  getTables() {
+    return this.httpServices.get('floor/table/').pipe(
+      catchError(err => of({ error: true, message: 'Server error', data: [] })));
+  }
+
+
 }

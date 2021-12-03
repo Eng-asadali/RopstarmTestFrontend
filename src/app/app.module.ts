@@ -14,6 +14,8 @@ import { SharedModule } from './Shared/shared.module';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { ModalModule } from 'ngx-bootstrap/modal';
+
 
 //Services
 import { HttpService } from './Services/http.service';
@@ -68,6 +70,7 @@ import { InventoryItemComponent } from './instamunch/inventory-item/inventory-it
 import { ItemAddComponent } from './instamunch/inventory-item/item-add/item-add.component';
 import { InventoryOrdersComponent } from './instamunch/inventory-orders/inventory-orders.component';
 import { AddOrdersComponent } from './instamunch/inventory-orders/add-orders/add-orders.component';
+import { QrcodegenerateComponent } from './instamunch/qrcodegenerate/qrcodegenerate.component';
 
 @NgModule({
   declarations: [
@@ -111,6 +114,7 @@ import { AddOrdersComponent } from './instamunch/inventory-orders/add-orders/add
     ItemAddComponent,
     InventoryOrdersComponent,
     AddOrdersComponent,
+    QrcodegenerateComponent,
   ],
 
   imports: [
@@ -126,6 +130,7 @@ import { AddOrdersComponent } from './instamunch/inventory-orders/add-orders/add
     MatFormFieldModule,
     MatCheckboxModule,
     MatInputModule,
+    ModalModule.forRoot(),
     MatProgressBarModule,
     SharedModule,
     NgApexchartsModule,

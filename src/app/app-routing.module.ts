@@ -37,6 +37,7 @@ import { InventoryItemComponent } from './instamunch/inventory-item/inventory-it
 import { ItemAddComponent } from './instamunch/inventory-item/item-add/item-add.component';
 import { InventoryOrdersComponent } from './instamunch/inventory-orders/inventory-orders.component';
 import { AddOrdersComponent } from './instamunch/inventory-orders/add-orders/add-orders.component';
+import { QrcodegenerateComponent } from './instamunch/qrcodegenerate/qrcodegenerate.component';
 
 
 const routes: Routes = [
@@ -165,6 +166,12 @@ const routes: Routes = [
       },
       {
         path: 'sales-report', component: SalesComponent
+        // resolve: {
+        //   cres: SalesReportResolver
+        // }
+      },
+      {
+        path: 'test-brcode', component: QrcodegenerateComponent
         // resolve: {
         //   cres: SalesReportResolver
         // }

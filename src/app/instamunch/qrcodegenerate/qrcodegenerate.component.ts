@@ -12,8 +12,7 @@ import { OrderService } from '../Services/order.service';
 import * as kjua from 'kjua-svg';
 import jsPDF from 'jspdf';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { BsModalService } from 'ngx-bootstrap/modal';
-import { AuthService } from 'src/app/Services/auth.service';
+// import { BsModalService } from 'ngx-bootstrap/modal';
 // import { DateUtils } from 'src/app/Utils/date-utils';
 
 @Component({
@@ -99,8 +98,7 @@ export class QrcodegenerateComponent implements OnInit {
     });
   }
 
-  constructor(private OrderService: OrderService,
-    private modalService: BsModalService) {
+  constructor(private OrderService: OrderService) {
     this.getTableData();
   }
 

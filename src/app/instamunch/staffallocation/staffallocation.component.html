@@ -1,0 +1,96 @@
+<div class="app-main__outer">
+  <div class="app-main__inner">
+    <div class="app-page-title">
+      <div class="page-title-wrapper">
+        <div class="page-title-heading">
+          <div class="page-title-icon bg-warning text-white">
+            <i class="icofont-dashboard-web  ">
+            </i>
+          </div>
+          <div> Staff Allocation
+            <div class="page-title-subheading">Staff allocation listing
+            </div>
+          </div>
+        </div>
+        <div class="page-title-actions">
+
+          <div class="d-inline-block dropdown">
+            <!-- <a style="margin-left: 4px;color: white;"  class="btn-shadow  btn btn-info">
+
+              <i class="icofont-ui-add"></i> Add New
+            </a> -->
+            <!-- <div class="btn-group ">
+              <button style="margin-left: 4px;" type="button" class="btn  btn-secondary"><i class="icofont-upload-alt"></i> Export</button>
+              <button type="button" class="btn m btn-secondary dropdown-toggle dropdown-toggle-split"
+                data-toggle="dropdown"></button>
+              <div class="dropdown-menu">
+                <a class="dropdown-item" href="#">Download PDF</a>
+                <a class="dropdown-item" href="#">Export to Excel</a>
+
+              </div>
+            </div>
+            <button style="margin-left: 4px;" type="button" class="btn  btn-secondary"> <i class="icofont-download-alt"></i> Import </button> -->
+
+        
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="page-content container-fluid">
+      <div class="width-full">
+        <div class="panel panel-default round">
+
+          <div class="panel-body padding-15">
+            <div class="row">
+              <div class="col-md-6">
+              </div>
+              <div class="col-md-6">
+                <div class="form-group margin-bottom-0 text-right">
+                  <a class="btn btn-success btn-round btn-block1">
+                    <i class="ri-add-fill"></i> Allocate Staff</a>
+                </div>
+              </div>
+            </div>
+            <mat-progress-bar *ngIf="progressBar" class="margin-top-20 margin-bottom-20" mode="indeterminate">
+            </mat-progress-bar>
+            <div class="example-container mat-elevation-z8">
+              <mat-table #table [dataSource]="dataSource" class="" matSort>
+                <ng-container matColumnDef="staff">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header class="arow">
+                    Staff Name
+                  </mat-header-cell>
+                  <mat-cell *matCellDef="let element">
+                    <span class="mobile-label">Event Name:</span>
+                    <span matTooltip="{{ element.imei }}">{{ element.id }}</span>
+                  </mat-cell>
+                </ng-container>
+    
+    
+                <ng-container matColumnDef="table">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header class="arow">
+                    Table Name
+                  </mat-header-cell>
+                  <mat-cell *matCellDef="let element">
+                    <span class="mobile-label">Event Date:</span>
+                    {{ element.key || 'N/A'}}
+                  </mat-cell>
+                </ng-container>
+    
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+              </mat-table>
+              <div *ngIf="lengthDataSource === 0" class="no-records">
+                No records found
+              </div>
+             
+    
+              <mat-paginator #tableData [pageSize]="dataSourcePageSize" [length]="lengthDataSource" showFirstLastButtons
+                [pageSizeOptions]="[10, dataSourcePageSize, 100, 150, 200]">
+              </mat-paginator>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

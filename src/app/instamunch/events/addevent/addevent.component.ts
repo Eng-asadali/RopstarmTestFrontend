@@ -18,5 +18,8 @@ export class AddeventComponent implements OnInit {
 
   ngOnInit() {
   }
+  onSubmit(){
+    console.log("Submited")
+  }
 
 }

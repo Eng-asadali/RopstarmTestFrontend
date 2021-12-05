@@ -39,5 +39,8 @@ export class AddgalleryComponent implements OnInit {
         }
     }
   }
+  onSubmit(){
+    console.log("submited")
+  }
 
 }

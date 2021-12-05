@@ -16,4 +16,7 @@ export class AddstaffallocationComponent implements OnInit {
     let url = this.router.url.split('/');
     this.router.navigate([url[0]+"/"+url[1]+"/"+url[2]]);
   }
+  onSubmit(){
+    console.log("Submited")
+  }
 }

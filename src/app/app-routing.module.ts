@@ -38,6 +38,9 @@ import { ItemAddComponent } from './instamunch/inventory-item/item-add/item-add.
 import { InventoryOrdersComponent } from './instamunch/inventory-orders/inventory-orders.component';
 import { AddOrdersComponent } from './instamunch/inventory-orders/add-orders/add-orders.component';
 import { QrcodegenerateComponent } from './instamunch/qrcodegenerate/qrcodegenerate.component';
+import { EventsComponent } from './instamunch/events/events.component';
+import { StaffallocationComponent } from './instamunch/staffallocation/staffallocation.component';
+import { GalleryComponent } from './instamunch/gallery/gallery.component';
 
 
 const routes: Routes = [
@@ -171,10 +174,16 @@ const routes: Routes = [
         // }
       },
       {
-        path: 'test-brcode', component: QrcodegenerateComponent
-        // resolve: {
-        //   cres: SalesReportResolver
-        // }
+        path: 'brcode', component: QrcodegenerateComponent
+      },
+      {
+        path: 'gallery', component: GalleryComponent
+      },
+      {
+        path: 'events', component: EventsComponent
+      },
+      {
+        path: 'staffallocation', component: StaffallocationComponent
       },
     ]
 

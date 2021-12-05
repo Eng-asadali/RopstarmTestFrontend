@@ -71,6 +71,9 @@ import { ItemAddComponent } from './instamunch/inventory-item/item-add/item-add.
 import { InventoryOrdersComponent } from './instamunch/inventory-orders/inventory-orders.component';
 import { AddOrdersComponent } from './instamunch/inventory-orders/add-orders/add-orders.component';
 import { QrcodegenerateComponent } from './instamunch/qrcodegenerate/qrcodegenerate.component';
+import { GalleryComponent } from './instamunch/gallery/gallery.component';
+import { EventsComponent } from './instamunch/events/events.component';
+import { StaffallocationComponent } from './instamunch/staffallocation/staffallocation.component';
 
 @NgModule({
   declarations: [
@@ -115,6 +118,9 @@ import { QrcodegenerateComponent } from './instamunch/qrcodegenerate/qrcodegener
     InventoryOrdersComponent,
     AddOrdersComponent,
     QrcodegenerateComponent,
+    GalleryComponent,
+    EventsComponent,
+    StaffallocationComponent,
   ],
 
   imports: [

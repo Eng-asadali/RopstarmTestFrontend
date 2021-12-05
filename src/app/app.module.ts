@@ -14,7 +14,7 @@ import { SharedModule } from './Shared/shared.module';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ModalModule } from 'ngx-bootstrap/modal';
+// import { ModalModule } from 'ngx-bootstrap/modal';
 
 
 //Services
@@ -130,7 +130,7 @@ import { QrcodegenerateComponent } from './instamunch/qrcodegenerate/qrcodegener
     MatFormFieldModule,
     MatCheckboxModule,
     MatInputModule,
-    ModalModule.forRoot(),
+    // ModalModule.forRoot(),
     MatProgressBarModule,
     SharedModule,
     NgApexchartsModule,

@@ -45,8 +45,7 @@
                                         {{group.name}}
                                       </ng-option>
                                     </ng-select>
-                                    <span class="error-message" *ngIf="userForm.get('type').getError('required') && submitted">
-                                      Please provide group</span>
+                                
                                   </div>
                                 </div>
                 
@@ -60,8 +59,6 @@
                                       </ng-option>
                                     </ng-select>
                 
-                                    <span class="error-message" *ngIf="userForm.get('status').getError('required') && submitted">Please
-                                      provide status</span>
                                   </div>
                                 </div>
                               </div>
@@ -72,7 +69,7 @@
                             <div class="col-md-12">
                               <hr>
                               <div class="form-group text-center">
-                                <button type="submit" [disabled]="btnLoading" style="margin-right: 1%;"
+                                <button type="submit" style="margin-right: 1%;"
                                   class="btn btn-success btn-round btn-block1 margin-right-3"><i
                                     class="ri-check-fill"></i>Save</button>
                                 <button type="button" class="btn btn-secondary btn-round btn-block1 margin-right-3"

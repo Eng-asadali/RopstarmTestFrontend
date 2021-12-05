@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators} from '@angular/forms';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -16,9 +17,12 @@ export class AddgalleryComponent implements OnInit {
     fileSource: new FormControl('', [Validators.required])
   });
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
+  }
+  get f(){
+    return this.userForm.controls;
   }
   onFileChange(event) {
     if (event.target.files && event.target.files[0]) {
@@ -39,8 +43,12 @@ export class AddgalleryComponent implements OnInit {
         }
     }
   }
-  onSubmit(){
+  onSubmit(value){
     console.log("submited")
+  }
+  navigateToListing() {
+    let url = this.router.url.split('/');
+    this.router.navigate([url[0]+"/"+url[1]+"/"+url[2]]);
   }
 
 }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators} from '@angular/forms';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -14,12 +15,16 @@ export class AddeventComponent implements OnInit {
     fileSource: new FormControl('', [Validators.required])
   });
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
   }
-  onSubmit(){
+  onSubmit(value){
     console.log("Submited")
+  }
+  navigateToListing() {
+    let url = this.router.url.split('/');
+    this.router.navigate([url[0]+"/"+url[1]+"/"+url[2]]);
   }
 
 }

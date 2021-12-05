@@ -14,6 +14,7 @@ import { SharedModule } from './Shared/shared.module';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+
 // import { ModalModule } from 'ngx-bootstrap/modal';
 
 
@@ -74,6 +75,9 @@ import { QrcodegenerateComponent } from './instamunch/qrcodegenerate/qrcodegener
 import { GalleryComponent } from './instamunch/gallery/gallery.component';
 import { EventsComponent } from './instamunch/events/events.component';
 import { StaffallocationComponent } from './instamunch/staffallocation/staffallocation.component';
+import { AddstaffallocationComponent } from './instamunch/staffallocation/addstaffallocation/addstaffallocation.component';
+import { AddeventComponent } from './instamunch/events/addevent/addevent.component';
+import { AddgalleryComponent } from './instamunch/gallery/addgallery/addgallery.component';
 
 @NgModule({
   declarations: [
@@ -121,6 +125,9 @@ import { StaffallocationComponent } from './instamunch/staffallocation/staffallo
     GalleryComponent,
     EventsComponent,
     StaffallocationComponent,
+    AddstaffallocationComponent,
+    AddeventComponent,
+    AddgalleryComponent,
   ],
 
   imports: [

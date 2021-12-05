@@ -41,6 +41,9 @@ import { QrcodegenerateComponent } from './instamunch/qrcodegenerate/qrcodegener
 import { EventsComponent } from './instamunch/events/events.component';
 import { StaffallocationComponent } from './instamunch/staffallocation/staffallocation.component';
 import { GalleryComponent } from './instamunch/gallery/gallery.component';
+import { AddstaffallocationComponent } from './instamunch/staffallocation/addstaffallocation/addstaffallocation.component';
+import { AddeventComponent } from './instamunch/events/addevent/addevent.component';
+import { AddgalleryComponent } from './instamunch/gallery/addgallery/addgallery.component';
 
 
 const routes: Routes = [
@@ -180,10 +183,19 @@ const routes: Routes = [
         path: 'gallery', component: GalleryComponent
       },
       {
+        path: 'gallery/add', component: AddgalleryComponent
+      },
+      {
         path: 'events', component: EventsComponent
       },
       {
+        path: 'events/add', component: AddeventComponent
+      },
+      {
         path: 'staffallocation', component: StaffallocationComponent
+      },
+      {
+        path: 'staffallocation/add', component: AddstaffallocationComponent
       },
     ]
 

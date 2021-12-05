@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, MatSort } from '@angular/material';
 import { MatTableDataSource } from '@angular/material/table';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-gallery',
@@ -24,9 +25,13 @@ export class GalleryComponent implements OnInit {
 
 
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
+  }
+  navigateToadd() {
+    let url = this.router.url.split('/');
+    this.router.navigate(['admin/gallery/add']);
   }
 
 }

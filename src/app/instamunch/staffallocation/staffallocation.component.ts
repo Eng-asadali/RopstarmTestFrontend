@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, MatSort } from '@angular/material';
 import { MatTableDataSource } from '@angular/material/table';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-staffallocation',
@@ -21,9 +22,14 @@ export class StaffallocationComponent implements OnInit {
   displayNoRecords: boolean = false;
 
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
+
+  }
+  navigateToListing() {
+    let url = this.router.url.split('/');
+    this.router.navigate(['admin/staffallocation/add']);
   }
 
 }

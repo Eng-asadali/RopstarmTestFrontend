@@ -48,8 +48,11 @@
                                   <div class="form-group">
                                     <label class="control-label">Event Date<span class="text-danger">*</span></label>
                                      
-                                    <input type="name" class="form-control" formControlName="file" maxlength="15">
-
+                                    <p-calendar [readonlyInput]="true" [monthNavigator]="true" [yearNavigator]="true"
+                                       name="dateOfBirth" placeholder="MM/DD/YYYY"
+                                      styleClass="prime-datetime" formControlName="date" [style]="{'width':'100%'}"
+                                      [inputStyle]="{'width':'100%'}">
+                                    </p-calendar>
                 
                                    
                                   </div>

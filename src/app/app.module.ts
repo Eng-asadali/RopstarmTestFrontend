@@ -14,6 +14,10 @@ import { SharedModule } from './Shared/shared.module';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import {CalendarModule} from 'primeng/calendar';
+import { QueryParamsHandling } from '@angular/router/src/config';
+
+
 
 // import { ModalModule } from 'ngx-bootstrap/modal';
 
@@ -143,6 +147,7 @@ import { AddgalleryComponent } from './instamunch/gallery/addgallery/addgallery.
     MatFormFieldModule,
     MatCheckboxModule,
     MatInputModule,
+    CalendarModule,
     // ModalModule.forRoot(),
     MatProgressBarModule,
     SharedModule,

@@ -60,8 +60,7 @@
                     Event Name
                   </mat-header-cell>
                   <mat-cell *matCellDef="let element">
-                    <span class="mobile-label">Event Name:</span>
-                    <span matTooltip="{{ element.imei }}">{{ element.id }}</span>
+                    <span matTooltip="{{ element.imei }}">{{ element.name }}</span>
                   </mat-cell>
                 </ng-container>
     
@@ -71,8 +70,8 @@
                     Photo
                   </mat-header-cell>
                   <mat-cell *matCellDef="let element">
-                    <span class="mobile-label">Photo:</span>
-                    {{ element.key || 'N/A'}}
+                    <img [src]="element.image" alt="Girl in a jacket" width="50" height="50">
+                    <!-- {{ element.key || 'N/A'}} -->
                   </mat-cell>
                 </ng-container>
     

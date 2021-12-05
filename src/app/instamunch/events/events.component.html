@@ -60,8 +60,7 @@
                     Event Name
                   </mat-header-cell>
                   <mat-cell *matCellDef="let element">
-                    <span class="mobile-label">Event Name:</span>
-                    <span matTooltip="{{ element.imei }}">{{ element.id }}</span>
+                    <span matTooltip="{{ element.imei }}">{{ element.name }}</span>
                   </mat-cell>
                 </ng-container>
     
@@ -71,8 +70,7 @@
                     Event Date
                   </mat-header-cell>
                   <mat-cell *matCellDef="let element">
-                    <span class="mobile-label">Event Date:</span>
-                    {{ element.key || 'N/A'}}
+                    {{ element.date || 'N/A'}}
                   </mat-cell>
                 </ng-container>
     

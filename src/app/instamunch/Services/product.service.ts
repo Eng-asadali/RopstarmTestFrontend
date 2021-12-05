@@ -63,4 +63,22 @@ export class ProductService {
       catchError(err => of({error:true,message:'Server error',data:[]}))
       );
    }
+   addGalleryPhoto(data) {
+    return this.httpServices.postFormData(data, 'catalog/gallery/').pipe(
+      catchError(err => of({ error: true, message: 'Server error', data: [] })));
+  }
+  getGalleryPhoto(){
+    return this.httpServices.get('catalog/gallery/').pipe(
+       catchError(err => of({error:true,message:'Server error',data:[]}))
+       );
+   }
+   addEventDate(data) {
+    return this.httpServices.postFormData(data, 'catalog/addEvent/').pipe(
+      catchError(err => of({ error: true, message: 'Server error', data: [] })));
+  }
+  getEvents(){
+    return this.httpServices.get('catalog/addEvent/').pipe(
+       catchError(err => of({error:true,message:'Server error',data:[]}))
+       );
+   }
 }

@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, MatSort } from '@angular/material';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
+import { ProductService } from '../Services/product.service';
 
 @Component({
   selector: 'app-gallery',
@@ -25,13 +26,20 @@ export class GalleryComponent implements OnInit {
 
 
 
-  constructor(private router: Router) { }
+  constructor(private router: Router,private productService: ProductService) { }
 
   ngOnInit() {
+    this.getGallery()
   }
   navigateToadd() {
     let url = this.router.url.split('/');
     this.router.navigate(['admin/gallery/add']);
+  }
+  getGallery(){
+    this.productService.getGalleryPhoto().subscribe(
+    result => {
+      this.dataSource = result['data'];
+    });
   }
 
 }

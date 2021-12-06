@@ -44,6 +44,10 @@ import { GalleryComponent } from './instamunch/gallery/gallery.component';
 import { AddstaffallocationComponent } from './instamunch/staffallocation/addstaffallocation/addstaffallocation.component';
 import { AddeventComponent } from './instamunch/events/addevent/addevent.component';
 import { AddgalleryComponent } from './instamunch/gallery/addgallery/addgallery.component';
+import { TodaypinsComponent } from './instamunch/todaypins/todaypins.component';
+import { AddtodaypinsComponent } from './instamunch/todaypins/addtodaypins/addtodaypins.component';
+import { StoriesComponent } from './instamunch/stories/stories.component';
+import { AddstoriesComponent } from './instamunch/stories/addstories/addstories.component';
 
 
 const routes: Routes = [
@@ -196,6 +200,18 @@ const routes: Routes = [
       },
       {
         path: 'staffallocation/add', component: AddstaffallocationComponent
+      },
+      {
+        path: 'today_pins', component: TodaypinsComponent
+      },
+      {
+        path: 'today_pins/add', component: AddtodaypinsComponent
+      },
+      {
+        path: 'stories', component: StoriesComponent
+      },
+      {
+        path: 'stories/add', component: AddstoriesComponent
       },
     ]
 

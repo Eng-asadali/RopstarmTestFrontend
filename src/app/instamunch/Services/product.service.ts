@@ -81,4 +81,14 @@ export class ProductService {
        catchError(err => of({error:true,message:'Server error',data:[]}))
        );
    }
+
+  addStoriesPhoto(data) {
+    return this.httpServices.postFormData(data, 'catalog/stories/').pipe(
+      catchError(err => of({ error: true, message: 'Server error', data: [] })));
+  }
+  getStoriesPhoto(){
+    return this.httpServices.get('catalog/stories/').pipe(
+       catchError(err => of({error:true,message:'Server error',data:[]}))
+       );
+   }
 }

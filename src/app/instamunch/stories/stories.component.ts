@@ -33,7 +33,7 @@ export class StoriesComponent implements OnInit {
     this.router.navigate(['admin/stories/add']);
   }
   getGallery(){
-    this.productService.getGalleryPhoto().subscribe(
+    this.productService.getStoriesPhoto().subscribe(
     result => {
       this.dataSource = result['data'];
     });

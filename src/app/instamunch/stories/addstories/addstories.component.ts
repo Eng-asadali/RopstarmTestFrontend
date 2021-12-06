@@ -49,7 +49,7 @@ export class AddstoriesComponent implements OnInit {
   }
   onSubmit(value){
     console.log("submited", value)
-    this.productService.addGalleryPhoto(value).subscribe(
+    this.productService.addStoriesPhoto(value).subscribe(
       result => {
         if (!result['error']) {
           SwalAlert.sucessAlert('', 'Photo Added Sucesssfully!')

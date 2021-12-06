@@ -31,7 +31,7 @@ export class TodaypinsComponent implements OnInit {
     this.router.navigate(['admin/today_pins/add']);
   }
   getGallery(){
-    this.productService.getGalleryPhoto().subscribe(
+    this.productService.getTodayPins().subscribe(
     result => {
       this.dataSource = result['data'];
     });

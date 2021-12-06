@@ -50,7 +50,7 @@ export class AddtodaypinsComponent implements OnInit {
   }
   onSubmit(value){
     console.log("submited", value)
-    this.productService.addGalleryPhoto(value).subscribe(
+    this.productService.addTodayPins(value).subscribe(
       result => {
         if (!result['error']) {
           SwalAlert.sucessAlert('', 'Photo Added Sucesssfully!')
@@ -69,6 +69,24 @@ export class AddtodaypinsComponent implements OnInit {
   navigateToListing() {
     let url = this.router.url.split('/');
     this.router.navigate([url[0]+"/"+url[1]+"/"+url[2]]);
+  }
+  url;
+  format;
+  onSelectFile(event) {
+    const file = event.target.files && event.target.files[0];
+    this.galleryForm.value['video'] = file;
+    if (file) {
+      var reader = new FileReader();
+      reader.readAsDataURL(file);
+      if(file.type.indexOf('image')> -1){
+        this.format = 'image';
+      } else if(file.type.indexOf('video')> -1){
+        this.format = 'video';
+      }
+      reader.onload = (event) => {
+        this.url = (<FileReader>event.target).result;
+      }
+    }
   }
 
 }

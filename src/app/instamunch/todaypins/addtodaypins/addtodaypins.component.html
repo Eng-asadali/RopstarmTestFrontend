@@ -46,20 +46,9 @@
                 
                                 <div class="col-md-6">
                                   <div class="form-group">
-                                    <label class="control-label">Upload Image's<span class="text-danger">*</span></label>
-                                      <input 
-                                          formControlName="file"
-                                          id="file" 
-                                          type="file" 
-                                          class="form-control"
-                                          multiple="" 
-                                          (change)="onFileChange($event)">
-                                      <div *ngIf="f.file.touched && f.file.invalid" class="alert alert-danger">
-                                          <div *ngIf="f.file.errors.required">File is required.</div>
-                                      </div>
-                                 
-                                  <img *ngFor='let url of images'  [src]="url" height="150" width="200px" style="margin: 3px;"> <br/>
-                
+                                    <label class="control-label">Upload Video's<span class="text-danger">*</span></label>
+                                    <video [src]="url" *ngIf="format==='video' && url" height="200" controls></video> <br/>
+                                    <input type='file'  formControlName="file" (change)="onSelectFile($event)" />
                                   </div>
                                 </div>
                               </div>

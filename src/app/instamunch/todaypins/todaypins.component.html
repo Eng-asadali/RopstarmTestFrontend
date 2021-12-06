@@ -70,7 +70,9 @@
                     Photo
                   </mat-header-cell>
                   <mat-cell *matCellDef="let element">
-                    <img [src]="element.image" alt="Girl in a jacket" width="50" height="50">
+                    <video width="50" height="50" controls>
+                      <source [src]="element.video" type="video/mp4">
+                    </video>
                     <!-- {{ element.key || 'N/A'}} -->
                   </mat-cell>
                 </ng-container>

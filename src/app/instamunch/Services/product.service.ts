@@ -91,4 +91,14 @@ export class ProductService {
        catchError(err => of({error:true,message:'Server error',data:[]}))
        );
    }
+
+  addTodayPins(data) {
+    return this.httpServices.postFormData(data, 'catalog/todaypins/').pipe(
+      catchError(err => of({ error: true, message: 'Server error', data: [] })));
+  }
+  getTodayPins(){
+    return this.httpServices.get('catalog/todaypins/').pipe(
+       catchError(err => of({error:true,message:'Server error',data:[]}))
+       );
+   }
 }

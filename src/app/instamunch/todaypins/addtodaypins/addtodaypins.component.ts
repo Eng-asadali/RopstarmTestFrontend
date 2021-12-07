@@ -15,6 +15,7 @@ export class AddtodaypinsComponent implements OnInit {
   images = [];
   selectedImage : any
   imageslist = []
+  video: any
   galleryForm = new FormGroup({
     name: new FormControl('', [Validators.required, Validators.minLength(3)]),
     file: new FormControl('', [Validators.required]),
@@ -50,6 +51,7 @@ export class AddtodaypinsComponent implements OnInit {
   }
   onSubmit(value){
     console.log("submited", value)
+    value['video'] = this.video
     this.productService.addTodayPins(value).subscribe(
       result => {
         if (!result['error']) {
@@ -75,6 +77,7 @@ export class AddtodaypinsComponent implements OnInit {
   onSelectFile(event) {
     const file = event.target.files && event.target.files[0];
     this.galleryForm.value['video'] = file;
+    this.video = file
     if (file) {
       var reader = new FileReader();
       reader.readAsDataURL(file);

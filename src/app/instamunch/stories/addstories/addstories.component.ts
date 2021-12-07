@@ -14,6 +14,7 @@ export class AddstoriesComponent implements OnInit {
   images = [];
   selectedImage : any
   imageslist = []
+  image_store: any
   galleryForm = new FormGroup({
     name: new FormControl('', [Validators.required, Validators.minLength(3)]),
     file: new FormControl('', [Validators.required]),
@@ -31,6 +32,7 @@ export class AddstoriesComponent implements OnInit {
     var selectedFile: File;
     selectedFile = event.target.files[0];
     this.galleryForm.value['image'] = selectedFile;
+    this.image_store = selectedFile
     var filesAmount = event.target.files.length;
         for (let i = 0; i < filesAmount; i++) {
           this.imageslist.push(event.target.files[i])
@@ -49,6 +51,7 @@ export class AddstoriesComponent implements OnInit {
   }
   onSubmit(value){
     console.log("submited", value)
+    value['image'] = this.image_store
     this.productService.addStoriesPhoto(value).subscribe(
       result => {
         if (!result['error']) {

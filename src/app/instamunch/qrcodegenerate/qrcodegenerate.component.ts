@@ -131,7 +131,7 @@ export class QrcodegenerateComponent implements OnInit {
     this.isAllSelected() ?
       this.selectionClear() :
       this.dataSource.data.forEach(row => {
-        this.idArray.push(row.id)
+        this.idArray.push(row.imei)
         this.selection.select(row)
       }
       );
@@ -173,7 +173,7 @@ export class QrcodegenerateComponent implements OnInit {
   // }
   valuesChecked(event, id) {
     if (event) {
-      this.idArray.push(id)
+      this.idArray.push(id.toString())
     } else {
       for (var i = 0; i < this.idArray.length; i++) {
         if (id == this.idArray[i]) {

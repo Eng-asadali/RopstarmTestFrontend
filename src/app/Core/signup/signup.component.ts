@@ -5,11 +5,11 @@ import { response } from '../../Interfaces/response';
 import { DataSharingService } from '../../Services/data-sharing.service';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  selector: 'app-signup',
+  templateUrl: './signup.component.html',
+  styleUrls: ['./signup.component.css']
 })
-export class LoginComponent implements OnInit {
+export class SignupComponent implements OnInit {
 
   loginError: boolean = false;
   error_message: string = '';
@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.activated_route.queryParams.subscribe(params => {
-      this.partner_id = params['partner_id'];
+      this.partner_id = 1;
     });
 
     if (localStorage.getItem('user') && localStorage.getItem('partner_id')== this.partner_id)
@@ -38,14 +38,19 @@ export class LoginComponent implements OnInit {
     this.loginPressed = true;
     this.loginError = false;
     // this.authService.unsetUser();
-    this.authService.login(this.model['username'], this.model['password'], this.partner_id).subscribe(
+    let data = {
+      "first_name": this.model['first_name'],
+      "last_name": this.model['last_name'],
+      "email": this.model['email'],
+    }
+    this.authService.signup(data).subscribe(
       data => {
         this.loginPressed = false;
         var response: response = data;
         if (!response.error) {
           localStorage.setItem('partner_id', this.partner_id);
           this.dataSharingSrvice.setOption('reload', true);
-          this.router.navigate(['admin/vehicleCategory']);
+          this.router.navigate(['login']);
         }
         else {
           this.loginError = true;

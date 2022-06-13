@@ -22,10 +22,10 @@
                       <div class=" modal-title text-center mb-3">
                         <div class="app-logo-inverse mx-auto mb-3 mt-2 text-center"> <img
                             src="assets/images/logo.png" height="50" /> </div>
-                        
+                    
 
                         <h4 class="mt-2">
-                          <div>Welcome! <br /> Sign in to your account </div>
+                          <div>Welcome! <br /> Sign up to create your account </div>
                         </h4>
 
 
@@ -36,31 +36,36 @@
                      
                       <div class="form-row">
                         <div class="col-md-12">
-                          <div class="position-relative form-group"><input [(ngModel)]="model.username" name="email"
-                              placeholder="email" id="exampleEmail" type="email" placeholder="Email here..."
+                          <div class="position-relative form-group"><input [(ngModel)]="model.first_name" name="first_name"
+                              placeholder="first_name" id="first_name" type="text" placeholder="First name here..."
                               class="form-control"></div>
                         </div>
                         <div class="col-md-12">
-                          <div class="position-relative form-group"><input [(ngModel)]="model.password" name="password"
-                              id="examplePassword" placeholder="Password here..." type="password" class="form-control">
-                          </div>
+                          <div class="position-relative form-group"><input [(ngModel)]="model.last_name" name="last_name"
+                              placeholder="last_name" id="last_name" type="text" placeholder="Last name here..."
+                              class="form-control"></div>
                         </div>
+                        <div class="col-md-12">
+                          <div class="position-relative form-group"><input [(ngModel)]="model.email" name="email"
+                              placeholder="email" id="exampleEmail" type="email" placeholder="Email here..."
+                              class="form-control"></div>
+                        </div>
+                        
                       </div>
                       <p style="color: red;" *ngIf="loginError">{{error_message}}</p>
 
-                      <a> <p routerLink="/signup" style="color: black; float: right; margin-right: 10px;">Sign up</p></a>
 
                     </div>
                     <div class="modal-footer1 clearfix">
-                      
-                      <button class="btn btn-primary btn-lg btn-block" type="submit"> Login to Dashboard</button>
+                  
+                      <button class="btn btn-primary btn-lg btn-block" type="submit"> Signup</button>
                         
 
                     </div>
                   </form>
                 </div>
               </div>
-              <div class="text-center text-white opacity-8 mt-3">Copyright © 2020 </div>
+              <div class="text-center text-white opacity-8 mt-3">Copyright © 2022 </div>
             </div>
           </div>
         </div>

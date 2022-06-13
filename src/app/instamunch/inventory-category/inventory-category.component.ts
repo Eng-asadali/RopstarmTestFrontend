@@ -20,7 +20,7 @@ export class InventoryCategoryComponent implements OnInit {
     private currentActivatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
-    this.table_headers = ['name','parent_category', 'status', 'actions'];
+    this.table_headers = ['name','color','modal','makes','registration','parent_category', 'status', 'actions'];
     this.getInventory()
   }
   refresh(){

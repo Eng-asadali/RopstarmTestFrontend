@@ -29,7 +29,7 @@ export class InventoryOrdersService {
       catchError(err => of({ error: true, message: 'Server error', data: [] })));
   }
   getParentCategories(){
-    return this.httpServices.get('inventory/parent/').pipe(
+    return this.httpServices.get('vehicleCategory/').pipe(
       catchError(err => of({error:true,message:'Server error',data:[]})));
   }
 }

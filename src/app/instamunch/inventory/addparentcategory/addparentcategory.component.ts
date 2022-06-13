@@ -107,7 +107,7 @@ export class AddparentcategoryComponent implements OnInit {
       result => {
         this.submit_clicked = false;
         if (!result['error']) {
-          SwalAlert.sucessAlert('', 'Parent Category Updated Sucesssfully!')
+          SwalAlert.sucessAlert('', 'Vehicle Category Updated Sucesssfully!')
           this.navigateToProductListing();
         }
         else {
@@ -129,7 +129,7 @@ export class AddparentcategoryComponent implements OnInit {
         this.submit_clicked = false;
         if (!result['error']) {
           this.clear_form = true;
-          SwalAlert.sucessAlert('', 'Parent Category Added Sucesssfully!')
+          SwalAlert.sucessAlert('', 'Vehicle Category Added Sucesssfully!')
           
         }
         else {

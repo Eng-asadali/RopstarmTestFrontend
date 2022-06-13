@@ -65,16 +65,19 @@ export class AddInventoryCategoryComponent implements OnInit {
           
           this.option = result['data']
     this.fields = [
-      { label: 'Name', type: 'text', bootstrapGridClass: "col-lg-12", name: "name", validations: [Validators.required, Validators.maxLength(50)], required: true, value: category ? category.name : null },
-      { label: 'Description', type: 'textarea', bootstrapGridClass: "col-lg-12", name: "description", validations: [Validators.required, Validators.maxLength(250)], required: true, value: category ? category.description : null },
-      { label: 'Parent Category', type: 'ngselect', bootstrapGridClass: "col-lg-6", name: "parent_category", validations: [Validators.required], required: true, value: category ? category.parent_category_id : null, options: result['data'] },
+      { label: 'Name', type: 'text', bootstrapGridClass: "col-lg-6", name: "name", validations: [Validators.required, Validators.maxLength(50)], required: true, value: category ? category.name : null },
+      { label: 'Color', type: 'text', bootstrapGridClass: "col-lg-6", name: "color", validations: [Validators.required, Validators.maxLength(50)], required: true, value: category ? category.color : null },
+      { label: 'Modal', type: 'text', bootstrapGridClass: "col-lg-6", name: "modal", validations: [Validators.required, Validators.maxLength(50)], required: true, value: category ? category.modal : null },
+      { label: 'makes', type: 'text', bootstrapGridClass: "col-lg-6", name: "makes", validations: [Validators.required, Validators.maxLength(50)], required: true, value: category ? category.makes : null },
+      { label: 'registration', type: 'text', bootstrapGridClass: "col-lg-12", name: "registration", validations: [Validators.required, Validators.maxLength(50)], required: true, value: category ? category.registration : null },
+      { label: 'Vehicle Category', type: 'ngselect', bootstrapGridClass: "col-lg-6", name: "parent_category", validations: [Validators.required], required: true, value: category ? category.parent_category_id : null, options: result['data'] },
       {
         label: 'Status', type: 'select', bootstrapGridClass: "col-lg-6", name: "status", validations: [Validators.required], required: true,
         value: category ? category.status : 'Active', options: Status2
       },
     ]
     this.form['form_fields'] = this.fields;
-    this.form['FormbootstrapGridClass'] = 'col-lg-9';
+    this.form['FormbootstrapGridClass'] = 'col-lg-12';
     this.form['map'] = false;
     this.form['MapbootstrapGridClass'] = 'col-lg-4';
     this.form['submit'] = 'Save';
@@ -107,7 +110,7 @@ export class AddInventoryCategoryComponent implements OnInit {
       result => {
         this.submit_clicked = false;
         if (!result['error']) {
-          SwalAlert.sucessAlert('', 'Category Updated Sucesssfully!')
+          SwalAlert.sucessAlert('', 'Vehicle Updated Sucesssfully!')
           this.navigateToProductListing();
         }
         else {
@@ -129,7 +132,7 @@ export class AddInventoryCategoryComponent implements OnInit {
         this.submit_clicked = false;
         if (!result['error']) {
           this.clear_form = true;
-          SwalAlert.sucessAlert('', 'Category Added Sucesssfully!')
+          SwalAlert.sucessAlert('', 'Vehicle Added Sucesssfully!')
           
         }
         else {

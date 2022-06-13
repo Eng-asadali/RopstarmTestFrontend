@@ -7,8 +7,8 @@
             <i class="icofont-dashboard-web  ">
             </i>
           </div>
-          <div> Inventory Managment
-            <div class="page-title-subheading">Parent Category
+          <div> Vehicle Managment
+            <div class="page-title-subheading">Vehicle Category Listing
             </div>
           </div>
         </div>
@@ -119,7 +119,7 @@
                 <table mat-table [dataSource]="dataSource" style="width: 100%;">
                   <div>
                     <ng-container matColumnDef="name">
-                      <th mat-header-cell *matHeaderCellDef> Parent Category </th>
+                      <th mat-header-cell *matHeaderCellDef> Vehicle Category </th>
                       <td mat-cell *matCellDef="let element"> {{element.name}} </td>
                     </ng-container>
                     <ng-container matColumnDef="status">

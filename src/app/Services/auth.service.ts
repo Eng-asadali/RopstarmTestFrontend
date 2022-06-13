@@ -33,6 +33,24 @@ export class AuthService {
         }
       ));
   }
+  signup(data) {
+    return this.http.post<any>('register',
+      
+        data
+      ).pipe(map(user => {
+
+        console.log(user);
+        if (!user['error']) {
+          localStorage.setItem('user', JSON.stringify(user['data'][0]));
+          this.dataSource.next(JSON.stringify(user['data'][0]));
+        }
+        return user;
+      },
+        err => {
+
+        }
+      ));
+  }
 
   getToken() {
     var token = null;

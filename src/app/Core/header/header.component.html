@@ -1,8 +1,6 @@
 <div class="app-header header-shadow bg-premium-dark header-text-light">
   <div class="app-header__logo">
-
-    <!-- <i>{{logo.getLogoSymbol()}} Admin</i> -->
-    <i>Polo Beach Club</i>
+    <i>RopStarm Test Project</i>
     <div class="header__pane ml-auto">
       <div>
         <button type="button" class="hamburger close-sidebar-btn hamburger--elastic" data-class="closed-sidebar">
@@ -33,33 +31,7 @@
   </div>
   <div class="app-header__content">
     <div class="app-header-left">
-      <!-- <div class="search-wrapper">
-              <div class="input-holder">
-                  <input type="text" class="search-input" placeholder="Type to search">
-                  <button class="search-icon"><span></span></button>
-              </div>
-              <button class="close"></button>
-          </div>
-          <ul class="header-menu nav">
-              <li class="nav-item">
-                  <a href="javascript:void(0);" class="nav-link">
-                      <i class="nav-link-icon fa fa-database"> </i>
-                      Statistics
-                  </a>
-              </li>
-              <li class="btn-group nav-item">
-                  <a href="javascript:void(0);" class="nav-link">
-                      <i class="nav-link-icon fa fa-edit"></i>
-                      Menu
-                  </a>
-              </li>
-              <li class="dropdown nav-item">
-                  <a href="javascript:void(0);" class="nav-link">
-                      <i class="nav-link-icon fa fa-cog"></i>
-                      Settings
-                  </a>
-              </li>
-          </ul> -->
+
     </div>
     <div class="app-header-right">
       <div class="header-btn-lg pr-0">
@@ -70,29 +42,13 @@
               <div class="widget-heading">
                 {{user?.first_name}} {{user?.last_name}}
               </div>
-              <div class="widget-subheading">
-                {{user?.type | titlecase}}
-              </div>
             </div>
             <div class="widget-content-left">
               <a style="margin-left: 15px;" [matMenuTriggerFor]="beforeMenu" class="p-0 btn">
-                <img width="42" class="rounded-circle"
-                  [src]="user?.user_image!=null ? user.user_image : '../../../assets/images/no_image.png'" alt="">
                 <i style="font-size: 18px" class="icofont-rounded-down ml-2 opacity-8"></i>
               </a>
 
               <mat-menu #beforeMenu="matMenu" xPosition="before">
-                <!-- <button type="button" mat-menu-item>
-                  <mat-icon>settings</mat-icon>
-                  <span>Account Settings </span>
-                </button>
-
-                <button mat-menu-item>
-                  <mat-icon>lock</mat-icon>
-                  <span>Change Password </span>
-                </button> -->
-
-                <!-- <div tabindex="-1" class="dropdown-divider"></div> -->
 
                 <button (click)="logout()" mat-menu-item>
                   <mat-icon>power_settings_new</mat-icon>
@@ -100,11 +56,7 @@
                 </button>
               </mat-menu>
             </div>
-            <!-- <div class="widget-content-right header-user-info ml-3">
-                          <button type="button" class="btn-shadow p-1 btn btn-primary btn-sm show-toastr-example">
-                              <i class="fa text-white fa-calendar pr-1 pl-1"></i>
-                          </button>
-                      </div> -->
+
           </div>
         </div>
       </div>

@@ -32,40 +32,16 @@
   <div class="scrollbar-sidebar ps ps--active-y">
       <div class="app-sidebar__inner">
           <ul class="vertical-nav-menu">
-              <!-- <li class="app-sidebar__heading">Navigation</li> -->
-              <li>
-                  <a routerLink='/admin' class="mm-active">
-                      <i class="metismenu-icon icofont-dart"></i>
-                      Dashboard
-                  </a>
-              </li>
-
-              <li class="app-sidebar__heading">Menu Management</li>
-              <!-- <li>
-                  <a>
-                      <i class="metismenu-icon icofont-burger"></i> Inventory
-                      <i class="metismenu-state-icon icofont-plus"></i>
-                  </a>
-                  <ul> -->
-                      <li> <a routerLink='product'> <i class="metismenu-icon icofont-food-basket"></i> Products </a></li>
-                      <li> <a routerLink='category'> <i class="metismenu-icon icofont-culinary"></i> Categories </a></li>
-                      <li> <a routerLink='inventoryparent'> <i class="metismenu-icon icofont-beverage"></i> Parent Category </a></li>
-                      <!-- <li> <a routerLink='deals'> <i class="metismenu-icon icofont-restaurant-menu"></i> Deals & Discounts </a></li> -->
-
-                      <!-- <li> <a href=""> <i class="metismenu-icon"></i> Deals & Promotions </a></li> -->
-                  <!-- </ul>
-              </li> -->
-              <li class="app-sidebar__heading">Inventory</li>
-              <!-- <li> <a routerLink='inventory'> <i class="metismenu-icon icofont-culinary"></i> Inventory </a></li> -->
-                       <li> <a routerLink='inventoryparent'> <i class="metismenu-icon" style="line-height: 23px !important;">
+              
+                       <li> <a routerLink='vehicleCategory'> <i class="metismenu-icon" style="line-height: 23px !important;">
                         <svg width="12" height="18" viewBox="0 0 12 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                           <path d="M9.35229 0.5282C9.35879 0.143715 8.93019 -0.121385 8.58915 0.0565672L2.90234 2.89997H9.35229V0.5282Z" fill="white"/>
                           <path d="M6.00046 8.39795C5.22924 8.39795 4.57417 8.90463 4.35059 9.60259H7.65033C7.42675 8.9046 6.77168 8.39795 6.00046 8.39795Z" fill="white"/>
                           <path d="M11.0837 3.95459H0.916966C0.625746 3.95459 0.389648 4.19069 0.389648 4.48191V17.4727C0.389648 17.7639 0.625746 18 0.916966 18H11.0837C11.3749 18 11.611 17.7639 11.611 17.4727V4.48191C11.611 4.19069 11.3749 3.95459 11.0837 3.95459ZM7.12993 15.7407H4.87066C4.17256 15.7151 4.17157 14.712 4.87066 14.6861H7.1299C7.42112 14.6861 7.65722 14.9222 7.65722 15.2134C7.65722 15.5046 7.42115 15.7407 7.12993 15.7407ZM8.82438 13.4815H3.17621C2.47906 13.4564 2.47621 12.4531 3.17621 12.4268H8.82438C9.52153 12.4519 9.52438 13.4552 8.82438 13.4815ZM8.82438 10.6574H3.17621C2.88499 10.6574 2.64889 10.4213 2.64889 10.13C2.65047 9.79492 2.93962 9.57028 3.26441 9.60273C3.47878 8.48843 4.35867 7.60855 5.47296 7.39418C5.42054 6.57712 6.58022 6.57761 6.52759 7.39418C7.64189 7.60855 8.52177 8.48843 8.73614 9.60273C9.49678 9.54296 9.57746 10.6122 8.82438 10.6574Z" fill="white"/>
                           </svg>
 
-                        </i> Parent Category </a></li>
-                      <li> <a routerLink='inventorycategory'> <i class="metismenu-icon" style="line-height: 23px !important;">
+                        </i> Vehicle Category </a></li>
+                      <li> <a routerLink='vehicle'> <i class="metismenu-icon" style="line-height: 23px !important;">
                         <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                           <path d="M0 1.82812H3.98296V5.81108H0V1.82812Z" fill="white"/>
                           <path d="M5.24902 1.82812H18.0003V5.81108H5.24902V1.82812Z" fill="white"/>
@@ -75,167 +51,8 @@
                           <path d="M5.24902 12.1646H18.0003V16.1476H5.24902V12.1646Z" fill="white"/>
                           </svg>
 
-                      </i> Categories </a></li>
-                      <li> <a routerLink='inventoryvendor'> <i class="metismenu-icon" style="line-height: 23px !important;">
-                        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M7.98047 10.3994V12.1647H10.0195V10.3994C9.69871 10.5057 9.35595 10.5632 8.99997 10.5632C8.64402 10.5632 8.30126 10.5057 7.98047 10.3994Z" fill="white"/>
-                          <path d="M6.27209 9.07764C5.51087 9.48737 4.99219 10.2917 4.99219 11.215V12.1642H6.92569V9.81273C6.67265 9.6024 6.45184 9.35452 6.27209 9.07764Z" fill="white"/>
-                          <path d="M13.0077 11.215C13.0077 10.2917 12.489 9.48737 11.7278 9.07764C11.5481 9.35452 11.3273 9.60236 11.0742 9.8127V12.1642H13.0077V11.215Z" fill="white"/>
-                          <path d="M12.9221 16.3828H5.18302C5.02387 16.8317 4.66758 17.1879 4.21875 17.3471V17.9997H13.8864V17.3471C13.4376 17.188 13.0812 16.8317 12.9221 16.3828Z" fill="white"/>
-                          <path d="M9.00003 9.50837C10.2125 9.50837 11.1954 8.52548 11.1954 7.31302C11.1954 6.10057 10.2125 5.11768 9.00003 5.11768C7.78757 5.11768 6.80469 6.10057 6.80469 7.31302C6.80469 8.52548 7.78757 9.50837 9.00003 9.50837Z" fill="white"/>
-                          <path d="M17.4727 13.2188H17.1911H0.914282H0.527328C0.236102 13.2188 0 13.4549 0 13.7461C0 13.9886 0.163964 14.1924 0.386953 14.2539V17.4724C0.386953 17.7636 0.623056 17.9997 0.914282 17.9997H3.16422V16.9102C3.16422 16.619 3.40032 16.3829 3.69154 16.3829C3.98231 16.3829 4.21887 16.1464 4.21887 15.8556C4.21887 15.5644 4.45497 15.3283 4.7462 15.3283H13.3592C13.6505 15.3283 13.8866 15.5644 13.8866 15.8556C13.8866 16.1464 14.1231 16.3829 14.4139 16.3829C14.7051 16.3829 14.9412 16.619 14.9412 16.9102V17.9997H17.1911C17.4824 17.9997 17.7185 17.7636 17.7185 17.4724V14.2124C17.8858 14.1241 18 13.9485 18 13.7461C18 13.4548 17.7639 13.2188 17.4727 13.2188Z" fill="white"/>
-                          <path d="M15.8545 5.00928V12.1642H16.9092V5.0098C16.7387 5.04454 16.5624 5.06285 16.3818 5.06285C16.2033 5.06285 16.0268 5.04447 15.8545 5.00928Z" fill="white"/>
-                          <path d="M1.61718 4.00818C2.02206 4.00818 2.39175 3.85512 2.67183 3.60407C2.95195 3.85512 3.32161 4.00818 3.72649 4.00818C4.13137 4.00818 4.50103 3.85512 4.78115 3.60407C5.06126 3.85512 5.43092 4.00818 5.8358 4.00818C6.24069 4.00818 6.61034 3.85512 6.89046 3.60407C7.17058 3.85512 7.54023 4.00818 7.94512 4.00818C8.35 4.00818 8.71966 3.85512 8.99977 3.60407C9.27989 3.85512 9.64955 4.00818 10.0544 4.00818C10.4593 4.00818 10.829 3.85512 11.1091 3.60407C11.3892 3.85512 11.7589 4.00818 12.1637 4.00818C12.5686 4.00818 12.9383 3.85515 13.2184 3.60411C13.4985 3.85515 13.8681 4.00818 14.273 4.00818C14.6779 4.00818 15.0476 3.85512 15.3277 3.60407C15.6078 3.85512 15.9775 4.00818 16.3823 4.00818C17.2546 4.00818 17.9643 3.29851 17.9643 2.42623V0.527817C17.9643 0.236591 17.7282 0.000488281 17.437 0.000488281H0.562485C0.271259 0.000488281 0.0351562 0.236591 0.0351562 0.527817V2.42623C0.0351914 3.29851 0.74487 4.00818 1.61718 4.00818Z" fill="white"/>
-                          <path d="M1.08984 5.00977V12.1642H2.1445V5.00928C1.97217 5.04447 1.79565 5.06285 1.61717 5.06285C1.43665 5.06285 1.26031 5.04454 1.08984 5.00977Z" fill="white"/>
-                          </svg>
-
-                      </i> Vendors </a></li>
-                      <li> <a routerLink='inventoryitem'> <i class="metismenu-icon" style="line-height: 23px !important;">
-                        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <g clip-path="url(#clip0)">
-                          <path d="M8.25 10.3125C8.25 10.0027 7.9965 9.75 7.6875 9.75H4.875V12C4.875 12.414 4.539 12.75 4.125 12.75C3.711 12.75 3.375 12.414 3.375 12V9.75H0.5625C0.25275 9.75 0 10.0027 0 10.3125V17.4375C0 17.7472 0.25275 18 0.5625 18H7.6875C7.9965 18 8.25 17.7472 8.25 17.4375V10.3125Z" fill="white"/>
-                          <path d="M18 10.3125C18 10.0027 17.7465 9.75 17.4375 9.75H14.625V12C14.625 12.414 14.289 12.75 13.875 12.75C13.461 12.75 13.125 12.414 13.125 12V9.75H10.3125C10.0027 9.75 9.75 10.0027 9.75 10.3125V17.4375C9.75 17.7472 10.0027 18 10.3125 18H17.4375C17.7465 18 18 17.7472 18 17.4375V10.3125Z" fill="white"/>
-                          <path d="M13.125 0.5625C13.125 0.2535 12.8715 0 12.5625 0H9.74999V2.25C9.74999 2.664 9.41399 3 8.99999 3C8.58599 3 8.24999 2.664 8.24999 2.25V0H5.4375C5.12775 0 4.875 0.2535 4.875 0.5625V7.6875C4.875 7.99725 5.12775 8.25 5.4375 8.25H12.5625C12.8715 8.25 13.125 7.99725 13.125 7.6875V0.5625Z" fill="white"/>
-                          </g>
-                          <defs>
-                          <clipPath id="clip0">
-                          <rect width="18" height="18" fill="white"/>
-                          </clipPath>
-                          </defs>
-                          </svg>
-
-                      </i> Inventory Items </a></li>
-                      <li> <a routerLink='inventoryorders'> <i class="metismenu-icon" style="line-height: 23px !important;">
-                        <svg width="14" height="18" viewBox="0 0 14 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M0.117188 0V18H13.8819V0H0.117188ZM6.47013 15.3529H2.23483V14.2941H6.47013V15.3529ZM6.47013 12.7059H2.23483V11.6471H6.47013V12.7059ZM11.7642 15.3529H8.58778V14.2941H11.7642V15.3529ZM11.7642 12.7059H8.58778V11.6471H11.7642V12.7059ZM11.7642 10.0588H2.23483V9H11.7642V10.0588ZM11.2348 7.41177H10.176H3.82307H2.76425V6.35294H3.86744C4.0912 5.02479 5.14198 3.97405 6.47013 3.75025V2.64706H7.52895V3.75025C8.85711 3.97405 9.90785 5.02479 10.1316 6.35294H11.2348V7.41177Z" fill="white"/>
-                        </svg></i> Orders </a></li> 
-
-
-               <li class="app-sidebar__heading">General Management</li>
-              <!-- <li>
-                  <a>
-                      <i class="metismenu-icon icofont-burger"></i> Inventory
-                      <i class="metismenu-state-icon icofont-plus"></i>
-                  </a>
-                  <ul> -->
-
-                      <li> <a routerLink='Kitchen'> <i class="metismenu-icon icofont-chef"></i> Kitchen </a></li>
-                      <li> <a routerLink='order'> <i class="metismenu-icon icofont-restaurant"></i> Orders </a></li>
-                      <li> <a routerLink='brcode'> <i class="metismenu-icon icofont-restaurant"></i> Generate QR Code </a></li>
-                      <li> <a routerLink='gallery'> <i class="metismenu-icon icofont-restaurant"></i> Upload Gallary Photo </a></li>
-                      <li> <a routerLink='events'> <i class="metismenu-icon icofont-restaurant"></i> Upload Events </a></li>
-                      <li> <a routerLink='today_pins'> <i class="metismenu-icon icofont-restaurant"></i> Today Pin's </a></li>
-                      <li> <a routerLink='stories'> <i class="metismenu-icon icofont-restaurant"></i> Today Stories </a></li>
-
-
-                      <!-- <li> <a href=""> <i class="metismenu-icon"></i> Deals & Promotions </a></li> -->
-                  <!-- </ul>
-              </li> -->
-
-              <!-- <li>
-                  <a routerLink='order'>
-                      <i class="metismenu-icon icofont-cart"></i> Orders
-                      <i class="metismenu-state-icon icofont-plus"></i>
-                  </a>
-                  <ul>
-                      <li> <a href=""> <i class="metismenu-icon"></i> Value1 </a></li>
-                      <li> <a href=""> <i class="metismenu-icon"></i> Value2 </a></li>
-
-                  </ul>
-              </li> -->
-
-
-
-
-              <!-- <li class="app-sidebar__heading">Menu Management</li>
-              <li>
-                  <a href="#">
-                      <i class="metismenu-icon icofont-bulb-alt"></i>
-                      Main Menu
-                      <i class="metismenu-state-icon icofont-plus"></i>
-                  </a>
-                  <ul>
-                      <li>
-                          <a href="">
-                              <i class="metismenu-icon"></i>
-                              Menu Items
-                          </a>
-                      </li>
-                      <li>
-                          <a href="">
-                              <i class="metismenu-icon">
-                              </i>Menu Deals
-                          </a>
-                      </li>
-
-                  </ul>
-              </li> -->
-
-              <li class="app-sidebar__heading">Finance</li>
-              <li>
-                  <a routerLink='expense'>
-                      <i class="metismenu-icon icofont-money"></i>
-                      Expense
-                  </a>
-              </li>
-
-              <li class="app-sidebar__heading">Staff Management</li>
-              <li>
-                  <a routerLink='staff'>
-                      <i class="metismenu-icon icofont-users-alt-4"></i>
-                      All Staff
-                  </a>
-                  <a routerLink='staffallocation'>
-                    <i class="metismenu-icon icofont-users-alt-3"></i>
-                   Staff Allocation
-                </a>
-                <a routerLink='logs'>
-                    <i class="metismenu-icon icofont-users-alt-3"></i>
-                   Staff Logs
-                </a>
-              </li>
-              <!-- <li>
-                  <a href="#">
-                      <i class="metismenu-icon icofont-bulb-alt"></i>
-                      Staff Record
-                  </a>
-              </li> -->
-
-              <!-- <li class="app-sidebar__heading">Analytics</li>
-              <li>
-                  <a>
-                      <i class="metismenu-icon icofont-bulb-alt"></i>
-                      Report
-                      <i class="metismenu-state-icon icofont-plus"></i>
-                  </a>
-                  <ul>
-                      <li>
-                          <a routerLink="sales-report">
-                              <i class="metismenu-icon"></i>
-                              Sale Report
-                          </a>
-                      </li>
-                      <li>
-                          <a href="">
-                              <i class="metismenu-icon">
-                              </i>Staff Report
-                          </a>
-                      </li>
-
-                  </ul>
-              </li> -->
-              <!-- <li>
-                  <a href="#">
-                      <i class="metismenu-icon icofont-attachment"></i>
-                      Customers Log
-                  </a>
-              </li>
-              <li>
-                  <a href="">
-                      <i class="metismenu-icon icofont-drag3"></i>
-                      Monthly Report
-                  </a>
-              </li> -->
+                      </i> Vahicle's </a></li>
+                      
 
 
           </ul>
